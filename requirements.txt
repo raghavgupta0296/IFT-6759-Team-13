@@ -1,0 +1,10 @@
+tensorflow-gpu==2.0
+tqdm
+lz4
+matplotlib
+opencv-python
+h5py
+numpy
+pandas
+h5netcdf
+netcdf4
