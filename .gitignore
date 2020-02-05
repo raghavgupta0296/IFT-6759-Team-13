@@ -5,6 +5,8 @@
 .idea/vcs.xml
 .idea/workspace.xml
 .idea/*
+.local
+.cache
 .data/hdf5v5_16bit/*.h5
 *.h5
 ift6759-env
