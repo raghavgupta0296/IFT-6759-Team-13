@@ -1,0 +1,240 @@
+[I 2020-02-02 00:29:31.926 SingleUserNotebookApp extension:158] JupyterLab extension loaded from /opt/jupyterhub/lib64/python3.6/site-packages/jupyterlab
+[I 2020-02-02 00:29:31.933 SingleUserNotebookApp extension:159] JupyterLab application directory is /opt/jupyterhub/share/jupyter/lab
+[I 2020-02-02 00:29:32.300 SingleUserNotebookApp __init__:25] Loading lmod extension
+[I 2020-02-02 00:29:32.304 SingleUserNotebookApp singleuser:561] Starting jupyterhub-singleuser server version 1.0.0
+[I 2020-02-02 00:29:32.308 SingleUserNotebookApp log:174] 302 GET /user/guest160/ -> /user/guest160/tree? (@132.219.137.246) 1.55ms
+[I 2020-02-02 00:29:32.316 SingleUserNotebookApp notebookapp:1924] Serving notebooks from local directory: /home/guest160
+[I 2020-02-02 00:29:32.316 SingleUserNotebookApp notebookapp:1924] The Jupyter Notebook is running at:
+[I 2020-02-02 00:29:32.316 SingleUserNotebookApp notebookapp:1924] http://helk80n03.helios.calculquebec.ca:56925/user/guest160/
+[I 2020-02-02 00:29:32.316 SingleUserNotebookApp notebookapp:1925] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[I 2020-02-02 00:29:32.330 SingleUserNotebookApp singleuser:542] Updating Hub with activity every 300 seconds
+[I 2020-02-02 00:29:32.396 SingleUserNotebookApp log:174] 302 GET /user/guest160/ -> /user/guest160/tree? (@142.116.216.49) 0.70ms
+[I 2020-02-02 00:29:32.428 SingleUserNotebookApp log:174] 302 GET /user/guest160/tree? -> /hub/api/oauth2/authorize?client_id=jupyterhub-user-guest160&redirect_uri=%2Fuser%2Fguest160%2Foauth_callback&response_type=code&state=[secret] (@142.116.216.49) 2.40ms
+[I 2020-02-02 00:29:32.561 SingleUserNotebookApp auth:981] Logged-in user {'kind': 'user', 'name': 'guest160', 'admin': False, 'groups': [], 'server': '/user/guest160/', 'pending': None, 'created': '2020-01-08T21:36:15.420535Z', 'last_activity': '2020-02-02T00:29:32.558370Z', 'servers': None}
+[I 2020-02-02 00:29:32.562 SingleUserNotebookApp log:174] 302 GET /user/guest160/oauth_callback?code=[secret]&state=[secret] -> /user/guest160/tree? (@142.116.216.49) 50.55ms
+[I 2020-02-02 00:29:32.660 SingleUserNotebookApp log:174] 200 GET /user/guest160/tree? (guest160@142.116.216.49) 64.86ms
+[I 2020-02-02 00:29:32.943 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/config/tree?_=1580603374989 (guest160@142.116.216.49) 3.68ms
+[I 2020-02-02 00:29:32.947 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/config/common?_=1580603374990 (guest160@142.116.216.49) 2.73ms
+[I 2020-02-02 00:29:32.969 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580603374991 (guest160@142.116.216.49) 0.89ms
+[I 2020-02-02 00:29:33.078 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580603374992 (guest160@142.116.216.49) 4.84ms
+[I 2020-02-02 00:29:33.078 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580603374993 (guest160@142.116.216.49) 4.70ms
+[I 2020-02-02 00:29:33.384 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580603374994 (guest160@142.116.216.49) 266.01ms
+[I 2020-02-02 00:30:07.651 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580603374995 (guest160@142.116.216.49) 1.57ms
+[I 2020-02-02 00:30:07.653 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580603374996 (guest160@142.116.216.49) 1.04ms
+[I 2020-02-02 00:30:07.706 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580603374997 (guest160@142.116.216.49) 8.93ms
+[I 2020-02-02 00:30:38.308 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580603374998 (guest160@142.116.216.49) 1.36ms
+[I 2020-02-02 00:30:38.310 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580603374999 (guest160@142.116.216.49) 1.02ms
+[I 2020-02-02 00:30:38.346 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580603375000 (guest160@142.116.216.49) 8.43ms
+[I 2020-02-02 00:39:16.271 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580603375001 (guest160@142.116.216.49) 36.37ms
+[I 2020-02-02 00:39:16.273 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580603375002 (guest160@142.116.216.49) 1.15ms
+[I 2020-02-02 00:39:16.317 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580603375003 (guest160@142.116.216.49) 9.20ms
+[I 2020-02-02 00:39:21.606 SingleUserNotebookApp handlers:134] Copying Data Explore.ipynb to 
+[I 2020-02-02 00:39:23.010 SingleUserNotebookApp log:174] 201 POST /user/guest160/api/contents (guest160@142.116.216.49) 1404.71ms
+[I 2020-02-02 00:39:23.058 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580603375004 (guest160@142.116.216.49) 9.35ms
+[I 2020-02-02 00:39:33.213 SingleUserNotebookApp log:174] 200 PATCH /user/guest160/api/contents/Data%20Explore-Copy1.ipynb (guest160@142.116.216.49) 7.26ms
+[I 2020-02-02 00:39:33.251 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580603375005 (guest160@142.116.216.49) 11.07ms
+[I 2020-02-02 00:39:36.030 SingleUserNotebookApp log:174] 200 GET /user/guest160/notebooks/Data%20Cleaning.ipynb (guest160@142.116.216.49) 847.82ms
+[I 2020-02-02 00:39:36.505 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/config/notebook?_=1580603978502 (guest160@142.116.216.49) 2.84ms
+[I 2020-02-02 00:39:36.509 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/config/common?_=1580603978503 (guest160@142.116.216.49) 2.69ms
+[I 2020-02-02 00:39:37.041 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?type=notebook&_=1580603978504 (guest160@142.116.216.49) 469.04ms
+[W 2020-02-02 00:39:37.056 SingleUserNotebookApp log:174] 404 GET /user/guest160/nbextensions/widgets/notebook/js/extension.js?v=20200202002931 (guest160@142.116.216.49) 11.72ms
+[I 2020-02-02 00:39:38.181 SingleUserNotebookApp kernelmanager:172] Kernel started: 4d6d4a45-d48b-48a8-abba-25ef51996c50
+[I 2020-02-02 00:39:38.183 SingleUserNotebookApp log:174] 201 POST /user/guest160/api/sessions (guest160@142.116.216.49) 75.86ms
+[I 2020-02-02 00:39:38.187 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb/checkpoints?_=1580603978505 (guest160@142.116.216.49) 2.96ms
+[I 2020-02-02 00:39:59.192 SingleUserNotebookApp log:174] 101 GET /user/guest160/api/kernels/4d6d4a45-d48b-48a8-abba-25ef51996c50/channels?session_id=9f72a21a00b4409b8835b16bb200f877 (guest160@142.116.216.49) 20912.79ms
+[I 2020-02-02 00:41:38.549 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978506 (guest160@142.116.216.49) 2.32ms
+[I 2020-02-02 00:41:41.310 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 00:41:41.909 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 613.06ms
+[I 2020-02-02 00:41:44.892 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580603375006 (guest160@142.116.216.49) 1.81ms
+[I 2020-02-02 00:41:44.915 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580603375007 (guest160@142.116.216.49) 1.13ms
+[I 2020-02-02 00:41:44.944 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580603375008 (guest160@142.116.216.49) 8.60ms
+[I 2020-02-02 00:43:38.579 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978507 (guest160@142.116.216.49) 2.05ms
+[I 2020-02-02 00:43:41.364 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 00:43:41.944 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 599.08ms
+[I 2020-02-02 00:45:38.226 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978508 (guest160@142.116.216.49) 36.77ms
+[I 2020-02-02 00:45:40.637 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 00:45:41.250 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 628.83ms
+[I 2020-02-02 00:47:38.561 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978509 (guest160@142.116.216.49) 2.04ms
+[I 2020-02-02 00:47:41.416 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 00:47:41.907 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 505.61ms
+[I 2020-02-02 00:49:38.194 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978510 (guest160@142.116.216.49) 2.01ms
+[I 2020-02-02 00:49:41.120 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 00:49:41.764 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 657.58ms
+[I 2020-02-02 00:51:38.232 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978511 (guest160@142.116.216.49) 35.46ms
+[I 2020-02-02 00:51:40.918 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 00:51:41.584 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 680.12ms
+[I 2020-02-02 00:53:38.215 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978512 (guest160@142.116.216.49) 2.00ms
+[I 2020-02-02 00:53:41.089 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 00:53:41.672 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 600.05ms
+[I 2020-02-02 00:55:38.188 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978513 (guest160@142.116.216.49) 2.37ms
+[I 2020-02-02 00:55:40.776 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 00:55:41.451 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 690.90ms
+[I 2020-02-02 00:57:38.163 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978514 (guest160@142.116.216.49) 36.39ms
+[I 2020-02-02 00:57:40.718 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 00:57:41.561 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 859.18ms
+[I 2020-02-02 00:59:38.195 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978515 (guest160@142.116.216.49) 1.99ms
+[I 2020-02-02 00:59:41.111 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 00:59:41.626 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 531.95ms
+[I 2020-02-02 01:01:38.225 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978516 (guest160@142.116.216.49) 2.09ms
+[I 2020-02-02 01:01:40.904 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 01:01:41.560 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 674.46ms
+[I 2020-02-02 01:03:38.230 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978517 (guest160@142.116.216.49) 35.99ms
+[I 2020-02-02 01:03:40.843 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 01:03:41.511 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 682.17ms
+[I 2020-02-02 01:05:38.192 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978518 (guest160@142.116.216.49) 1.60ms
+[I 2020-02-02 01:05:41.233 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 01:05:41.754 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 537.16ms
+[I 2020-02-02 01:07:38.198 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978519 (guest160@142.116.216.49) 2.00ms
+[I 2020-02-02 01:07:41.224 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 01:07:41.875 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 672.70ms
+[I 2020-02-02 01:09:38.580 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978520 (guest160@142.116.216.49) 28.79ms
+[I 2020-02-02 01:09:41.627 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 01:09:42.208 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 597.57ms
+[I 2020-02-02 01:12:50.170 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580603375009 (guest160@142.116.216.49) 2.77ms
+[I 2020-02-02 01:12:50.171 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580603375010 (guest160@142.116.216.49) 2.36ms
+[I 2020-02-02 01:12:50.214 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580603375011 (guest160@142.116.216.49) 12.31ms
+[I 2020-02-02 01:13:13.022 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580603375012 (guest160@142.116.216.49) 1.73ms
+[I 2020-02-02 01:13:13.024 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580603375013 (guest160@142.116.216.49) 1.16ms
+[I 2020-02-02 01:13:13.060 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580603375014 (guest160@142.116.216.49) 10.41ms
+[I 2020-02-02 01:15:48.468 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580603375015 (guest160@142.116.216.49) 38.05ms
+[I 2020-02-02 01:15:48.469 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580603375016 (guest160@142.116.216.49) 2.23ms
+[I 2020-02-02 01:15:48.512 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580603375017 (guest160@142.116.216.49) 9.96ms
+[I 2020-02-02 01:23:38.226 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978521 (guest160@142.116.216.49) 33.56ms
+[I 2020-02-02 01:23:41.017 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 01:23:41.730 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 728.49ms
+[I 2020-02-02 01:25:38.220 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978522 (guest160@142.116.216.49) 2.02ms
+[I 2020-02-02 01:25:40.993 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 01:25:41.600 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 622.57ms
+[I 2020-02-02 01:27:38.572 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978523 (guest160@142.116.216.49) 2.00ms
+[I 2020-02-02 01:27:41.730 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 01:27:42.419 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 708.73ms
+[I 2020-02-02 01:29:38.242 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978524 (guest160@142.116.216.49) 35.93ms
+[I 2020-02-02 01:29:41.796 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 01:29:42.448 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 670.55ms
+[I 2020-02-02 01:31:38.203 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978525 (guest160@142.116.216.49) 2.00ms
+[I 2020-02-02 01:31:41.448 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 01:31:42.205 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 775.11ms
+[I 2020-02-02 02:19:38.610 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978526 (guest160@142.116.216.49) 36.02ms
+[I 2020-02-02 02:19:41.543 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 02:19:42.275 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 751.32ms
+[I 2020-02-02 02:21:38.199 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978527 (guest160@142.116.216.49) 1.71ms
+[I 2020-02-02 02:21:41.093 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 02:21:41.809 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 732.46ms
+[I 2020-02-02 02:23:38.338 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978528 (guest160@142.116.216.49) 2.55ms
+[I 2020-02-02 02:23:41.595 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 02:23:42.091 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 513.79ms
+[I 2020-02-02 02:25:38.225 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978529 (guest160@142.116.216.49) 37.69ms
+[I 2020-02-02 02:25:41.159 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 02:25:41.766 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 624.95ms
+[I 2020-02-02 02:27:38.187 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978530 (guest160@142.116.216.49) 1.98ms
+[I 2020-02-02 02:27:41.507 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 02:27:42.066 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 576.12ms
+[I 2020-02-02 02:35:38.229 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978531 (guest160@142.116.216.49) 39.27ms
+[I 2020-02-02 02:35:41.142 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 02:35:41.879 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 753.88ms
+[I 2020-02-02 02:37:38.197 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978532 (guest160@142.116.216.49) 2.01ms
+[I 2020-02-02 02:37:41.184 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 02:37:41.894 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 730.21ms
+[I 2020-02-02 02:43:38.234 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978533 (guest160@142.116.216.49) 37.83ms
+[I 2020-02-02 02:43:41.219 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 02:43:41.884 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 683.03ms
+[I 2020-02-02 02:44:00.000 SingleUserNotebookApp multikernelmanager:173] Kernel interrupted: 4d6d4a45-d48b-48a8-abba-25ef51996c50
+[I 2020-02-02 02:44:00.001 SingleUserNotebookApp log:174] 204 POST /user/guest160/api/kernels/4d6d4a45-d48b-48a8-abba-25ef51996c50/interrupt (guest160@142.116.216.49) 1.90ms
+[I 2020-02-02 02:45:38.195 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978534 (guest160@142.116.216.49) 2.04ms
+[I 2020-02-02 02:45:41.648 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 02:45:42.274 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 644.25ms
+[I 2020-02-02 02:45:43.902 SingleUserNotebookApp multikernelmanager:173] Kernel interrupted: 4d6d4a45-d48b-48a8-abba-25ef51996c50
+[I 2020-02-02 02:45:43.903 SingleUserNotebookApp log:174] 204 POST /user/guest160/api/kernels/4d6d4a45-d48b-48a8-abba-25ef51996c50/interrupt (guest160@142.116.216.49) 1.54ms
+[I 2020-02-02 02:45:54.346 SingleUserNotebookApp multikernelmanager:173] Kernel interrupted: 4d6d4a45-d48b-48a8-abba-25ef51996c50
+[I 2020-02-02 02:45:54.347 SingleUserNotebookApp log:174] 204 POST /user/guest160/api/kernels/4d6d4a45-d48b-48a8-abba-25ef51996c50/interrupt (guest160@142.116.216.49) 1.88ms
+[I 2020-02-02 02:46:24.451 SingleUserNotebookApp multikernelmanager:173] Kernel interrupted: 4d6d4a45-d48b-48a8-abba-25ef51996c50
+[I 2020-02-02 02:46:24.451 SingleUserNotebookApp log:174] 204 POST /user/guest160/api/kernels/4d6d4a45-d48b-48a8-abba-25ef51996c50/interrupt (guest160@142.116.216.49) 1.83ms
+[I 2020-02-02 02:47:38.448 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978535 (guest160@142.116.216.49) 2.07ms
+[I 2020-02-02 02:47:41.823 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 02:47:42.503 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 697.61ms
+[I 2020-02-02 02:49:38.230 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978536 (guest160@142.116.216.49) 36.85ms
+[I 2020-02-02 02:49:41.222 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 02:49:41.768 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 569.40ms
+[I 2020-02-02 02:51:38.181 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978537 (guest160@142.116.216.49) 2.09ms
+[I 2020-02-02 02:51:41.542 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 02:51:42.303 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 778.80ms
+[I 2020-02-02 02:53:38.201 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978538 (guest160@142.116.216.49) 1.81ms
+[I 2020-02-02 02:53:41.266 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 02:53:42.083 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 837.53ms
+[I 2020-02-02 02:54:40.118 SingleUserNotebookApp multikernelmanager:173] Kernel interrupted: 4d6d4a45-d48b-48a8-abba-25ef51996c50
+[I 2020-02-02 02:54:40.119 SingleUserNotebookApp log:174] 204 POST /user/guest160/api/kernels/4d6d4a45-d48b-48a8-abba-25ef51996c50/interrupt (guest160@142.116.216.49) 38.14ms
+[I 2020-02-02 02:55:38.505 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978539 (guest160@142.116.216.49) 2.05ms
+[I 2020-02-02 02:55:41.496 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 02:55:42.158 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 683.17ms
+[I 2020-02-02 02:57:22.311 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978540 (guest160@142.116.216.49) 1.66ms
+[I 2020-02-02 02:57:25.689 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 02:57:26.377 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 705.98ms
+[I 2020-02-02 02:57:26.459 SingleUserNotebookApp log:174] 201 POST /user/guest160/api/contents/Data%20Cleaning.ipynb/checkpoints (guest160@142.116.216.49) 37.24ms
+[I 2020-02-02 02:57:27.759 SingleUserNotebookApp multikernelmanager:173] Kernel interrupted: 4d6d4a45-d48b-48a8-abba-25ef51996c50
+[I 2020-02-02 02:57:27.760 SingleUserNotebookApp log:174] 204 POST /user/guest160/api/kernels/4d6d4a45-d48b-48a8-abba-25ef51996c50/interrupt (guest160@142.116.216.49) 1.30ms
+[I 2020-02-02 02:57:38.130 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978541 (guest160@142.116.216.49) 1.76ms
+[I 2020-02-02 02:57:41.092 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 02:57:41.773 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 704.52ms
+[I 2020-02-02 02:58:00.989 SingleUserNotebookApp multikernelmanager:173] Kernel interrupted: 4d6d4a45-d48b-48a8-abba-25ef51996c50
+[I 2020-02-02 02:58:00.990 SingleUserNotebookApp log:174] 204 POST /user/guest160/api/kernels/4d6d4a45-d48b-48a8-abba-25ef51996c50/interrupt (guest160@142.116.216.49) 1.82ms
+[I 2020-02-02 02:59:24.044 SingleUserNotebookApp multikernelmanager:173] Kernel interrupted: 4d6d4a45-d48b-48a8-abba-25ef51996c50
+[I 2020-02-02 02:59:24.044 SingleUserNotebookApp log:174] 204 POST /user/guest160/api/kernels/4d6d4a45-d48b-48a8-abba-25ef51996c50/interrupt (guest160@142.116.216.49) 1.89ms
+[I 2020-02-02 02:59:38.132 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978542 (guest160@142.116.216.49) 1.96ms
+[I 2020-02-02 02:59:42.011 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 02:59:42.639 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 682.14ms
+[I 2020-02-02 03:00:22.612 SingleUserNotebookApp multikernelmanager:173] Kernel interrupted: 4d6d4a45-d48b-48a8-abba-25ef51996c50
+[I 2020-02-02 03:00:22.612 SingleUserNotebookApp log:174] 204 POST /user/guest160/api/kernels/4d6d4a45-d48b-48a8-abba-25ef51996c50/interrupt (guest160@142.116.216.49) 1.84ms
+[I 2020-02-02 03:00:27.157 SingleUserNotebookApp multikernelmanager:173] Kernel interrupted: 4d6d4a45-d48b-48a8-abba-25ef51996c50
+[I 2020-02-02 03:00:27.157 SingleUserNotebookApp log:174] 204 POST /user/guest160/api/kernels/4d6d4a45-d48b-48a8-abba-25ef51996c50/interrupt (guest160@142.116.216.49) 1.70ms
+[I 2020-02-02 03:01:38.204 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978543 (guest160@142.116.216.49) 1.98ms
+[I 2020-02-02 03:01:41.561 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 03:01:42.247 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 705.44ms
+[I 2020-02-02 03:01:42.871 SingleUserNotebookApp multikernelmanager:173] Kernel interrupted: 4d6d4a45-d48b-48a8-abba-25ef51996c50
+[I 2020-02-02 03:01:42.871 SingleUserNotebookApp log:174] 204 POST /user/guest160/api/kernels/4d6d4a45-d48b-48a8-abba-25ef51996c50/interrupt (guest160@142.116.216.49) 1.52ms
+[I 2020-02-02 03:02:30.278 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978544 (guest160@142.116.216.49) 1.96ms
+[I 2020-02-02 03:02:33.250 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 03:02:33.935 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 702.51ms
+[I 2020-02-02 03:02:33.999 SingleUserNotebookApp log:174] 201 POST /user/guest160/api/contents/Data%20Cleaning.ipynb/checkpoints (guest160@142.116.216.49) 11.76ms
+[I 2020-02-02 03:02:34.569 SingleUserNotebookApp multikernelmanager:173] Kernel interrupted: 4d6d4a45-d48b-48a8-abba-25ef51996c50
+[I 2020-02-02 03:02:34.570 SingleUserNotebookApp log:174] 204 POST /user/guest160/api/kernels/4d6d4a45-d48b-48a8-abba-25ef51996c50/interrupt (guest160@142.116.216.49) 1.48ms
+[I 2020-02-02 03:03:14.540 SingleUserNotebookApp multikernelmanager:173] Kernel interrupted: 4d6d4a45-d48b-48a8-abba-25ef51996c50
+[I 2020-02-02 03:03:14.541 SingleUserNotebookApp log:174] 204 POST /user/guest160/api/kernels/4d6d4a45-d48b-48a8-abba-25ef51996c50/interrupt (guest160@142.116.216.49) 1.78ms
+[I 2020-02-02 03:03:38.146 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978545 (guest160@142.116.216.49) 2.00ms
+[I 2020-02-02 03:03:41.109 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 03:03:41.753 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 666.22ms
+[I 2020-02-02 03:05:17.648 SingleUserNotebookApp multikernelmanager:173] Kernel interrupted: 4d6d4a45-d48b-48a8-abba-25ef51996c50
+[I 2020-02-02 03:05:17.649 SingleUserNotebookApp log:174] 204 POST /user/guest160/api/kernels/4d6d4a45-d48b-48a8-abba-25ef51996c50/interrupt (guest160@142.116.216.49) 28.70ms
+[I 2020-02-02 03:05:38.136 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978546 (guest160@142.116.216.49) 2.05ms
+[I 2020-02-02 03:05:41.253 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 03:05:41.858 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 625.75ms
+[I 2020-02-02 03:06:12.758 SingleUserNotebookApp multikernelmanager:173] Kernel interrupted: 4d6d4a45-d48b-48a8-abba-25ef51996c50
+[I 2020-02-02 03:06:12.758 SingleUserNotebookApp log:174] 204 POST /user/guest160/api/kernels/4d6d4a45-d48b-48a8-abba-25ef51996c50/interrupt (guest160@142.116.216.49) 1.83ms
+[I 2020-02-02 03:07:38.200 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978547 (guest160@142.116.216.49) 2.06ms
+[I 2020-02-02 03:07:41.578 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 03:07:42.081 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 521.83ms
+[I 2020-02-02 03:09:38.242 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978548 (guest160@142.116.216.49) 2.08ms
+[I 2020-02-02 03:09:42.251 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 03:09:42.905 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 673.79ms
+[I 2020-02-02 03:11:38.638 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978549 (guest160@142.116.216.49) 36.22ms
+[I 2020-02-02 03:11:41.718 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 03:11:42.473 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 776.06ms
+[I 2020-02-02 03:13:38.190 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978550 (guest160@142.116.216.49) 2.03ms
+[I 2020-02-02 03:13:41.548 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 03:13:42.177 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 652.52ms
+[I 2020-02-02 03:15:38.184 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978551 (guest160@142.116.216.49) 1.83ms
+[I 2020-02-02 03:15:41.435 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 03:15:42.364 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 948.17ms
+[I 2020-02-02 03:17:38.232 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978552 (guest160@142.116.216.49) 34.41ms
+[I 2020-02-02 03:17:41.202 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 03:17:41.867 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 682.09ms
+[I 2020-02-02 03:19:38.201 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978553 (guest160@142.116.216.49) 1.77ms
+[I 2020-02-02 03:19:42.038 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 03:19:42.731 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 713.66ms
+[I 2020-02-02 03:23:44.068 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Cleaning.ipynb?content=0&_=1580603978554 (guest160@142.116.216.49) 37.91ms
+[I 2020-02-02 03:23:47.028 SingleUserNotebookApp handlers:164] Saving file at /Data Cleaning.ipynb
+[I 2020-02-02 03:23:47.858 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Cleaning.ipynb (guest160@142.116.216.49) 849.39ms
+[I 2020-02-02 03:23:47.899 SingleUserNotebookApp log:174] 201 POST /user/guest160/api/contents/Data%20Cleaning.ipynb/checkpoints (guest160@142.116.216.49) 11.28ms
+[I 2020-02-02 03:23:50.300 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580603375018 (guest160@142.116.216.49) 1.48ms
+[I 2020-02-02 03:23:50.323 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580603375019 (guest160@142.116.216.49) 1.12ms
+[I 2020-02-02 03:23:50.745 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580603375020 (guest160@142.116.216.49) 401.09ms
+slurmstepd: error: *** JOB 3706 ON helk80n03 CANCELLED AT 2020-02-02T04:29:39 DUE TO TIME LIMIT ***

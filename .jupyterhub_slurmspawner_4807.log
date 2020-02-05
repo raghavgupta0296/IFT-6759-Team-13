@@ -1,0 +1,46 @@
+[I 2020-02-05 20:27:14.511 SingleUserNotebookApp extension:158] JupyterLab extension loaded from /opt/jupyterhub/lib64/python3.6/site-packages/jupyterlab
+[I 2020-02-05 20:27:14.534 SingleUserNotebookApp extension:159] JupyterLab application directory is /opt/jupyterhub/share/jupyter/lab
+[I 2020-02-05 20:27:14.915 SingleUserNotebookApp __init__:25] Loading lmod extension
+[I 2020-02-05 20:27:14.919 SingleUserNotebookApp singleuser:561] Starting jupyterhub-singleuser server version 1.0.0
+[I 2020-02-05 20:27:14.923 SingleUserNotebookApp log:174] 302 GET /user/guest160/ -> /user/guest160/tree? (@132.219.137.246) 1.57ms
+[I 2020-02-05 20:27:14.929 SingleUserNotebookApp notebookapp:1924] Serving notebooks from local directory: /home/guest160
+[I 2020-02-05 20:27:14.929 SingleUserNotebookApp notebookapp:1924] The Jupyter Notebook is running at:
+[I 2020-02-05 20:27:14.929 SingleUserNotebookApp notebookapp:1924] http://helk80n01.helios.calculquebec.ca:33822/user/guest160/
+[I 2020-02-05 20:27:14.929 SingleUserNotebookApp notebookapp:1925] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[I 2020-02-05 20:27:14.943 SingleUserNotebookApp singleuser:542] Updating Hub with activity every 300 seconds
+[I 2020-02-05 20:27:15.098 SingleUserNotebookApp log:174] 302 GET /user/guest160/ -> /user/guest160/tree? (@69.28.236.4) 0.68ms
+[I 2020-02-05 20:27:15.153 SingleUserNotebookApp log:174] 302 GET /user/guest160/tree? -> /hub/api/oauth2/authorize?client_id=jupyterhub-user-guest160&redirect_uri=%2Fuser%2Fguest160%2Foauth_callback&response_type=code&state=[secret] (@69.28.236.4) 2.46ms
+[I 2020-02-05 20:27:15.404 SingleUserNotebookApp auth:981] Logged-in user {'kind': 'user', 'name': 'guest160', 'admin': False, 'groups': [], 'server': '/user/guest160/', 'pending': None, 'created': '2020-01-08T21:36:15.420535Z', 'last_activity': '2020-02-05T20:27:15.400316Z', 'servers': None}
+[I 2020-02-05 20:27:15.404 SingleUserNotebookApp log:174] 302 GET /user/guest160/oauth_callback?code=[secret]&state=[secret] -> /user/guest160/tree? (@69.28.236.4) 52.46ms
+[I 2020-02-05 20:27:15.516 SingleUserNotebookApp log:174] 200 GET /user/guest160/tree? (guest160@69.28.236.4) 66.86ms
+[I 2020-02-05 20:27:16.171 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/config/tree?_=1580934436607 (guest160@69.28.236.4) 3.81ms
+[I 2020-02-05 20:27:16.191 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/config/common?_=1580934436608 (guest160@69.28.236.4) 4.15ms
+[I 2020-02-05 20:27:16.215 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580934436609 (guest160@69.28.236.4) 1.26ms
+[I 2020-02-05 20:27:16.367 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580934436610 (guest160@69.28.236.4) 5.13ms
+[I 2020-02-05 20:27:16.368 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580934436611 (guest160@69.28.236.4) 4.94ms
+[I 2020-02-05 20:27:17.386 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580934436612 (guest160@69.28.236.4) 929.87ms
+[I 2020-02-05 20:27:18.389 SingleUserNotebookApp log:174] 200 GET /user/guest160/lmod/avail (guest160@69.28.236.4) 570.71ms
+[I 2020-02-05 20:27:26.468 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580934436613 (guest160@69.28.236.4) 1.56ms
+[I 2020-02-05 20:27:26.470 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580934436614 (guest160@69.28.236.4) 0.95ms
+[I 2020-02-05 20:27:26.614 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580934436615 (guest160@69.28.236.4) 11.51ms
+[I 2020-02-05 20:27:50.392 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580934436616 (guest160@69.28.236.4) 1.12ms
+[I 2020-02-05 20:27:50.393 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580934436617 (guest160@69.28.236.4) 0.96ms
+[I 2020-02-05 20:27:50.450 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580934436618 (guest160@69.28.236.4) 10.62ms
+[I 2020-02-05 20:28:43.858 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580934436619 (guest160@69.28.236.4) 1.40ms
+[I 2020-02-05 20:28:43.863 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580934436620 (guest160@69.28.236.4) 0.95ms
+[I 2020-02-05 20:28:43.919 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580934436621 (guest160@69.28.236.4) 11.12ms
+[I 2020-02-05 20:29:00.138 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580934436622 (guest160@69.28.236.4) 1.50ms
+[I 2020-02-05 20:29:00.142 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580934436623 (guest160@69.28.236.4) 0.93ms
+[I 2020-02-05 20:29:00.207 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580934436624 (guest160@69.28.236.4) 11.28ms
+[I 2020-02-05 20:29:36.042 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580934436625 (guest160@69.28.236.4) 1.33ms
+[I 2020-02-05 20:29:36.045 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580934436626 (guest160@69.28.236.4) 0.87ms
+[I 2020-02-05 20:29:36.105 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580934436627 (guest160@69.28.236.4) 10.52ms
+[I 2020-02-05 20:30:48.851 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580934436628 (guest160@69.28.236.4) 1.27ms
+[I 2020-02-05 20:30:48.853 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580934436629 (guest160@69.28.236.4) 0.98ms
+[I 2020-02-05 20:30:48.911 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580934436630 (guest160@69.28.236.4) 11.37ms
+[I 2020-02-05 20:32:03.531 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580934436631 (guest160@69.28.236.4) 1.99ms
+[I 2020-02-05 20:32:03.531 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580934436632 (guest160@69.28.236.4) 1.74ms
+[I 2020-02-05 20:32:03.589 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580934436633 (guest160@69.28.236.4) 12.43ms
+[I 2020-02-05 20:32:17.901 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580934436634 (guest160@69.28.236.4) 26.86ms
+[I 2020-02-05 20:32:17.903 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580934436635 (guest160@69.28.236.4) 0.93ms
+[I 2020-02-05 20:32:17.958 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580934436636 (guest160@69.28.236.4) 10.95ms

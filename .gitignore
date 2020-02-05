@@ -1,0 +1,13 @@
+.idea/inspectionProfiles/profiles_settings.xml
+.idea/workspace.xml
+.idea/IFT6759.iml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/workspace.xml
+.idea/*
+.data/hdf5v5_16bit/*.h5
+*.h5
+ift6759-env
+my_tf_env
+Outputs
+

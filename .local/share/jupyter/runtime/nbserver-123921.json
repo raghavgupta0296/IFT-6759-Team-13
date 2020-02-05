@@ -1,0 +1,11 @@
+{
+  "base_url": "/user/guest160/",
+  "hostname": "0.0.0.0",
+  "notebook_dir": "/home/guest160",
+  "password": false,
+  "pid": 123921,
+  "port": 39665,
+  "secure": false,
+  "token": "",
+  "url": "http://0.0.0.0:39665/user/guest160/"
+}

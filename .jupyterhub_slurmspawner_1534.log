@@ -1,0 +1,405 @@
+[I 2020-01-26 06:36:04.312 SingleUserNotebookApp extension:158] JupyterLab extension loaded from /opt/jupyterhub/lib64/python3.6/site-packages/jupyterlab
+[I 2020-01-26 06:36:04.482 SingleUserNotebookApp extension:159] JupyterLab application directory is /opt/jupyterhub/share/jupyter/lab
+[I 2020-01-26 06:36:04.858 SingleUserNotebookApp __init__:25] Loading lmod extension
+[I 2020-01-26 06:36:04.862 SingleUserNotebookApp singleuser:561] Starting jupyterhub-singleuser server version 1.0.0
+[I 2020-01-26 06:36:04.866 SingleUserNotebookApp log:174] 302 GET /user/guest160/ -> /user/guest160/tree? (@132.219.137.246) 1.43ms
+[I 2020-01-26 06:36:04.872 SingleUserNotebookApp notebookapp:1924] Serving notebooks from local directory: /home/guest160
+[I 2020-01-26 06:36:04.872 SingleUserNotebookApp notebookapp:1924] The Jupyter Notebook is running at:
+[I 2020-01-26 06:36:04.872 SingleUserNotebookApp notebookapp:1924] http://helk80n01.helios.calculquebec.ca:54418/user/guest160/
+[I 2020-01-26 06:36:04.873 SingleUserNotebookApp notebookapp:1925] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[I 2020-01-26 06:36:04.887 SingleUserNotebookApp singleuser:542] Updating Hub with activity every 300 seconds
+[I 2020-01-26 06:36:04.968 SingleUserNotebookApp log:174] 302 GET /user/guest160/tree -> /hub/api/oauth2/authorize?client_id=jupyterhub-user-guest160&redirect_uri=%2Fuser%2Fguest160%2Foauth_callback&response_type=code&state=[secret] (@142.116.216.49) 2.40ms
+[I 2020-01-26 06:36:05.214 SingleUserNotebookApp auth:981] Logged-in user {'kind': 'user', 'name': 'guest160', 'admin': False, 'groups': [], 'server': '/user/guest160/', 'pending': None, 'created': '2020-01-08T21:36:15.420535Z', 'last_activity': '2020-01-26T06:36:05.204679Z', 'servers': None}
+[I 2020-01-26 06:36:05.215 SingleUserNotebookApp log:174] 302 GET /user/guest160/oauth_callback?code=[secret]&state=[secret] -> /user/guest160/tree (@142.116.216.49) 54.22ms
+[I 2020-01-26 06:36:05.308 SingleUserNotebookApp log:174] 200 GET /user/guest160/tree (guest160@142.116.216.49) 62.92ms
+[I 2020-01-26 06:36:06.763 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580020569767 (guest160@142.116.216.49) 1.54ms
+[I 2020-01-26 06:36:06.776 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/config/common?_=1580020569765 (guest160@142.116.216.49) 3.51ms
+[I 2020-01-26 06:36:06.780 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/config/tree?_=1580020569764 (guest160@142.116.216.49) 2.89ms
+[I 2020-01-26 06:36:06.782 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580020569766 (guest160@142.116.216.49) 0.95ms
+[I 2020-01-26 06:36:07.421 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580020569769 (guest160@142.116.216.49) 616.32ms
+[I 2020-01-26 06:36:07.426 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580020569768 (guest160@142.116.216.49) 3.20ms
+[I 2020-01-26 06:36:11.294 SingleUserNotebookApp log:174] 200 GET /user/guest160/notebooks/Data%20Explore.ipynb (guest160@142.116.216.49) 238.26ms
+[I 2020-01-26 06:36:13.543 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/config/common?_=1580020576372 (guest160@142.116.216.49) 2.75ms
+[I 2020-01-26 06:36:13.549 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/config/notebook?_=1580020576371 (guest160@142.116.216.49) 2.70ms
+[I 2020-01-26 06:36:14.319 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Explore.ipynb?type=notebook&_=1580020576373 (guest160@142.116.216.49) 713.53ms
+[W 2020-01-26 06:36:14.373 SingleUserNotebookApp log:174] 404 GET /user/guest160/nbextensions/widgets/notebook/js/extension.js?v=20200126063603 (guest160@142.116.216.49) 8.57ms
+[I 2020-01-26 06:36:14.567 SingleUserNotebookApp kernelmanager:172] Kernel started: d731c464-12da-439d-ad95-2016fc4df14c
+[I 2020-01-26 06:36:14.569 SingleUserNotebookApp log:174] 201 POST /user/guest160/api/sessions (guest160@142.116.216.49) 60.86ms
+[I 2020-01-26 06:36:14.642 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Explore.ipynb/checkpoints?_=1580020576374 (guest160@142.116.216.49) 71.91ms
+[I 2020-01-26 06:36:15.834 SingleUserNotebookApp log:174] 101 GET /user/guest160/api/kernels/d731c464-12da-439d-ad95-2016fc4df14c/channels?session_id=49e33885c2c5488faee7032871c9f352 (guest160@142.116.216.49) 1081.93ms
+[I 2020-01-26 06:36:48.274 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580020569771 (guest160@142.116.216.49) 1.14ms
+[I 2020-01-26 06:36:48.276 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580020569770 (guest160@142.116.216.49) 1.24ms
+[I 2020-01-26 06:36:48.311 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580020569772 (guest160@142.116.216.49) 5.21ms
+[I 2020-01-26 06:37:42.691 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580020569773 (guest160@142.116.216.49) 1.51ms
+[I 2020-01-26 06:37:42.693 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580020569774 (guest160@142.116.216.49) 0.98ms
+[I 2020-01-26 06:37:42.726 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580020569775 (guest160@142.116.216.49) 5.41ms
+[I 2020-01-26 06:37:48.669 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/my_tf_env?type=directory&_=1580020569776 (guest160@142.116.216.49) 8.60ms
+[I 2020-01-26 06:37:50.915 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580020569777 (guest160@142.116.216.49) 5.03ms
+[I 2020-01-26 06:38:14.971 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Explore.ipynb?content=0&_=1580020576375 (guest160@142.116.216.49) 1.44ms
+[I 2020-01-26 06:38:15.033 SingleUserNotebookApp handlers:164] Saving file at /Data Explore.ipynb
+[I 2020-01-26 06:38:15.573 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Explore.ipynb (guest160@142.116.216.49) 540.96ms
+[I 2020-01-26 06:42:46.155 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580020569778 (guest160@142.116.216.49) 47.13ms
+[I 2020-01-26 06:42:46.157 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580020569779 (guest160@142.116.216.49) 0.95ms
+[I 2020-01-26 06:42:46.194 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580020569780 (guest160@142.116.216.49) 6.45ms
+[I 2020-01-26 06:42:49.037 SingleUserNotebookApp kernelmanager:217] Starting buffering for d731c464-12da-439d-ad95-2016fc4df14c:49e33885c2c5488faee7032871c9f352
+[I 2020-01-26 06:42:51.911 SingleUserNotebookApp management:320] New terminal with automatic name: 1
+[I 2020-01-26 06:42:51.912 SingleUserNotebookApp log:174] 200 POST /user/guest160/api/terminals (guest160@142.116.216.49) 49.92ms
+[I 2020-01-26 06:42:52.322 SingleUserNotebookApp log:174] 200 GET /user/guest160/terminals/1 (guest160@142.116.216.49) 12.64ms
+[I 2020-01-26 06:42:53.381 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/config/terminal?_=1580020976574 (guest160@142.116.216.49) 3.47ms
+[I 2020-01-26 06:42:53.385 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/config/common?_=1580020976575 (guest160@142.116.216.49) 2.84ms
+[I 2020-01-26 06:42:53.410 SingleUserNotebookApp log:174] 101 GET /user/guest160/terminals/websocket/1 (guest160@142.116.216.49) 1.03ms
+TermSocket.open: 1
+TermSocket.open: Opened 1
+[I 2020-01-26 06:43:04.127 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580020569781 (guest160@142.116.216.49) 1.50ms
+[I 2020-01-26 06:43:04.129 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580020569782 (guest160@142.116.216.49) 0.98ms
+[I 2020-01-26 06:43:04.165 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580020569783 (guest160@142.116.216.49) 5.67ms
+[I 2020-01-26 06:43:15.308 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580020569784 (guest160@142.116.216.49) 1.19ms
+[I 2020-01-26 06:43:15.310 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580020569785 (guest160@142.116.216.49) 0.93ms
+[I 2020-01-26 06:43:15.345 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580020569786 (guest160@142.116.216.49) 4.75ms
+[I 2020-01-26 06:43:36.151 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580020569787 (guest160@142.116.216.49) 1.58ms
+[I 2020-01-26 06:43:36.153 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580020569788 (guest160@142.116.216.49) 0.98ms
+[I 2020-01-26 06:43:36.188 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580020569789 (guest160@142.116.216.49) 5.29ms
+[I 2020-01-26 06:43:48.073 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580020569790 (guest160@142.116.216.49) 1.11ms
+[I 2020-01-26 06:43:48.074 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580020569791 (guest160@142.116.216.49) 0.94ms
+[I 2020-01-26 06:43:48.106 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580020569792 (guest160@142.116.216.49) 5.05ms
+[I 2020-01-26 06:44:56.948 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580020569794 (guest160@142.116.216.49) 1.22ms
+[I 2020-01-26 06:44:56.995 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580020569793 (guest160@142.116.216.49) 1.28ms
+[I 2020-01-26 06:44:57.028 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580020569795 (guest160@142.116.216.49) 5.47ms
+[I 2020-01-26 06:44:59.171 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/config/notebook?_=1580021102289 (guest160@142.116.216.49) 2.58ms
+[I 2020-01-26 06:44:59.182 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/config/common?_=1580021102290 (guest160@142.116.216.49) 2.61ms
+[I 2020-01-26 06:44:59.771 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Explore.ipynb?type=notebook&_=1580021102291 (guest160@142.116.216.49) 532.27ms
+[W 2020-01-26 06:44:59.779 SingleUserNotebookApp log:174] 404 GET /user/guest160/nbextensions/widgets/notebook/js/extension.js?v=20200126063603 (guest160@142.116.216.49) 4.66ms
+[I 2020-01-26 06:44:59.963 SingleUserNotebookApp log:174] 201 POST /user/guest160/api/sessions (guest160@142.116.216.49) 1.55ms
+[I 2020-01-26 06:44:59.965 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Explore.ipynb/checkpoints?_=1580021102292 (guest160@142.116.216.49) 1.22ms
+[I 2020-01-26 06:45:00.068 SingleUserNotebookApp log:174] 101 GET /user/guest160/api/kernels/d731c464-12da-439d-ad95-2016fc4df14c/channels?session_id=54bddeb543d447ee81ed2d48243e7164 (guest160@142.116.216.49) 2.51ms
+[I 2020-01-26 06:45:18.542 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580020569796 (guest160@142.116.216.49) 1.54ms
+[I 2020-01-26 06:45:18.544 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580020569797 (guest160@142.116.216.49) 0.91ms
+[I 2020-01-26 06:45:18.590 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580020569798 (guest160@142.116.216.49) 5.65ms
+[I 2020-01-26 06:45:22.580 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/config/tree?_=1580021125752 (guest160@142.116.216.49) 3.09ms
+[I 2020-01-26 06:45:22.584 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/config/common?_=1580021125753 (guest160@142.116.216.49) 2.93ms
+[I 2020-01-26 06:45:22.586 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021125754 (guest160@142.116.216.49) 0.96ms
+[I 2020-01-26 06:45:22.596 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/kernelspecs (guest160@142.116.216.49) 8.05ms
+[I 2020-01-26 06:45:22.599 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021125755 (guest160@142.116.216.49) 1.91ms
+[I 2020-01-26 06:45:22.599 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021125756 (guest160@142.116.216.49) 1.63ms
+[I 2020-01-26 06:45:22.649 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021125757 (guest160@142.116.216.49) 5.15ms
+[I 2020-01-26 06:45:34.739 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021125758 (guest160@142.116.216.49) 1.71ms
+[I 2020-01-26 06:45:34.740 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021125759 (guest160@142.116.216.49) 0.94ms
+[I 2020-01-26 06:45:34.782 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021125760 (guest160@142.116.216.49) 5.44ms
+[I 2020-01-26 06:45:38.113 SingleUserNotebookApp handlers:153] Creating new notebook in 
+[I 2020-01-26 06:45:39.093 SingleUserNotebookApp log:174] 201 POST /user/guest160/api/contents (guest160@142.116.216.49) 980.73ms
+[I 2020-01-26 06:45:39.253 SingleUserNotebookApp log:174] 200 GET /user/guest160/notebooks/Untitled.ipynb?kernel_name=ift6759-env (guest160@142.116.216.49) 130.91ms
+[I 2020-01-26 06:45:39.937 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/config/notebook?_=1580021143069 (guest160@142.116.216.49) 2.90ms
+[I 2020-01-26 06:45:39.940 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/config/common?_=1580021143070 (guest160@142.116.216.49) 2.66ms
+[I 2020-01-26 06:45:40.272 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Untitled.ipynb?type=notebook&_=1580021143071 (guest160@142.116.216.49) 290.26ms
+[W 2020-01-26 06:45:40.280 SingleUserNotebookApp log:174] 404 GET /user/guest160/nbextensions/widgets/notebook/js/extension.js?v=20200126063603 (guest160@142.116.216.49) 4.91ms
+[I 2020-01-26 06:45:40.370 SingleUserNotebookApp kernelmanager:172] Kernel started: 4e73bbd1-844f-44da-a28a-ca32381d0020
+[I 2020-01-26 06:45:40.372 SingleUserNotebookApp log:174] 201 POST /user/guest160/api/sessions (guest160@142.116.216.49) 21.44ms
+[I 2020-01-26 06:45:40.376 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Untitled.ipynb/checkpoints?_=1580021143072 (guest160@142.116.216.49) 2.90ms
+[I 2020-01-26 06:45:41.557 SingleUserNotebookApp log:174] 101 GET /user/guest160/api/kernels/4e73bbd1-844f-44da-a28a-ca32381d0020/channels?session_id=a418f9d76319409584cc14194242348b (guest160@142.116.216.49) 1126.70ms
+[I 2020-01-26 06:45:51.581 SingleUserNotebookApp kernelmanager:217] Starting buffering for 4e73bbd1-844f-44da-a28a-ca32381d0020:a418f9d76319409584cc14194242348b
+[I 2020-01-26 06:45:51.617 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021125761 (guest160@142.116.216.49) 1.57ms
+[I 2020-01-26 06:45:51.619 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021125762 (guest160@142.116.216.49) 1.00ms
+[I 2020-01-26 06:45:51.651 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021125763 (guest160@142.116.216.49) 5.49ms
+[I 2020-01-26 06:46:13.390 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021125764 (guest160@142.116.216.49) 1.62ms
+[I 2020-01-26 06:46:13.392 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021125765 (guest160@142.116.216.49) 0.98ms
+[I 2020-01-26 06:46:13.447 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021125766 (guest160@142.116.216.49) 5.57ms
+[I 2020-01-26 06:46:16.211 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/config/tree?_=1580021179399 (guest160@142.116.216.49) 3.05ms
+[I 2020-01-26 06:46:16.215 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/config/common?_=1580021179400 (guest160@142.116.216.49) 2.75ms
+[I 2020-01-26 06:46:16.224 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179401 (guest160@142.116.216.49) 0.91ms
+[I 2020-01-26 06:46:16.226 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179402 (guest160@142.116.216.49) 1.30ms
+[I 2020-01-26 06:46:16.228 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179403 (guest160@142.116.216.49) 0.97ms
+[I 2020-01-26 06:46:16.238 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/kernelspecs (guest160@142.116.216.49) 9.71ms
+[I 2020-01-26 06:46:16.277 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179404 (guest160@142.116.216.49) 4.80ms
+[I 2020-01-26 06:46:21.815 SingleUserNotebookApp handlers:153] Creating new notebook in 
+[I 2020-01-26 06:46:22.546 SingleUserNotebookApp log:174] 201 POST /user/guest160/api/contents (guest160@142.116.216.49) 731.89ms
+[I 2020-01-26 06:46:22.706 SingleUserNotebookApp log:174] 200 GET /user/guest160/notebooks/Untitled1.ipynb?kernel_name=my_tf_env (guest160@142.116.216.49) 131.10ms
+[I 2020-01-26 06:46:24.062 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/config/notebook?_=1580021186393 (guest160@142.116.216.49) 2.85ms
+[I 2020-01-26 06:46:24.066 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/config/common?_=1580021186394 (guest160@142.116.216.49) 2.80ms
+[I 2020-01-26 06:46:24.461 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Untitled1.ipynb?type=notebook&_=1580021186395 (guest160@142.116.216.49) 339.12ms
+[W 2020-01-26 06:46:24.469 SingleUserNotebookApp log:174] 404 GET /user/guest160/nbextensions/widgets/notebook/js/extension.js?v=20200126063603 (guest160@142.116.216.49) 4.41ms
+[I 2020-01-26 06:46:24.578 SingleUserNotebookApp kernelmanager:172] Kernel started: 29f4d552-d361-4ee3-9f39-8feb5bcfdc57
+[I 2020-01-26 06:46:24.579 SingleUserNotebookApp log:174] 201 POST /user/guest160/api/sessions (guest160@142.116.216.49) 43.66ms
+[I 2020-01-26 06:46:24.583 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Untitled1.ipynb/checkpoints?_=1580021186396 (guest160@142.116.216.49) 2.88ms
+[I 2020-01-26 06:46:25.585 SingleUserNotebookApp log:174] 101 GET /user/guest160/api/kernels/29f4d552-d361-4ee3-9f39-8feb5bcfdc57/channels?session_id=3266734afbc147f089b39612bdc5de3a (guest160@142.116.216.49) 950.17ms
+[I 2020-01-26 06:46:36.350 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179405 (guest160@142.116.216.49) 2.32ms
+[I 2020-01-26 06:46:36.351 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179406 (guest160@142.116.216.49) 2.06ms
+[I 2020-01-26 06:46:36.395 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179407 (guest160@142.116.216.49) 5.64ms
+[I 2020-01-26 06:46:59.984 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Explore.ipynb?content=0&_=1580021102293 (guest160@142.116.216.49) 1.63ms
+[I 2020-01-26 06:47:00.046 SingleUserNotebookApp handlers:164] Saving file at /Data Explore.ipynb
+[I 2020-01-26 06:47:00.397 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Explore.ipynb (guest160@142.116.216.49) 352.07ms
+[I 2020-01-26 06:47:33.446 SingleUserNotebookApp management:185] EOF on FD 26; stopping reading
+[I 2020-01-26 06:47:33.548 SingleUserNotebookApp management:338] Terminal 1 closed
+Websocket closed
+[I 2020-01-26 06:47:36.581 SingleUserNotebookApp kernelmanager:217] Starting buffering for d731c464-12da-439d-ad95-2016fc4df14c:54bddeb543d447ee81ed2d48243e7164
+[I 2020-01-26 06:47:37.097 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179408 (guest160@142.116.216.49) 2.29ms
+[I 2020-01-26 06:47:37.098 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179409 (guest160@142.116.216.49) 2.07ms
+[I 2020-01-26 06:47:37.138 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179410 (guest160@142.116.216.49) 6.71ms
+[I 2020-01-26 06:47:42.970 SingleUserNotebookApp multikernelmanager:127] Kernel shutdown: 4e73bbd1-844f-44da-a28a-ca32381d0020
+[I 2020-01-26 06:47:42.972 SingleUserNotebookApp log:174] 204 DELETE /user/guest160/api/sessions/a57b1056-0412-4e01-b015-50a7923743da (guest160@142.116.216.49) 861.72ms
+[I 2020-01-26 06:47:43.025 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179411 (guest160@142.116.216.49) 1.58ms
+[I 2020-01-26 06:47:43.086 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179412 (guest160@142.116.216.49) 24.30ms
+[W 2020-01-26 06:47:48.751 SingleUserNotebookApp handlers:236] delete /Untitled.ipynb
+[I 2020-01-26 06:47:48.782 SingleUserNotebookApp log:174] 204 DELETE /user/guest160/api/contents/Untitled.ipynb (guest160@142.116.216.49) 95.79ms
+[I 2020-01-26 06:47:54.835 SingleUserNotebookApp multikernelmanager:127] Kernel shutdown: d731c464-12da-439d-ad95-2016fc4df14c
+[I 2020-01-26 06:47:54.836 SingleUserNotebookApp log:174] 204 DELETE /user/guest160/api/sessions/f00929ba-1858-406b-b480-3bfe2ae019c0 (guest160@142.116.216.49) 505.25ms
+[I 2020-01-26 06:47:54.864 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179413 (guest160@142.116.216.49) 1.27ms
+[I 2020-01-26 06:47:54.899 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179414 (guest160@142.116.216.49) 6.58ms
+[I 2020-01-26 06:48:01.299 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/config/notebook?_=1580021284425 (guest160@142.116.216.49) 2.76ms
+[I 2020-01-26 06:48:01.309 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/config/common?_=1580021284426 (guest160@142.116.216.49) 2.57ms
+[I 2020-01-26 06:48:01.751 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Explore.ipynb?type=notebook&_=1580021284427 (guest160@142.116.216.49) 406.98ms
+[W 2020-01-26 06:48:01.760 SingleUserNotebookApp log:174] 404 GET /user/guest160/nbextensions/widgets/notebook/js/extension.js?v=20200126063603 (guest160@142.116.216.49) 4.62ms
+[I 2020-01-26 06:48:01.966 SingleUserNotebookApp kernelmanager:172] Kernel started: dabdf0f4-a9f2-4c23-bddd-a7726869bcae
+[I 2020-01-26 06:48:01.967 SingleUserNotebookApp log:174] 201 POST /user/guest160/api/sessions (guest160@142.116.216.49) 20.63ms
+[I 2020-01-26 06:48:01.969 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Explore.ipynb/checkpoints?_=1580021284428 (guest160@142.116.216.49) 1.53ms
+[I 2020-01-26 06:48:02.903 SingleUserNotebookApp log:174] 101 GET /user/guest160/api/kernels/dabdf0f4-a9f2-4c23-bddd-a7726869bcae/channels?session_id=028892994a8446b88aceaa74f3e68d4d (guest160@142.116.216.49) 877.80ms
+[I 2020-01-26 06:48:10.779 SingleUserNotebookApp kernelmanager:217] Starting buffering for dabdf0f4-a9f2-4c23-bddd-a7726869bcae:028892994a8446b88aceaa74f3e68d4d
+[I 2020-01-26 06:48:11.394 SingleUserNotebookApp multikernelmanager:127] Kernel shutdown: dabdf0f4-a9f2-4c23-bddd-a7726869bcae
+[I 2020-01-26 06:48:11.395 SingleUserNotebookApp log:174] 204 DELETE /user/guest160/api/sessions/b50b376f-2f84-4d46-a7da-e58d451d4952 (guest160@142.116.216.49) 605.41ms
+[I 2020-01-26 06:48:11.445 SingleUserNotebookApp kernelmanager:172] Kernel started: e4584a07-160a-4a75-acb4-7c50967900c3
+[I 2020-01-26 06:48:11.446 SingleUserNotebookApp log:174] 201 POST /user/guest160/api/sessions (guest160@142.116.216.49) 23.20ms
+[I 2020-01-26 06:48:12.402 SingleUserNotebookApp log:174] 101 GET /user/guest160/api/kernels/e4584a07-160a-4a75-acb4-7c50967900c3/channels?session_id=028892994a8446b88aceaa74f3e68d4d (guest160@142.116.216.49) 902.61ms
+[I 2020-01-26 06:48:16.058 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Explore.ipynb?content=0&_=1580021284429 (guest160@142.116.216.49) 1.84ms
+[I 2020-01-26 06:48:16.120 SingleUserNotebookApp handlers:164] Saving file at /Data Explore.ipynb
+[I 2020-01-26 06:48:16.490 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Explore.ipynb (guest160@142.116.216.49) 371.75ms
+[I 2020-01-26 06:48:16.493 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Explore.ipynb?content=0&_=1580021284430 (guest160@142.116.216.49) 1.32ms
+[I 2020-01-26 06:48:16.528 SingleUserNotebookApp log:174] 201 POST /user/guest160/api/contents/Data%20Explore.ipynb/checkpoints (guest160@142.116.216.49) 7.92ms
+[I 2020-01-26 06:48:16.560 SingleUserNotebookApp handlers:164] Saving file at /Data Explore.ipynb
+[I 2020-01-26 06:48:16.990 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Explore.ipynb (guest160@142.116.216.49) 431.36ms
+[I 2020-01-26 06:48:18.729 SingleUserNotebookApp kernelmanager:217] Starting buffering for e4584a07-160a-4a75-acb4-7c50967900c3:028892994a8446b88aceaa74f3e68d4d
+[I 2020-01-26 06:48:18.746 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179415 (guest160@142.116.216.49) 1.72ms
+[I 2020-01-26 06:48:18.751 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179416 (guest160@142.116.216.49) 0.98ms
+[I 2020-01-26 06:48:18.781 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179417 (guest160@142.116.216.49) 6.99ms
+[I 2020-01-26 06:48:21.456 SingleUserNotebookApp multikernelmanager:127] Kernel shutdown: e4584a07-160a-4a75-acb4-7c50967900c3
+[I 2020-01-26 06:48:21.457 SingleUserNotebookApp log:174] 204 DELETE /user/guest160/api/sessions/a79a152e-0fa8-4de6-a1c4-e41a0ec8c1d8 (guest160@142.116.216.49) 505.69ms
+[I 2020-01-26 06:48:21.485 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179418 (guest160@142.116.216.49) 1.38ms
+[I 2020-01-26 06:48:21.520 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179419 (guest160@142.116.216.49) 5.32ms
+[I 2020-01-26 06:48:24.562 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Untitled1.ipynb?content=0&_=1580021186397 (guest160@142.116.216.49) 1.88ms
+[I 2020-01-26 06:48:24.605 SingleUserNotebookApp handlers:164] Saving file at /Untitled1.ipynb
+[I 2020-01-26 06:48:24.966 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Untitled1.ipynb (guest160@142.116.216.49) 362.07ms
+[I 2020-01-26 06:48:48.317 SingleUserNotebookApp kernelmanager:217] Starting buffering for 29f4d552-d361-4ee3-9f39-8feb5bcfdc57:3266734afbc147f089b39612bdc5de3a
+[I 2020-01-26 06:48:48.347 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179420 (guest160@142.116.216.49) 1.86ms
+[I 2020-01-26 06:48:48.354 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179421 (guest160@142.116.216.49) 1.11ms
+[I 2020-01-26 06:48:48.388 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179422 (guest160@142.116.216.49) 6.59ms
+[I 2020-01-26 06:48:50.515 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/config/notebook?_=1580021333658 (guest160@142.116.216.49) 3.37ms
+[I 2020-01-26 06:48:50.520 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/config/common?_=1580021333659 (guest160@142.116.216.49) 3.22ms
+[I 2020-01-26 06:48:50.792 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Explore.ipynb?type=notebook&_=1580021333660 (guest160@142.116.216.49) 220.77ms
+[W 2020-01-26 06:48:50.799 SingleUserNotebookApp log:174] 404 GET /user/guest160/nbextensions/widgets/notebook/js/extension.js?v=20200126063603 (guest160@142.116.216.49) 3.93ms
+[I 2020-01-26 06:48:51.013 SingleUserNotebookApp kernelmanager:172] Kernel started: 3b0e85c9-7d7b-4f7d-9d4a-940667ad6602
+[I 2020-01-26 06:48:51.015 SingleUserNotebookApp log:174] 201 POST /user/guest160/api/sessions (guest160@142.116.216.49) 44.51ms
+[I 2020-01-26 06:48:51.017 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Explore.ipynb/checkpoints?_=1580021333661 (guest160@142.116.216.49) 1.44ms
+[I 2020-01-26 06:48:51.928 SingleUserNotebookApp log:174] 101 GET /user/guest160/api/kernels/3b0e85c9-7d7b-4f7d-9d4a-940667ad6602/channels?session_id=afcdce8753324654807ef18808848bd6 (guest160@142.116.216.49) 854.34ms
+[I 2020-01-26 06:49:06.687 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179423 (guest160@142.116.216.49) 1.65ms
+[I 2020-01-26 06:49:06.689 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179424 (guest160@142.116.216.49) 1.01ms
+[I 2020-01-26 06:49:06.725 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179425 (guest160@142.116.216.49) 5.74ms
+Error in atexit._run_exitfuncs:
+Traceback (most recent call last):
+  File "/cvmfs/soft.computecanada.ca/easybuild/software/2017/Core/python/3.7.4/lib/python3.7/logging/__init__.py", line 2033, in shutdown
+    h.flush()
+  File "/localscratch/guest160.1534.0/lib/python3.7/site-packages/absl/logging/__init__.py", line 882, in flush
+    self._current_handler.flush()
+  File "/localscratch/guest160.1534.0/lib/python3.7/site-packages/absl/logging/__init__.py", line 776, in flush
+    self.stream.flush()
+  File "/opt/ipython-kernel/lib/python3.7/site-packages/ipykernel/iostream.py", line 341, in flush
+    if self.pub_thread.thread.is_alive():
+AttributeError: 'NoneType' object has no attribute 'thread'
+[I 2020-01-26 06:49:13.654 SingleUserNotebookApp multikernelmanager:127] Kernel shutdown: 29f4d552-d361-4ee3-9f39-8feb5bcfdc57
+[I 2020-01-26 06:49:13.656 SingleUserNotebookApp log:174] 204 DELETE /user/guest160/api/sessions/9b1a59f0-138a-4a42-bcf4-b63e044f4204 (guest160@142.116.216.49) 708.94ms
+[I 2020-01-26 06:49:13.685 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179426 (guest160@142.116.216.49) 1.38ms
+[I 2020-01-26 06:49:13.719 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179427 (guest160@142.116.216.49) 5.25ms
+[W 2020-01-26 06:49:17.214 SingleUserNotebookApp handlers:236] delete /Untitled1.ipynb
+[I 2020-01-26 06:49:17.217 SingleUserNotebookApp log:174] 204 DELETE /user/guest160/api/contents/Untitled1.ipynb (guest160@142.116.216.49) 3.62ms
+[I 2020-01-26 06:50:51.999 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Explore.ipynb?content=0&_=1580021333662 (guest160@142.116.216.49) 2.00ms
+[I 2020-01-26 06:50:52.110 SingleUserNotebookApp handlers:164] Saving file at /Data Explore.ipynb
+[I 2020-01-26 06:50:52.388 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Explore.ipynb (guest160@142.116.216.49) 279.66ms
+[I 2020-01-26 06:51:47.800 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179428 (guest160@142.116.216.49) 1.57ms
+[I 2020-01-26 06:51:47.824 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179429 (guest160@142.116.216.49) 1.06ms
+[I 2020-01-26 06:51:47.854 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179430 (guest160@142.116.216.49) 6.92ms
+[I 2020-01-26 06:52:51.031 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Explore.ipynb?content=0&_=1580021333663 (guest160@142.116.216.49) 38.88ms
+[I 2020-01-26 06:52:51.120 SingleUserNotebookApp handlers:164] Saving file at /Data Explore.ipynb
+[I 2020-01-26 06:52:51.431 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Explore.ipynb (guest160@142.116.216.49) 312.53ms
+[I 2020-01-26 06:53:24.918 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179431 (guest160@142.116.216.49) 1.54ms
+[I 2020-01-26 06:53:24.940 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179432 (guest160@142.116.216.49) 0.94ms
+[I 2020-01-26 06:53:24.952 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179433 (guest160@142.116.216.49) 6.21ms
+[I 2020-01-26 06:54:51.990 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Explore.ipynb?content=0&_=1580021333664 (guest160@142.116.216.49) 2.05ms
+[I 2020-01-26 06:54:52.101 SingleUserNotebookApp handlers:164] Saving file at /Data Explore.ipynb
+[I 2020-01-26 06:54:52.462 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Explore.ipynb (guest160@142.116.216.49) 362.14ms
+[I 2020-01-26 07:01:31.315 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179434 (guest160@142.116.216.49) 40.67ms
+[I 2020-01-26 07:01:31.317 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179435 (guest160@142.116.216.49) 1.00ms
+[I 2020-01-26 07:01:31.367 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179436 (guest160@142.116.216.49) 6.22ms
+[I 2020-01-26 07:02:10.972 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179437 (guest160@142.116.216.49) 1.34ms
+[I 2020-01-26 07:02:10.974 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179438 (guest160@142.116.216.49) 0.99ms
+[I 2020-01-26 07:02:11.008 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179439 (guest160@142.116.216.49) 5.37ms
+[I 2020-01-26 07:03:06.584 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179440 (guest160@142.116.216.49) 1.17ms
+[I 2020-01-26 07:03:06.585 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179441 (guest160@142.116.216.49) 0.95ms
+[I 2020-01-26 07:03:06.617 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179442 (guest160@142.116.216.49) 5.11ms
+[I 2020-01-26 07:03:21.419 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179443 (guest160@142.116.216.49) 1.18ms
+[I 2020-01-26 07:03:21.420 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179444 (guest160@142.116.216.49) 0.99ms
+[I 2020-01-26 07:03:21.455 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179445 (guest160@142.116.216.49) 5.11ms
+[I 2020-01-26 07:05:18.528 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179446 (guest160@142.116.216.49) 1.54ms
+[I 2020-01-26 07:05:18.529 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179447 (guest160@142.116.216.49) 0.94ms
+[I 2020-01-26 07:05:18.561 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179448 (guest160@142.116.216.49) 5.45ms
+[I 2020-01-26 07:05:45.353 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179449 (guest160@142.116.216.49) 1.29ms
+[I 2020-01-26 07:05:45.355 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179450 (guest160@142.116.216.49) 0.98ms
+[I 2020-01-26 07:05:45.389 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179451 (guest160@142.116.216.49) 5.25ms
+[I 2020-01-26 07:23:43.002 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179452 (guest160@142.116.216.49) 32.03ms
+[I 2020-01-26 07:23:43.004 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179453 (guest160@142.116.216.49) 1.11ms
+[I 2020-01-26 07:23:43.049 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179454 (guest160@142.116.216.49) 12.25ms
+[I 2020-01-26 07:24:08.619 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179455 (guest160@142.116.216.49) 1.39ms
+[I 2020-01-26 07:24:08.621 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179456 (guest160@142.116.216.49) 1.10ms
+[I 2020-01-26 07:24:08.655 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179457 (guest160@142.116.216.49) 5.86ms
+[I 2020-01-26 07:24:51.003 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Explore.ipynb?content=0&_=1580021333665 (guest160@142.116.216.49) 1.83ms
+[I 2020-01-26 07:24:51.104 SingleUserNotebookApp handlers:164] Saving file at /Data Explore.ipynb
+[I 2020-01-26 07:24:51.525 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Explore.ipynb (guest160@142.116.216.49) 422.54ms
+[I 2020-01-26 07:26:51.029 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Explore.ipynb?content=0&_=1580021333666 (guest160@142.116.216.49) 1.96ms
+[I 2020-01-26 07:26:51.133 SingleUserNotebookApp handlers:164] Saving file at /Data Explore.ipynb
+[I 2020-01-26 07:26:51.542 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Explore.ipynb (guest160@142.116.216.49) 410.16ms
+[I 2020-01-26 07:28:19.225 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179459 (guest160@142.116.216.49) 2.25ms
+[I 2020-01-26 07:28:19.226 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179458 (guest160@142.116.216.49) 2.22ms
+[I 2020-01-26 07:28:19.272 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179460 (guest160@142.116.216.49) 7.43ms
+[I 2020-01-26 07:28:52.018 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Explore.ipynb?content=0&_=1580021333667 (guest160@142.116.216.49) 34.32ms
+[I 2020-01-26 07:28:52.128 SingleUserNotebookApp handlers:164] Saving file at /Data Explore.ipynb
+[I 2020-01-26 07:28:52.666 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Explore.ipynb (guest160@142.116.216.49) 538.71ms
+[I 2020-01-26 07:34:50.113 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179462 (guest160@142.116.216.49) 34.38ms
+[I 2020-01-26 07:34:50.115 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179461 (guest160@142.116.216.49) 1.48ms
+[I 2020-01-26 07:34:50.161 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179463 (guest160@142.116.216.49) 7.22ms
+[I 2020-01-26 07:34:50.998 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Explore.ipynb?content=0&_=1580021333668 (guest160@142.116.216.49) 1.57ms
+[I 2020-01-26 07:34:51.136 SingleUserNotebookApp handlers:164] Saving file at /Data Explore.ipynb
+[I 2020-01-26 07:34:51.614 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Explore.ipynb (guest160@142.116.216.49) 479.63ms
+[I 2020-01-26 07:35:42.291 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179464 (guest160@142.116.216.49) 1.46ms
+[I 2020-01-26 07:35:42.293 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179465 (guest160@142.116.216.49) 1.09ms
+[I 2020-01-26 07:35:42.328 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179466 (guest160@142.116.216.49) 7.06ms
+[I 2020-01-26 07:36:51.042 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Explore.ipynb?content=0&_=1580021333669 (guest160@142.116.216.49) 1.70ms
+[I 2020-01-26 07:36:51.161 SingleUserNotebookApp handlers:164] Saving file at /Data Explore.ipynb
+[I 2020-01-26 07:36:51.875 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Explore.ipynb (guest160@142.116.216.49) 715.59ms
+[I 2020-01-26 07:47:18.885 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179467 (guest160@142.116.216.49) 2.48ms
+[I 2020-01-26 07:47:18.886 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179468 (guest160@142.116.216.49) 2.22ms
+[I 2020-01-26 07:47:18.935 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179469 (guest160@142.116.216.49) 15.38ms
+[I 2020-01-26 07:47:29.325 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179470 (guest160@142.116.216.49) 1.36ms
+[I 2020-01-26 07:47:29.327 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179471 (guest160@142.116.216.49) 1.10ms
+[I 2020-01-26 07:47:29.360 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179472 (guest160@142.116.216.49) 5.88ms
+[I 2020-01-26 07:50:51.062 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Explore.ipynb?content=0&_=1580021333670 (guest160@142.116.216.49) 32.87ms
+[I 2020-01-26 07:50:51.179 SingleUserNotebookApp handlers:164] Saving file at /Data Explore.ipynb
+[I 2020-01-26 07:50:52.278 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Explore.ipynb (guest160@142.116.216.49) 1099.41ms
+[I 2020-01-26 07:51:22.230 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179473 (guest160@142.116.216.49) 1.21ms
+[I 2020-01-26 07:51:22.255 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179474 (guest160@142.116.216.49) 0.90ms
+[I 2020-01-26 07:51:22.280 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179475 (guest160@142.116.216.49) 6.47ms
+[I 2020-01-26 07:51:40.155 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179476 (guest160@142.116.216.49) 1.40ms
+[I 2020-01-26 07:51:40.156 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179477 (guest160@142.116.216.49) 0.96ms
+[I 2020-01-26 07:51:40.195 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179478 (guest160@142.116.216.49) 5.36ms
+[I 2020-01-26 07:54:02.881 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179479 (guest160@142.116.216.49) 2.18ms
+[I 2020-01-26 07:54:02.881 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179480 (guest160@142.116.216.49) 1.91ms
+[I 2020-01-26 07:54:02.928 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179481 (guest160@142.116.216.49) 5.48ms
+[I 2020-01-26 07:54:13.174 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179482 (guest160@142.116.216.49) 1.20ms
+[I 2020-01-26 07:54:13.175 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179483 (guest160@142.116.216.49) 1.01ms
+[I 2020-01-26 07:54:13.210 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179484 (guest160@142.116.216.49) 5.08ms
+[I 2020-01-26 07:54:25.542 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179485 (guest160@142.116.216.49) 1.25ms
+[I 2020-01-26 07:54:25.544 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179486 (guest160@142.116.216.49) 0.96ms
+[I 2020-01-26 07:54:25.578 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179487 (guest160@142.116.216.49) 5.34ms
+[I 2020-01-26 07:54:50.426 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179488 (guest160@142.116.216.49) 1.50ms
+[I 2020-01-26 07:54:50.433 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179489 (guest160@142.116.216.49) 0.98ms
+[I 2020-01-26 07:54:50.461 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179490 (guest160@142.116.216.49) 5.42ms
+[I 2020-01-26 07:54:51.271 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Explore.ipynb?content=0&_=1580021333671 (guest160@142.116.216.49) 1.29ms
+[I 2020-01-26 07:54:51.370 SingleUserNotebookApp handlers:164] Saving file at /Data Explore.ipynb
+[I 2020-01-26 07:54:51.757 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Explore.ipynb (guest160@142.116.216.49) 388.58ms
+[I 2020-01-26 07:55:00.895 SingleUserNotebookApp multikernelmanager:173] Kernel interrupted: 3b0e85c9-7d7b-4f7d-9d4a-940667ad6602
+[I 2020-01-26 07:55:00.896 SingleUserNotebookApp log:174] 204 POST /user/guest160/api/kernels/3b0e85c9-7d7b-4f7d-9d4a-940667ad6602/interrupt (guest160@142.116.216.49) 1.26ms
+[I 2020-01-26 07:55:06.926 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179492 (guest160@142.116.216.49) 2.04ms
+[I 2020-01-26 07:55:06.927 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179491 (guest160@142.116.216.49) 2.15ms
+[I 2020-01-26 07:55:07.211 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179493 (guest160@142.116.216.49) 6.17ms
+[I 2020-01-26 07:55:31.509 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179494 (guest160@142.116.216.49) 1.17ms
+[I 2020-01-26 07:55:31.511 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179495 (guest160@142.116.216.49) 0.94ms
+[I 2020-01-26 07:55:31.543 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179496 (guest160@142.116.216.49) 4.92ms
+[I 2020-01-26 07:55:42.066 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179497 (guest160@142.116.216.49) 2.05ms
+[I 2020-01-26 07:55:42.067 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179498 (guest160@142.116.216.49) 1.86ms
+[I 2020-01-26 07:55:42.163 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179499 (guest160@142.116.216.49) 5.23ms
+[I 2020-01-26 07:56:02.772 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179500 (guest160@142.116.216.49) 32.24ms
+[I 2020-01-26 07:56:02.773 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179501 (guest160@142.116.216.49) 0.93ms
+[I 2020-01-26 07:56:02.806 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179502 (guest160@142.116.216.49) 5.18ms
+[I 2020-01-26 07:56:12.910 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179503 (guest160@142.116.216.49) 1.11ms
+[I 2020-01-26 07:56:12.913 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179504 (guest160@142.116.216.49) 0.87ms
+[I 2020-01-26 07:56:12.942 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179505 (guest160@142.116.216.49) 5.04ms
+[I 2020-01-26 07:56:27.104 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179506 (guest160@142.116.216.49) 1.18ms
+[I 2020-01-26 07:56:27.106 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179507 (guest160@142.116.216.49) 0.96ms
+[I 2020-01-26 07:56:27.137 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179508 (guest160@142.116.216.49) 5.25ms
+[I 2020-01-26 07:56:48.651 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179509 (guest160@142.116.216.49) 1.48ms
+[I 2020-01-26 07:56:48.653 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179510 (guest160@142.116.216.49) 0.97ms
+[I 2020-01-26 07:56:48.686 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179511 (guest160@142.116.216.49) 5.24ms
+[I 2020-01-26 07:56:51.989 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Explore.ipynb?content=0&_=1580021333672 (guest160@142.116.216.49) 1.30ms
+[I 2020-01-26 07:56:52.088 SingleUserNotebookApp handlers:164] Saving file at /Data Explore.ipynb
+[I 2020-01-26 07:56:52.933 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Explore.ipynb (guest160@142.116.216.49) 846.01ms
+[I 2020-01-26 07:56:58.886 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179512 (guest160@142.116.216.49) 1.33ms
+[I 2020-01-26 07:56:58.888 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179513 (guest160@142.116.216.49) 1.08ms
+[I 2020-01-26 07:56:58.924 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179514 (guest160@142.116.216.49) 6.91ms
+[I 2020-01-26 07:57:14.833 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179516 (guest160@142.116.216.49) 1.10ms
+[I 2020-01-26 07:57:14.835 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179515 (guest160@142.116.216.49) 1.39ms
+[I 2020-01-26 07:57:14.870 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179517 (guest160@142.116.216.49) 5.59ms
+[I 2020-01-26 07:57:33.789 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179518 (guest160@142.116.216.49) 1.60ms
+[I 2020-01-26 07:57:33.791 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179519 (guest160@142.116.216.49) 1.10ms
+[I 2020-01-26 07:57:33.847 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179520 (guest160@142.116.216.49) 5.87ms
+[I 2020-01-26 07:57:52.625 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179522 (guest160@142.116.216.49) 1.11ms
+[I 2020-01-26 07:57:52.627 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179521 (guest160@142.116.216.49) 1.40ms
+[I 2020-01-26 07:57:52.923 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179523 (guest160@142.116.216.49) 6.00ms
+[I 2020-01-26 07:58:18.534 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179524 (guest160@142.116.216.49) 1.52ms
+[I 2020-01-26 07:58:18.536 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179525 (guest160@142.116.216.49) 1.13ms
+[I 2020-01-26 07:58:18.575 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179526 (guest160@142.116.216.49) 6.15ms
+[I 2020-01-26 07:58:30.646 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179527 (guest160@142.116.216.49) 1.31ms
+[I 2020-01-26 07:58:30.648 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179528 (guest160@142.116.216.49) 1.10ms
+[I 2020-01-26 07:58:30.680 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179529 (guest160@142.116.216.49) 4.86ms
+[I 2020-01-26 07:58:50.994 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Explore.ipynb?content=0&_=1580021333673 (guest160@142.116.216.49) 1.66ms
+[I 2020-01-26 07:58:51.123 SingleUserNotebookApp handlers:164] Saving file at /Data Explore.ipynb
+[I 2020-01-26 07:58:51.580 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Explore.ipynb (guest160@142.116.216.49) 458.73ms
+[I 2020-01-26 07:59:45.174 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179530 (guest160@142.116.216.49) 1.66ms
+[I 2020-01-26 07:59:45.204 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179531 (guest160@142.116.216.49) 1.07ms
+[I 2020-01-26 07:59:45.216 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179532 (guest160@142.116.216.49) 6.57ms
+[I 2020-01-26 08:00:08.537 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179533 (guest160@142.116.216.49) 1.51ms
+[I 2020-01-26 08:00:08.539 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179534 (guest160@142.116.216.49) 1.07ms
+[I 2020-01-26 08:00:08.570 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179535 (guest160@142.116.216.49) 5.28ms
+[I 2020-01-26 08:00:29.527 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179536 (guest160@142.116.216.49) 1.41ms
+[I 2020-01-26 08:00:29.529 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179537 (guest160@142.116.216.49) 1.09ms
+[I 2020-01-26 08:00:29.566 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179538 (guest160@142.116.216.49) 5.98ms
+[I 2020-01-26 08:00:51.001 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Explore.ipynb?content=0&_=1580021333674 (guest160@142.116.216.49) 1.68ms
+[I 2020-01-26 08:00:51.128 SingleUserNotebookApp handlers:164] Saving file at /Data Explore.ipynb
+[I 2020-01-26 08:00:51.565 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Explore.ipynb (guest160@142.116.216.49) 438.53ms
+[I 2020-01-26 08:01:21.634 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179539 (guest160@142.116.216.49) 32.66ms
+[I 2020-01-26 08:01:21.636 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179540 (guest160@142.116.216.49) 1.10ms
+[I 2020-01-26 08:01:21.670 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179541 (guest160@142.116.216.49) 7.00ms
+[I 2020-01-26 08:02:42.288 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179543 (guest160@142.116.216.49) 2.32ms
+[I 2020-01-26 08:02:42.289 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179542 (guest160@142.116.216.49) 2.31ms
+[I 2020-01-26 08:02:42.333 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179544 (guest160@142.116.216.49) 6.28ms
+[I 2020-01-26 08:02:50.993 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Explore.ipynb?content=0&_=1580021333675 (guest160@142.116.216.49) 1.64ms
+[I 2020-01-26 08:02:51.107 SingleUserNotebookApp handlers:164] Saving file at /Data Explore.ipynb
+[I 2020-01-26 08:02:51.536 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Explore.ipynb (guest160@142.116.216.49) 430.48ms
+[I 2020-01-26 08:03:37.759 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179545 (guest160@142.116.216.49) 1.52ms
+[I 2020-01-26 08:03:37.761 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179546 (guest160@142.116.216.49) 1.10ms
+[I 2020-01-26 08:03:37.797 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179547 (guest160@142.116.216.49) 6.02ms
+[I 2020-01-26 08:04:47.464 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179548 (guest160@142.116.216.49) 1.55ms
+[I 2020-01-26 08:04:47.468 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179549 (guest160@142.116.216.49) 1.06ms
+[I 2020-01-26 08:04:47.499 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179550 (guest160@142.116.216.49) 6.15ms
+[I 2020-01-26 08:04:50.991 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Explore.ipynb?content=0&_=1580021333676 (guest160@142.116.216.49) 1.61ms
+[I 2020-01-26 08:04:51.118 SingleUserNotebookApp handlers:164] Saving file at /Data Explore.ipynb
+[I 2020-01-26 08:04:51.681 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Explore.ipynb (guest160@142.116.216.49) 563.83ms
+[I 2020-01-26 08:08:02.627 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179551 (guest160@142.116.216.49) 41.27ms
+[I 2020-01-26 08:08:02.629 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179552 (guest160@142.116.216.49) 1.12ms
+[I 2020-01-26 08:08:02.669 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179553 (guest160@142.116.216.49) 6.98ms
+[I 2020-01-26 08:09:54.863 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179555 (guest160@142.116.216.49) 1.29ms
+[I 2020-01-26 08:09:54.866 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179554 (guest160@142.116.216.49) 1.35ms
+[I 2020-01-26 08:09:54.906 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179556 (guest160@142.116.216.49) 5.98ms
+[I 2020-01-26 08:54:51.151 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents/Data%20Explore.ipynb?content=0&_=1580021333677 (guest160@142.116.216.49) 32.36ms
+[I 2020-01-26 08:54:51.270 SingleUserNotebookApp handlers:164] Saving file at /Data Explore.ipynb
+[I 2020-01-26 08:54:51.737 SingleUserNotebookApp log:174] 200 PUT /user/guest160/api/contents/Data%20Explore.ipynb (guest160@142.116.216.49) 469.02ms
+[I 2020-01-26 09:24:42.949 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179557 (guest160@142.116.216.49) 38.40ms
+[I 2020-01-26 09:24:42.951 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179558 (guest160@142.116.216.49) 2.76ms
+[I 2020-01-26 09:24:43.006 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179559 (guest160@142.116.216.49) 25.05ms
+[I 2020-01-26 09:25:07.992 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179560 (guest160@142.116.216.49) 1.44ms
+[I 2020-01-26 09:25:07.993 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179561 (guest160@142.116.216.49) 1.10ms
+[I 2020-01-26 09:25:08.034 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179562 (guest160@142.116.216.49) 6.01ms
+[I 2020-01-26 09:27:04.819 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179564 (guest160@142.116.216.49) 1.21ms
+[I 2020-01-26 09:27:04.821 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179563 (guest160@142.116.216.49) 1.40ms
+[I 2020-01-26 09:27:05.032 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179565 (guest160@142.116.216.49) 6.26ms
+[I 2020-01-26 09:27:23.599 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179566 (guest160@142.116.216.49) 1.37ms
+[I 2020-01-26 09:27:23.601 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179567 (guest160@142.116.216.49) 1.09ms
+[I 2020-01-26 09:27:23.820 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179568 (guest160@142.116.216.49) 5.98ms
+[I 2020-01-26 09:27:37.878 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/sessions?_=1580021179569 (guest160@142.116.216.49) 1.43ms
+[I 2020-01-26 09:27:37.880 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/terminals?_=1580021179570 (guest160@142.116.216.49) 1.09ms
+[I 2020-01-26 09:27:38.116 SingleUserNotebookApp log:174] 200 GET /user/guest160/api/contents?type=directory&_=1580021179571 (guest160@142.116.216.49) 6.14ms
+slurmstepd: error: *** JOB 1534 ON helk80n01 CANCELLED AT 2020-01-26T10:36:26 DUE TO TIME LIMIT ***
