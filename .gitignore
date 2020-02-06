@@ -7,3 +7,4 @@
 .idea/*
 .data/hdf5v5_16bit/*.h5
 *.h5
+test_1.py
