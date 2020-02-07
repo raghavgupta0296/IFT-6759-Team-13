@@ -519,3 +519,35 @@ def viz_predictions(
             day_idx = max(day_idx - 1, 0)
         elif ret == 82 or ret == 83:  # UNIX: right or up arrow
             day_idx = min(day_idx + 1, len(displays) - 1)
+
+
+
+def get_hdf5_attributes(
+        dataset_name: str,
+        reader: h5py.File,
+        sample_idx: int,
+) -> typing.Any:
+    """Displays list of attributes
+    Args:
+        dataset_name: name of the HDF5 dataset to fetch the sample from using the reader. In the context of
+            the GHI prediction project, this may be for example an imagery channel name (e.g. "ch1").
+        reader: an HDF5 archive reader obtained via ``h5py.File(...)`` which can be used for dataset indexing.
+        sample_idx: the integer index (or offset) that corresponds to the position of the sample in the dataset.
+
+    Returns:
+        The attributes keys in shape of str-list
+    """
+    dataset_lut_name = dataset_name + "_LUT"
+    if dataset_lut_name in reader:
+        sample_idx = reader[dataset_lut_name][sample_idx]
+        if sample_idx == -1:
+            return None  # unavailable
+    dataset = reader[dataset_name]
+    return dataset
+
+
+def get_hdf5_fields(reader: h5py.File) -> typing.Any:
+    fields_names = []
+    for dataset_lut_name in reader:
+        fields_names.append(dataset_lut_name)
+    return fields_names
