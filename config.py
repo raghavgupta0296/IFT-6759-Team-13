@@ -15,6 +15,8 @@ STATION_NAMES = list(STATION_INFO.keys())
 
 # HYPERPARAMS
 CROP_SIZE = 70 # even number
+EPOCHS = 1
+BATCH_SIZE = 64
 
 def init_args():
 	parser = argparse.ArgumentParser(description='Process arguments for processing/training/testing')
