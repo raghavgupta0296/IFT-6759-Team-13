@@ -1,1 +1,1 @@
-THis folder is for documentation / research papers useful for this project.
+This folder is for documentation / research papers useful for this project.
