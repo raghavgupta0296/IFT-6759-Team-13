@@ -1,10 +1,12 @@
 import pickle
 import cv2
-import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import tensorflow as tf
 import h5py, h5netcdf
+
+import matplotlib.pyplot as plt
+from utilities.utils import fetch_hdf5_sample
 
 
 # loads the pickle dataframe containing data paths and targets information
@@ -26,8 +28,8 @@ def read_ncdf(ncdf_path):
 
 # maps a physical co-ordinate to image pixel
 def map_coord_to_pixel(coord,min_coord,res):
-            x = int(abs(min_coord - coord)/res)
-            return x
+    x = int(abs(min_coord - coord)/res)
+    return x
 
 # extract images of all the 5 channels given offset and data handle
 def fetch_channel_samples(args,h5_data_handle,hdf5_offset):
@@ -42,3 +44,14 @@ def plot_and_save_image(args, station_coords, samples, prefix="0"):
         plt.imshow(sample,origin='lower',cmap=cmap)
         plt.scatter(station_coords[:,0], station_coords[:,1])
         plt.savefig("sample_outputs/%s_%s.png"%(prefix, ch))
+
+
+# Extracts the Latitude and Longitude  from the hdf5 data
+def get_lon_lat_from_hdf5(h5_data):
+    global_start_idx = h5_data.attrs["global_dataframe_start_idx"]
+    global_end_idx = h5_data.attrs["global_dataframe_end_idx"]
+    archive_lut_size = global_end_idx - global_start_idx
+    idx, lat, lon = 0, None, None
+    if idx < archive_lut_size:
+        lat, lon = fetch_hdf5_sample("lat", h5_data, idx), fetch_hdf5_sample("lon", h5_data, idx)
+    return lat, lon
