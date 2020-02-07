@@ -5,10 +5,6 @@
 .idea/vcs.xml
 .idea/workspace.xml
 .idea/*
-<<<<<<< HEAD
-.data/hdf5v5_16bit/*.h5
-*.h5
-=======
 .local
 .cache
 .data/hdf5v5_16bit/*.h5
@@ -26,5 +22,3 @@ __pycache__
 ift6759-env
 my_tf_env
 Outputs
-
->>>>>>> 8c64ae904973e1de9f22e0542a989c97abc86aaa
