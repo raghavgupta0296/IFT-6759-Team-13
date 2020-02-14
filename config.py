@@ -27,12 +27,13 @@ def init_args():
 	data_catalog = os.path.join(ROOT_DATA_PATH,RAW_DATA_CATALOG)
 	parser.add_argument('--data_catalog_path',default=data_catalog,help='catalog absolute file path (dataframe) which contains the image paths, ghi and other metadata')
 	parser.add_argument('--station_data',default=STATION_INFO,help='catalog absolute file path (dataframe) which contains the image paths, ghi and other metadata')
-	parser.add_argument('--channels',default=CHANNELS,help='catalog absolute file path (dataframe) which contains the image paths, ghi and other metadata')
+	parser.add_argument('--channels',default=CHANNELS,help='list of channels to extract')
 
 	parser.add_argument('--crop_size',default=CROP_SIZE,help='window size for cropping station image from satellite image.')    
-    
+	parser.add_argument('--batch_size',default=BATCH_SIZE,help='batch size for training data.')    
+	parser.add_argument('-d','--debug',action="store_true",help='debugs on a limited amount of data and model capacity')
+	parser.add_argument('-e','--epochs',default=EPOCHS,type=int,help='number of passes on the full dataset to train the model on')
+
 	args = parser.parse_args()
 
-	# args["station_data"] = STATION_INFO
-	# args["channels"] = CHANNELS
 	return args
