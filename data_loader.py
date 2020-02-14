@@ -73,24 +73,34 @@ def station_from_row(args, rows, x, y):
         # if .nc doesn't exist, then skip example
         if row['ncdf_path'] == "nan":
             continue
-        # h5_data = read_hdf5(hdf5_16)
+            
+        ini = time.time()
+        h5_data = read_hdf5(hdf5_16)
+        print("time taken for reading hfd5 16 bit file: ", time.time()-ini)
+
+        ini = time.time()
         h5_data = read_hdf5(hdf5_8)
-
-        # ini = time.time()
+        print("time taken for reading hfd5 8 bit file: ", time.time()-ini)
+        
+        ini = time.time()
         ncdf_data = read_ncdf(ncdf_path)
-
+        print("time for reading ncdf file", time.time()-ini)
+        
         # print(ncdf_data.dimensions)
         # print(ncdf_data.variables.keys())
         # print(ncdf_data.ncattrs)
         
         # extracts meta-data to map station co-ordinates to pixels
+        ini = time.time()
         lat_min = ncdf_data.attrs['geospatial_lat_min'][0]
         lat_max = ncdf_data.attrs['geospatial_lat_max'][0]
         lon_min = ncdf_data.attrs['geospatial_lon_min'][0]
         lon_max = ncdf_data.attrs['geospatial_lon_max'][0]
         lat_res = ncdf_data.attrs['geospatial_lat_resolution'][0]
         lon_res = ncdf_data.attrs['geospatial_lon_resolution'][0]
+        print("time for extracting attributes from ncdf file", time.time()-ini)
 
+        ini = time.time()
         station_coords = {}
         # R! reading from dictionary can lead to random order of key pairs, 
         # storing datatype changed from array to dictionary
@@ -99,14 +109,17 @@ def station_from_row(args, rows, x, y):
             # x = column data (latitude: changes across columns i.e horizontally)
             x_coord,y_coord = [map_coord_to_pixel(lat,lat_min,lat_res),map_coord_to_pixel(lon,lon_min,lon_res)]
             station_coords[sta] = [y_coord,x_coord] 
-        # print("time to find coordinates: ", time.time()-ini)
+        print("time to find coordinates: ", time.time()-ini)
 
         # reads h5 and ncdf samples
-        # ini = time.time()
-        # h5_16bit_samples = fetch_channel_samples(args,h5_data,row['hdf5_16bit_offset'])
+        ini = time.time()
+        h5_16bit_samples = fetch_channel_samples(args,h5_data,row['hdf5_16bit_offset'])
+        print("time taken for reading hdf5 16 bit sat image: ", time.time()-ini)
+        
+        ini = time.time()
         h5_16bit_samples = fetch_channel_samples(args,h5_data,row['hdf5_8bit_offset'])
+        print("time taken for reading hdf5 8 bit sat image: ", time.time()-ini)
 
-        # print("time taken for reading sat image: ", time.time()-ini)
         # ncdf_samples = [ncdf_data.variables[ch][0] for ch in args.channels]
 
         # R! question: -ve large values in ncdf_samples?
@@ -127,15 +140,22 @@ def station_from_row(args, rows, x, y):
                 continue
             # print(station_i)
             y.append(row[station_i+"_GHI"])
-            # ini = time.time()
+            ini = time.time()
             x.append(crop_station_image(station_i,h5_16bit_samples,station_coords))
-            # print("cropping time: ", time.time()-ini)
+            print("cropping time: ", time.time()-ini)
     return x, y
+
+prev_station_coords = {'BND': [915, 401], 'TBL': [494, 403], 'DRA': [224, 315], 'FPK': [497, 607], 'GWN': [878, 256], 'PSU': [1176, 418], 'SXF': [709, 493]}
 
 # crop station image from satellite image of size CROP_SIZE
 def crop_station_image(station_i,sat_image,station_coords):
 
     # R! check  crop correct positions? and also if lower origin needs to be taken before manual cropping
+    global prev_station_coords
+    
+    assert prev_station_coords==station_coords
+    prev_station_coords = station_coords
+#     print(station_coords)
     
     crop_size = config.CROP_SIZE
 
