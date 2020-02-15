@@ -19,6 +19,8 @@
 .licenses
 __pycache__
 *.h5
-ift6759-env
-my_tf_env
-Outputs
+test_1.py
+*.nc
+data/catalog.helios.public.20100101-20160101.pkl
+data/dummy_test_catalog.pkl
+data/dummy_test_cfg.json
