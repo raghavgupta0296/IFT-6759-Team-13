@@ -1,13 +1,14 @@
-import pickle
 import cv2
+import pickle
+import h5py, h5netcdf
+
 import numpy as np
 import pandas as pd
 import tensorflow as tf
-import h5py, h5netcdf
-
 import matplotlib.pyplot as plt
-from utilities.utils import fetch_hdf5_sample
 
+from utilities.utils import fetch_hdf5_sample
+from time import sleep
 
 # loads the pickle dataframe containing data paths and targets information
 def load_catalog(args):
@@ -25,6 +26,39 @@ def read_hdf5(hdf5_path):
 def read_ncdf(ncdf_path):
     ncdf_data = h5netcdf.File(ncdf_path, 'r')
     return ncdf_data
+
+"""
+Function creating dummy image. Used for as well for experiements as for generating noise/ replacing missing images
+Args:
+Returns:
+    Blank image
+"""
+def create_dummy_image():
+    img = np.zeros([70,70,5],dtype=np.uint8)
+    #plt.imshow(img[:,:,0], cmap='gray')
+    return img
+
+"""
+Dummy cropping function used for experiments. To be replaced by a valid one
+Args:
+    hdf5_8bit_path:  path to file
+    stations_coordinates: dictionary containing stations coordinates
+    offsets: list of valid offsets
+Returns:
+    Dictionary containing stations, offsets and corresponding images
+"""
+def dummy_crop_image(hdf5_8bit_path, stations_coordinates, offsets):
+    global_dictionary = {}
+    # Simulating access to files
+    sleep(1.14)
+    station_names = ['BND', 'DRA', 'FPK', 'GWN', 'PSU', 'SXF', 'TBL']
+    for s in station_names:
+        dic = {}
+        for o in offsets:
+            dic[o] = create_dummy_image()
+        global_dictionary[s] = dic
+    return global_dictionary
+
 
 # maps a physical co-ordinate to image pixel
 def map_coord_to_pixel(coord,min_coord,res):
