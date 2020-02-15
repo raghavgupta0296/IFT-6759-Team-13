@@ -4,6 +4,7 @@ MIN_TIME = 15
 
 
 """
+Returns the same time at next day given a timestamp
 Args:
     start_time:  timestamp 
 Returns:
