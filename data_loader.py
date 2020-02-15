@@ -43,8 +43,108 @@ def map_coord_to_pixel(coord,min_coord,res):
 # extract images of all the 5 channels given offset and data handle
 def fetch_channel_samples(args,h5_data_handle,hdf5_offset):
     channels = args.channels
+    
     sample = [utils.fetch_hdf5_sample(ch, h5_data_handle, hdf5_offset) for ch in channels]
+    # return sample
+
+    h5_data = h5_data_handle
+    global_start_idx = h5_data.attrs["global_dataframe_start_idx"]
+    global_end_idx = h5_data.attrs["global_dataframe_end_idx"]
+    archive_lut_size = global_end_idx - global_start_idx
+    raw_data = np.zeros((archive_lut_size, len(channels), 650, 1500), dtype=np.uint8)
+    copy_last_if_missing = True
+    for channel_idx, channel_name in enumerate(channels):
+        assert channel_name in h5_data, f"missing channel: {channels}"
+        norm_min = h5_data[channel_name].attrs.get("orig_min", None)
+        norm_max = h5_data[channel_name].attrs.get("orig_max", None)
+        channel_data = [utils.fetch_hdf5_sample(channel_name, h5_data, idx) for idx in range(archive_lut_size)]
+        assert all([array is None or array.shape == (650, 1500) for array in channel_data]), \
+            "one of the saved channels had an expected dimension"
+        last_valid_array_idx = None
+        for array_idx, array in enumerate(channel_data):
+            if array is None:
+                if copy_last_if_missing and last_valid_array_idx is not None:
+                    raw_data[array_idx, channel_idx, :, :] = raw_data[last_valid_array_idx, channel_idx, :, :]
+                continue
+            array = (((array.astype(np.float32) - norm_min) / (norm_max - norm_min)) * 255).astype(np.uint8)
+            # array = cv.applyColorMap(array, cv.COLORMAP_BONE)
+            # for station_idx, (station_name, station) in enumerate(stations_data.items()):
+            #     station_color = get_label_color_mapping(station_idx + 1).tolist()[::-1]
+            #     array = cv.circle(array, station["coords"][::-1], radius=9, color=station_color, thickness=-1)
+            # raw_data[array_idx, channel_idx, :, :] = cv.flip(array, 0)
+            last_valid_array_idx = array_idx
+    print("raw_data:",raw_data.shape)
     return sample
+
+def fetch_all_samples_hdf5(args,h5_data_path,dataframe_path=None):
+    channels = args.channels
+    
+    # sample = [utils.fetch_hdf5_sample(ch, h5_data_handle, hdf5_offset) for ch in channels]
+    # # return sample
+    copy_last_if_missing = True
+    h5_data = h5_data_handle
+    global_start_idx = h5_data.attrs["global_dataframe_start_idx"]
+    global_end_idx = h5_data.attrs["global_dataframe_end_idx"]
+    archive_lut_size = global_end_idx - global_start_idx
+    lut_timestamps = [global_start_time + idx * datetime.timedelta(minutes=15) for idx in range(archive_lut_size)]
+    stations_data = {}
+    # df = pd.read_pickle(dataframe_path)
+    # assume lats/lons stay identical throughout all frames; just pick the first available arrays
+    idx, lats, lons = 0, None, None
+    while (lats is None or lons is None) and idx < archive_lut_size:
+        lats, lons = fetch_hdf5_sample("lat", h5_data, idx), fetch_hdf5_sample("lon", h5_data, idx)
+        idx += 1    
+    assert lats is not None and lons is not None, "could not fetch lats/lons arrays (hdf5 might be empty)"
+    for reg, coords in stations.items():
+        station_coords = (np.argmin(np.abs(lats - coords[0])), np.argmin(np.abs(lons - coords[1])))
+        station_data = {"coords": station_coords}
+        # if dataframe_path:
+        # station_data["ghi"] = [df.at[pd.Timestamp(t), reg + "_GHI"] for t in lut_timestamps]
+        # station_data["csky"] = [df.at[pd.Timestamp(t), reg + "_CLEARSKY_GHI"] for t in lut_timestamps]
+        # station_data["daytime"] = [df.at[pd.Timestamp(t), reg + "_DAYTIME"] for t in lut_timestamps]
+        stations_data[reg] = station_data
+
+    raw_data = np.zeros((archive_lut_size, len(channels), 650, 1500), dtype=np.uint8)
+    for channel_idx, channel_name in enumerate(channels):
+        assert channel_name in h5_data, f"missing channel: {channels}"
+        norm_min = h5_data[channel_name].attrs.get("orig_min", None)
+        norm_max = h5_data[channel_name].attrs.get("orig_max", None)
+        channel_data = [fetch_hdf5_sample(channel_name, h5_data, idx) for idx in range(archive_lut_size)]
+        assert all([array is None or array.shape == (650, 1500) for array in channel_data]), \
+            "one of the saved channels had an expected dimension"
+        last_valid_array_idx = None
+        for array_idx, array in enumerate(channel_data):
+            if array is None:
+                if copy_last_if_missing and last_valid_array_idx is not None:
+                    raw_data[array_idx, channel_idx, :, :] = raw_data[last_valid_array_idx, channel_idx, :, :]
+                continue
+            array = (((array.astype(np.float32) - norm_min) / (norm_max - norm_min)) * 255).astype(np.uint8)
+            # array = cv.applyColorMap(array, cv.COLORMAP_BONE)
+            # for station_idx, (station_name, station) in enumerate(stations_data.items()):
+            #     station_color = get_label_color_mapping(station_idx + 1).tolist()[::-1]
+            #     array = cv.circle(array, station["coords"][::-1], radius=9, color=station_color, thickness=-1)
+            # raw_data[array_idx, channel_idx, :, :] = cv.flip(array, 0)
+            raw_data[array_idx, channel_idx, :, :] = array
+            last_valid_array_idx = array_idx
+    print("raw_data:",raw_data.shape)
+    
+
+    crop_size = args.CROP_SIZE
+    station_crops = {}
+    for station_name, station in stations_data.items():
+        array = cv.circle(array, station["coords"][::-1], radius=9, color=station_color, thickness=-1)
+        station_coords = station["coords"]
+        margin = crop_size//2
+        lat_mid = station_coords[station_i][1]
+        lon_mid = station_coords[station_i][0]
+        crop = raw_data[
+            :, :,
+            lat_mid-margin:lat_mid+margin, 
+            lon_mid-margin:lon_mid+margin, 
+        ]
+        station_crops{station_name} = crop
+    return station_crops
+
 
 # saves images of 5 channels with plotted mapped co-ordinates
 def plot_and_save_image(args,station_coords,samples,prefix="0"):
@@ -137,6 +237,7 @@ def station_from_row(args, rows):
 
         # ncdf_samples = [data_handle.variables[ch][0] for ch in args.channels]
         samples = np.array(samples)
+        print("sample shape:",samples.shape)
         # R! question: -ve large values in ncdf_samples?
         # print(ncdf_samples)
 
@@ -163,14 +264,14 @@ def station_from_row(args, rows):
             # print(station_coords)
             x.append(crop_station_image(station_i,samples,station_coords))
             # print("cropping time: ", time.time()-ini)
-    return x, y
+    return x,y
 
 # crop station image from satellite image of size CROP_SIZE
 def crop_station_image(station_i,sat_image,station_coords):
 
     # R! check  crop correct positions? and also if lower origin needs to be taken before manual cropping
     
-    crop_size = config.CROP_SIZE
+    crop_size = args.CROP_SIZE
 
     # fig,ax = plt.subplots(1)
     # ax.imshow(sat_image[0], cmap='bone')
@@ -196,6 +297,8 @@ def crop_station_image(station_i,sat_image,station_coords):
     # plt.savefig("check_cropped.png")
 
     return crop
+
+
 
 class SimpleDataLoader(tf.data.Dataset):
 
@@ -253,10 +356,10 @@ class FastDataLoader(tf.data.Dataset):
 
     def _generator(args, catalog):
 
-        STEP_SIZE = args.batch_size
+        STEP_SIZE =1 # args.batch_size
         # STEP_SIZE = 
         START_IDX = 0
-        END_IDX = len(catalog)
+        END_IDX = STEP_SIZE*100 #len(catalog)
         
         if args.debug:
             STEP_SIZE = 1
@@ -282,7 +385,6 @@ class FastDataLoader(tf.data.Dataset):
             x = np.array(x)
             y = np.array(y)
             print("Yielding x (shape) and y (shape) of index: ", index, x.shape,y.shape)
-
             yield (x,y)
 
 
@@ -299,7 +401,7 @@ def load_dataset(args):
     # tf_set = tf.data.Dataset.from_generator(iterate_dataset, (tf.float32,tf.float32), args=(args,catalog))
     # print(tf_set)
 
-    sdl = SimpleDataLoader(args, catalog).prefetch(tf.data.experimental.AUTOTUNE).cache()
+    sdl = FastDataLoader(args, catalog).prefetch(tf.data.experimental.AUTOTUNE).cache()
     
     for epoch in range(args.epochs):
         # iterate over epochs
