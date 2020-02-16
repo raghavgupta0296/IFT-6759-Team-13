@@ -25,3 +25,18 @@ Returns:
 def next_time(start_time, offset):
     return start_time + pd.Timedelta(str(offset * MIN_TIME) + ' minutes')
 
+
+"""
+Converts the local time(h:m:s) to seconds
+Args:
+    pd_timestamp:  timestamp to process
+Returns:
+    local time in seconds
+"""
+def time_in_seconds(pd_timestamp):
+    df_time = pd.to_datetime(pd_timestamp)
+    return (df_time.hour*60+df_time.minute)*60 + df_time.second
+
+
+
+

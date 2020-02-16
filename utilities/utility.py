@@ -10,6 +10,16 @@ import matplotlib.pyplot as plt
 from utilities.utils import fetch_hdf5_sample
 from time import sleep
 
+"""
+Generates a file name
+Args:
+    length:  length of the string 
+Returns:
+    string of size 'length' containing random characters
+"""
+def get_file_name(length = 15):
+    return binascii.b2a_hex(os.urandom(length)).decode('ascii')
+
 # loads the pickle dataframe containing data paths and targets information
 def load_catalog(args):
     f = open(args.data_catalog_path,"rb")
