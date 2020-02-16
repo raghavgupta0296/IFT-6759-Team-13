@@ -14,7 +14,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import tensorflow as tf
 import pandas as pd
-
+from tqdm import tqdm
+from utilities.utility import *
 
 # loads dataset and iterates over dataframe rows as well as hdf5 and nc files for processing
 def load_dataset(args):
@@ -245,7 +246,8 @@ class SimpleDataLoader(tf.data.Dataset):
 
             yield (x,y)
 
-class FastDataLoader(tf.data.Dataset):
+# generates t0-1 and t0 data
+class SequenceDataLoader(tf.data.Dataset):
 
     def __new__(cls, args, catalog):
 
@@ -257,6 +259,8 @@ class FastDataLoader(tf.data.Dataset):
 
     def _generator(args, catalog):
 
+        unique_paths = pd.unique(catalog['hdf5_8bit_path'].values.ravel())
+        print(unique_paths)
         STEP_SIZE =1 # args.batch_size
         # STEP_SIZE = 
         START_IDX = 0
@@ -266,28 +270,37 @@ class FastDataLoader(tf.data.Dataset):
             STEP_SIZE = 1
             END_IDX = STEP_SIZE*3
 
-        for index in tqdm(range(START_IDX,END_IDX,STEP_SIZE)): 
-        # while(index < len(catalog)):
+        for path in tqdm(unique_paths):
 
-            rows = catalog[ index : index+STEP_SIZE ]
-            # print(rows)
+            samples = fetch_all_samples_hdf5(args,path)
 
-            if args.debug:
-                profiler = LineProfiler()
-                profiled_func = profiler(station_from_row)
-                try:
-                    profiled_func(args, rows, x, y)
-                finally:
-                    profiler.print_stats()
-                    profiler.dump_stats('data_loader_dump.txt')
-            else:
-                x,y = station_from_row(args, rows)
-
-            x = np.array(x)
-            y = np.array(y)
-            print("Yielding x (shape) and y (shape) of index: ", index, x.shape,y.shape)
-            yield (x,y)
-
+            # grouping by paths
+            grouped = catalog[path == catalog.hdf5_8bit_path]
+            offsets_1 = {} # T0 - 1
+            offsets_0 = {} # T0
+            example_pairs = {}
+            for station in args.station_data.keys():
+                df = grouped[grouped.station == station]
+                argsort = np.argsort(df['hdf5_8bit_offset'].values)
+                offsets_1[station] = df['hdf5_8bit_offset'].values[argsort]
+                offsets_0[station] = offsets_1[station] + 4
+                
+                # if offsets+4 offset exists, we create pairs using those offsets+4 since T0-1 exists by definition
+                matching_offsets = np.intersect1d(offsets_1[station],offsets_0[station])
+                # pairs = zip(matching_offsets-4,matching_offsets)
+                GHI_pairs = zip(df[df.hdf5_8bit_offset.isin(matching_offsets-4)].GHI.values, df[df.hdf5_8bit_offset.isin(matching_offsets)].GHI.values)
+                offset_pairs = zip(matching_offsets-4,matching_offsets)
+                
+                example_pairs[station] = zip(offset_pairs,GHI_pairs)
+                # print(example_pairs)
+            for station,ex_pair in example_pairs.items():
+                # for offset,GHI in ex_pair:
+                for (offset_1,offset_0),(GHI_1,GHI_0) in ex_pair:
+                # for a in ex_pair:
+                    # print(list(offset))
+                    img_1 = samples[station][offset_1]
+                    img_0 = samples[station][offset_0]
+                    yield (img_1,img_0),(GHI_1,GHI_0) 
 
 # loads dataset and iterates over dataframe rows as well as hdf5 and nc files for processing
 def load_dataset(args):
@@ -302,7 +315,7 @@ def load_dataset(args):
     # tf_set = tf.data.Dataset.from_generator(iterate_dataset, (tf.float32,tf.float32), args=(args,catalog))
     # print(tf_set)
 
-    sdl = FastDataLoader(args, catalog).prefetch(tf.data.experimental.AUTOTUNE).cache()
+    sdl = SimpleDataLoader(args, catalog).prefetch(tf.data.experimental.AUTOTUNE).cache()
     
     for epoch in range(args.epochs):
         # iterate over epochs
@@ -313,7 +326,29 @@ def load_dataset(args):
 
     print("hi i reached here")
 
-    # return SimpleDataLoader(args, catalog)
+# loads dataset and iterates over dataframe rows as well as hdf5 and nc files for processing
+def load_dataset_seq(args):
+    catalog = load_catalog(args)
+    # catalog = pre_process(catalog)
+    
+    # print(catalog)
+
+    # data_generator = iterate_dataset(args,catalog)
+    # print(data_generator.next())
+
+    # tf_set = tf.data.Dataset.from_generator(iterate_dataset, (tf.float32,tf.float32), args=(args,catalog))
+    # print(tf_set)
+
+    sdl = SequenceDataLoader(args, catalog).prefetch(tf.data.experimental.AUTOTUNE).cache()
+    
+    for epoch in range(args.epochs):
+        # iterate over epochs
+        print("Epoch: %d"%epoch)
+        for (img_1,img_0),(GHI_1,GHI_0) in sdl:
+            # print(img_1.shape,img_0.shape)
+            pass
+
+    print("hi i reached here")
 
 def extract_at_time(time,ctlg):
     pass
@@ -323,7 +358,7 @@ def create_data_loader():
 
 def data_loader_main():
     args = config.init_args()
-    load_dataset(args)
+    load_dataset_seq(args)
 
 if __name__ == "__main__":
     data_loader_main()

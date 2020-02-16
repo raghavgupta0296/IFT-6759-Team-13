@@ -1,7 +1,9 @@
+import datetime
 from functools import lru_cache
 import pickle
 import pdb
 from time import sleep
+import typing
 
 import cv2
 import h5py, h5netcdf
@@ -14,7 +16,7 @@ import tensorflow as tf
 from tqdm import tqdm
 
 import config
-from utilities.utils import fetch_hdf5_sample
+from utilities import utils
 
 """
 Generates a file name
@@ -85,26 +87,28 @@ def map_coord_to_pixel(coord,min_coord,res):
 # extract images of all the 5 channels given offset and data handle
 def fetch_channel_samples(args,h5_data_handle,hdf5_offset):
     channels = args.channels
-    sample = [fetch_hdf5_sample(ch, h5_data_handle, hdf5_offset) for ch in channels]
+    sample = [utils.fetch_hdf5_sample(ch, h5_data_handle, hdf5_offset) for ch in channels]
     return sample
 
 def fetch_all_samples_hdf5(args,h5_data_path,dataframe_path=None):
     channels = args.channels
-    
+
     # sample = [utils.fetch_hdf5_sample(ch, h5_data_handle, hdf5_offset) for ch in channels]
     # # return sample
     copy_last_if_missing = True
-    h5_data = h5_data_handle
+    h5_data = read_hdf5(h5_data_path)
     global_start_idx = h5_data.attrs["global_dataframe_start_idx"]
     global_end_idx = h5_data.attrs["global_dataframe_end_idx"]
     archive_lut_size = global_end_idx - global_start_idx
+    global_start_time = datetime.datetime.strptime(h5_data.attrs["global_dataframe_start_time"], "%Y.%m.%d.%H%M")
     lut_timestamps = [global_start_time + idx * datetime.timedelta(minutes=15) for idx in range(archive_lut_size)]
+    stations = args.station_data
     stations_data = {}
     # df = pd.read_pickle(dataframe_path)
     # assume lats/lons stay identical throughout all frames; just pick the first available arrays
     idx, lats, lons = 0, None, None
     while (lats is None or lons is None) and idx < archive_lut_size:
-        lats, lons = fetch_hdf5_sample("lat", h5_data, idx), fetch_hdf5_sample("lon", h5_data, idx)
+        lats, lons = utils.fetch_hdf5_sample("lat", h5_data, idx), utils.fetch_hdf5_sample("lon", h5_data, idx)
         idx += 1    
     assert lats is not None and lons is not None, "could not fetch lats/lons arrays (hdf5 might be empty)"
     for reg, coords in stations.items():
@@ -121,7 +125,7 @@ def fetch_all_samples_hdf5(args,h5_data_path,dataframe_path=None):
         assert channel_name in h5_data, f"missing channel: {channels}"
         norm_min = h5_data[channel_name].attrs.get("orig_min", None)
         norm_max = h5_data[channel_name].attrs.get("orig_max", None)
-        channel_data = [fetch_hdf5_sample(channel_name, h5_data, idx) for idx in range(archive_lut_size)]
+        channel_data = [utils.fetch_hdf5_sample(channel_name, h5_data, idx) for idx in range(archive_lut_size)]
         assert all([array is None or array.shape == (650, 1500) for array in channel_data]), \
             "one of the saved channels had an expected dimension"
         last_valid_array_idx = None
@@ -141,20 +145,20 @@ def fetch_all_samples_hdf5(args,h5_data_path,dataframe_path=None):
     print("raw_data:",raw_data.shape)
     
 
-    crop_size = args.CROP_SIZE
+    crop_size = args.crop_size
     station_crops = {}
     for station_name, station in stations_data.items():
-        array = cv.circle(array, station["coords"][::-1], radius=9, color=station_color, thickness=-1)
+        # array = cv.circle(array, station["coords"][::-1], radius=9, color=station_color, thickness=-1)
         station_coords = station["coords"]
         margin = crop_size//2
-        lat_mid = station_coords[station_i][1]
-        lon_mid = station_coords[station_i][0]
+        lat_mid = station_coords[0]
+        lon_mid = station_coords[1]
         crop = raw_data[
             :, :,
             lat_mid-margin:lat_mid+margin, 
             lon_mid-margin:lon_mid+margin, 
         ]
-        station_crops{station_name} = crop
+        station_crops[station_name] = crop
     return station_crops
 
 # saves images of 5 channels with plotted mapped co-ordinates
@@ -172,7 +176,7 @@ def get_lon_lat_from_hdf5(h5_data):
     archive_lut_size = global_end_idx - global_start_idx
     idx, lat, lon = 0, None, None
     if idx < archive_lut_size:
-        lat, lon = fetch_hdf5_sample("lat", h5_data, idx), fetch_hdf5_sample("lon", h5_data, idx)
+        lat, lon = utils.fetch_hdf5_sample("lat", h5_data, idx), utils.fetch_hdf5_sample("lon", h5_data, idx)
     return lat, lon
 
 def get_hdf5_attributes(
