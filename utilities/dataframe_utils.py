@@ -4,10 +4,11 @@ import numpy as np
 #from tqdm.notebook import tqdm
 from tqdm import tqdm
 
+from utilities import dataloader
+from utilities import config
 from utilities.utility import create_dummy_image
 from utilities.utility import dummy_crop_image
 from utilities.sequencer import time_in_seconds
-
 
 """
 Groups the dataframe per column and sorts it with respect to timestamps
@@ -46,7 +47,12 @@ def generate_intermediate_dataframe(df):
         cropped_df = grouped[grouped.hdf5_8bit_path == path].sort_index(axis=0)
         offsets = cropped_df['hdf5_8bit_offset'].values
         # Collecting cropped images from the compressed data
-        dic = dummy_crop_image(path)
+
+        # Bhavya's note: please pass the args instance in the following function
+        # or if instantiated earlier, can pass it as an argument from the calling fn
+        args = config.init_args() # <- instantiated like this if not done
+        dic = dataloader.fetch_all_samples_hdf5(args,path)
+        # dic = create_dummy_image()
 
         # Iterating throw stations
         for index, row in cropped_df.iterrows():
