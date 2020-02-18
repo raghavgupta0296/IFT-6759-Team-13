@@ -1,0 +1,275 @@
+2.0.0
+2020-02-18 04:51:53.950047: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcuda.so.1
+2020-02-18 04:51:54.035235: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1618] Found device 0 with properties: 
+name: Tesla K80 major: 3 minor: 7 memoryClockRate(GHz): 0.8235
+pciBusID: 0000:14:00.0
+2020-02-18 04:51:54.037217: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudart.so.10.0
+2020-02-18 04:51:54.055497: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcublas.so.10.0
+2020-02-18 04:51:54.063314: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcufft.so.10.0
+2020-02-18 04:51:54.066038: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcurand.so.10.0
+2020-02-18 04:51:54.080067: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcusolver.so.10.0
+2020-02-18 04:51:54.090256: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcusparse.so.10.0
+2020-02-18 04:51:54.126369: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudnn.so.7
+2020-02-18 04:51:54.133071: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1746] Adding visible gpu devices: 0
+2020-02-18 04:51:54.143586: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2693315000 Hz
+2020-02-18 04:51:54.143921: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x47aa600 executing computations on platform Host. Devices:
+2020-02-18 04:51:54.143942: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): Host, Default Version
+2020-02-18 04:51:54.264753: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x47acb50 executing computations on platform CUDA. Devices:
+2020-02-18 04:51:54.264821: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): Tesla K80, Compute Capability 3.7
+2020-02-18 04:51:54.267990: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1618] Found device 0 with properties: 
+name: Tesla K80 major: 3 minor: 7 memoryClockRate(GHz): 0.8235
+pciBusID: 0000:14:00.0
+2020-02-18 04:51:54.268111: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudart.so.10.0
+2020-02-18 04:51:54.268144: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcublas.so.10.0
+2020-02-18 04:51:54.268174: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcufft.so.10.0
+2020-02-18 04:51:54.268202: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcurand.so.10.0
+2020-02-18 04:51:54.268232: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcusolver.so.10.0
+2020-02-18 04:51:54.268260: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcusparse.so.10.0
+2020-02-18 04:51:54.268289: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudnn.so.7
+2020-02-18 04:51:54.275179: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1746] Adding visible gpu devices: 0
+2020-02-18 04:51:54.275362: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudart.so.10.0
+2020-02-18 04:51:54.279140: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1159] Device interconnect StreamExecutor with strength 1 edge matrix:
+2020-02-18 04:51:54.279197: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1165]      0 
+2020-02-18 04:51:54.279209: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1178] 0:   N 
+2020-02-18 04:51:54.285856: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1304] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 10804 MB memory) -> physical GPU (device: 0, name: Tesla K80, pci bus id: 0000:14:00.0, compute capability: 3.7)
+EPOCH  0
+<DatasetV1Adapter shapes: (<unknown>, <unknown>), types: (tf.float32, tf.float32)>
+  0%|                                                                                                 | 0/580 [00:00<?, ?it/s]Yielding x (shape) and y (shape) of index:  chunk52736.npz (767, 70, 70, 5) (767,)
+~~~~~~~~~~~~~~~~~GOT from dataloader in  0.47992730140686035
+training...
+2020-02-18 04:51:56.232464: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudnn.so.7
+Yielding x (shape) and y (shape) of index:  chunk24192.npz (742, 70, 70, 5) (742,)
+2020-02-18 04:51:57.560190: W tensorflow/stream_executor/cuda/redzone_allocator.cc:312] Not found: ./bin/ptxas not found
+Relying on driver to perform ptx compilation. This message will be only logged once.
+2020-02-18 04:51:58.714855: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcublas.so.10.0
+[-1.6035826] 236.01334
+[-0.16540061] 18.073334
+[-1.0768471] -1.96
+[-0.02097671] 18.493334
+[-0.7603396] 83.933334
+[-1.1910417] 111.9
+[-1.7005501] 75.84
+[-1.7219644] 234.62
+[0.18354154] 29.133333
+[-0.3150223] 7.4266667
+train loss:  tf.Tensor(136356.28, shape=(), dtype=float32)
+
+ Loss:  136356.28
+one iteration done in  4.536494255065918 ... loading data again
+  0%|▏                                                                                        | 1/580 [00:05<48:24,  5.02s/it]~~~~~~~~~~~~~~~~~GOT from dataloader in  0.006821155548095703
+training...
+Yielding x (shape) and y (shape) of index:  chunk37504.npz (749, 70, 70, 5) (749,)
+[-27.977938] -4.08
+[6.263664] 66.82
+[0.48459497] 39.18
+[3.719722] 28.173334
+[-0.63121736] 12.72
+[1.8745612] 2.4266667
+[2.1356478] 13.253333
+[1.8055849] 36.453335
+[2.9458735] 0.04
+[1.6178399] 83.02
+train loss:  tf.Tensor(234693.98, shape=(), dtype=float32)
+
+ Loss:  333031.7
+one iteration done in  2.761767625808716 ... loading data again
+  0%|▎                                                                                        | 2/580 [00:07<41:49,  4.34s/it]~~~~~~~~~~~~~~~~~GOT from dataloader in  0.007540464401245117
+training...
+Yielding x (shape) and y (shape) of index:  chunk86016.npz (695, 70, 70, 5) (695,)
+[-61.813957] 289.69333
+[41.70331] 888.36664
+[103.4033] 997.56
+[-3.6769118] 649.84
+[49.469364] 751.25336
+[-0.8472449] 577.2733
+[29.137932] 320.94666
+[-63.443993] 253.10667
+[33.95825] 825.6667
+[101.31541] 955.50665
+train loss:  tf.Tensor(258853.98, shape=(), dtype=float32)
+
+ Loss:  307173.97
+one iteration done in  2.761359214782715 ... loading data again
+  1%|▍                                                                                        | 3/580 [00:10<37:13,  3.87s/it]~~~~~~~~~~~~~~~~~GOT from dataloader in  0.006509304046630859
+training...
+Yielding x (shape) and y (shape) of index:  chunk58880.npz (750, 70, 70, 5) (750,)
+[-41.72996] -2.7866666
+[-31.463566] -1.5
+[33.163136] -3.16
+[-26.487225] -0.74666667
+[-36.732002] -0.46
+[42.395725] -1.0466666
+[-24.249449] 0.40666667
+[-33.335308] 3.3466666
+[58.472137] 16.133333
+[-22.032902] 3.1266668
+train loss:  tf.Tensor(202990.45, shape=(), dtype=float32)
+
+ Loss:  35399.855
+one iteration done in  2.6331350803375244 ... loading data again
+  1%|▌                                                                                        | 4/580 [00:13<33:36,  3.50s/it]~~~~~~~~~~~~~~~~~GOT from dataloader in  0.006745100021362305
+training...
+Yielding x (shape) and y (shape) of index:  chunk1792.npz (723, 70, 70, 5) (723,)
+[1.9276334] 144.59334
+[3.5893233] 319.22665
+[186.00027] 762.24664
+[92.135864] 500.19333
+[12.694687] 163.05333
+[1.0002193] 278.75333
+[103.111275] 286.36667
+[1.884736] 110.07333
+[3.8071167] 548.36664
+[172.34398] 703.58
+train loss:  tf.Tensor(204253.3, shape=(), dtype=float32)
+
+ Loss:  209304.69
+one iteration done in  2.774235963821411 ... loading data again
+  1%|▊                                                                                        | 5/580 [00:15<31:29,  3.29s/it]~~~~~~~~~~~~~~~~~GOT from dataloader in  0.007454872131347656
+training...
+Yielding x (shape) and y (shape) of index:  chunk101504.npz (733, 70, 70, 5) (733,)
+[-5.7237253] 136.44
+[8.114301] 220.04666
+[411.97247] 1079.1133
+[274.9071] 943.86
+[19.516409] 594.56665
+[212.34483] 754.0467
+[5.59925] 440.22665
+[-5.437575] 146.49333
+[7.852224] 388.78
+[408.5026] 1074.3
+train loss:  tf.Tensor(197715.17, shape=(), dtype=float32)
+
+ Loss:  165024.55
+one iteration done in  2.78753924369812 ... loading data again
+  1%|▉                                                                                        | 6/580 [00:18<30:01,  3.14s/it]~~~~~~~~~~~~~~~~~GOT from dataloader in  0.0072100162506103516
+training...
+Yielding x (shape) and y (shape) of index:  chunk54912.npz (778, 70, 70, 5) (778,)
+[1.8795393] 473.28
+[-8.796668] 270.99335
+[-4.1587167] 123.36
+[5.611869] 169.99333
+[-12.989139] 457.59332
+[-0.01166621] 418.38
+[-5.9810166] 339.65332
+[24.73966] 518.9533
+[0.48279557] 326.17334
+[5.8028574] 173.54666
+train loss:  tf.Tensor(187539.92, shape=(), dtype=float32)
+
+ Loss:  126488.52
+one iteration done in  2.805405855178833 ... loading data again
+  1%|█                                                                                        | 7/580 [00:21<29:02,  3.04s/it]~~~~~~~~~~~~~~~~~GOT from dataloader in  0.0067522525787353516
+training...
+Yielding x (shape) and y (shape) of index:  chunk44032.npz (747, 70, 70, 5) (747,)
+[477.00616] 741.74
+[13.204641] 302.67334
+[457.98154] 421.66
+[17.711903] 248.36667
+[376.31165] 770.5467
+[404.64038] 793.56
+[4.5312066] 300.41333
+[498.0988] 774.4
+[13.027227] 322.33334
+[486.0167] 478.12668
+train loss:  tf.Tensor(182225.78, shape=(), dtype=float32)
+
+ Loss:  145026.72
+one iteration done in  2.8799824714660645 ... loading data again
+  1%|█▏                                                                                       | 8/580 [00:24<28:32,  2.99s/it]~~~~~~~~~~~~~~~~~GOT from dataloader in  0.007725715637207031
+training...
+Yielding x (shape) and y (shape) of index:  chunk75520.npz (753, 70, 70, 5) (753,)
+[529.99774] 979.75336
+[129.0225] 70.16
+[753.92566] 1013.76
+[190.39919] 877.69336
+[16.435476] 347.41333
+[156.29663] 908.08
+[394.91196] 908.9267
+[526.0024] 960.5333
+[8.856685] 118.19334
+[764.60535] 1036.4
+train loss:  tf.Tensor(175335.81, shape=(), dtype=float32)
+
+ Loss:  120215.94
+one iteration done in  2.818129777908325 ... loading data again
+  2%|█▍                                                                                       | 9/580 [00:27<28:01,  2.94s/it]~~~~~~~~~~~~~~~~~GOT from dataloader in  0.007249116897583008
+training...
+Yielding x (shape) and y (shape) of index:  chunk57472.npz (800, 70, 70, 5) (800,)
+[22.149742] 21.546667
+[22.213852] 48.533333
+[26.949133] 5.113333
+[22.252434] 71.94
+[28.005337] 20.813334
+[15.793247] 1.12
+[22.342058] 123.53333
+[16.147676] -0.33333334
+[28.95847] 43.893333
+[23.914219] 0.78
+train loss:  tf.Tensor(167806.58, shape=(), dtype=float32)
+
+ Loss:  100043.54
+one iteration done in  2.840177297592163 ... loading data again
+  2%|█▌                                                                                      | 10/580 [00:30<27:41,  2.92s/it]~~~~~~~~~~~~~~~~~GOT from dataloader in  0.007551908493041992
+training...
+Yielding x (shape) and y (shape) of index:  chunk20608.npz (770, 70, 70, 5) (770,)
+[491.54684] 751.5867
+[67.06679] 817.9867
+[662.85535] 791.4667
+[41.295925] 170.19333
+[651.959] 728.62
+[738.18835] 377.87332
+[29.82139] 338.50665
+[588.4615] 741.67334
+[122.829216] 850.7133
+[682.11884] 834.4267
+train loss:  tf.Tensor(161448.39, shape=(), dtype=float32)
+
+ Loss:  97866.56
+one iteration done in  2.9187445640563965 ... loading data again
+  2%|█▋                                                                                      | 11/580 [00:33<27:40,  2.92s/it]~~~~~~~~~~~~~~~~~GOT from dataloader in  0.008326053619384766
+training...
+Yielding x (shape) and y (shape) of index:  chunk29696.npz (745, 70, 70, 5) (745,)
+[500.26984] 608.4
+[412.99008] 886.0867
+[905.8333] 349.82666
+[802.7599] 363.51334
+[175.94495] 684.94666
+[57.165688] 49.553333
+[49.55089] 243.53334
+[433.1539] 460.34
+[409.65512] 855.4533
+[900.73303] 273.25333
+train loss:  tf.Tensor(156402.58, shape=(), dtype=float32)
+
+ Loss:  100898.81
+one iteration done in  2.9563279151916504 ... loading data again
+  2%|█▊                                                                                      | 12/580 [00:36<27:45,  2.93s/it]~~~~~~~~~~~~~~~~~GOT from dataloader in  0.0076639652252197266
+training...
+Yielding x (shape) and y (shape) of index:  chunk88448.npz (706, 70, 70, 5) (706,)
+[55.46413] 22.493334
+[66.614655] 30.373333
+[61.91113] 6.7466664
+[54.316444] 140.34666
+[39.2739] 189.26666
+[64.95847] 91.293335
+[51.62229] 30.52
+[67.27816] 76.22
+[80.21924] -1.8866667
+[61.736374] 27.98
+train loss:  tf.Tensor(148772.48, shape=(), dtype=float32)
+
+ Loss:  57211.242
+one iteration done in  2.765157699584961 ... loading data again
+  2%|█▉                                                                                      | 13/580 [00:38<27:15,  2.88s/it]~~~~~~~~~~~~~~~~~GOT from dataloader in  0.008527517318725586
+training...
+Yielding x (shape) and y (shape) of index:  chunk55168.npz (712, 70, 70, 5) (712,)
+[42.366478] 119.52
+[770.7241] 360.46667
+[62.850674] 25.38
+[74.53069] 4.693333
+[62.524868] 5.22
+[56.472904] 89.566666
+[748.2528] 285.83334
+[67.641815] 19.833334
+[70.06412] -0.49333334
+[70.76287] 74.16

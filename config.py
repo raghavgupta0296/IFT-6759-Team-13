@@ -15,13 +15,15 @@ STATION_NAMES = list(STATION_INFO.keys())
 
 # HYPERPARAMS
 CROP_SIZE = 70 # even number
-EPOCHS = 1
-BATCH_SIZE = 64
+EPOCHS = 10
+BATCH_SIZE = 128
+OPTIMIZER = 'adam' # implement this as a hyperparam
+IMAGE_DATA = 'hdf5 8 bit' # not used, keeping here as note
 
 def init_args():
 	parser = argparse.ArgumentParser(description='Process arguments for processing/training/testing')
 	parser.add_argument('--mode', help='train/test/prepro')
-	parser.add_argument('--image_data', choices=['hdf5v7_8bit','hdf5v5_16bit','netcdf'], default='hdf5v5_16bit',
+	parser.add_argument('--image_data', choices=['hdf5v7_8bit','hdf5v5_16bit','netcdf'], default='hdf5v7_8bit',
 		help='choose either hdf5 8bit or 16bit')
 
 	data_catalog = os.path.join(ROOT_DATA_PATH,RAW_DATA_CATALOG)

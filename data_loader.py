@@ -3,17 +3,16 @@ from functools import lru_cache
 import pickle
 import pdb
 import time
-
 import cv2
 import h5py, h5netcdf
-from line_profiler import LineProfiler
+# from line_profiler import LineProfiler
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 import numpy as np
 import pandas as pd
 import tensorflow as tf
 from tqdm import tqdm
-
+import os
 import config
 import utils
 
@@ -25,7 +24,7 @@ def load_catalog(args):
     return dataset
 
 # loads an hdf5 file
-@lru_cache(maxsize=10)
+@lru_cache(maxsize=3)
 def read_hdf5(hdf5_path):
     h5_data = h5py.File(hdf5_path, "r")
     return h5_data
@@ -67,7 +66,7 @@ def pre_process(dataset):
     pp_dataset = pp_dataset.reset_index()
     
     # shuffle all rows of dataset 
-    # !!! REMOVE FOR CONSIDERING TIME SEQUENCING ###
+    # !!! REMOVE FOR CONSIDERING TIME SEQUENCING AND LRU_CACHING OF HDF5 FILES###
     # pp_dataset = pp_dataset.sample(frac=1).reset_index(drop=True)
     pp_dataset = pp_dataset.reset_index(drop=True)
 
@@ -83,20 +82,6 @@ def station_from_row(args, rows):
         # if .nc doesn't exist, then skip example
         if row['ncdf_path'] == "nan":
             continue
-<<<<<<< HEAD
-            
-        ini = time.time()
-        h5_data = read_hdf5(hdf5_16)
-        print("time taken for reading hfd5 16 bit file: ", time.time()-ini)
-
-        ini = time.time()
-        h5_data = read_hdf5(hdf5_8)
-        print("time taken for reading hfd5 8 bit file: ", time.time()-ini)
-        
-        ini = time.time()
-        ncdf_data = read_ncdf(ncdf_path)
-        print("time for reading ncdf file", time.time()-ini)
-=======
 
         if args.image_data == 'hdf5v7_8bit':
             data_handle = read_hdf5(hdf5_8)
@@ -109,41 +94,16 @@ def station_from_row(args, rows):
         elif args.image_data == 'netcdf':
             data_handle = read_ncdf(ncdf_path)
             samples = [data_handle.variables[ch][0] for ch in args.channels]
->>>>>>> 9ebbcf2352a9f02f64a98e934a79ac1ed6b3f4f8
         
         # print(ncdf_data.dimensions)
         # print(ncdf_data.variables.keys())
         # print(ncdf_data.ncattrs)
-<<<<<<< HEAD
-        
-        # extracts meta-data to map station co-ordinates to pixels
-        ini = time.time()
-        lat_min = ncdf_data.attrs['geospatial_lat_min'][0]
-        lat_max = ncdf_data.attrs['geospatial_lat_max'][0]
-        lon_min = ncdf_data.attrs['geospatial_lon_min'][0]
-        lon_max = ncdf_data.attrs['geospatial_lon_max'][0]
-        lat_res = ncdf_data.attrs['geospatial_lat_resolution'][0]
-        lon_res = ncdf_data.attrs['geospatial_lon_resolution'][0]
-        print("time for extracting attributes from ncdf file", time.time()-ini)
-
-        ini = time.time()
-        station_coords = {}
-        # R! reading from dictionary can lead to random order of key pairs, 
-        # storing datatype changed from array to dictionary
-        for sta, (lat,lon,elev) in args.station_data.items():
-            # y = row data (longitude: changes across rows i.e. vertically)
-            # x = column data (latitude: changes across columns i.e horizontally)
-            x_coord,y_coord = [map_coord_to_pixel(lat,lat_min,lat_res),map_coord_to_pixel(lon,lon_min,lon_res)]
-            station_coords[sta] = [y_coord,x_coord] 
-        print("time to find coordinates: ", time.time()-ini)
-=======
 
         # print(data_handle.keys())
         # print(data_handle['lon_LUT'])
         # print(data_handle['lon'][0])
         # print(data_handle['lat'][0])
         # print(data_handle['lat_LUT'])
->>>>>>> 9ebbcf2352a9f02f64a98e934a79ac1ed6b3f4f8
 
         # extracts meta-data to map station co-ordinates to pixels
         station_coords = {}
@@ -170,21 +130,9 @@ def station_from_row(args, rows):
                 station_coords[sta] = [y_coord,x_coord] 
         
         # reads h5 and ncdf samples
-<<<<<<< HEAD
-        ini = time.time()
-        h5_16bit_samples = fetch_channel_samples(args,h5_data,row['hdf5_16bit_offset'])
-        print("time taken for reading hdf5 16 bit sat image: ", time.time()-ini)
-        
-        ini = time.time()
-        h5_16bit_samples = fetch_channel_samples(args,h5_data,row['hdf5_8bit_offset'])
-        print("time taken for reading hdf5 8 bit sat image: ", time.time()-ini)
-
-        # ncdf_samples = [ncdf_data.variables[ch][0] for ch in args.channels]
-=======
 
         # h5_16bit_samples = fetch_channel_samples(args,h5_data,row['hdf5_16bit_offset'])
         # h5_16bit_samples = fetch_channel_samples(args,data_handle,row['hdf5_8bit_offset'])
->>>>>>> 9ebbcf2352a9f02f64a98e934a79ac1ed6b3f4f8
 
         # ncdf_samples = [data_handle.variables[ch][0] for ch in args.channels]
         samples = np.array(samples)
@@ -210,16 +158,10 @@ def station_from_row(args, rows):
             # print(station_i)
 
             y.append(row[station_i+"_GHI"])
-<<<<<<< HEAD
-            ini = time.time()
-            x.append(crop_station_image(station_i,h5_16bit_samples,station_coords))
-            print("cropping time: ", time.time()-ini)
-=======
             # ini = time.time()
             # print(station_coords)
             x.append(crop_station_image(station_i,samples,station_coords))
             # print("cropping time: ", time.time()-ini)
->>>>>>> 9ebbcf2352a9f02f64a98e934a79ac1ed6b3f4f8
     return x, y
 
 prev_station_coords = {'BND': [915, 401], 'TBL': [494, 403], 'DRA': [224, 315], 'FPK': [497, 607], 'GWN': [878, 256], 'PSU': [1176, 418], 'SXF': [709, 493]}
@@ -261,120 +203,193 @@ def crop_station_image(station_i,sat_image,station_coords):
 
     return crop
 
-class SimpleDataLoader(tf.data.Dataset):
+class FasterDataLoader(tf.data.Dataset):
 
-    def __new__(cls, args, catalog):
+    def __new__(cls,start_idx,stop_idx):
 
         return tf.data.Dataset.from_generator(
-            lambda: cls._generator(args,catalog),
-            output_types=(tf.float32,tf.float32)
+            lambda: cls._generator(start_idx,stop_idx),
+            output_types=(tf.float32,tf.float32),
+            # output_shapes=(tf.TensorShape([]), tf.TensorShape([]))
+            # output_shapes=((-1,config.CROP_SIZE,config.CROP_SIZE,5),(-1,1))
             # args=(args,catalog)
         )
 
-    def _generator(args, catalog):
+    def _generator(start_idx,stop_idx):
 
-        STEP_SIZE = args.batch_size
-        # STEP_SIZE = 
-        START_IDX = 0
-        END_IDX = STEP_SIZE*3 #len(catalog)
+        memory_chunk_path = "memory_chunks/"
+            
+        chunk_filenames = os.listdir(memory_chunk_path)[start_idx:stop_idx]
         
-        if args.debug:
-            STEP_SIZE = 1
-            END_IDX = STEP_SIZE*3
+        for chunk_i in chunk_filenames:
+            data = np.load(memory_chunk_path+chunk_i)
+            x = data['x']
+            y = data['y']
+            
+            x /= 255 # R! remove after creating memory chunks again
+            x = x.swapaxes(1,3)
 
-        for index in tqdm(range(START_IDX,END_IDX,STEP_SIZE)): 
-        # while(index < len(catalog)):
-
-            rows = catalog[ index : index+STEP_SIZE ]
-            # print(rows)
-
-            if args.debug:
-                profiler = LineProfiler()
-                profiled_func = profiler(station_from_row)
-                try:
-                    profiled_func(args, rows, x, y)
-                finally:
-                    profiler.print_stats()
-                    profiler.dump_stats('data_loader_dump.txt')
-            else:
-                x,y = station_from_row(args, rows)
-
-            x = np.array(x)
-            y = np.array(y)
-            print("Yielding x (shape) and y (shape) of index: ", index, x.shape,y.shape)
+            print("Yielding x (shape) and y (shape) of index: ", chunk_i, x.shape,y.shape)
 
             yield (x,y)
-
-class FastDataLoader(tf.data.Dataset):
-
-    def __new__(cls, args, catalog):
-
-        return tf.data.Dataset.from_generator(
-            lambda: cls._generator(args,catalog),
-            output_types=(tf.float32,tf.float32)
-            # args=(args,catalog)
-        )
-
-    def _generator(args, catalog):
-
-        STEP_SIZE = args.batch_size
-        # STEP_SIZE = 
-        START_IDX = 0
-        END_IDX = len(catalog)
         
-        if args.debug:
-            STEP_SIZE = 1
-            END_IDX = STEP_SIZE*3
+# class SimpleDataLoader(tf.data.Dataset):
 
-        for index in tqdm(range(START_IDX,END_IDX,STEP_SIZE)): 
-        # while(index < len(catalog)):
+#     def __new__(cls, args, catalog):
 
-            rows = catalog[ index : index+STEP_SIZE ]
-            # print(rows)
+#         return tf.data.Dataset.from_generator(
+#             lambda: cls._generator(args,catalog),
+#             output_types=(tf.float32,tf.float32)
+#             # args=(args,catalog)
+#         )
 
-            if args.debug:
-                profiler = LineProfiler()
-                profiled_func = profiler(station_from_row)
-                try:
-                    profiled_func(args, rows, x, y)
-                finally:
-                    profiler.print_stats()
-                    profiler.dump_stats('data_loader_dump.txt')
-            else:
-                x,y = station_from_row(args, rows)
+#     def _generator(args, catalog):
 
-            x = np.array(x)
-            y = np.array(y)
-            print("Yielding x (shape) and y (shape) of index: ", index, x.shape,y.shape)
+#         STEP_SIZE = args.batch_size
+#         # STEP_SIZE = 
+#         START_IDX = 0
+#         END_IDX = len(catalog)
+        
+#         if args.debug:
+#             STEP_SIZE = 1
+#             END_IDX = STEP_SIZE*3
 
-            yield (x,y)
+#         for index in range(START_IDX,END_IDX,STEP_SIZE): 
+#         # while(index < len(catalog)):
 
+#             rows = catalog[ index : index+STEP_SIZE ]
+#             # print(rows)
+
+#             if args.debug:
+#                 # profiler = LineProfiler()
+#                 profiled_func = profiler(station_from_row)
+#                 try:
+#                     profiled_func(args, rows, x, y)
+#                 finally:
+#                     profiler.print_stats()
+#                     profiler.dump_stats('data_loader_dump.txt')
+#             else:
+#                 x,y = station_from_row(args, rows)
+
+#             x = np.array(x)
+#             y = np.array(y)
+#             print("Yielding x (shape) and y (shape) of index: ", index, x.shape,y.shape)
+
+#             yield (x,y)
+
+# class FastDataLoader(tf.data.Dataset):
+
+#     def __new__(cls, args, catalog):
+
+#         return tf.data.Dataset.from_generator(
+#             lambda: cls._generator(args,catalog),
+#             output_types=(tf.float32,tf.float32)
+#             # args=(args,catalog)
+#         )
+
+#     def _generator(args, catalog):
+
+#         STEP_SIZE = args.batch_size
+#         # STEP_SIZE = 
+#         START_IDX = 0
+#         END_IDX = len(catalog)
+        
+#         if args.debug:
+#             STEP_SIZE = 1
+#             END_IDX = STEP_SIZE*3
+
+#         for index in tqdm(range(START_IDX,END_IDX,STEP_SIZE)): 
+
+#             rows = catalog[ index : index+STEP_SIZE ]
+#             # print(rows)
+
+#             if args.debug:
+#                 # profiler = LineProfiler()
+#                 profiled_func = profiler(station_from_row)
+#                 try:
+#                     profiled_func(args, rows, x, y)
+#                 finally:
+#                     profiler.print_stats()
+#                     profiler.dump_stats('data_loader_dump.txt')
+#             else:
+#                 x,y = station_from_row(args, rows)
+
+#             x = np.array(x)
+#             y = np.array(y)
+#             print("Yielding x (shape) and y (shape) of index: ", index, x.shape,y.shape)
+
+#             yield (x,y)
+
+def create_memory_chunks(args, catalog):
+    STEP_SIZE = args.batch_size
+    START_IDX = 0
+    END_IDX = len(catalog)
+
+    for index in tqdm(range(START_IDX,END_IDX,STEP_SIZE)):
+
+        print("\n",index)
+        rows = catalog[ index : index+STEP_SIZE ]
+
+        # print(rows['iso-datetime'])
+        x,y = station_from_row(args, rows)
+
+        # print("fetched x and y")
+        x = np.array(x)
+        y = np.array(y)
+
+        # x /= 255
+        # x = x.swapaxes(1,3)
+
+        print("Yielding x (shape) and y (shape) of index: ", index, x.shape,y.shape)
+
+        np.savez("memory_chunks/chunk"+str(index),x=x,y=y)
 
 # loads dataset and iterates over dataframe rows as well as hdf5 and nc files for processing
-def load_dataset(args):
+def load_dataloader(args):
+    
     catalog = load_catalog(args)
     catalog = pre_process(catalog)
-    
-    # print(catalog)
 
-    # data_generator = iterate_dataset(args,catalog)
-    # print(data_generator.next())
+    # sdl = SimpleDataLoader(args, catalog)
+    # indexes to pass for memory chunks #
+    # sdl_train = FasterDataLoader(0,580).prefetch(tf.data.experimental.AUTOTUNE)
+    # sdl_valid = FasterDataLoader(580,746).prefetch(tf.data.experimental.AUTOTUNE)
+    # sdl_test = FasterDataLoader(746,None).prefetch(tf.data.experimental.AUTOTUNE)
 
-    # tf_set = tf.data.Dataset.from_generator(iterate_dataset, (tf.float32,tf.float32), args=(args,catalog))
-    # print(tf_set)
+    sdl_train = FasterDataLoader(0,100).prefetch(tf.data.experimental.AUTOTUNE)
+    sdl_valid = FasterDataLoader(100,120).prefetch(tf.data.experimental.AUTOTUNE)
+    sdl_test = FasterDataLoader(746,None).prefetch(tf.data.experimental.AUTOTUNE)
 
-    sdl = SimpleDataLoader(args, catalog).prefetch(tf.data.experimental.AUTOTUNE).cache()
-    
-    for epoch in range(args.epochs):
-        # iterate over epochs
-        print("Epoch: %d"%epoch)
-        for i,j in sdl:
-            print(i.shape,j.shape)
-            # print("Incoming x and y: ", i,j)
+    # sdl = SimpleDataLoader(args, catalog).prefetch(tf.data.experimental.AUTOTUNE).cache()
+    # for epoch in range(args.epochs):
+    #     # iterate over epochs
+    #     print("Epoch: %d"%epoch)
+    #     for i,j in sdl:
+    #         print(i.shape,j.shape)
+#             print("Incoming x and y: ", i,j)
 
-    print("hi i reached here")
+    # print("hi i reached here")
 
     # return SimpleDataLoader(args, catalog)
+    return sdl_train, sdl_valid, sdl_test
+
+def check_speed_loading():
+    import os
+    files = sorted(os.listdir("memory_chunks"))
+    print(len(files))
+    
+    avg_time = 0
+    
+    for file in files:
+        print(file)
+        ini = time.time()
+        f = np.load("memory_chunks/"+ file)
+        x = f['x']
+        y = f['y']
+        fin = time.time()-ini
+        print("time taken to load xy: ", fin)
+        avg_time+=fin
+    print("\n finished avg time: ", avg_time/len(files))
 
 def extract_at_time(time,ctlg):
     pass
@@ -382,9 +397,14 @@ def extract_at_time(time,ctlg):
 def create_data_loader():
     pass
 
-def data_loader_main():
-    args = config.init_args()
-    load_dataset(args)
-
 if __name__ == "__main__":
-    data_loader_main()
+    args = config.init_args()
+#     load_dataloader(args)
+
+    # catalog = load_catalog(args)
+    # catalog = pre_process(catalog)
+    # create_memory_chunks(args,catalog)
+
+#     check_speed_loading()
+
+    

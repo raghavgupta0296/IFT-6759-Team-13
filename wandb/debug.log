@@ -1,0 +1,145 @@
+2020-02-18 07:34:23,765 DEBUG   MainThread:49950 [wandb_config.py:_load_defaults():119] no defaults not found in config-defaults.yaml
+2020-02-18 07:34:23,815 DEBUG   MainThread:49950 [meta.py:setup():94] code probe starting
+2020-02-18 07:34:23,819 DEBUG   MainThread:49950 [meta.py:_setup_code_git():49] probe for git information
+2020-02-18 07:34:23,824 DEBUG   MainThread:49950 [cmd.py:execute():719] Popen(['git', 'cat-file', '--batch-check'], cwd=/home/guest160, universal_newlines=False, shell=None, istream=<valid stream>)
+2020-02-18 07:34:23,851 DEBUG   MainThread:49950 [cmd.py:execute():719] Popen(['git', 'rev-parse', '--show-toplevel'], cwd=/home/guest160, universal_newlines=False, shell=None, istream=None)
+2020-02-18 07:34:23,865 DEBUG   MainThread:49950 [meta.py:_setup_code_program():58] scan for untracked program
+2020-02-18 07:34:23,866 DEBUG   MainThread:49950 [cmd.py:execute():719] Popen(['git', 'status', '--porcelain', '--untracked-files'], cwd=/home/guest160, universal_newlines=False, shell=None, istream=None)
+2020-02-18 07:34:23,930 DEBUG   MainThread:49950 [meta.py:setup():116] code probe done
+2020-02-18 07:34:23,945 DEBUG   MainThread:49950 [run_manager.py:__init__():536] Initialized sync for project1/umr9dofa
+2020-02-18 07:34:23,958 INFO    MainThread:49950 [run_manager.py:wrap_existing_process():1134] wrapping existing process 49840
+2020-02-18 07:34:23,958 WARNING MainThread:49950 [io_wrap.py:register():104] SIGWINCH handler was not None: <Handlers.SIG_DFL: 0>
+2020-02-18 07:34:23,964 DEBUG   MainThread:49950 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): pypi.org:443
+2020-02-18 07:34:24,810 INFO    Thread-3  :49950 [run_manager.py:_on_file_created():672] file/dir created: /home/guest160/wandb/run-20200218_073422-umr9dofa/wandb-metadata.json
+2020-02-18 07:34:32,018 INFO    MainThread:49950 [run_manager.py:init_run():919] system metrics and metadata threads started
+2020-02-18 07:34:32,018 INFO    MainThread:49950 [run_manager.py:init_run():953] upserting run before process can begin, waiting at most 10 seconds
+2020-02-18 07:34:32,041 DEBUG   Thread-14 :49950 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+2020-02-18 07:34:42,019 ERROR   MainThread:49950 [run_manager.py:init_run():958] Failed to connect to W&B servers after 10 seconds.                    Letting user process proceed while attempting to reconnect.
+2020-02-18 07:34:42,020 INFO    MainThread:49950 [run_manager.py:wrap_existing_process():1151] informing user process we are ready to proceed
+2020-02-18 07:34:42,031 DEBUG   Thread-15 :49950 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+2020-02-18 07:34:42,031 INFO    MainThread:49950 [run_manager.py:_sync_etc():1258] entering loop for messages from user process
+2020-02-18 07:34:42,137 INFO    MainThread:49950 [run_manager.py:_sync_etc():1281] received message from user process: {"exitcode": 1}
+2020-02-18 07:34:42,137 INFO    MainThread:49950 [run_manager.py:_sync_etc():1367] closing log streams and sending exitcode to W&B
+2020-02-18 07:34:42,139 INFO    MainThread:49950 [run_manager.py:shutdown():1058] shutting down system stats and metadata service
+2020-02-18 07:34:43,159 DEBUG   Thread-14 :49950 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+2020-02-18 07:34:53,118 DEBUG   Thread-15 :49950 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+2020-02-18 07:34:53,164 ERROR   Thread-14 :49950 [retry.py:__call__():108] Retry attempt failed:
+Traceback (most recent call last):
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/urllib3/connection.py", line 157, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/urllib3/util/connection.py", line 84, in create_connection
+    raise err
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/urllib3/util/connection.py", line 74, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/urllib3/connectionpool.py", line 672, in urlopen
+    chunked=chunked,
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/urllib3/connectionpool.py", line 376, in _make_request
+    self._validate_conn(conn)
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/urllib3/connectionpool.py", line 994, in _validate_conn
+    conn.connect()
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/urllib3/connection.py", line 300, in connect
+    conn = self._new_conn()
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/urllib3/connection.py", line 164, in _new_conn
+    % (self.host, self.timeout),
+urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.VerifiedHTTPSConnection object at 0x2b864adfa8d0>, 'Connection to api.wandb.ai timed out. (connect timeout=10)')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/urllib3/connectionpool.py", line 720, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/urllib3/util/retry.py", line 436, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.wandb.ai', port=443): Max retries exceeded with url: /graphql (Caused by ConnectTimeoutError(<urllib3.connection.VerifiedHTTPSConnection object at 0x2b864adfa8d0>, 'Connection to api.wandb.ai timed out. (connect timeout=10)'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/wandb/retry.py", line 95, in __call__
+    result = self._call_fn(*args, **kwargs)
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/wandb/apis/internal.py", line 110, in execute
+    return self.client.execute(*args, **kwargs)
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/gql/client.py", line 52, in execute
+    result = self._get_result(document, *args, **kwargs)
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/gql/client.py", line 60, in _get_result
+    return self.transport.execute(document, *args, **kwargs)
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/gql/transport/requests.py", line 38, in execute
+    request = requests.post(self.url, **post_args)
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/requests/api.py", line 116, in post
+    return request('post', url, data=data, json=json, **kwargs)
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/requests/api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/requests/sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/requests/sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/requests/adapters.py", line 504, in send
+    raise ConnectTimeout(e, request=request)
+requests.exceptions.ConnectTimeout: HTTPSConnectionPool(host='api.wandb.ai', port=443): Max retries exceeded with url: /graphql (Caused by ConnectTimeoutError(<urllib3.connection.VerifiedHTTPSConnection object at 0x2b864adfa8d0>, 'Connection to api.wandb.ai timed out. (connect timeout=10)'))
+2020-02-18 07:34:55,624 DEBUG   Thread-14 :49950 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+t):
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/urllib3/connection.py", line 157, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/urllib3/util/connection.py", line 84, in create_connection
+    raise err
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/urllib3/util/connection.py", line 74, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/urllib3/connectionpool.py", line 672, in urlopen
+    chunked=chunked,
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/urllib3/connectionpool.py", line 376, in _make_request
+    self._validate_conn(conn)
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/urllib3/connectionpool.py", line 994, in _validate_conn
+    conn.connect()
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/urllib3/connection.py", line 300, in connect
+    conn = self._new_conn()
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/urllib3/connection.py", line 164, in _new_conn
+    % (self.host, self.timeout),
+urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.VerifiedHTTPSConnection object at 0x2b864adfa8d0>, 'Connection to api.wandb.ai timed out. (connect timeout=10)')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/urllib3/connectionpool.py", line 720, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/urllib3/util/retry.py", line 436, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.wandb.ai', port=443): Max retries exceeded with url: /graphql (Caused by ConnectTimeoutError(<urllib3.connection.VerifiedHTTPSConnection object at 0x2b864adfa8d0>, 'Connection to api.wandb.ai timed out. (connect timeout=10)'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/wandb/retry.py", line 95, in __call__
+    result = self._call_fn(*args, **kwargs)
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/wandb/apis/internal.py", line 110, in execute
+    return self.client.execute(*args, **kwargs)
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/gql/client.py", line 52, in execute
+    result = self._get_result(document, *args, **kwargs)
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/gql/client.py", line 60, in _get_result
+    return self.transport.execute(document, *args, **kwargs)
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/gql/transport/requests.py", line 38, in execute
+    request = requests.post(self.url, **post_args)
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/requests/api.py", line 116, in post
+    return request('post', url, data=data, json=json, **kwargs)
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/requests/api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/requests/sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/requests/sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/requests/adapters.py", line 504, in send
+    raise ConnectTimeout(e, request=request)
+requests.exceptions.ConnectTimeout: HTTPSConnectionPool(host='api.wandb.ai', port=443): Max retries exceeded with url: /graphql (Caused by ConnectTimeoutError(<urllib3.connection.VerifiedHTTPSConnection object at 0x2b864adfa8d0>, 'Connection to api.wandb.ai timed out. (connect timeout=10)'))

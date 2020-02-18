@@ -1,0 +1,25 @@
+{
+    "root": "/home/guest160",
+    "program": "basic_cnn.py",
+    "git": {
+        "remote": null,
+        "commit": "4d10e99b3cdccb7a244f3c58a77394b3ffbe9aa2"
+    },
+    "email": "raghav0296@gmail.com",
+    "startedAt": "2020-02-18T04:51:34.582271",
+    "host": "helk80n02.helios.calculquebec.ca",
+    "username": "guest160",
+    "executable": "/home/guest160/ift6759-env/bin/python",
+    "os": "Linux-3.10.0-1062.9.1.el7.x86_64-x86_64-with-centos-7.7.1908-Core",
+    "python": "3.7.4",
+    "gpu": "Tesla K80",
+    "gpu_count": 1,
+    "cpu_count": 24,
+    "args": [],
+    "state": "killed",
+    "jobType": null,
+    "mode": "run",
+    "project": "project1",
+    "heartbeatAt": "2020-02-18T04:52:36.083481",
+    "exitcode": 255
+}

@@ -1,0 +1,15 @@
+2.0.0
+Traceback (most recent call last):
+  File "basic_cnn.py", line 63, in <module>
+    model = MyModel()
+  File "basic_cnn.py", line 23, in __init__
+    self.conv1 = Conv2D(32, 3, activation='None')
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/tensorflow_core/python/keras/layers/convolutional.py", line 489, in __init__
+    activation=activations.get(activation),
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/tensorflow_core/python/keras/activations.py", line 316, in get
+    return deserialize(identifier)
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/tensorflow_core/python/keras/activations.py", line 307, in deserialize
+    printable_module_name='activation function')
+  File "/home/guest160/ift6759-env/lib/python3.7/site-packages/tensorflow_core/python/keras/utils/generic_utils.py", line 210, in deserialize_keras_object
+    raise ValueError('Unknown ' + printable_module_name + ':' + object_name)
+ValueError: Unknown activation function:None

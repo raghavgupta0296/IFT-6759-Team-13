@@ -29,4 +29,4 @@ test_1.py
 data/catalog.helios.public.20100101-20160101.pkl
 data/dummy_test_catalog.pkl
 data/dummy_test_cfg.json
-
+memory_chunks

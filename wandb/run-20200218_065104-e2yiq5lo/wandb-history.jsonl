@@ -1,0 +1,10 @@
+{"Epoch": 0, "Train_Loss": 64546.1640625, "Valid_Loss": 80036.6953125, "_runtime": 236.3997232913971, "_timestamp": 1582008900.621556, "_step": 0}
+{"Epoch": 1, "Train_Loss": 40784.16015625, "Valid_Loss": 72024.046875, "_runtime": 313.56431221961975, "_timestamp": 1582008977.786145, "_step": 1}
+{"Epoch": 2, "Train_Loss": 34172.4609375, "Valid_Loss": 136392.40625, "_runtime": 390.4183692932129, "_timestamp": 1582009054.640202, "_step": 2}
+{"Epoch": 3, "Train_Loss": 31177.587890625, "Valid_Loss": 74193.03125, "_runtime": 467.8975794315338, "_timestamp": 1582009132.1194122, "_step": 3}
+{"Epoch": 4, "Train_Loss": 27793.748046875, "Valid_Loss": 61983.51171875, "_runtime": 547.0047616958618, "_timestamp": 1582009211.2265944, "_step": 4}
+{"Epoch": 5, "Train_Loss": 26604.345703125, "Valid_Loss": 62694.5078125, "_runtime": 625.7819225788116, "_timestamp": 1582009290.0037553, "_step": 5}
+{"Epoch": 6, "Train_Loss": 24955.037109375, "Valid_Loss": 127908.546875, "_runtime": 705.4768254756927, "_timestamp": 1582009369.6986582, "_step": 6}
+{"Epoch": 7, "Train_Loss": 23025.056640625, "Valid_Loss": 160251.15625, "_runtime": 784.9782137870789, "_timestamp": 1582009449.2000465, "_step": 7}
+{"Epoch": 8, "Train_Loss": 21770.52734375, "Valid_Loss": 208933.65625, "_runtime": 863.3606584072113, "_timestamp": 1582009527.5824912, "_step": 8}
+{"Epoch": 9, "Train_Loss": 20727.39453125, "Valid_Loss": 421028.0625, "_runtime": 939.8462567329407, "_timestamp": 1582009604.0680895, "_step": 9}

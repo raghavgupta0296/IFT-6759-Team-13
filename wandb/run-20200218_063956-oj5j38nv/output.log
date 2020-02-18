@@ -1,0 +1,1980 @@
+2.0.0
+2020-02-18 06:40:16.596497: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcuda.so.1
+2020-02-18 06:40:16.692015: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1618] Found device 0 with properties: 
+name: Tesla K80 major: 3 minor: 7 memoryClockRate(GHz): 0.8235
+pciBusID: 0000:14:00.0
+2020-02-18 06:40:16.694296: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudart.so.10.0
+2020-02-18 06:40:16.711983: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcublas.so.10.0
+2020-02-18 06:40:16.719802: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcufft.so.10.0
+2020-02-18 06:40:16.722693: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcurand.so.10.0
+2020-02-18 06:40:16.737074: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcusolver.so.10.0
+2020-02-18 06:40:16.747060: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcusparse.so.10.0
+2020-02-18 06:40:16.787243: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudnn.so.7
+2020-02-18 06:40:16.795172: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1746] Adding visible gpu devices: 0
+2020-02-18 06:40:16.851887: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2693315000 Hz
+2020-02-18 06:40:16.853355: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x4160ae0 executing computations on platform Host. Devices:
+2020-02-18 06:40:16.853381: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): Host, Default Version
+2020-02-18 06:40:16.984035: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x4162fe0 executing computations on platform CUDA. Devices:
+2020-02-18 06:40:16.984077: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): Tesla K80, Compute Capability 3.7
+2020-02-18 06:40:16.989974: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1618] Found device 0 with properties: 
+name: Tesla K80 major: 3 minor: 7 memoryClockRate(GHz): 0.8235
+pciBusID: 0000:14:00.0
+2020-02-18 06:40:16.990042: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudart.so.10.0
+2020-02-18 06:40:16.990072: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcublas.so.10.0
+2020-02-18 06:40:16.990098: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcufft.so.10.0
+2020-02-18 06:40:16.990124: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcurand.so.10.0
+2020-02-18 06:40:16.990151: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcusolver.so.10.0
+2020-02-18 06:40:16.990177: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcusparse.so.10.0
+2020-02-18 06:40:16.990203: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudnn.so.7
+2020-02-18 06:40:16.996460: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1746] Adding visible gpu devices: 0
+2020-02-18 06:40:17.000703: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudart.so.10.0
+2020-02-18 06:40:17.006008: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1159] Device interconnect StreamExecutor with strength 1 edge matrix:
+2020-02-18 06:40:17.006036: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1165]      0 
+2020-02-18 06:40:17.006049: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1178] 0:   N 
+2020-02-18 06:40:17.015365: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1304] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 10804 MB memory) -> physical GPU (device: 0, name: Tesla K80, pci bus id: 0000:14:00.0, compute capability: 3.7)
+EPOCH  0
+<DatasetV1Adapter shapes: (<unknown>, <unknown>), types: (tf.float32, tf.float32)>
+  0%|                                                                                                 | 0/580 [00:00<?, ?it/s]Yielding x (shape) and y (shape) of index:  chunk52736.npz (767, 70, 70, 5) (767,)
+2020-02-18 06:40:20.473647: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudnn.so.7
+Yielding x (shape) and y (shape) of index:  chunk24192.npz (742, 70, 70, 5) (742,)
+2020-02-18 06:40:21.456511: W tensorflow/stream_executor/cuda/redzone_allocator.cc:312] Not found: ./bin/ptxas not found
+Relying on driver to perform ptx compilation. This message will be only logged once.
+2020-02-18 06:40:22.605076: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcublas.so.10.0
+
+ Loss:  135670.36
+  0%|▏                                                                                        | 1/580 [00:04<46:17,  4.80s/it]Yielding x (shape) and y (shape) of index:  chunk37504.npz (749, 70, 70, 5) (749,)
+
+ Loss:  331370.8
+  0%|▎                                                                                        | 2/580 [00:07<39:56,  4.15s/it]Yielding x (shape) and y (shape) of index:  chunk86016.npz (695, 70, 70, 5) (695,)
+
+ Loss:  301720.78
+  1%|▍                                                                                        | 3/580 [00:10<35:36,  3.70s/it]Yielding x (shape) and y (shape) of index:  chunk58880.npz (750, 70, 70, 5) (750,)
+
+ Loss:  32633.855
+  1%|▌                                                                                        | 4/580 [00:12<32:06,  3.34s/it]Yielding x (shape) and y (shape) of index:  chunk1792.npz (723, 70, 70, 5) (723,)
+
+ Loss:  199989.67
+  1%|▊                                                                                        | 5/580 [00:15<30:08,  3.15s/it]Yielding x (shape) and y (shape) of index:  chunk101504.npz (733, 70, 70, 5) (733,)
+
+ Loss:  155643.75
+  1%|▉                                                                                        | 6/580 [00:17<28:39,  3.00s/it]Yielding x (shape) and y (shape) of index:  chunk54912.npz (778, 70, 70, 5) (778,)
+
+ Loss:  116037.71
+  1%|█                                                                                        | 7/580 [00:20<27:38,  2.89s/it]Yielding x (shape) and y (shape) of index:  chunk44032.npz (747, 70, 70, 5) (747,)
+
+ Loss:  134232.47
+  1%|█▏                                                                                       | 8/580 [00:23<27:26,  2.88s/it]Yielding x (shape) and y (shape) of index:  chunk75520.npz (753, 70, 70, 5) (753,)
+
+ Loss:  109057.05
+  2%|█▍                                                                                       | 9/580 [00:26<26:46,  2.81s/it]Yielding x (shape) and y (shape) of index:  chunk57472.npz (800, 70, 70, 5) (800,)
+
+ Loss:  100176.38
+  2%|█▌                                                                                      | 10/580 [00:28<26:20,  2.77s/it]Yielding x (shape) and y (shape) of index:  chunk20608.npz (770, 70, 70, 5) (770,)
+
+ Loss:  88929.29
+  2%|█▋                                                                                      | 11/580 [00:31<26:04,  2.75s/it]Yielding x (shape) and y (shape) of index:  chunk29696.npz (745, 70, 70, 5) (745,)
+
+ Loss:  80176.41
+  2%|█▊                                                                                      | 12/580 [00:34<26:09,  2.76s/it]Yielding x (shape) and y (shape) of index:  chunk88448.npz (706, 70, 70, 5) (706,)
+
+ Loss:  70568.016
+  2%|█▉                                                                                      | 13/580 [00:36<25:54,  2.74s/it]Yielding x (shape) and y (shape) of index:  chunk55168.npz (712, 70, 70, 5) (712,)
+
+ Loss:  133184.4
+  2%|██                                                                                      | 14/580 [00:39<25:22,  2.69s/it]Yielding x (shape) and y (shape) of index:  chunk23552.npz (777, 70, 70, 5) (777,)
+
+ Loss:  85483.87
+  3%|██▎                                                                                     | 15/580 [00:42<25:11,  2.68s/it]Yielding x (shape) and y (shape) of index:  chunk32640.npz (697, 70, 70, 5) (697,)
+
+ Loss:  86069.35
+  3%|██▍                                                                                     | 16/580 [00:44<25:33,  2.72s/it]Yielding x (shape) and y (shape) of index:  chunk9472.npz (756, 70, 70, 5) (756,)
+
+ Loss:  56912.51
+  3%|██▌                                                                                     | 17/580 [00:47<24:56,  2.66s/it]Yielding x (shape) and y (shape) of index:  chunk86528.npz (685, 70, 70, 5) (685,)
+
+ Loss:  34679.938
+  3%|██▋                                                                                     | 18/580 [00:50<24:54,  2.66s/it]Yielding x (shape) and y (shape) of index:  chunk34688.npz (709, 70, 70, 5) (709,)
+
+ Loss:  43372.7
+  3%|██▉                                                                                     | 19/580 [00:52<24:33,  2.63s/it]Yielding x (shape) and y (shape) of index:  chunk62464.npz (748, 70, 70, 5) (748,)
+
+ Loss:  29737.15
+  3%|███                                                                                     | 20/580 [00:55<24:26,  2.62s/it]Yielding x (shape) and y (shape) of index:  chunk52096.npz (694, 70, 70, 5) (694,)
+
+ Loss:  82115.8
+  4%|███▏                                                                                    | 21/580 [00:57<24:28,  2.63s/it]Yielding x (shape) and y (shape) of index:  chunk59264.npz (773, 70, 70, 5) (773,)
+
+ Loss:  25284.916
+  4%|███▎                                                                                    | 22/580 [01:00<24:07,  2.59s/it]Yielding x (shape) and y (shape) of index:  chunk87680.npz (696, 70, 70, 5) (696,)
+
+ Loss:  113105.2
+  4%|███▍                                                                                    | 23/580 [01:03<24:31,  2.64s/it]Yielding x (shape) and y (shape) of index:  chunk41472.npz (774, 70, 70, 5) (774,)
+
+ Loss:  16442.277
+  4%|███▋                                                                                    | 24/580 [01:05<24:13,  2.61s/it]Yielding x (shape) and y (shape) of index:  chunk36608.npz (748, 70, 70, 5) (748,)
+
+ Loss:  163792.84
+  4%|███▊                                                                                    | 25/580 [01:08<24:55,  2.69s/it]Yielding x (shape) and y (shape) of index:  chunk34816.npz (749, 70, 70, 5) (749,)
+
+ Loss:  58951.88
+  4%|███▉                                                                                    | 26/580 [01:09<19:13,  2.08s/it]Yielding x (shape) and y (shape) of index:  chunk84736.npz (712, 70, 70, 5) (712,)
+
+ Loss:  30101.082
+  5%|████                                                                                    | 27/580 [01:09<15:13,  1.65s/it]Yielding x (shape) and y (shape) of index:  chunk64640.npz (725, 70, 70, 5) (725,)
+
+ Loss:  22590.805
+  5%|████▏                                                                                   | 28/580 [01:10<12:22,  1.35s/it]Yielding x (shape) and y (shape) of index:  chunk103552.npz (738, 70, 70, 5) (738,)
+
+ Loss:  25400.062
+  5%|████▍                                                                                   | 29/580 [01:13<15:58,  1.74s/it]Yielding x (shape) and y (shape) of index:  chunk67968.npz (695, 70, 70, 5) (695,)
+
+ Loss:  27554.13
+  5%|████▌                                                                                   | 30/580 [01:15<18:25,  2.01s/it]Yielding x (shape) and y (shape) of index:  chunk83456.npz (768, 70, 70, 5) (768,)
+
+ Loss:  32247.482
+  5%|████▋                                                                                   | 31/580 [01:16<14:37,  1.60s/it]Yielding x (shape) and y (shape) of index:  chunk100608.npz (741, 70, 70, 5) (741,)
+
+ Loss:  27655.469
+  6%|████▊                                                                                   | 32/580 [01:19<17:40,  1.94s/it]Yielding x (shape) and y (shape) of index:  chunk92032.npz (692, 70, 70, 5) (692,)
+
+ Loss:  68731.97
+  6%|█████                                                                                   | 33/580 [01:21<19:38,  2.16s/it]Yielding x (shape) and y (shape) of index:  chunk82560.npz (780, 70, 70, 5) (780,)
+
+ Loss:  49242.75
+  6%|█████▏                                                                                  | 34/580 [01:24<20:33,  2.26s/it]Yielding x (shape) and y (shape) of index:  chunk3712.npz (763, 70, 70, 5) (763,)
+
+ Loss:  66571.04
+  6%|█████▎                                                                                  | 35/580 [01:27<21:44,  2.39s/it]Yielding x (shape) and y (shape) of index:  chunk55424.npz (697, 70, 70, 5) (697,)
+
+ Loss:  114371.66
+  6%|█████▍                                                                                  | 36/580 [01:29<22:44,  2.51s/it]Yielding x (shape) and y (shape) of index:  chunk640.npz (720, 70, 70, 5) (720,)
+
+ Loss:  56817.574
+  6%|█████▌                                                                                  | 37/580 [01:30<17:37,  1.95s/it]Yielding x (shape) and y (shape) of index:  chunk21504.npz (764, 70, 70, 5) (764,)
+
+ Loss:  39034.367
+  7%|█████▊                                                                                  | 38/580 [01:33<19:29,  2.16s/it]Yielding x (shape) and y (shape) of index:  chunk12032.npz (702, 70, 70, 5) (702,)
+
+ Loss:  47727.742
+  7%|█████▉                                                                                  | 39/580 [01:35<20:57,  2.32s/it]Yielding x (shape) and y (shape) of index:  chunk104192.npz (710, 70, 70, 5) (710,)
+
+ Loss:  58711.656
+  7%|██████                                                                                  | 40/580 [01:38<21:31,  2.39s/it]Yielding x (shape) and y (shape) of index:  chunk72192.npz (680, 70, 70, 5) (680,)
+
+ Loss:  51828.188
+  7%|██████▏                                                                                 | 41/580 [01:41<22:03,  2.46s/it]Yielding x (shape) and y (shape) of index:  chunk26112.npz (768, 70, 70, 5) (768,)
+
+ Loss:  45112.633
+  7%|██████▎                                                                                 | 42/580 [01:43<22:12,  2.48s/it]Yielding x (shape) and y (shape) of index:  chunk79360.npz (767, 70, 70, 5) (767,)
+
+ Loss:  54681.176
+  7%|██████▌                                                                                 | 43/580 [01:44<17:17,  1.93s/it]Yielding x (shape) and y (shape) of index:  chunk69632.npz (710, 70, 70, 5) (710,)
+
+ Loss:  51014.805
+  8%|██████▋                                                                                 | 44/580 [01:44<13:44,  1.54s/it]Yielding x (shape) and y (shape) of index:  chunk35584.npz (733, 70, 70, 5) (733,)
+
+ Loss:  103657.61
+  8%|██████▊                                                                                 | 45/580 [01:45<11:15,  1.26s/it]Yielding x (shape) and y (shape) of index:  chunk49792.npz (680, 70, 70, 5) (680,)
+
+ Loss:  39420.855
+  8%|██████▉                                                                                 | 46/580 [01:46<09:25,  1.06s/it]Yielding x (shape) and y (shape) of index:  chunk84096.npz (720, 70, 70, 5) (720,)
+
+ Loss:  61660.695
+  8%|███████▏                                                                                | 47/580 [01:46<08:00,  1.11it/s]Yielding x (shape) and y (shape) of index:  chunk46720.npz (772, 70, 70, 5) (772,)
+
+ Loss:  16639.613
+  8%|███████▎                                                                                | 48/580 [01:47<07:23,  1.20it/s]Yielding x (shape) and y (shape) of index:  chunk99584.npz (751, 70, 70, 5) (751,)
+Yielding x (shape) and y (shape) of index:  chunk57344.npz (764, 70, 70, 5) (764,)
+
+ Loss:  48129.445
+  8%|███████▍                                                                                | 49/580 [01:50<13:37,  1.54s/it]Yielding x (shape) and y (shape) of index:  chunk47616.npz (755, 70, 70, 5) (755,)
+
+ Loss:  46804.254
+  9%|███████▌                                                                                | 50/580 [01:53<16:55,  1.92s/it]Yielding x (shape) and y (shape) of index:  chunk18816.npz (767, 70, 70, 5) (767,)
+
+ Loss:  64642.79
+  9%|███████▋                                                                                | 51/580 [01:53<13:22,  1.52s/it]Yielding x (shape) and y (shape) of index:  chunk47488.npz (737, 70, 70, 5) (737,)
+
+ Loss:  23819.314
+  9%|███████▉                                                                                | 52/580 [01:56<16:55,  1.92s/it]Yielding x (shape) and y (shape) of index:  chunk13696.npz (688, 70, 70, 5) (688,)
+
+ Loss:  58383.285
+  9%|████████                                                                                | 53/580 [01:57<13:27,  1.53s/it]Yielding x (shape) and y (shape) of index:  chunk10752.npz (740, 70, 70, 5) (740,)
+
+ Loss:  19911.62
+  9%|████████▏                                                                               | 54/580 [01:59<16:21,  1.87s/it]Yielding x (shape) and y (shape) of index:  chunk9344.npz (737, 70, 70, 5) (737,)
+
+ Loss:  31738.441
+  9%|████████▎                                                                               | 55/580 [02:02<17:58,  2.05s/it]Yielding x (shape) and y (shape) of index:  chunk40576.npz (732, 70, 70, 5) (732,)
+
+ Loss:  14405.6
+ 10%|████████▍                                                                               | 56/580 [02:05<19:38,  2.25s/it]Yielding x (shape) and y (shape) of index:  chunk7552.npz (761, 70, 70, 5) (761,)
+
+ Loss:  32508.934
+ 10%|████████▋                                                                               | 57/580 [02:05<15:26,  1.77s/it]Yielding x (shape) and y (shape) of index:  chunk26368.npz (759, 70, 70, 5) (759,)
+
+ Loss:  53219.285
+ 10%|████████▊                                                                               | 58/580 [02:08<17:49,  2.05s/it]Yielding x (shape) and y (shape) of index:  chunk48640.npz (720, 70, 70, 5) (720,)
+
+ Loss:  58785.684
+ 10%|████████▉                                                                               | 59/580 [02:11<19:32,  2.25s/it]Yielding x (shape) and y (shape) of index:  chunk4608.npz (761, 70, 70, 5) (761,)
+
+ Loss:  58368.848
+ 10%|█████████                                                                               | 60/580 [02:14<20:52,  2.41s/it]Yielding x (shape) and y (shape) of index:  chunk68096.npz (653, 70, 70, 5) (653,)
+
+ Loss:  31160.828
+ 11%|█████████▎                                                                              | 61/580 [02:14<16:06,  1.86s/it]Yielding x (shape) and y (shape) of index:  chunk85632.npz (694, 70, 70, 5) (694,)
+
+ Loss:  91192.27
+ 11%|█████████▍                                                                              | 62/580 [02:15<12:53,  1.49s/it]Yielding x (shape) and y (shape) of index:  chunk95360.npz (737, 70, 70, 5) (737,)
+
+ Loss:  66997.164
+ 11%|█████████▌                                                                              | 63/580 [02:17<15:16,  1.77s/it]Yielding x (shape) and y (shape) of index:  chunk15360.npz (701, 70, 70, 5) (701,)
+
+ Loss:  67141.71
+ 11%|█████████▋                                                                              | 64/580 [02:18<12:12,  1.42s/it]Yielding x (shape) and y (shape) of index:  chunk68736.npz (706, 70, 70, 5) (706,)
+
+ Loss:  45448.523
+ 11%|█████████▊                                                                              | 65/580 [02:18<10:06,  1.18s/it]Yielding x (shape) and y (shape) of index:  chunk72448.npz (660, 70, 70, 5) (660,)
+
+ Loss:  62616.133
+ 11%|██████████                                                                              | 66/580 [02:21<13:34,  1.58s/it]Yielding x (shape) and y (shape) of index:  chunk104448.npz (710, 70, 70, 5) (710,)
+
+ Loss:  26518.076
+ 12%|██████████▏                                                                             | 67/580 [02:22<11:10,  1.31s/it]Yielding x (shape) and y (shape) of index:  chunk39424.npz (765, 70, 70, 5) (765,)
+
+ Loss:  45974.844
+ 12%|██████████▎                                                                             | 68/580 [02:24<14:04,  1.65s/it]Yielding x (shape) and y (shape) of index:  chunk46080.npz (766, 70, 70, 5) (766,)
+
+ Loss:  21180.113
+ 12%|██████████▍                                                                             | 69/580 [02:25<11:29,  1.35s/it]Yielding x (shape) and y (shape) of index:  chunk98816.npz (718, 70, 70, 5) (718,)
+
+ Loss:  61943.69
+ 12%|██████████▌                                                                             | 70/580 [02:27<15:00,  1.77s/it]Yielding x (shape) and y (shape) of index:  chunk19584.npz (777, 70, 70, 5) (777,)
+
+ Loss:  62402.6
+ 12%|██████████▊                                                                             | 71/580 [02:30<17:27,  2.06s/it]Yielding x (shape) and y (shape) of index:  chunk76800.npz (774, 70, 70, 5) (774,)
+
+ Loss:  91561.88
+ 12%|██████████▉                                                                             | 72/580 [02:33<18:55,  2.24s/it]Yielding x (shape) and y (shape) of index:  chunk65792.npz (728, 70, 70, 5) (728,)
+
+ Loss:  60528.76
+ 13%|███████████                                                                             | 73/580 [02:33<14:53,  1.76s/it]Yielding x (shape) and y (shape) of index:  chunk90752.npz (762, 70, 70, 5) (762,)
+
+ Loss:  79909.24
+ 13%|███████████▏                                                                            | 74/580 [02:34<11:54,  1.41s/it]Yielding x (shape) and y (shape) of index:  chunk93696.npz (735, 70, 70, 5) (735,)
+
+ Loss:  22434.521
+ 13%|███████████▍                                                                            | 75/580 [02:37<15:07,  1.80s/it]Yielding x (shape) and y (shape) of index:  chunk28032.npz (709, 70, 70, 5) (709,)
+
+ Loss:  28425.459
+ 13%|███████████▌                                                                            | 76/580 [02:40<17:38,  2.10s/it]Yielding x (shape) and y (shape) of index:  chunk38912.npz (765, 70, 70, 5) (765,)
+
+ Loss:  45914.12
+ 13%|███████████▋                                                                            | 77/580 [02:42<19:09,  2.29s/it]Yielding x (shape) and y (shape) of index:  chunk67712.npz (691, 70, 70, 5) (691,)
+
+ Loss:  31598.229
+ 13%|███████████▊                                                                            | 78/580 [02:43<14:54,  1.78s/it]Yielding x (shape) and y (shape) of index:  chunk74880.npz (752, 70, 70, 5) (752,)
+
+ Loss:  45180.844
+ 14%|███████████▉                                                                            | 79/580 [02:44<12:07,  1.45s/it]Yielding x (shape) and y (shape) of index:  chunk33792.npz (705, 70, 70, 5) (705,)
+
+ Loss:  75695.68
+ 14%|████████████▏                                                                           | 80/580 [02:46<14:48,  1.78s/it]Yielding x (shape) and y (shape) of index:  chunk98688.npz (744, 70, 70, 5) (744,)
+
+ Loss:  44105.742
+ 14%|████████████▎                                                                           | 81/580 [02:49<17:04,  2.05s/it]Yielding x (shape) and y (shape) of index:  chunk60800.npz (762, 70, 70, 5) (762,)
+
+ Loss:  74192.17
+ 14%|████████████▍                                                                           | 82/580 [02:51<18:26,  2.22s/it]Yielding x (shape) and y (shape) of index:  chunk70656.npz (716, 70, 70, 5) (716,)
+
+ Loss:  48784.875
+ 14%|████████████▌                                                                           | 83/580 [02:54<19:31,  2.36s/it]Yielding x (shape) and y (shape) of index:  chunk5504.npz (759, 70, 70, 5) (759,)
+
+ Loss:  51188.75
+ 14%|████████████▋                                                                           | 84/580 [02:55<15:21,  1.86s/it]Yielding x (shape) and y (shape) of index:  chunk24448.npz (770, 70, 70, 5) (770,)
+
+ Loss:  37734.36
+ 15%|████████████▉                                                                           | 85/580 [02:57<17:14,  2.09s/it]Yielding x (shape) and y (shape) of index:  chunk53632.npz (705, 70, 70, 5) (705,)
+
+ Loss:  55574.656
+ 15%|█████████████                                                                           | 86/580 [02:58<13:38,  1.66s/it]Yielding x (shape) and y (shape) of index:  chunk26624.npz (750, 70, 70, 5) (750,)
+
+ Loss:  51264.375
+ 15%|█████████████▏                                                                          | 87/580 [02:59<11:12,  1.36s/it]Yielding x (shape) and y (shape) of index:  chunk51328.npz (706, 70, 70, 5) (706,)
+
+ Loss:  34350.46
+ 15%|█████████████▎                                                                          | 88/580 [02:59<09:25,  1.15s/it]Yielding x (shape) and y (shape) of index:  chunk41344.npz (774, 70, 70, 5) (774,)
+
+ Loss:  37639.223
+ 15%|█████████████▌                                                                          | 89/580 [03:00<08:02,  1.02it/s]Yielding x (shape) and y (shape) of index:  chunk86784.npz (672, 70, 70, 5) (672,)
+
+ Loss:  40616.758
+ 16%|█████████████▋                                                                          | 90/580 [03:01<07:13,  1.13it/s]Yielding x (shape) and y (shape) of index:  chunk59520.npz (776, 70, 70, 5) (776,)
+
+ Loss:  54559.418
+ 16%|█████████████▊                                                                          | 91/580 [03:01<06:43,  1.21it/s]Yielding x (shape) and y (shape) of index:  chunk75264.npz (759, 70, 70, 5) (759,)
+
+ Loss:  65683.414
+ 16%|█████████████▉                                                                          | 92/580 [03:04<10:56,  1.34s/it]Yielding x (shape) and y (shape) of index:  chunk45696.npz (768, 70, 70, 5) (768,)
+
+ Loss:  50982.887
+ 16%|██████████████                                                                          | 93/580 [03:07<14:22,  1.77s/it]Yielding x (shape) and y (shape) of index:  chunk56576.npz (709, 70, 70, 5) (709,)
+
+ Loss:  54545.99
+ 16%|██████████████▎                                                                         | 94/580 [03:07<11:35,  1.43s/it]Yielding x (shape) and y (shape) of index:  chunk88192.npz (708, 70, 70, 5) (708,)
+
+ Loss:  49045.38
+ 16%|██████████████▍                                                                         | 95/580 [03:08<09:44,  1.21s/it]Yielding x (shape) and y (shape) of index:  chunk18688.npz (767, 70, 70, 5) (767,)
+
+ Loss:  34288.105
+ 17%|██████████████▌                                                                         | 96/580 [03:09<08:10,  1.01s/it]Yielding x (shape) and y (shape) of index:  chunk8576.npz (761, 70, 70, 5) (761,)
+
+ Loss:  42844.902
+ 17%|██████████████▋                                                                         | 97/580 [03:11<12:22,  1.54s/it]Yielding x (shape) and y (shape) of index:  chunk39168.npz (758, 70, 70, 5) (758,)
+
+ Loss:  32956.992
+ 17%|██████████████▊                                                                         | 98/580 [03:12<10:21,  1.29s/it]
+ Loss:  35907.22
+ 17%|███████████████                                                                         | 99/580 [03:13<08:26,  1.05s/it]
+ Loss:  31311.62
+ 17%|███████████████                                                                        | 100/580 [03:15<12:02,  1.51s/it]
+  0%|                                                                                                 | 0/166 [00:00<?, ?it/s][AYielding x (shape) and y (shape) of index:  chunk3968.npz (754, 70, 70, 5) (754,)
+Yielding x (shape) and y (shape) of index:  chunk36864.npz (680, 70, 70, 5) (680,)
+
+ Valid Loss:  tf.Tensor(148333.27, shape=(), dtype=float32)
+
+  1%|▌                                                                                        | 1/166 [00:01<04:30,  1.64s/it][A
+ Valid Loss:  tf.Tensor(90591.96, shape=(), dtype=float32)
+
+  1%|█                                                                                        | 2/166 [00:01<03:16,  1.20s/it][AYielding x (shape) and y (shape) of index:  chunk94592.npz (770, 70, 70, 5) (770,)
+
+ Valid Loss:  tf.Tensor(104688.664, shape=(), dtype=float32)
+
+  2%|█▌                                                                                       | 3/166 [00:02<02:40,  1.02it/s][AYielding x (shape) and y (shape) of index:  chunk4352.npz (772, 70, 70, 5) (772,)
+
+ Valid Loss: 
+  2%|██▏                                                                                      | 4/166 [00:02<02:16,  1.19it/s][A tf.Tensor(129473.555, shape=(), dtype=float32)
+Yielding x (shape) and y (shape) of index:  chunk59008.npz (758, 70, 70, 5) (758,)
+
+ Valid Loss:  tf.Tensor(119156.17, shape=(), dtype=float32)
+
+  3%|██▋                                                                                      | 5/166 [00:03<01:56,  1.39it/s][AYielding x (shape) and y (shape) of index:  chunk42240.npz (750, 70, 70, 5) (750,)
+
+ Valid Loss:  tf.Tensor(159098.02, shape=(), dtype=float32)
+
+  4%|███▏                                                                                     | 6/166 [00:03<01:42,  1.56it/s][AYielding x (shape) and y (shape) of index:  chunk7296.npz (763, 70, 70, 5) (763,)
+
+ Valid Loss:  tf.Tensor(121652.836, shape=(), dtype=float32)
+
+  4%|███▊                                                                                     | 7/166 [00:04<01:34,  1.69it/s][AYielding x (shape) and y (shape) of index:  chunk69888.npz (708, 70, 70, 5) (708,)
+
+ Valid Loss: 
+  5%|████▎                                                                                    | 8/166 [00:04<01:25,  1.85it/s][A tf.Tensor(42422.707, shape=(), dtype=float32)
+Yielding x (shape) and y (shape) of index:  chunk80512.npz (761, 70, 70, 5) (761,)
+
+ Valid Loss:  tf.Tensor(95840.84, shape=(), dtype=float32)
+
+  5%|████▊                                                                                    | 9/166 [00:05<01:21,  1.92it/s][AYielding x (shape) and y (shape) of index:  chunk44288.npz (720, 70, 70, 5) (720,)
+
+ Valid Loss:  tf.Tensor(106246.31, shape=(), dtype=float32)
+
+  6%|█████▎                                                                                  | 10/166 [00:05<01:17,  2.01it/s][AYielding x (shape) and y (shape) of index:  chunk93184.npz (719, 70, 70, 5) (719,)
+Yielding x (shape) and y (shape) of index:  chunk92928.npz (758, 70, 70, 5) (758,)
+Yielding x (shape) and y (shape) of index:  chunk76416.npz (761, 70, 70, 5) (761,)
+
+ Valid Loss:  tf.Tensor(94553.55, shape=(), dtype=float32)
+
+  7%|█████▊                                                                                  | 11/166 [00:07<02:12,  1.17it/s][A
+ Valid Loss:  tf.Tensor(123523.99, shape=(), dtype=float32)
+
+  7%|██████▎                                                                                 | 12/166 [00:07<01:41,  1.52it/s][AYielding x (shape) and y (shape) of index:  chunk77952.npz (752, 70, 70, 5) (752,)
+
+ Valid Loss:  tf.Tensor(113476.39, shape=(), dtype=float32)
+
+  8%|██████▉                                                                                 | 13/166 [00:07<01:20,  1.89it/s][A
+ Valid Loss: 
+  8%|███████▍                                                                                | 14/166 [00:07<01:08,  2.22it/s][A tf.Tensor(139209.36, shape=(), dtype=float32)
+Yielding x (shape) and y (shape) of index:  chunk67072.npz (629, 70, 70, 5) (629,)
+Yielding x (shape) and y (shape) of index:  chunk100864.npz (767, 70, 70, 5) (767,)
+Yielding x (shape) and y (shape) of index:  chunk13184.npz (688, 70, 70, 5) (688,)
+
+ Valid Loss:  tf.Tensor(23557.346, shape=(), dtype=float32)
+
+  9%|███████▉                                                                                | 15/166 [00:09<01:58,  1.28it/s][AYielding x (shape) and y (shape) of index:  chunk33024.npz (707, 70, 70, 5) (707,)
+
+ Valid Loss:  tf.Tensor(77237.58, shape=(), dtype=float32)
+
+ 10%|████████▍                                                                               | 16/166 [00:09<01:32,  1.62it/s][A
+ Valid Loss:  tf.Tensor(21895.162, shape=(), dtype=float32)
+
+ 10%|█████████                                                                               | 17/166 [00:09<01:14,  2.00it/s][AYielding x (shape) and y (shape) of index:  chunk82944.npz (713, 70, 70, 5) (713,)
+Yielding x (shape) and y (shape) of index:  chunk12928.npz (663, 70, 70, 5) (663,)
+
+ Valid Loss:  tf.Tensor(21962.72, shape=(), dtype=float32)
+
+ 11%|█████████▌                                                                              | 18/166 [00:11<01:50,  1.34it/s][A
+ Valid Loss:  tf.Tensor(53883.68, shape=(), dtype=float32)
+
+ 11%|██████████                                                                              | 19/166 [00:12<01:57,  1.25it/s][A
+ Valid Loss:  tf.Tensor(22010.15, shape=(), dtype=float32)
+
+ 12%|██████████▌                                                                             | 20/166 [00:13<01:58,  1.23it/s][AEpoch:  0 ; Train Loss:  tf.Tensor(0.0, shape=(), dtype=float32) ; Valid Loss:  tf.Tensor(90440.7, shape=(), dtype=float32)
+EPOCH  1
+<DatasetV1Adapter shapes: (<unknown>, <unknown>), types: (tf.float32, tf.float32)>
+
+
+  0%|                                                                                                 | 0/580 [00:00<?, ?it/s][A[AYielding x (shape) and y (shape) of index:  chunk52736.npz (767, 70, 70, 5) (767,)
+Yielding x (shape) and y (shape) of index:  chunk24192.npz (742, 70, 70, 5) (742,)
+
+ Loss:  38695.715
+
+
+  0%|▏                                                                                        | 1/580 [00:01<10:13,  1.06s/it][A[AYielding x (shape) and y (shape) of index:  chunk37504.npz (749, 70, 70, 5) (749,)
+
+ Loss:  44476.527
+
+
+  0%|▎                                                                                        | 2/580 [00:01<08:59,  1.07it/s][A[AYielding x (shape) and y (shape) of index:  chunk86016.npz (695, 70, 70, 5) (695,)
+
+ Loss:  29872.496
+
+
+  1%|▍                                                                                        | 3/580 [00:02<08:03,  1.19it/s][A[AYielding x (shape) and y (shape) of index:  chunk58880.npz (750, 70, 70, 5) (750,)
+
+ Loss:  75699.375
+
+
+  1%|▌                                                                                        | 4/580 [00:02<07:24,  1.30it/s][A[AYielding x (shape) and y (shape) of index:  chunk1792.npz (723, 70, 70, 5) (723,)
+
+ Loss:  42886.28
+
+
+  1%|▊                                                                                        | 5/580 [00:03<07:00,  1.37it/s][A[AYielding x (shape) and y (shape) of index:  chunk101504.npz (733, 70, 70, 5) (733,)
+
+ Loss:  40315.55
+
+
+  1%|▉                                                                                        | 6/580 [00:04<06:42,  1.43it/s][A[AYielding x (shape) and y (shape) of index:  chunk54912.npz (778, 70, 70, 5) (778,)
+
+ Loss:  25154.287
+
+
+  1%|█                                                                                        | 7/580 [00:04<06:30,  1.47it/s][A[AYielding x (shape) and y (shape) of index:  chunk44032.npz (747, 70, 70, 5) (747,)
+
+ Loss:  41177.5
+
+
+  1%|█▏                                                                                       | 8/580 [00:05<06:20,  1.50it/s][A[AYielding x (shape) and y (shape) of index:  chunk75520.npz (753, 70, 70, 5) (753,)
+
+ Loss:  43385.867
+
+
+  2%|█▍                                                                                       | 9/580 [00:06<06:20,  1.50it/s][A[AYielding x (shape) and y (shape) of index:  chunk57472.npz (800, 70, 70, 5) (800,)
+
+ Loss:  44435.562
+
+
+  2%|█▌                                                                                      | 10/580 [00:06<06:11,  1.54it/s][A[AYielding x (shape) and y (shape) of index:  chunk20608.npz (770, 70, 70, 5) (770,)
+
+ Loss:  49649.97
+
+
+  2%|█▋                                                                                      | 11/580 [00:07<06:39,  1.42it/s][A[AYielding x (shape) and y (shape) of index:  chunk29696.npz (745, 70, 70, 5) (745,)
+
+ Loss:  48107.734
+
+
+  2%|█▊                                                                                      | 12/580 [00:08<06:34,  1.44it/s][A[AYielding x (shape) and y (shape) of index:  chunk88448.npz (706, 70, 70, 5) (706,)
+
+ Loss:  33697.285
+
+
+  2%|█▉                                                                                      | 13/580 [00:08<06:26,  1.47it/s][A[AYielding x (shape) and y (shape) of index:  chunk55168.npz (712, 70, 70, 5) (712,)
+
+ Loss:  64247.65
+
+
+  2%|██                                                                                      | 14/580 [00:09<06:21,  1.48it/s][A[AYielding x (shape) and y (shape) of index:  chunk23552.npz (777, 70, 70, 5) (777,)
+
+ Loss:  56911.156
+
+
+  3%|██▎                                                                                     | 15/580 [00:10<06:06,  1.54it/s][A[AYielding x (shape) and y (shape) of index:  chunk32640.npz (697, 70, 70, 5) (697,)
+
+ Loss:  56836.03
+
+
+  3%|██▍                                                                                     | 16/580 [00:10<06:27,  1.45it/s][A[AYielding x (shape) and y (shape) of index:  chunk9472.npz (756, 70, 70, 5) (756,)
+
+ Loss:  47317.53
+
+
+  3%|██▌                                                                                     | 17/580 [00:11<06:06,  1.53it/s][A[AYielding x (shape) and y (shape) of index:  chunk86528.npz (685, 70, 70, 5) (685,)
+
+ Loss:  21004.393
+
+
+  3%|██▋                                                                                     | 18/580 [00:12<06:31,  1.44it/s][A[AYielding x (shape) and y (shape) of index:  chunk34688.npz (709, 70, 70, 5) (709,)
+
+ Loss:  40965.418
+
+
+  3%|██▉                                                                                     | 19/580 [00:12<06:23,  1.46it/s][A[AYielding x (shape) and y (shape) of index:  chunk62464.npz (748, 70, 70, 5) (748,)
+
+ Loss:  22611.668
+
+
+  3%|███                                                                                     | 20/580 [00:13<06:18,  1.48it/s][A[AYielding x (shape) and y (shape) of index:  chunk52096.npz (694, 70, 70, 5) (694,)
+
+ Loss:  53183.723
+
+
+  4%|███▏                                                                                    | 21/580 [00:14<06:12,  1.50it/s][A[AYielding x (shape) and y (shape) of index:  chunk59264.npz (773, 70, 70, 5) (773,)
+
+ Loss:  18792.611
+
+
+  4%|███▎                                                                                    | 22/580 [00:14<05:57,  1.56it/s][A[AYielding x (shape) and y (shape) of index:  chunk87680.npz (696, 70, 70, 5) (696,)
+
+ Loss:  64988.906
+
+
+  4%|███▍                                                                                    | 23/580 [00:15<06:17,  1.47it/s][A[AYielding x (shape) and y (shape) of index:  chunk41472.npz (774, 70, 70, 5) (774,)
+
+ Loss:  10541.963
+
+
+  4%|███▋                                                                                    | 24/580 [00:16<06:16,  1.48it/s][A[AYielding x (shape) and y (shape) of index:  chunk36608.npz (748, 70, 70, 5) (748,)
+
+ Loss:  103572.97
+
+
+  4%|███▊                                                                                    | 25/580 [00:16<06:13,  1.49it/s][A[AYielding x (shape) and y (shape) of index:  chunk34816.npz (749, 70, 70, 5) (749,)
+
+ Loss:  35022.824
+
+
+  4%|███▉                                                                                    | 26/580 [00:17<06:11,  1.49it/s][A[AYielding x (shape) and y (shape) of index:  chunk84736.npz (712, 70, 70, 5) (712,)
+
+ Loss:  21768.293
+
+
+  5%|████                                                                                    | 27/580 [00:18<06:03,  1.52it/s][A[AYielding x (shape) and y (shape) of index:  chunk64640.npz (725, 70, 70, 5) (725,)
+
+ Loss:  16852.543
+
+
+  5%|████▏                                                                                   | 28/580 [00:18<05:58,  1.54it/s][A[AYielding x (shape) and y (shape) of index:  chunk103552.npz (738, 70, 70, 5) (738,)
+
+ Loss:  18373.441
+
+
+  5%|████▍                                                                                   | 29/580 [00:19<05:57,  1.54it/s][A[AYielding x (shape) and y (shape) of index:  chunk67968.npz (695, 70, 70, 5) (695,)
+
+ Loss:  28027.209
+
+
+  5%|████▌                                                                                   | 30/580 [00:20<06:00,  1.52it/s][A[AYielding x (shape) and y (shape) of index:  chunk83456.npz (768, 70, 70, 5) (768,)
+
+ Loss:  22513.27
+
+
+  5%|████▋                                                                                   | 31/580 [00:20<06:02,  1.52it/s][A[AYielding x (shape) and y (shape) of index:  chunk100608.npz (741, 70, 70, 5) (741,)
+
+ Loss:  20589.676
+
+
+  6%|████▊                                                                                   | 32/580 [00:21<06:03,  1.51it/s][A[AYielding x (shape) and y (shape) of index:  chunk92032.npz (692, 70, 70, 5) (692,)
+
+ Loss:  43109.875
+
+
+  6%|█████                                                                                   | 33/580 [00:22<06:03,  1.51it/s][A[AYielding x (shape) and y (shape) of index:  chunk82560.npz (780, 70, 70, 5) (780,)
+
+ Loss:  27293.71
+
+
+  6%|█████▏                                                                                  | 34/580 [00:22<05:44,  1.58it/s][A[AYielding x (shape) and y (shape) of index:  chunk3712.npz (763, 70, 70, 5) (763,)
+
+ Loss:  46432.293
+
+
+  6%|█████▎                                                                                  | 35/580 [00:23<06:09,  1.48it/s][A[AYielding x (shape) and y (shape) of index:  chunk55424.npz (697, 70, 70, 5) (697,)
+
+ Loss:  61571.086
+
+
+  6%|█████▍                                                                                  | 36/580 [00:24<06:00,  1.51it/s][A[AYielding x (shape) and y (shape) of index:  chunk640.npz (720, 70, 70, 5) (720,)
+
+ Loss:  42177.74
+
+
+  6%|█████▌                                                                                  | 37/580 [00:24<05:54,  1.53it/s][A[AYielding x (shape) and y (shape) of index:  chunk21504.npz (764, 70, 70, 5) (764,)
+
+ Loss:  29413.965
+
+
+  7%|█████▊                                                                                  | 38/580 [00:25<05:55,  1.53it/s][A[AYielding x (shape) and y (shape) of index:  chunk12032.npz (702, 70, 70, 5) (702,)
+
+ Loss:  38534.156
+
+
+  7%|█████▉                                                                                  | 39/580 [00:26<05:56,  1.52it/s][A[AYielding x (shape) and y (shape) of index:  chunk104192.npz (710, 70, 70, 5) (710,)
+
+ Loss:  48455.613
+
+
+  7%|██████                                                                                  | 40/580 [00:26<05:48,  1.55it/s][A[AYielding x (shape) and y (shape) of index:  chunk72192.npz (680, 70, 70, 5) (680,)
+
+ Loss:  49899.73
+
+
+  7%|██████▏                                                                                 | 41/580 [00:27<05:42,  1.57it/s][A[AYielding x (shape) and y (shape) of index:  chunk26112.npz (768, 70, 70, 5) (768,)
+
+ Loss:  30284.918
+
+
+  7%|██████▎                                                                                 | 42/580 [00:27<05:40,  1.58it/s][A[AYielding x (shape) and y (shape) of index:  chunk79360.npz (767, 70, 70, 5) (767,)
+
+ Loss:  40164.87
+
+
+  7%|██████▌                                                                                 | 43/580 [00:28<05:44,  1.56it/s][A[AYielding x (shape) and y (shape) of index:  chunk69632.npz (710, 70, 70, 5) (710,)
+
+ Loss:  40311.984
+
+
+  8%|██████▋                                                                                 | 44/580 [00:29<05:45,  1.55it/s][A[AYielding x (shape) and y (shape) of index:  chunk35584.npz (733, 70, 70, 5) (733,)
+
+ Loss:  50438.29
+
+
+  8%|██████▊                                                                                 | 45/580 [00:29<05:31,  1.62it/s][A[AYielding x (shape) and y (shape) of index:  chunk49792.npz (680, 70, 70, 5) (680,)
+
+ Loss:  24431.404
+
+
+  8%|██████▉                                                                                 | 46/580 [00:30<05:46,  1.54it/s][A[AYielding x (shape) and y (shape) of index:  chunk84096.npz (720, 70, 70, 5) (720,)
+
+ Loss:  57407.59
+
+
+  8%|███████▏                                                                                | 47/580 [00:31<05:44,  1.55it/s][A[AYielding x (shape) and y (shape) of index:  chunk46720.npz (772, 70, 70, 5) (772,)
+
+ Loss:  19167.123
+
+
+  8%|███████▎                                                                                | 48/580 [00:31<05:30,  1.61it/s][A[AYielding x (shape) and y (shape) of index:  chunk99584.npz (751, 70, 70, 5) (751,)
+
+ Loss:  37256.97
+
+
+  8%|███████▍                                                                                | 49/580 [00:32<05:50,  1.51it/s][A[AYielding x (shape) and y (shape) of index:  chunk57344.npz (764, 70, 70, 5) (764,)
+
+ Loss:  37945.645
+
+
+  9%|███████▌                                                                                | 50/580 [00:33<05:53,  1.50it/s][A[AYielding x (shape) and y (shape) of index:  chunk47616.npz (755, 70, 70, 5) (755,)
+
+ Loss:  45777.758
+
+
+  9%|███████▋                                                                                | 51/580 [00:33<05:53,  1.50it/s][A[AYielding x (shape) and y (shape) of index:  chunk18816.npz (767, 70, 70, 5) (767,)
+
+ Loss:  24114.074
+
+
+  9%|███████▉                                                                                | 52/580 [00:34<05:52,  1.50it/s][A[AYielding x (shape) and y (shape) of index:  chunk47488.npz (737, 70, 70, 5) (737,)
+
+ Loss:  47450.426
+
+
+  9%|████████                                                                                | 53/580 [00:35<05:46,  1.52it/s][A[AYielding x (shape) and y (shape) of index:  chunk13696.npz (688, 70, 70, 5) (688,)
+
+ Loss:  12923.654
+
+
+  9%|████████▏                                                                               | 54/580 [00:35<05:42,  1.54it/s][A[AYielding x (shape) and y (shape) of index:  chunk10752.npz (740, 70, 70, 5) (740,)
+
+ Loss:  29422.34
+
+
+  9%|████████▎                                                                               | 55/580 [00:36<05:34,  1.57it/s][A[AYielding x (shape) and y (shape) of index:  chunk9344.npz (737, 70, 70, 5) (737,)
+
+ Loss:  14227.402
+
+
+ 10%|████████▍                                                                               | 56/580 [00:37<05:38,  1.55it/s][A[AYielding x (shape) and y (shape) of index:  chunk40576.npz (732, 70, 70, 5) (732,)
+
+ Loss:  31955.846
+
+
+ 10%|████████▋                                                                               | 57/580 [00:37<05:43,  1.52it/s][A[AYielding x (shape) and y (shape) of index:  chunk7552.npz (761, 70, 70, 5) (761,)
+
+ Loss:  50903.645
+
+
+ 10%|████████▊                                                                               | 58/580 [00:38<05:43,  1.52it/s][A[AYielding x (shape) and y (shape) of index:  chunk26368.npz (759, 70, 70, 5) (759,)
+
+ Loss:  52092.492
+
+
+ 10%|████████▉                                                                               | 59/580 [00:39<05:41,  1.52it/s][A[AYielding x (shape) and y (shape) of index:  chunk48640.npz (720, 70, 70, 5) (720,)
+
+ Loss:  51110.863
+
+
+ 10%|█████████                                                                               | 60/580 [00:39<05:40,  1.53it/s][A[AYielding x (shape) and y (shape) of index:  chunk4608.npz (761, 70, 70, 5) (761,)
+
+ Loss:  20765.45
+
+
+ 11%|█████████▎                                                                              | 61/580 [00:40<05:41,  1.52it/s][A[AYielding x (shape) and y (shape) of index:  chunk68096.npz (653, 70, 70, 5) (653,)
+
+ Loss:  80855.445
+
+
+ 11%|█████████▍                                                                              | 62/580 [00:40<05:31,  1.56it/s][A[AYielding x (shape) and y (shape) of index:  chunk85632.npz (694, 70, 70, 5) (694,)
+
+ Loss:  32845.9
+
+
+ 11%|█████████▌                                                                              | 63/580 [00:41<05:26,  1.59it/s][A[AYielding x (shape) and y (shape) of index:  chunk95360.npz (737, 70, 70, 5) (737,)
+
+ Loss:  51155.566
+
+
+ 11%|█████████▋                                                                              | 64/580 [00:42<05:27,  1.58it/s][A[AYielding x (shape) and y (shape) of index:  chunk15360.npz (701, 70, 70, 5) (701,)
+
+ Loss:  33635.887
+
+
+ 11%|█████████▊                                                                              | 65/580 [00:42<05:26,  1.58it/s][A[AYielding x (shape) and y (shape) of index:  chunk68736.npz (706, 70, 70, 5) (706,)
+
+ Loss:  34526.42
+
+
+ 11%|██████████                                                                              | 66/580 [00:43<05:24,  1.58it/s][A[AYielding x (shape) and y (shape) of index:  chunk72448.npz (660, 70, 70, 5) (660,)
+
+ Loss:  23047.125
+
+
+ 12%|██████████▏                                                                             | 67/580 [00:44<05:17,  1.62it/s][A[AYielding x (shape) and y (shape) of index:  chunk104448.npz (710, 70, 70, 5) (710,)
+
+ Loss: 
+
+ 12%|██████████▎                                                                             | 68/580 [00:44<05:18,  1.61it/s][A[A 31691.99
+Yielding x (shape) and y (shape) of index:  chunk39424.npz (765, 70, 70, 5) (765,)
+
+ Loss:  18015.113
+
+
+ 12%|██████████▍                                                                             | 69/580 [00:45<05:06,  1.67it/s][A[AYielding x (shape) and y (shape) of index:  chunk46080.npz (766, 70, 70, 5) (766,)
+
+ Loss:  39228.63
+
+
+ 12%|██████████▌                                                                             | 70/580 [00:46<05:37,  1.51it/s][A[AYielding x (shape) and y (shape) of index:  chunk98816.npz (718, 70, 70, 5) (718,)
+
+ Loss:  32317.652
+
+
+ 12%|██████████▊                                                                             | 71/580 [00:46<05:31,  1.53it/s][A[AYielding x (shape) and y (shape) of index:  chunk19584.npz (777, 70, 70, 5) (777,)
+
+ Loss:  63230.074
+
+
+ 12%|██████████▉                                                                             | 72/580 [00:47<05:19,  1.59it/s][A[AYielding x (shape) and y (shape) of index:  chunk76800.npz (774, 70, 70, 5) (774,)
+
+ Loss:  40958.277
+
+
+ 13%|███████████                                                                             | 73/580 [00:48<05:43,  1.47it/s][A[AYielding x (shape) and y (shape) of index:  chunk65792.npz (728, 70, 70, 5) (728,)
+
+ Loss:  47274.4
+
+
+ 13%|███████████▏                                                                            | 74/580 [00:48<05:36,  1.50it/s][A[AYielding x (shape) and y (shape) of index:  chunk90752.npz (762, 70, 70, 5) (762,)
+
+ Loss:  38726.78
+
+
+ 13%|███████████▍                                                                            | 75/580 [00:49<05:33,  1.51it/s][A[AYielding x (shape) and y (shape) of index:  chunk93696.npz (735, 70, 70, 5) (735,)
+
+ Loss:  23467.418
+
+
+ 13%|███████████▌                                                                            | 76/580 [00:50<05:36,  1.50it/s][A[AYielding x (shape) and y (shape) of index:  chunk28032.npz (709, 70, 70, 5) (709,)
+
+ Loss:  38239.957
+
+
+ 13%|███████████▋                                                                            | 77/580 [00:50<05:27,  1.54it/s][A[AYielding x (shape) and y (shape) of index:  chunk38912.npz (765, 70, 70, 5) (765,)
+
+ Loss:  28654.45
+
+
+ 13%|███████████▊                                                                            | 78/580 [00:51<05:13,  1.60it/s][A[AYielding x (shape) and y (shape) of index:  chunk67712.npz (691, 70, 70, 5) (691,)
+
+ Loss:  33646.043
+
+
+ 14%|███████████▉                                                                            | 79/580 [00:51<05:26,  1.53it/s][A[AYielding x (shape) and y (shape) of index:  chunk74880.npz (752, 70, 70, 5) (752,)
+
+ Loss:  40271.75
+
+
+ 14%|████████████▏                                                                           | 80/580 [00:52<05:11,  1.61it/s][A[AYielding x (shape) and y (shape) of index:  chunk33792.npz (705, 70, 70, 5) (705,)
+
+ Loss: 
+
+ 14%|████████████▎                                                                           | 81/580 [00:53<05:34,  1.49it/s][A[A 48450.22
+Yielding x (shape) and y (shape) of index:  chunk98688.npz (744, 70, 70, 5) (744,)
+
+ Loss:  54685.902
+
+
+ 14%|████████████▍                                                                           | 82/580 [00:53<05:20,  1.55it/s][A[AYielding x (shape) and y (shape) of index:  chunk60800.npz (762, 70, 70, 5) (762,)
+
+ Loss:  36528.062
+
+
+ 14%|████████████▌                                                                           | 83/580 [00:54<05:32,  1.50it/s][A[AYielding x (shape) and y (shape) of index:  chunk70656.npz (716, 70, 70, 5) (716,)
+
+ Loss:  49247.438
+
+
+ 14%|████████████▋                                                                           | 84/580 [00:55<05:25,  1.52it/s][A[AYielding x (shape) and y (shape) of index:  chunk5504.npz (759, 70, 70, 5) (759,)
+
+ Loss:  26975.63
+
+
+ 15%|████████████▉                                                                           | 85/580 [00:55<05:13,  1.58it/s][A[AYielding x (shape) and y (shape) of index:  chunk24448.npz (770, 70, 70, 5) (770,)
+
+ Loss:  44312.727
+
+
+ 15%|█████████████                                                                           | 86/580 [00:56<05:27,  1.51it/s][A[AYielding x (shape) and y (shape) of index:  chunk53632.npz (705, 70, 70, 5) (705,)
+
+ Loss:  43966.094
+
+
+ 15%|█████████████▏                                                                          | 87/580 [00:57<05:26,  1.51it/s][A[AYielding x (shape) and y (shape) of index:  chunk26624.npz (750, 70, 70, 5) (750,)
+
+ Loss:  23010.988
+
+
+ 15%|█████████████▎                                                                          | 88/580 [00:57<05:20,  1.54it/s][A[AYielding x (shape) and y (shape) of index:  chunk51328.npz (706, 70, 70, 5) (706,)
+
+ Loss:  34150.477
+
+
+ 15%|█████████████▌                                                                          | 89/580 [00:58<05:14,  1.56it/s][A[AYielding x (shape) and y (shape) of index:  chunk41344.npz (774, 70, 70, 5) (774,)
+
+ Loss:  32493.201
+
+
+ 16%|█████████████▋                                                                          | 90/580 [00:59<05:12,  1.57it/s][A[AYielding x (shape) and y (shape) of index:  chunk86784.npz (672, 70, 70, 5) (672,)
+
+ Loss:  36566.637
+
+
+ 16%|█████████████▊                                                                          | 91/580 [00:59<05:08,  1.58it/s][A[AYielding x (shape) and y (shape) of index:  chunk59520.npz (776, 70, 70, 5) (776,)
+
+ Loss:  51411.5
+
+
+ 16%|█████████████▉                                                                          | 92/580 [01:00<05:09,  1.58it/s][A[AYielding x (shape) and y (shape) of index:  chunk75264.npz (759, 70, 70, 5) (759,)
+
+ Loss:  39368.36
+
+
+ 16%|██████████████                                                                          | 93/580 [01:00<05:15,  1.55it/s][A[AYielding x (shape) and y (shape) of index:  chunk45696.npz (768, 70, 70, 5) (768,)
+
+ Loss:  42391.996
+
+
+ 16%|██████████████▎                                                                         | 94/580 [01:01<05:17,  1.53it/s][A[AYielding x (shape) and y (shape) of index:  chunk56576.npz (709, 70, 70, 5) (709,)
+
+ Loss:  39953.926
+
+
+ 16%|██████████████▍                                                                         | 95/580 [01:02<05:16,  1.53it/s][A[AYielding x (shape) and y (shape) of index:  chunk88192.npz (708, 70, 70, 5) (708,)
+
+ Loss:  29998.686
+
+
+ 17%|██████████████▌                                                                         | 96/580 [01:02<05:11,  1.56it/s][A[AYielding x (shape) and y (shape) of index:  chunk18688.npz (767, 70, 70, 5) (767,)
+
+ Loss:  28769.127
+
+
+ 17%|██████████████▋                                                                         | 97/580 [01:03<05:07,  1.57it/s][A[AYielding x (shape) and y (shape) of index:  chunk8576.npz (761, 70, 70, 5) (761,)
+
+ Loss:  32751.771
+
+
+ 17%|██████████████▊                                                                         | 98/580 [01:04<05:11,  1.55it/s][A[AYielding x (shape) and y (shape) of index:  chunk39168.npz (758, 70, 70, 5) (758,)
+
+ Loss:  28489.93
+
+
+ 17%|███████████████                                                                         | 99/580 [01:04<05:14,  1.53it/s][A[A
+ Loss:  26324.28
+
+
+ 17%|███████████████                                                                        | 100/580 [01:05<04:52,  1.64it/s][A[A
+
+
+  0%|                                                                                                 | 0/166 [00:00<?, ?it/s][A[A[AYielding x (shape) and y (shape) of index:  chunk3968.npz (754, 70, 70, 5) (754,)
+
+ Valid Loss:  tf.Tensor(198713.19, shape=(), dtype=float32)
+
+
+
+  1%|▌                                                                                        | 1/166 [00:00<02:28,  1.11it/s][A[A[AYielding x (shape) and y (shape) of index:  chunk36864.npz (680, 70, 70, 5) (680,)
+
+ Valid Loss:  tf.Tensor(123909.0, shape=(), dtype=float32)
+
+
+
+  1%|█                                                                                        | 2/166 [00:01<02:02,  1.34it/s][A[A[AYielding x (shape) and y (shape) of index:  chunk94592.npz (770, 70, 70, 5) (770,)
+
+ Valid Loss:  tf.Tensor(138929.34, shape=(), dtype=float32)
+
+
+
+  2%|█▌                                                                                       | 3/166 [00:01<01:52,  1.45it/s][A[A[AYielding x (shape) and y (shape) of index:  chunk4352.npz (772, 70, 70, 5) (772,)
+
+ Valid Loss:  tf.Tensor(171692.75, shape=(), dtype=float32)
+
+
+
+  2%|██▏                                                                                      | 4/166 [00:02<01:42,  1.57it/s][A[A[AYielding x (shape) and y (shape) of index:  chunk59008.npz (758, 70, 70, 5) (758,)
+
+ Valid Loss:  tf.Tensor(159190.81, shape=(), dtype=float32)
+
+
+
+  3%|██▋                                                                                      | 5/166 [00:02<01:32,  1.73it/s][A[A[AYielding x (shape) and y (shape) of index:  chunk42240.npz (750, 70, 70, 5) (750,)
+
+ Valid Loss:  tf.Tensor(212695.0, shape=(), dtype=float32)
+
+
+
+  4%|███▏                                                                                     | 6/166 [00:03<01:28,  1.82it/s][A[A[AYielding x (shape) and y (shape) of index:  chunk7296.npz (763, 70, 70, 5) (763,)
+
+ Valid Loss:  tf.Tensor(167905.72, shape=(), dtype=float32)
+
+
+
+  4%|███▊                                                                                     | 7/166 [00:03<01:25,  1.85it/s][A[A[AYielding x (shape) and y (shape) of index:  chunk69888.npz (708, 70, 70, 5) (708,)
+
+ Valid Loss:  tf.Tensor(58305.418, shape=(), dtype=float32)
+
+
+
+  5%|████▎                                                                                    | 8/166 [00:04<01:20,  1.96it/s][A[A[AYielding x (shape) and y (shape) of index:  chunk80512.npz (761, 70, 70, 5) (761,)
+
+ Valid Loss: 
+
+
+  5%|████▊                                                                                    | 9/166 [00:04<01:19,  1.97it/s][A[A[A tf.Tensor(126516.734, shape=(), dtype=float32)
+Yielding x (shape) and y (shape) of index:  chunk44288.npz (720, 70, 70, 5) (720,)
+
+ Valid Loss:  tf.Tensor(141563.67, shape=(), dtype=float32)
+
+
+
+  6%|█████▎                                                                                  | 10/166 [00:05<01:16,  2.04it/s][A[A[AYielding x (shape) and y (shape) of index:  chunk93184.npz (719, 70, 70, 5) (719,)
+
+ Valid Loss:  tf.Tensor(123925.3, shape=(), dtype=float32)
+
+
+
+  7%|█████▊                                                                                  | 11/166 [00:05<01:13,  2.10it/s][A[A[AYielding x (shape) and y (shape) of index:  chunk92928.npz (758, 70, 70, 5) (758,)
+
+ Valid Loss:  tf.Tensor(169931.02, shape=(), dtype=float32)
+
+
+
+  7%|██████▎                                                                                 | 12/166 [00:06<01:12,  2.12it/s][A[A[AYielding x (shape) and y (shape) of index:  chunk76416.npz (761, 70, 70, 5) (761,)
+
+ Valid Loss: 
+
+
+  8%|██████▉                                                                                 | 13/166 [00:06<01:12,  2.11it/s][A[A[A tf.Tensor(145074.8, shape=(), dtype=float32)
+Yielding x (shape) and y (shape) of index:  chunk77952.npz (752, 70, 70, 5) (752,)
+
+ Valid Loss:  tf.Tensor(187340.83, shape=(), dtype=float32)
+
+
+
+  8%|███████▍                                                                                | 14/166 [00:07<01:10,  2.15it/s][A[A[AYielding x (shape) and y (shape) of index:  chunk67072.npz (629, 70, 70, 5) (629,)
+
+ Valid Loss: 
+
+
+  9%|███████▉                                                                                | 15/166 [00:07<01:06,  2.25it/s][A[A[A tf.Tensor(25493.922, shape=(), dtype=float32)
+Yielding x (shape) and y (shape) of index:  chunk100864.npz (767, 70, 70, 5) (767,)
+
+ Valid Loss:  tf.Tensor(104797.2, shape=(), dtype=float32)
+
+
+
+ 10%|████████▍                                                                               | 16/166 [00:07<01:09,  2.15it/s][A[A[AYielding x (shape) and y (shape) of index:  chunk13184.npz (688, 70, 70, 5) (688,)
+
+ Valid Loss:  tf.Tensor(20535.566, shape=(), dtype=float32)
+
+
+
+ 10%|█████████                                                                               | 17/166 [00:08<01:08,  2.18it/s][A[A[AYielding x (shape) and y (shape) of index:  chunk33024.npz (707, 70, 70, 5) (707,)
+
+ Valid Loss:  tf.Tensor(26830.398, shape=(), dtype=float32)
+
+
+
+ 11%|█████████▌                                                                              | 18/166 [00:08<01:09,  2.14it/s][A[A[AYielding x (shape) and y (shape) of index:  chunk82944.npz (713, 70, 70, 5) (713,)
+
+ Valid Loss:  tf.Tensor(67906.77, shape=(), dtype=float32)
+
+
+
+ 11%|██████████                                                                              | 19/166 [00:09<01:10,  2.08it/s][A[A[AYielding x (shape) and y (shape) of index:  chunk12928.npz (663, 70, 70, 5) (663,)
+
+ Valid Loss:  tf.Tensor(26118.45, shape=(), dtype=float32)
+
+
+
+ 12%|██████████▌                                                                             | 20/166 [00:09<01:06,  2.18it/s][A[A[AEpoch:  1 ; Train Loss:  tf.Tensor(0.0, shape=(), dtype=float32) ; Valid Loss:  tf.Tensor(119868.79, shape=(), dtype=float32)
+EPOCH  2
+<DatasetV1Adapter shapes: (<unknown>, <unknown>), types: (tf.float32, tf.float32)>
+
+
+
+
+  0%|                                                                                                 | 0/580 [00:00<?, ?it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk52736.npz (767, 70, 70, 5) (767,)
+Yielding x (shape) and y (shape) of index:  chunk24192.npz (742, 70, 70, 5) (742,)
+
+ Loss:  24335.463
+
+
+
+
+  0%|▏                                                                                        | 1/580 [00:01<11:12,  1.16s/it][A[A[A[AYielding x (shape) and y (shape) of index:  chunk37504.npz (749, 70, 70, 5) (749,)
+
+ Loss:  32215.709
+
+
+
+
+  0%|▎                                                                                        | 2/580 [00:01<09:30,  1.01it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk86016.npz (695, 70, 70, 5) (695,)
+
+ Loss:  27560.67
+
+
+
+
+  1%|▍                                                                                        | 3/580 [00:02<08:51,  1.09it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk58880.npz (750, 70, 70, 5) (750,)
+
+ Loss:  78591.76
+
+
+
+
+  1%|▌                                                                                        | 4/580 [00:03<08:08,  1.18it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk1792.npz (723, 70, 70, 5) (723,)
+
+ Loss:  43312.387
+
+
+
+
+  1%|▊                                                                                        | 5/580 [00:03<07:40,  1.25it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk101504.npz (733, 70, 70, 5) (733,)
+
+ Loss:  35271.86
+
+
+
+
+  1%|▉                                                                                        | 6/580 [00:04<07:16,  1.31it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk54912.npz (778, 70, 70, 5) (778,)
+
+ Loss:  26345.307
+
+
+
+
+  1%|█                                                                                        | 7/580 [00:05<06:48,  1.40it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk44032.npz (747, 70, 70, 5) (747,)
+
+ Loss:  45063.824
+
+
+
+
+  1%|█▏                                                                                       | 8/580 [00:05<07:04,  1.35it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk75520.npz (753, 70, 70, 5) (753,)
+
+ Loss:  34015.68
+
+
+
+
+  2%|█▍                                                                                       | 9/580 [00:06<06:43,  1.41it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk57472.npz (800, 70, 70, 5) (800,)
+
+ Loss:  36713.242
+
+
+
+
+  2%|█▌                                                                                      | 10/580 [00:07<06:43,  1.41it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk20608.npz (770, 70, 70, 5) (770,)
+
+ Loss:  50883.37
+
+
+
+
+  2%|█▋                                                                                      | 11/580 [00:08<07:01,  1.35it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk29696.npz (745, 70, 70, 5) (745,)
+
+ Loss:  45190.285
+
+
+
+
+  2%|█▊                                                                                      | 12/580 [00:08<06:46,  1.40it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk88448.npz (706, 70, 70, 5) (706,)
+
+ Loss:  31966.088
+
+
+
+
+  2%|█▉                                                                                      | 13/580 [00:09<06:31,  1.45it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk55168.npz (712, 70, 70, 5) (712,)
+
+ Loss:  42437.645
+
+
+
+
+  2%|██                                                                                      | 14/580 [00:10<06:18,  1.50it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk23552.npz (777, 70, 70, 5) (777,)
+
+ Loss:  44847.797
+
+
+
+
+  3%|██▎                                                                                     | 15/580 [00:10<06:17,  1.50it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk32640.npz (697, 70, 70, 5) (697,)
+
+ Loss:  51645.06
+
+
+
+
+  3%|██▍                                                                                     | 16/580 [00:11<06:09,  1.53it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk9472.npz (756, 70, 70, 5) (756,)
+
+ Loss:  53331.258
+
+
+
+
+  3%|██▌                                                                                     | 17/580 [00:11<06:09,  1.52it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk86528.npz (685, 70, 70, 5) (685,)
+
+ Loss:  20292.002
+
+
+
+
+  3%|██▋                                                                                     | 18/580 [00:12<06:04,  1.54it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk34688.npz (709, 70, 70, 5) (709,)
+
+ Loss:  33040.62
+
+
+
+
+  3%|██▉                                                                                     | 19/580 [00:13<06:03,  1.54it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk62464.npz (748, 70, 70, 5) (748,)
+
+ Loss:  18601.693
+
+
+
+
+  3%|███                                                                                     | 20/580 [00:13<05:49,  1.60it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk52096.npz (694, 70, 70, 5) (694,)
+
+ Loss:  43509.97
+
+
+
+
+  4%|███▏                                                                                    | 21/580 [00:14<06:09,  1.51it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk59264.npz (773, 70, 70, 5) (773,)
+
+ Loss:  16504.527
+
+
+
+
+  4%|███▎                                                                                    | 22/580 [00:15<05:49,  1.60it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk87680.npz (696, 70, 70, 5) (696,)
+
+ Loss:  52829.484
+
+
+
+
+  4%|███▍                                                                                    | 23/580 [00:15<06:11,  1.50it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk41472.npz (774, 70, 70, 5) (774,)
+
+ Loss:  11403.678
+
+
+
+
+  4%|███▋                                                                                    | 24/580 [00:16<06:03,  1.53it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk36608.npz (748, 70, 70, 5) (748,)
+
+ Loss:  79709.125
+
+
+
+
+  4%|███▊                                                                                    | 25/580 [00:17<06:03,  1.53it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk34816.npz (749, 70, 70, 5) (749,)
+
+ Loss:  27518.152
+
+
+
+
+  4%|███▉                                                                                    | 26/580 [00:17<06:02,  1.53it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk84736.npz (712, 70, 70, 5) (712,)
+
+ Loss:  17761.846
+
+
+
+
+  5%|████                                                                                    | 27/580 [00:18<06:01,  1.53it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk64640.npz (725, 70, 70, 5) (725,)
+
+ Loss:  15386.577
+
+
+
+
+  5%|████▏                                                                                   | 28/580 [00:19<05:59,  1.54it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk103552.npz (738, 70, 70, 5) (738,)
+
+ Loss:  18884.186
+
+
+
+
+  5%|████▍                                                                                   | 29/580 [00:19<05:55,  1.55it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk67968.npz (695, 70, 70, 5) (695,)
+
+ Loss:  26440.648
+
+
+
+
+  5%|████▌                                                                                   | 30/580 [00:20<05:55,  1.55it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk83456.npz (768, 70, 70, 5) (768,)
+
+ Loss:  18765.621
+
+
+
+
+  5%|████▋                                                                                   | 31/580 [00:20<05:41,  1.61it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk100608.npz (741, 70, 70, 5) (741,)
+
+ Loss:  16846.637
+
+
+
+
+  6%|████▊                                                                                   | 32/580 [00:21<06:13,  1.47it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk92032.npz (692, 70, 70, 5) (692,)
+
+ Loss:  37801.918
+
+
+
+
+  6%|█████                                                                                   | 33/580 [00:22<06:06,  1.49it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk82560.npz (780, 70, 70, 5) (780,)
+
+ Loss:  31799.104
+
+
+
+
+  6%|█████▏                                                                                  | 34/580 [00:22<05:46,  1.58it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk3712.npz (763, 70, 70, 5) (763,)
+
+ Loss:  30443.85
+
+
+
+
+  6%|█████▎                                                                                  | 35/580 [00:23<06:15,  1.45it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk55424.npz (697, 70, 70, 5) (697,)
+
+ Loss:  55211.75
+
+
+
+
+  6%|█████▍                                                                                  | 36/580 [00:24<06:08,  1.48it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk640.npz (720, 70, 70, 5) (720,)
+
+ Loss:  43097.92
+
+
+
+
+  6%|█████▌                                                                                  | 37/580 [00:25<05:58,  1.51it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk21504.npz (764, 70, 70, 5) (764,)
+
+ Loss:  28847.994
+
+
+
+
+  7%|█████▊                                                                                  | 38/580 [00:25<05:42,  1.58it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk12032.npz (702, 70, 70, 5) (702,)
+
+ Loss:  38902.293
+
+
+
+
+  7%|█████▉                                                                                  | 39/580 [00:26<06:01,  1.50it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk104192.npz (710, 70, 70, 5) (710,)
+
+ Loss:  35183.793
+
+
+
+
+  7%|██████                                                                                  | 40/580 [00:27<05:55,  1.52it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk72192.npz (680, 70, 70, 5) (680,)
+
+ Loss:  50487.5
+
+
+
+
+  7%|██████▏                                                                                 | 41/580 [00:27<05:45,  1.56it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk26112.npz (768, 70, 70, 5) (768,)
+
+ Loss:  32532.03
+
+
+
+
+  7%|██████▎                                                                                 | 42/580 [00:28<05:30,  1.63it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk79360.npz (767, 70, 70, 5) (767,)
+
+ Loss:  34282.777
+
+
+
+
+  7%|██████▌                                                                                 | 43/580 [00:28<05:44,  1.56it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk69632.npz (710, 70, 70, 5) (710,)
+
+ Loss:  36366.246
+
+
+
+
+  8%|██████▋                                                                                 | 44/580 [00:29<06:03,  1.47it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk35584.npz (733, 70, 70, 5) (733,)
+
+ Loss:  27674.645
+
+
+
+
+  8%|██████▊                                                                                 | 45/580 [00:30<05:57,  1.50it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk49792.npz (680, 70, 70, 5) (680,)
+
+ Loss:  21948.727
+
+
+
+
+  8%|██████▉                                                                                 | 46/580 [00:30<05:56,  1.50it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk84096.npz (720, 70, 70, 5) (720,)
+
+ Loss:  45051.28
+
+
+
+
+  8%|███████▏                                                                                | 47/580 [00:31<05:46,  1.54it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk46720.npz (772, 70, 70, 5) (772,)
+
+ Loss:  21987.402
+
+
+
+
+  8%|███████▎                                                                                | 48/580 [00:32<05:40,  1.56it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk99584.npz (751, 70, 70, 5) (751,)
+
+ Loss:  27880.525
+
+
+
+
+  8%|███████▍                                                                                | 49/580 [00:32<05:40,  1.56it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk57344.npz (764, 70, 70, 5) (764,)
+
+ Loss:  36872.977
+
+
+
+
+  9%|███████▌                                                                                | 50/580 [00:33<05:40,  1.56it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk47616.npz (755, 70, 70, 5) (755,)
+
+ Loss:  45099.203
+
+
+
+
+  9%|███████▋                                                                                | 51/580 [00:34<05:40,  1.55it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk18816.npz (767, 70, 70, 5) (767,)
+
+ Loss:  23608.662
+
+
+
+
+  9%|███████▉                                                                                | 52/580 [00:34<05:43,  1.54it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk47488.npz (737, 70, 70, 5) (737,)
+
+ Loss:  49348.312
+
+
+
+
+  9%|████████                                                                                | 53/580 [00:35<05:39,  1.55it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk13696.npz (688, 70, 70, 5) (688,)
+
+ Loss:  10866.6875
+
+
+
+
+  9%|████████▏                                                                               | 54/580 [00:35<05:32,  1.58it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk10752.npz (740, 70, 70, 5) (740,)
+
+ Loss:  20085.658
+
+
+
+
+  9%|████████▎                                                                               | 55/580 [00:36<05:24,  1.62it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk9344.npz (737, 70, 70, 5) (737,)
+
+ Loss:  10724.141
+
+
+
+
+ 10%|████████▍                                                                               | 56/580 [00:37<05:42,  1.53it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk40576.npz (732, 70, 70, 5) (732,)
+
+ Loss:  25907.043
+
+
+
+
+ 10%|████████▋                                                                               | 57/580 [00:37<05:38,  1.54it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk7552.npz (761, 70, 70, 5) (761,)
+
+ Loss:  44286.816
+
+
+
+
+ 10%|████████▊                                                                               | 58/580 [00:38<05:40,  1.53it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk26368.npz (759, 70, 70, 5) (759,)
+
+ Loss:  39824.676
+
+
+
+
+ 10%|████████▉                                                                               | 59/580 [00:39<05:44,  1.51it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk48640.npz (720, 70, 70, 5) (720,)
+
+ Loss:  43000.312
+
+
+
+
+ 10%|█████████                                                                               | 60/580 [00:39<05:37,  1.54it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk4608.npz (761, 70, 70, 5) (761,)
+
+ Loss:  21292.629
+
+
+
+
+ 11%|█████████▎                                                                              | 61/580 [00:40<05:36,  1.54it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk68096.npz (653, 70, 70, 5) (653,)
+
+ Loss:  58566.086
+
+
+
+
+ 11%|█████████▍                                                                              | 62/580 [00:41<05:38,  1.53it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk85632.npz (694, 70, 70, 5) (694,)
+
+ Loss:  23218.055
+
+
+
+
+ 11%|█████████▌                                                                              | 63/580 [00:41<05:30,  1.56it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk95360.npz (737, 70, 70, 5) (737,)
+
+ Loss:  34430.875
+
+
+
+
+ 11%|█████████▋                                                                              | 64/580 [00:42<05:31,  1.56it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk15360.npz (701, 70, 70, 5) (701,)
+
+ Loss:  25957.27
+
+
+
+
+ 11%|█████████▊                                                                              | 65/580 [00:43<05:28,  1.57it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk68736.npz (706, 70, 70, 5) (706,)
+
+ Loss:  22300.559
+
+
+
+
+ 11%|██████████                                                                              | 66/580 [00:43<05:27,  1.57it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk72448.npz (660, 70, 70, 5) (660,)
+
+ Loss:  21174.43
+
+
+
+
+ 12%|██████████▏                                                                             | 67/580 [00:44<05:24,  1.58it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk104448.npz (710, 70, 70, 5) (710,)
+
+ Loss:  32488.902
+
+
+
+
+ 12%|██████████▎                                                                             | 68/580 [00:44<05:11,  1.65it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk39424.npz (765, 70, 70, 5) (765,)
+
+ Loss:  18201.846
+
+
+
+
+ 12%|██████████▍                                                                             | 69/580 [00:45<05:18,  1.61it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk46080.npz (766, 70, 70, 5) (766,)
+
+ Loss:  35716.793
+
+
+
+
+ 12%|██████████▌                                                                             | 70/580 [00:46<05:36,  1.52it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk98816.npz (718, 70, 70, 5) (718,)
+
+ Loss:  22577.125
+
+
+
+
+ 12%|██████████▊                                                                             | 71/580 [00:47<05:58,  1.42it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk19584.npz (777, 70, 70, 5) (777,)
+
+ Loss:  49080.066
+
+
+
+
+ 12%|██████████▉                                                                             | 72/580 [00:47<05:40,  1.49it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk76800.npz (774, 70, 70, 5) (774,)
+
+ Loss:  37917.656
+
+
+
+
+ 13%|███████████                                                                             | 73/580 [00:48<06:09,  1.37it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk65792.npz (728, 70, 70, 5) (728,)
+
+ Loss:  35406.44
+
+
+
+
+ 13%|███████████▏                                                                            | 74/580 [00:49<06:02,  1.40it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk90752.npz (762, 70, 70, 5) (762,)
+
+ Loss:  26589.36
+
+
+
+
+ 13%|███████████▍                                                                            | 75/580 [00:49<05:40,  1.48it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk93696.npz (735, 70, 70, 5) (735,)
+
+ Loss:  21181.922
+
+
+
+
+ 13%|███████████▌                                                                            | 76/580 [00:50<05:55,  1.42it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk28032.npz (709, 70, 70, 5) (709,)
+
+ Loss:  37532.945
+
+
+
+
+ 13%|███████████▋                                                                            | 77/580 [00:51<05:50,  1.43it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk38912.npz (765, 70, 70, 5) (765,)
+
+ Loss:  30059.57
+
+
+
+
+ 13%|███████████▊                                                                            | 78/580 [00:51<05:29,  1.52it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk67712.npz (691, 70, 70, 5) (691,)
+
+ Loss:  24595.297
+
+
+
+
+ 14%|███████████▉                                                                            | 79/580 [00:52<05:49,  1.43it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk74880.npz (752, 70, 70, 5) (752,)
+
+ Loss:  41066.418
+
+
+
+
+ 14%|████████████▏                                                                           | 80/580 [00:53<05:29,  1.52it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk33792.npz (705, 70, 70, 5) (705,)
+
+ Loss:  42384.52
+
+
+
+
+ 14%|████████████▎                                                                           | 81/580 [00:53<05:40,  1.47it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk98688.npz (744, 70, 70, 5) (744,)
+
+ Loss:  44514.137
+
+
+
+
+ 14%|████████████▍                                                                           | 82/580 [00:54<05:31,  1.50it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk60800.npz (762, 70, 70, 5) (762,)
+
+ Loss:  31222.752
+
+
+
+
+ 14%|████████████▌                                                                           | 83/580 [00:55<05:18,  1.56it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk70656.npz (716, 70, 70, 5) (716,)
+
+ Loss:  40248.902
+
+
+
+
+ 14%|████████████▋                                                                           | 84/580 [00:55<05:28,  1.51it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk5504.npz (759, 70, 70, 5) (759,)
+
+ Loss:  22623.518
+
+
+
+
+ 15%|████████████▉                                                                           | 85/580 [00:56<05:29,  1.50it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk24448.npz (770, 70, 70, 5) (770,)
+
+ Loss:  37800.05
+
+
+
+
+ 15%|█████████████                                                                           | 86/580 [00:57<05:30,  1.50it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk53632.npz (705, 70, 70, 5) (705,)
+
+ Loss:  40403.66
+
+
+
+
+ 15%|█████████████▏                                                                          | 87/580 [00:57<05:27,  1.51it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk26624.npz (750, 70, 70, 5) (750,)
+
+ Loss:  21053.504
+
+
+
+
+ 15%|█████████████▎                                                                          | 88/580 [00:58<05:14,  1.57it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk51328.npz (706, 70, 70, 5) (706,)
+
+ Loss:  31552.111
+
+
+
+
+ 15%|█████████████▌                                                                          | 89/580 [00:59<05:25,  1.51it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk41344.npz (774, 70, 70, 5) (774,)
+
+ Loss:  21761.705
+
+
+
+
+ 16%|█████████████▋                                                                          | 90/580 [00:59<05:12,  1.57it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk86784.npz (672, 70, 70, 5) (672,)
+
+ Loss:  34692.78
+
+
+
+
+ 16%|█████████████▊                                                                          | 91/580 [01:00<05:24,  1.51it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk59520.npz (776, 70, 70, 5) (776,)
+
+ Loss:  37739.918
+
+
+
+
+ 16%|█████████████▉                                                                          | 92/580 [01:01<05:07,  1.58it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk75264.npz (759, 70, 70, 5) (759,)
+
+ Loss:  37133.113
+
+
+
+
+ 16%|██████████████                                                                          | 93/580 [01:01<05:34,  1.45it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk45696.npz (768, 70, 70, 5) (768,)
+
+ Loss:  39320.29
+
+
+
+
+ 16%|██████████████▎                                                                         | 94/580 [01:02<05:29,  1.47it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk56576.npz (709, 70, 70, 5) (709,)
+
+ Loss:  30944.842
+
+
+
+
+ 16%|██████████████▍                                                                         | 95/580 [01:03<05:24,  1.50it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk88192.npz (708, 70, 70, 5) (708,)
+
+ Loss:  29526.652
+
+
+
+
+ 17%|██████████████▌                                                                         | 96/580 [01:03<05:17,  1.52it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk18688.npz (767, 70, 70, 5) (767,)
+
+ Loss:  18744.838
+
+
+
+
+ 17%|██████████████▋                                                                         | 97/580 [01:04<05:03,  1.59it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk8576.npz (761, 70, 70, 5) (761,)
+
+ Loss:  37433.297
+
+
+
+
+ 17%|██████████████▊                                                                         | 98/580 [01:05<05:29,  1.46it/s][A[A[A[AYielding x (shape) and y (shape) of index:  chunk39168.npz (758, 70, 70, 5) (758,)
+
+ Loss:  26540.502
+
+
+
+
+ 17%|███████████████                                                                         | 99/580 [01:05<05:17,  1.51it/s][A[A[A[A
+ Loss:  28349.258
+
+
+
+
+ 17%|███████████████                                                                        | 100/580 [01:06<05:11,  1.54it/s][A[A[A[A
+
+
+
+
+  0%|                                                                                                 | 0/166 [00:00<?, ?it/s][A[A[A[A[AYielding x (shape) and y (shape) of index:  chunk3968.npz (754, 70, 70, 5) (754,)
+
+ Valid Loss:  tf.Tensor(199796.84, shape=(), dtype=float32)
+
+
+
+
+
+  1%|▌                                                                                        | 1/166 [00:00<02:35,  1.06it/s][A[A[A[A[AYielding x (shape) and y (shape) of index:  chunk36864.npz (680, 70, 70, 5) (680,)
+
+ Valid Loss: 
+
+
+
+
+  1%|█                                                                                        | 2/166 [00:01<02:07,  1.28it/s][A[A[A[A[A tf.Tensor(119292.4, shape=(), dtype=float32)
+Yielding x (shape) and y (shape) of index:  chunk94592.npz (770, 70, 70, 5) (770,)
+
+ Valid Loss:  tf.Tensor(135660.08, shape=(), dtype=float32)
+
+
+
+
+
+  2%|█▌                                                                                       | 3/166 [00:01<01:58,  1.38it/s][A[A[A[A[AYielding x (shape) and y (shape) of index:  chunk4352.npz (772, 70, 70, 5) (772,)
+
+ Valid Loss: 
+
+
+
+
+  2%|██▏                                                                                      | 4/166 [00:02<01:48,  1.49it/s][A[A[A[A[A tf.Tensor(172544.52, shape=(), dtype=float32)
+Yielding x (shape) and y (shape) of index:  chunk59008.npz (758, 70, 70, 5) (758,)
+
+ Valid Loss: 
+
+
+
+
+  3%|██▋                                                                                      | 5/166 [00:02<01:39,  1.62it/s][A[A[A[A[A tf.Tensor(154230.67, shape=(), dtype=float32)
+Yielding x (shape) and y (shape) of index:  chunk42240.npz (750, 70, 70, 5) (750,)
+
+ Valid Loss:  tf.Tensor(220348.16, shape=(), dtype=float32)
+
+
+
+
+
+  4%|███▏                                                                                     | 6/166 [00:03<01:34,  1.70it/s][A[A[A[A[AYielding x (shape) and y (shape) of index:  chunk7296.npz (763, 70, 70, 5) (763,)
+
+ Valid Loss: 
+
+
+
+
+  4%|███▊                                                                                     | 7/166 [00:04<01:32,  1.72it/s][A[A[A[A[A tf.Tensor(166570.48, shape=(), dtype=float32)
+Yielding x (shape) and y (shape) of index:  chunk69888.npz (708, 70, 70, 5) (708,)
+
+ Valid Loss:  tf.Tensor(51454.67, shape=(), dtype=float32)
+
+
+
+
+
+  5%|████▎                                                                                    | 8/166 [00:04<01:27,  1.81it/s][A[A[A[A[AYielding x (shape) and y (shape) of index:  chunk80512.npz (761, 70, 70, 5) (761,)
+
+ Valid Loss: 
+
+
+
+
+  5%|████▊                                                                                    | 9/166 [00:05<01:26,  1.82it/s][A[A[A[A[A tf.Tensor(128532.836, shape=(), dtype=float32)
+Yielding x (shape) and y (shape) of index:  chunk44288.npz (720, 70, 70, 5) (720,)
+
+ Valid Loss:  tf.Tensor(140017.02, shape=(), dtype=float32)
+
+
+
+
+
+  6%|█████▎                                                                                  | 10/166 [00:05<01:23,  1.87it/s][A[A[A[A[AYielding x (shape) and y (shape) of index:  chunk93184.npz (719, 70, 70, 5) (719,)
+
+ Valid Loss:  tf.Tensor(121508.07, shape=(), dtype=float32)
+
+
+
+
+
+  7%|█████▊                                                                                  | 11/166 [00:06<01:22,  1.89it/s][A[A[A[A[AYielding x (shape) and y (shape) of index:  chunk92928.npz (758, 70, 70, 5) (758,)
+
+ Valid Loss: 
+
+
+
+
+  7%|██████▎                                                                                 | 12/166 [00:06<01:20,  1.90it/s][A[A[A[A[A tf.Tensor(165789.98, shape=(), dtype=float32)
+Yielding x (shape) and y (shape) of index:  chunk76416.npz (761, 70, 70, 5) (761,)
+
+ Valid Loss: 
+
+
+
+
+  8%|██████▉                                                                                 | 13/166 [00:07<01:20,  1.90it/s][A[A[A[A[A tf.Tensor(146671.31, shape=(), dtype=float32)
+Yielding x (shape) and y (shape) of index:  chunk77952.npz (752, 70, 70, 5) (752,)
+
+ Valid Loss:  tf.Tensor(184784.06, shape=(), dtype=float32)
+
+
+
+
+
+  8%|███████▍                                                                                | 14/166 [00:07<01:20,  1.90it/s][A[A[A[A[AYielding x (shape) and y (shape) of index:  chunk67072.npz (629, 70, 70, 5) (629,)
+
+ Valid Loss:  tf.Tensor(23764.137, shape=(), dtype=float32)
+
+
+
+
+
+  9%|███████▉                                                                                | 15/166 [00:08<01:12,  2.07it/s][A[A[A[A[AYielding x (shape) and y (shape) of index:  chunk100864.npz (767, 70, 70, 5) (767,)
+
+ Valid Loss:  tf.Tensor(104354.99, shape=(), dtype=float32)
+
+
+
+
+
+ 10%|████████▍                                                                               | 16/166 [00:08<01:14,  2.00it/s][A[A[A[A[AYielding x (shape) and y (shape) of index:  chunk13184.npz (688, 70, 70, 5) (688,)
+
+ Valid Loss:  tf.Tensor(20376.201, shape=(), dtype=float32)
+
+
+
+
+
+ 10%|█████████                                                                               | 17/166 [00:09<01:12,  2.05it/s][A[A[A[A[AYielding x (shape) and y (shape) of index:  chunk33024.npz (707, 70, 70, 5) (707,)
+
+ Valid Loss:  tf.Tensor(26221.115, shape=(), dtype=float32)
+
+
+
+
+
+ 11%|█████████▌                                                                              | 18/166 [00:09<01:12,  2.04it/s][A[A[A[A[AYielding x (shape) and y (shape) of index:  chunk82944.npz (713, 70, 70, 5) (713,)
+
+ Valid Loss:  tf.Tensor(66567.09, shape=(), dtype=float32)
+
+
+
+
+
+ 11%|██████████                                                                              | 19/166 [00:10<01:11,  2.05it/s][A[A[A[A[AYielding x (shape) and y (shape) of index:  chunk12928.npz (663, 70, 70, 5) (663,)
+
+ Valid Loss:  tf.Tensor(24326.205, shape=(), dtype=float32)
+
+
+
+
+
+ 12%|██████████▌                                                                             | 20/166 [00:10<01:08,  2.13it/s][A[A[A[A[AEpoch:  2 ; Train Loss:  tf.Tensor(0.0, shape=(), dtype=float32) ; Valid Loss:  tf.Tensor(118640.54, shape=(), dtype=float32)
+Model: "my_model"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+conv2d (Conv2D)              multiple                  1472      
+_________________________________________________________________
+batch_normalization (BatchNo multiple                  128       
+_________________________________________________________________
+max_pooling2d (MaxPooling2D) multiple                  0         
+_________________________________________________________________
+conv2d_1 (Conv2D)            multiple                  18496     
+_________________________________________________________________
+batch_normalization_1 (Batch multiple                  256       
+_________________________________________________________________
+conv2d_2 (Conv2D)            multiple                  73856     
+_________________________________________________________________
+batch_normalization_2 (Batch multiple                  512       
+_________________________________________________________________
+conv2d_3 (Conv2D)            multiple                  295168    
+_________________________________________________________________
+batch_normalization_3 (Batch multiple                  1024      
+_________________________________________________________________
+conv2d_4 (Conv2D)            multiple                  3277312   
+_________________________________________________________________
+flatten (Flatten)            multiple                  0         
+_________________________________________________________________
+dense (Dense)                multiple                  513       
+=================================================================
+Total params: 3,668,737
+Trainable params: 3,667,777
+Non-trainable params: 960
+_________________________________________________________________
+
+
+
+
+                                                                                                                              [A[A[A[A
+
+
+
+
+                                                                                                                              [A[A[A[A[A 12%|██████████▌                                                                             | 20/166 [01:27<10:41,  4.40s/it]
+
+
+
+
+[A[A[A[A 17%|███████████████                                                                        | 100/580 [01:17<06:10,  1.29it/s]
+
+
+                                                                                                                              [A[A
+
+
+[A[A[A 12%|██████████▌                                                                             | 20/166 [02:47<20:20,  8.36s/it]
+
+
+[A[A 17%|███████████████                                                                        | 100/580 [02:33<12:15,  1.53s/it]
+
+[A 17%|███████████████                                                                        | 100/580 [06:02<29:01,  3.63s/it]
