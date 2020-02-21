@@ -1,14 +1,23 @@
 import pandas as pd
 import numpy as np
+import pickle as pkl
 
 #from tqdm.notebook import tqdm
 from tqdm import tqdm
 
-from utilities import dataloader
-from utilities import config
 from utilities.utility import create_dummy_image
 from utilities.utility import dummy_crop_image
-from utilities.sequencer import time_in_seconds
+
+from utilities.sequencer_utils import time_in_seconds
+from utilities.sequencer_utils import convert_to_epoch
+from utilities.utility import generate_file_name
+
+# To set to 0 later
+DEBUG = 1
+
+# Root directory
+ROOT_DIR = '.'
+
 
 """
 Groups the dataframe per column and sorts it with respect to timestamps
@@ -24,15 +33,16 @@ def group_by(df, column):
         return None
     return grouped
 
-
 """
-Generates the intermediate dataframe that will be used to produce data chunks for the model
+Generates the intermediate dictionaries that will be used to produce data chunks for the model
 Args:
+    args: Object containing arguments
     df:  original dataframe 
+    list_stations:  list of stations
 Returns:
-    Dataframe containing training data
+    list containing training data
 """
-def generate_intermediate_dataframe(df):
+def generate_stations_dictionaries(df, list_stations):
     # First step: organize the dataframe with respect to file paths
     grouped = group_by(df, 'hdf5_8bit_path')
     unique_paths = np.unique(df['hdf5_8bit_path'])
@@ -40,19 +50,18 @@ def generate_intermediate_dataframe(df):
     # timer
     t1 = tqdm(total=len(unique_paths))
     nb_rows = 0
-    list_of_records = []
+    records = {}
+    # Creating dictionaries
+    for s in list_stations:
+        records[s] = []
+
+    # Main loop
     for path in unique_paths:
-        # print('### processing path \'%s\'' %path)
         # Grouping by paths
         cropped_df = grouped[grouped.hdf5_8bit_path == path].sort_index(axis=0)
         offsets = cropped_df['hdf5_8bit_offset'].values
         # Collecting cropped images from the compressed data
-
-        # Bhavya's note: please pass the args instance in the following function
-        # or if instantiated earlier, can pass it as an argument from the calling fn
-        args = config.init_args() # <- instantiated like this if not done
-        dic = dataloader.fetch_all_samples_hdf5(args,path)
-        # dic = create_dummy_image()
+        dic = dummy_crop_image(path)
 
         # Iterating throw stations
         for index, row in cropped_df.iterrows():
@@ -64,21 +73,21 @@ def generate_intermediate_dataframe(df):
             except KeyError:
                 img = create_dummy_image()
 
-            # Creating the row and adding it to the dataframe
+            # Generating row and adding it to the list
             df_timestamp = row['iso-datetime']
-            new_row = {'iso-datetime': df_timestamp,
+            new_row = {'iso-datetime': convert_to_epoch(df_timestamp),
+                       'station': row['station'],
                        'day': df_timestamp.day,
                        'month': df_timestamp.month,
                        'local_time': time_in_seconds(df_timestamp),
-                       'station': station_id,
                        'image': img,
                        'CLEARSKY_GHI': row['CLEARSKY_GHI'],
                        'GHI': row['GHI']}
-            list_of_records.append(new_row)
+            records[station_id].append(new_row)
             nb_rows += 1
         t1.update(1)
     print('Generated %d rows in total' % nb_rows)
-    return pd.DataFrame(list_of_records)
+    return records
 
 
 
@@ -99,27 +108,20 @@ def get_n_slices(total_size, slice):
 
 
 """
-Splits dataframe to smaller dataframes
+Generates sub-lists from the main lists
 Args:
-    dataframe:  main dataframe
-    slice_length: size of each subset
+    records:  list of data
+    slice_size: maximum size allowed
 Returns:
-    list of blocks containing smaller subsets
-    
-TODO: function needs to be debugged. pandas dataframe slicing does not work well
+    List of sub-blocks
 """
-def generate_blocks_from_df(dataframe, slice_length):
+def generate_blocks_from_lists(records, slice_size):
     mini_blocks = []
-    slices = get_n_slices(dataframe.size, slice_length)
+    slices = get_n_slices(len(records), slice_size)
     nb_slices = len(slices)
-    print('slices are :', slices)
-    last = dataframe.size
+    last = len(records) - 1
     for index in reversed(slices):
-        print('first:', index, ', last:', last)
-        print('Getting slice [%d, %d]' %(index, last))
-        block = dataframe[index:last]
-        print('Got a block of size %d' %block.size)
-        mini_blocks.insert(0, block)
+        mini_blocks.insert(0, records[index:last])
         last = index
     return mini_blocks
 
@@ -127,21 +129,58 @@ def generate_blocks_from_df(dataframe, slice_length):
 """
 Saves blocks in the disk
 Args:
-    blocks_dic:  list of dataframes
-    root_dir: directory where the blocks are to be saved
+    records:  list of data
+    list_stations: list of stations
+    root_dir: folder
+    slice_size: maximum size allowed
 Returns:
     Dataframe with records pointing to the files locations
 """
-def write_blocks_on_disk(blocks_dic, root_dir='./'):
-    block_list = []
-    for station, blocks in block_dic.items():
-        for i, b in enumerate(blocks):
-            filename = root_dir + get_file_name() + '.pkl'
-            new_row = {'station': station,
-                   'seq': i + 1,
-                   'path':filename}
+def write_blocks_on_disk(records, list_stations, root_dir = ROOT_DIR + '/data/preprocessed/', slice_size = 30000, df_path = 'database.db' ):
+    db_list = []
+    t1 = tqdm(total=len(list_stations))
+    for s in list_stations:
+        # Getting records
+        records_list  = records[s]
+        # Slicing
+        mini_blocks = generate_blocks_from_lists(records_list, slice_size)
+        i = 0
+        for b in mini_blocks:
+            i = i + 1
+            filename = generate_file_name()
+            filepath = root_dir + filename + '.dat'
+            new_row = {'station': s,
+                       'seq':i,
+                       'df_path':filepath}
+            db_list.append(new_row)
             # Dumping data on disk
-            b.to_pickle(filename)
-    # Creating the dataframe
-    db = pd.DataFrame(block_list)
+            pkl.dump(b, open(filepath, "wb" ) )
+        t1.update(1)
+    db = pd.DataFrame(db_list)
+    db.to_pickle(df_path)
     return db
+
+
+
+"""
+Reads data-frame information from database
+Args:
+    records:  list of data
+Returns:
+    Dictionary-representation of the dataframe
+"""
+def read_db(db_df):
+    stations_mapping = {}
+    # First step: organize the dataframe with respect to stations
+    grouped = group_by(db_df, 'station')
+    unique_stations = np.unique(db_df['station'])
+
+    # Iterating throw stations
+    for station in unique_stations:
+        stations_mapping[station] = {}
+        cropped_df = grouped[grouped.station == station]
+        sequences = sorted(cropped_df['seq'].values)
+        for seq in sequences:
+            row = cropped_df.query(f'station == "{station}" and seq=={seq}', inplace=False)
+            stations_mapping[station][seq] = row['df_path'].values[0]
+    return stations_mapping
