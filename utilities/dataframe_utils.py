@@ -5,8 +5,6 @@ import pickle as pkl
 #from tqdm.notebook import tqdm
 from tqdm import tqdm
 
-from utilities import dataloader
-from utilities import config
 from utilities.utility import create_dummy_image
 from utilities.utility import dummy_crop_image
 
@@ -14,11 +12,11 @@ from utilities.sequencer_utils import time_in_seconds
 from utilities.sequencer_utils import convert_to_epoch
 from utilities.utility import generate_file_name
 
-# To remove later
+# To set to 0 later
 DEBUG = 1
-ROOT_DIR = '.'
 
-from utilities.sequencer import time_in_seconds
+# Root directory
+ROOT_DIR = '.'
 
 
 """
@@ -138,7 +136,7 @@ Args:
 Returns:
     Dataframe with records pointing to the files locations
 """
-def write_blocks_on_disk(records, list_stations, root_dir = ROOT_DIR + '/data/preprocessed/', slice_size = 30000):
+def write_blocks_on_disk(records, list_stations, root_dir = ROOT_DIR + '/data/preprocessed/', slice_size = 30000, df_path = 'database.db' ):
     db_list = []
     t1 = tqdm(total=len(list_stations))
     for s in list_stations:
@@ -159,7 +157,7 @@ def write_blocks_on_disk(records, list_stations, root_dir = ROOT_DIR + '/data/pr
             pkl.dump(b, open(filepath, "wb" ) )
         t1.update(1)
     db = pd.DataFrame(db_list)
-    db.to_pickle(ROOT_DIR + '/database.db')
+    db.to_pickle(df_path)
     return db
 
 

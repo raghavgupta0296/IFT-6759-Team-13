@@ -1,6 +1,5 @@
 import pandas as pd
-
-MIN_TIME = 15
+import datetime as dt
 
 
 """
@@ -23,7 +22,7 @@ Returns:
     (current + 15 min * offset)
 """
 def next_time(start_time, offset):
-    return start_time + pd.Timedelta(str(offset * MIN_TIME) + ' minutes')
+    return start_time + pd.Timedelta(str(offset) + ' seconds')
 
 
 """
@@ -35,7 +34,7 @@ Returns:
 """
 def time_in_seconds(pd_timestamp):
     df_time = pd.to_datetime(pd_timestamp)
-    return (df_time.hour*60+df_time.minute)*60 + df_time.second
+    return (df_time.hour * 60 + df_time.minute) * 60 + df_time.second
 
 
 """
@@ -111,3 +110,6 @@ def intersect_sorted_lists(l1, l2):
             id1 += 1
             id2 += 1
     return res
+
+
+
