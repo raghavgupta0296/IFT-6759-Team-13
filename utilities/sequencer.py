@@ -226,7 +226,6 @@ class Sequencer:
                           % (i, station_name, end_index))
                     continue
                 print('INFO: batch %d, station %s: found %d sequences...' % (i, station_name, len(sequences_list)))
-
                 # updating current index
                 self._update_index(station_name, end_index)
                 print('INFO: batch %d, station %s new index is %d...' % (

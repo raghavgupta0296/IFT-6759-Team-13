@@ -9,6 +9,7 @@ from utilities import dataloader
 from utilities import config
 from utilities.utility import create_dummy_image
 from utilities.utility import dummy_crop_image
+
 from utilities.sequencer_utils import time_in_seconds
 from utilities.sequencer_utils import convert_to_epoch
 from utilities.utility import generate_file_name
@@ -16,6 +17,9 @@ from utilities.utility import generate_file_name
 # To remove later
 DEBUG = 1
 ROOT_DIR = '.'
+
+from utilities.sequencer import time_in_seconds
+
 
 """
 Groups the dataframe per column and sorts it with respect to timestamps
@@ -30,8 +34,6 @@ def group_by(df, column):
     except KeyError:
         return None
     return grouped
-
-
 
 """
 Generates the intermediate dictionaries that will be used to produce data chunks for the model
