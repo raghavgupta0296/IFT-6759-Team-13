@@ -14,6 +14,7 @@ import numpy as np
 import pandas as pd
 import tensorflow as tf
 from tqdm import tqdm
+import os,binascii
 
 import config
 from utilities import utils
@@ -25,7 +26,7 @@ Args:
 Returns:
     string of size 'length' containing random characters
 """
-def get_file_name(length = 15):
+def generate_file_name(length = 10):
     return binascii.b2a_hex(os.urandom(length)).decode('ascii')
 
 # loads the pickle dataframe containing data paths and targets information
