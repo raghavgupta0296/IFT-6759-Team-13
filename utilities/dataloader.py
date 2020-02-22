@@ -250,14 +250,37 @@ class SimpleDataLoader(tf.data.Dataset):
             yield (x,y)
 
 def store_numpy(ndarray_dict,filepath):
+    os.makedirs('npz_store',exist_ok=True)
     path = os.path.splitext(os.path.basename(filepath))[0] + ".npz"
     path = os.path.join('npz_store',path)
     np.savez(path, **ndarray_dict)
 
+def store_pickle(ndarray_dict,filepath):
+    os.makedirs('pickle_store',exist_ok=True)
+    path = os.path.splitext(os.path.basename(filepath))[0] + ".dat"
+    path = os.path.join('pickle_store',path)
+    # np.savez(path, **ndarray_dict)
+    with open(path, 'wb') as outfile:
+        pickle.dump(ndarray_dict, outfile, protocol=pickle.HIGHEST_PROTOCOL)
+
+def load_pickle(filepath):
+    path = os.path.splitext(os.path.basename(filepath))[0] + ".dat"
+    path = os.path.join('pickle_store',path)
+    # np.savez(path, **ndarray_dict)
+    tic = time.time()
+    with open(path, 'rb') as infile:
+        ndarray_dict = pickle.load(infile)
+    toc = time.time()
+    print("pkl:",toc-tic)
+    return ndarray_dict
+
 def load_numpy(filepath):
     path = os.path.splitext(os.path.basename(filepath))[0] + ".npz"
     path = os.path.join('npz_store',path)
+    tic = time.time()
     ndarray_dict = np.load(path)
+    toc = time.time()
+    print("npz:",toc-tic)
     return ndarray_dict
 
 # generates t0-1 and t0 data
@@ -344,14 +367,11 @@ class SequenceDataLoaderMemChunks(tf.data.Dataset):
             END_IDX = STEP_SIZE*3
         counter = 0
 
-        k_sequences = 1 # in the past, addition to T0 
-        img_sequence_step = 2
+        k_sequences = args.k_sequences # in the past, addition to T0 
+        img_sequence_step = args.img_sequence_step
         GHI_sequence_steps = [4,12,24] # in the future, in addition to T0
-        GHI_size = len(GHI_sequence_steps)
-
-        def get_GHI_pairs_2(df):
-            
-
+        GHI_sequence_steps = GHI_sequence_steps[:args.future_ghis]
+        GHI_sequence_steps.reverse()
         for path in tqdm(unique_paths):
 
             # samples = fetch_all_samples_hdf5(args,path)
@@ -385,27 +405,45 @@ class SequenceDataLoaderMemChunks(tf.data.Dataset):
                     matching_offsets_GHIs = np.intersect1d(matching_offsets_GHIs, matching_offsets_GHIs + GHI_sequence_step)
                 # matching_offsets_GHIs = np.intersect1d(matching_offsets_imgs, matching_offsets_imgs + GHI_sequence_step)
 
+                GHI_pairs_list = []
+                # CS_GHI_pairs_list = []
+                for GHI_sequence_step in GHI_sequence_steps:
+                    GHI_pairs_list.append(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs - GHI_sequence_step)].GHI.values)
+                GHI_pairs_list.append(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs)].GHI.values)
+                #     CS_GHI_pairs_list.append(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs - GHI_sequence_step)].CLEARSKY_GHI.values)
+                # GHI_pairs_list.append(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs)].CLEARSKY_GHI.values)
 
-                GHI_pairs = zip(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs - GHI_sequence_step )].GHI.values, 
-                    df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs)].GHI.values)
+                # GHI_pairs = zip(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs - GHI_sequence_step )].GHI.values, 
+                #     df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs)].GHI.values)
+                GHI_pairs = zip(*GHI_pairs_list)
 
                 # for images
                 # offset_pairs = zip(matching_offsets-4,matching_offsets)
-                offset_pairs = zip(matching_offsets_imgs - img_sequence_step,matching_offsets_imgs)
-                
+                offsets_pairs_list = []
+                for i in range(k_sequences):
+                    offsets_pairs_list.append(matching_offsets_imgs - (k_sequences + i))
+                offsets_pairs_list.append(matching_offsets_imgs)
+                offset_pairs = zip(*offsets_pairs_list)
+                # offset_pairs = zip(matching_offsets_imgs - img_sequence_step, matching_offsets_imgs)
+
                 # example_pairs[station] = zip(offset_pairs,GHI_pairs)
                 sample = samples[station]
-                example_pair = zip(offset_pairs,GHI_pairs)
-                for (offset_1,offset_0),(GHI_0,GHI_plus_1) in example_pair:
+                example_pair = zip(offset_pairs, GHI_pairs)
+                # for (offset_1,offset_0),(GHI_0,GHI_plus_1) in example_pair:
+                for offsets,GHIs in example_pair:
                     # for a in ex_pair:
                     # print(list(offset))
-                    img_1 = sample[offset_1].swapaxes(0,1).swapaxes(1,2)
-                    img_0 = sample[offset_0].swapaxes(0,1).swapaxes(1,2)
+                    imgs = []
+                    for offset in offsets:
+                        img = sample[offset].swapaxes(0,1).swapaxes(1,2)
+                        imgs.append(img)
+                    # img_1 = sample[offset_1].swapaxes(0,1).swapaxes(1,2)
+                    # img_0 = sample[offset_0].swapaxes(0,1).swapaxes(1,2)
                     # tic = time.time()
                     # print(tic-toc)
                     # print(counter)
                     # counter += 1
-                    yield (img_1,img_0),(GHI_0,GHI_plus_1)
+                    yield imgs,GHIs
                     # yield (img_1,img_0),(GHI_0)
                 # print(example_pairs)
 
@@ -413,6 +451,9 @@ def iterate_and_fetch_all_samples_hdf5(args,paths):
     for path in paths:
         samples = fetch_all_samples_hdf5(args,path)
         store_numpy(samples,path)
+        store_pickle(samples,path)
+        load_numpy(samples,path)
+        load_pickle(samples,path)
         print("stored %s"%path)
 
 # generates t0-1 and t0 data

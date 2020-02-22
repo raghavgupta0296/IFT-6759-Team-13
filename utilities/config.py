@@ -33,6 +33,10 @@ def init_args():
 
 	parser.add_argument('--crop_size',default=CROP_SIZE,help='window size for cropping station image from satellite image.')    
 	parser.add_argument('--batch_size',default=BATCH_SIZE,help='batch size for training data.')    
+	parser.add_argument('--k_sequences',default=1,help='how many image sequences in the past to take')
+	parser.add_argument('--img_sequence_step',default=4,help='step size for k_sequences. in offset unit terms')    
+	parser.add_argument('--future_ghis',default=1,help='''how many future GHIs to predict apart from T0.
+		Future GHIs predicted: [+1hr] if 1, [+1hr,+3hr] if 2, [+1hr,+3hr,+6hr] if 3,''')    
 	parser.add_argument('-d','--debug',action="store_true",help='debugs on a limited amount of data and model capacity')
 	parser.add_argument('-e','--epochs',default=EPOCHS,type=int,help='number of passes on the full dataset to train the model on')
 

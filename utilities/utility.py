@@ -123,8 +123,8 @@ def fetch_all_samples_hdf5(args,h5_data_path,dataframe_path=None):
     raw_data = np.zeros((archive_lut_size, len(channels), 650, 1500), dtype=np.uint8)
     for channel_idx, channel_name in enumerate(channels):
         assert channel_name in h5_data, f"missing channel: {channels}"
-        norm_min = h5_data[channel_name].attrs.get("orig_min", None)
-        norm_max = h5_data[channel_name].attrs.get("orig_max", None)
+        # norm_min = h5_data[channel_name].attrs.get("orig_min", None)
+        # norm_max = h5_data[channel_name].attrs.get("orig_max", None)
         channel_data = [utils.fetch_hdf5_sample(channel_name, h5_data, idx) for idx in range(archive_lut_size)]
         assert all([array is None or array.shape == (650, 1500) for array in channel_data]), \
             "one of the saved channels had an expected dimension"
@@ -134,7 +134,7 @@ def fetch_all_samples_hdf5(args,h5_data_path,dataframe_path=None):
                 if copy_last_if_missing and last_valid_array_idx is not None:
                     raw_data[array_idx, channel_idx, :, :] = raw_data[last_valid_array_idx, channel_idx, :, :]
                 continue
-            array = (((array.astype(np.float32) - norm_min) / (norm_max - norm_min)) * 255).astype(np.uint8)
+            # array = (((array.astype(np.float32) - norm_min) / (norm_max - norm_min)) * 255).astype(np.uint8)
             # array = cv.applyColorMap(array, cv.COLORMAP_BONE)
             # for station_idx, (station_name, station) in enumerate(stations_data.items()):
             #     station_color = get_label_color_mapping(station_idx + 1).tolist()[::-1]
