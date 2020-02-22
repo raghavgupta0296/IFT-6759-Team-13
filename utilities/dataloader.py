@@ -267,20 +267,14 @@ def load_pickle(filepath):
     path = os.path.splitext(os.path.basename(filepath))[0] + ".dat"
     path = os.path.join('pickle_store',path)
     # np.savez(path, **ndarray_dict)
-    tic = time.time()
     with open(path, 'rb') as infile:
         ndarray_dict = pickle.load(infile)
-    toc = time.time()
-    print("pkl:",toc-tic)
     return ndarray_dict
 
 def load_numpy(filepath):
     path = os.path.splitext(os.path.basename(filepath))[0] + ".npz"
     path = os.path.join('npz_store',path)
-    tic = time.time()
     ndarray_dict = np.load(path)
-    toc = time.time()
-    print("npz:",toc-tic)
     return ndarray_dict
 
 # generates t0-1 and t0 data
@@ -451,9 +445,9 @@ def iterate_and_fetch_all_samples_hdf5(args,paths):
     for path in paths:
         samples = fetch_all_samples_hdf5(args,path)
         store_numpy(samples,path)
-        store_pickle(samples,path)
-        load_numpy(samples,path)
-        load_pickle(samples,path)
+        # store_pickle(samples,path)
+        # load_numpy(path)
+        # load_pickle(path)
         print("stored %s"%path)
 
 # generates t0-1 and t0 data
