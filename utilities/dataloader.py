@@ -22,7 +22,7 @@ from utilities.utility import *
 
 # loads dataset and iterates over dataframe rows as well as hdf5 and nc files for processing
 def load_dataset(args):
-    catalog = load_catalog(args)
+    catalog = load_catalog(args.data_catalog_path)
     for index, row in catalog.iterrows():
         ncdf_path = row['ncdf_path']
         hdf5_8 = row['hdf5_8bit_path']
@@ -319,7 +319,6 @@ class SequenceDataLoader(tf.data.Dataset):
                     img_0 = samples[station][offset_0]
                     yield (img_1,img_0),(GHI_1,GHI_0) 
 
-
 # generates t0-1 and t0 data
 class SequenceDataLoaderMemChunks(tf.data.Dataset):
 
@@ -334,7 +333,7 @@ class SequenceDataLoaderMemChunks(tf.data.Dataset):
     def _generator(args, catalog):
 
         unique_paths = pd.unique(catalog['hdf5_8bit_path'].values.ravel())
-        print(unique_paths)
+        # print(unique_paths)
         STEP_SIZE =1 # args.batch_size
         # STEP_SIZE = 
         START_IDX = 0
@@ -344,6 +343,15 @@ class SequenceDataLoaderMemChunks(tf.data.Dataset):
             STEP_SIZE = 1
             END_IDX = STEP_SIZE*3
         counter = 0
+
+        k_sequences = 1 # in the past, addition to T0 
+        img_sequence_step = 2
+        GHI_sequence_steps = [4,12,24] # in the future, in addition to T0
+        GHI_size = len(GHI_sequence_steps)
+
+        def get_GHI_pairs_2(df):
+            
+
         for path in tqdm(unique_paths):
 
             # samples = fetch_all_samples_hdf5(args,path)
@@ -355,27 +363,35 @@ class SequenceDataLoaderMemChunks(tf.data.Dataset):
             offsets_1 = {} # T0 - 1
             offsets_0 = {} # T0
             example_pairs = {}
-            
+            offsets_list = []
             for station in args.station_data.keys():
                 df = grouped[grouped.station == station]
                 argsort = np.argsort(df['hdf5_8bit_offset'].values)
                 offsets_1[station] = df['hdf5_8bit_offset'].values[argsort]
-                offsets_0[station] = offsets_1[station] + 4
+                offsets_0[station] = offsets_1[station] + img_sequence_step
+                matching_offsets_imgs = df['hdf5_8bit_offset'].values[argsort]
+                for i in range(k_sequences):
+                    matching_offsets_imgs = np.intersect1d(matching_offsets_imgs, matching_offsets_imgs + img_sequence_step )
                 # offsets_plus_1[station] = offsets_1[station] + 8
                 
                 # if offsets+4 offset exists, we create pairs using those offsets+4 since T0-1 exists by definition
-                matching_offsets = np.intersect1d(offsets_1[station],offsets_0[station])
+                # matching_offsets_imgs = np.intersect1d(offsets_1[station],offsets_0[station])
                 # pairs = zip(matching_offsets-4,matching_offsets)
 
                 # For GHIs
-                matching_offsets_GHIs = np.intersect1d(matching_offsets, matching_offsets + 4)
+                
+                matching_offsets_GHIs = matching_offsets_imgs
+                for GHI_sequence_step in GHI_sequence_steps:
+                    matching_offsets_GHIs = np.intersect1d(matching_offsets_GHIs, matching_offsets_GHIs + GHI_sequence_step)
+                # matching_offsets_GHIs = np.intersect1d(matching_offsets_imgs, matching_offsets_imgs + GHI_sequence_step)
 
-                GHI_pairs = zip(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs-4)].GHI.values, 
+
+                GHI_pairs = zip(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs - GHI_sequence_step )].GHI.values, 
                     df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs)].GHI.values)
 
                 # for images
                 # offset_pairs = zip(matching_offsets-4,matching_offsets)
-                offset_pairs = zip(matching_offsets_GHIs-4,matching_offsets_GHIs)
+                offset_pairs = zip(matching_offsets_imgs - img_sequence_step,matching_offsets_imgs)
                 
                 # example_pairs[station] = zip(offset_pairs,GHI_pairs)
                 sample = samples[station]
@@ -383,13 +399,14 @@ class SequenceDataLoaderMemChunks(tf.data.Dataset):
                 for (offset_1,offset_0),(GHI_0,GHI_plus_1) in example_pair:
                     # for a in ex_pair:
                     # print(list(offset))
-                    img_1 = sample[offset_1].swapaxes(1,2).swapaxes(0,1)
-                    img_0 = sample[offset_0].swapaxes(1,2).swapaxes(0,1)
+                    img_1 = sample[offset_1].swapaxes(0,1).swapaxes(1,2)
+                    img_0 = sample[offset_0].swapaxes(0,1).swapaxes(1,2)
                     # tic = time.time()
                     # print(tic-toc)
                     # print(counter)
                     # counter += 1
                     yield (img_1,img_0),(GHI_0,GHI_plus_1)
+                    # yield (img_1,img_0),(GHI_0)
                 # print(example_pairs)
 
 def iterate_and_fetch_all_samples_hdf5(args,paths):
@@ -475,7 +492,7 @@ class SequenceDataLoaderThreaded(tf.data.Dataset):
 
 # loads dataset and iterates over dataframe rows as well as hdf5 and nc files for processing
 def load_dataset(args):
-    catalog = load_catalog(args)
+    catalog = load_catalog(args.data_catalog_path)
     catalog = pre_process(catalog)
     
     # print(catalog)
@@ -499,7 +516,7 @@ def load_dataset(args):
 
 # loads dataset and iterates over dataframe rows as well as hdf5 and nc files for processing
 def load_dataset_seq(args):
-    catalog = load_catalog(args)
+    catalog = load_catalog(args.data_catalog_path)
     # catalog = pre_process(catalog)
     
     # print(catalog)
@@ -510,8 +527,8 @@ def load_dataset_seq(args):
     # tf_set = tf.data.Dataset.from_generator(iterate_dataset, (tf.float32,tf.float32), args=(args,catalog))
     # print(tf_set)
 
-    # sdl = SequenceDataLoaderThreaded(args, catalog)
-    sdl = SequenceDataLoaderMemChunks(args, catalog)
+    sdl = SequenceDataLoaderThreaded(args, catalog)
+    # sdl = SequenceDataLoaderMemChunks(args, catalog)
     # sdl = sdl.map(lambda x,y: (x,y), num_parallel_calls=4)
     sdl = sdl.prefetch(tf.data.experimental.AUTOTUNE)
     

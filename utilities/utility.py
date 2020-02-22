@@ -29,8 +29,8 @@ def get_file_name(length = 15):
     return binascii.b2a_hex(os.urandom(length)).decode('ascii')
 
 # loads the pickle dataframe containing data paths and targets information
-def load_catalog(args):
-    f = open(args.data_catalog_path,"rb")
+def load_catalog(path):
+    f = open(path,"rb")
     dataset = pickle.load(f)
     f.close()
     return dataset

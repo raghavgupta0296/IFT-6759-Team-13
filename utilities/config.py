@@ -25,7 +25,9 @@ def init_args():
 		help='choose either hdf5 8bit or 16bit')
 
 	data_catalog = os.path.join(ROOT_DATA_PATH,RAW_DATA_CATALOG)
-	parser.add_argument('--data_catalog_path',default=data_catalog,help='catalog absolute file path (dataframe) which contains the image paths, ghi and other metadata')
+	parser.add_argument('--data_catalog_path',default=data_catalog,help='train catalog absolute file path (dataframe) which contains the image paths, ghi and other metadata')
+	parser.add_argument('--val_catalog_path',default='valid_df',help='validation catalog absolute file path (dataframe) which contains the image paths, ghi and other metadata')
+	parser.add_argument('--test_catalog_path',default='test_df',help='test catalog absolute file path (dataframe) which contains the image paths, ghi and other metadata')
 	parser.add_argument('--station_data',default=STATION_INFO,help='catalog absolute file path (dataframe) which contains the image paths, ghi and other metadata')
 	parser.add_argument('--channels',default=CHANNELS,help='list of channels to extract')
 
