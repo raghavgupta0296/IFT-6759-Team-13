@@ -8,7 +8,7 @@ class Sequencer:
 
     # Init method
     def __init__(self, stations_names, stations_mappings, offset=1800, seq_length=16, max_batch_size=50, shuffle=False):
-        self._MAX_MEM_SIZE = 100
+        self._MAX_MEM_SIZE = 1000
         self._stations_names = stations_names
         self._stations_mappings = stations_mappings
         self._offset = offset
@@ -19,6 +19,7 @@ class Sequencer:
         self._current_seq_num = {name: 0 for name in stations_names}
         self._memory_segments = {name: [] for name in stations_names}
         self._number_of_memory_loads = 0
+        print('Calling sequencer with offset = %d, seq_length = %d and batch size = %d' %( offset, seq_length, max_batch_size))
 
     # Checks whether we have more
     def _get_seq_number(self, station_name):
@@ -85,12 +86,14 @@ class Sequencer:
     def _truncate_memory_segment(self, station_name, size):
         mem_list = self._memory_segments[station_name]
         if mem_list:
-            del (mem_list[:size])
+            self._memory_segments[station_name] = mem_list[size:]
+            
 
     # Avoids the lists to grow exponentially
     def _adjust_memory_segment(self, station_name):
         index = self._current_indexes[station_name]
         if index > self._MAX_MEM_SIZE:
+            print('INFO: Memory cleanup...')
             self._truncate_memory_segment(station_name, index)
             # Update the index
             self._update_index(station_name, 0)
@@ -123,19 +126,20 @@ class Sequencer:
         # Checking first if we have enough data
         curr_index = self._current_indexes[station_name]
         size = len(mem_list)
-        today = self._read_day(mem_list[curr_index])
-        last_day = self._read_day(mem_list[size - 1])
-
-        if last_day == today:
+        now = self._read_epoch_time(mem_list[curr_index])
+        then = self._read_epoch_time(mem_list[size - 1])
+        DAY = 86400
+        if (then - now) < DAY:
             print('INFO: Loading segment for station \'%s\'' % station_name)
             attempt = self._load_segment(station_name)
             if attempt != 1:
                 print('WARNING: Failed to get valid segment for station \'%s\'' % station_name)
-                return -1
+                return size - 1
             print('INFO: sequence number for station %s is now %d' % (station_name, seq))
 
         # Getting 1 day segment
         next_day = -1
+        today = self._read_day(mem_list[curr_index])
         last_index = 0
         for last_index in range(curr_index + 1, len(mem_list)):
             next_day = self._read_day(mem_list[last_index])
@@ -185,54 +189,51 @@ class Sequencer:
         batch_size = self._max_batch_size
         batch = []
         # Stations Ids
-        # station_Ids = [0]
+        #station_Ids = [0]
         station_Ids = [i for i in range(len(self._stations_names))]
 
         # Main loop
         oos_stations = 0
         while len(batch) < batch_size and oos_stations < len(station_Ids):
-            i = len(batch)
             if self._shuffle:
                 shuffle(station_Ids)
             for station_id in station_Ids:
                 station_name = self._stations_names[station_id]
-                print('INFO: batch %d, preparing data for station %s...' % (i, station_name))
+                print('INFO: preparing data for station %s...' %station_name)
                 memory_segment = self._memory_segments[station_name]
                 start_index = self._current_indexes[station_name]
-                print('INFO: batch %d, station %s. Initial index is %d...' % (i, station_name, start_index))
+                print('INFO: station %s. Initial index is %d...' % (station_name, start_index))
                 end_index = self._get_valid_data_segment(station_name)
                 if end_index == -1:
                     self._update_index(station_name, len(memory_segment) - 1)
                     # self._adjust_memory_segment(station_name)
-                    print('INFO: batch %d, station %s: NO sequence found, updating index to %d and continuing...'
-                          % (i, station_name, self._current_indexes[station_name]))
+                    print('INFO: station %s: NO sequence found, updating index to %d and continuing...'
+                          % (station_name, self._current_indexes[station_name]))
                     oos_stations += 1
                     continue
 
-                print('INFO: batch %d, station %s, reading segment[%d, %d]...' % (
-                i, station_name, start_index, end_index))
+                print('INFO: station %s, reading segment[%d, %d]...' % (station_name, start_index, end_index))
                 view = memory_segment[start_index:end_index]
 
-                print('INFO: batch %d, station %s: sequence detection...' % (i, station_name))
+                print('INFO: station %s: sequence detection...' % (station_name))
                 sequences_list = self._detect_sequences_in_segment(start_index, view)
-                if not sequences_list or len(sequences_list) == 1:
+                if not sequences_list:
                     # No sequence found
                     self._update_index(station_name, end_index)
                     # self._adjust_memory_segment(station_name)
-                    print('INFO: batch %d, station %s: NO sequence found, updating index to %d and continuing...'
-                          % (i, station_name, end_index))
+                    print('INFO: station %s: NO sequence found, updating index to %d and continuing...'
+                          % (station_name, end_index))
                     continue
-                print('INFO: batch %d, station %s: found %d sequences...' % (i, station_name, len(sequences_list)))
+                print('INFO: station %s: found %d sequences...' % (station_name, len(sequences_list)))
                 # updating current index
                 self._update_index(station_name, end_index)
-                print('INFO: batch %d, station %s new index is %d...' % (
-                i, station_name, self._current_indexes[station_name]))
+                print('INFO: station %s new index is %d...' % (station_name, self._current_indexes[station_name]))
 
                 # Cleaning up memory in case list have became very large
                 # self._adjust_memory_segment(station_name)
 
                 # Append sequence to the batch
-                print('INFO: batch %d, station %s: Adding the data to the batch...' % (i, station_name))
+                print('INFO: station %s: Adding the data to the batch...' % (station_name))
                 # Copying over the data
                 for seq in sequences_list:
                     sequence = []
@@ -240,4 +241,7 @@ class Sequencer:
                         sequence.append(memory_segment[s])
                     batch.append(sequence)
 
+                # Memory cleanup
+                #for station_id in station_Ids:
+                #    self._adjust_memory_segment(station_name)
         return batch
