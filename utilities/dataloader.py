@@ -5,7 +5,7 @@ from utilities.utility import map_coord_to_pixel
 from utilities.utility import fetch_channel_samples
 from utilities.utility import plot_and_save_image
 from utilities.config import init_args
-from utilities.config import CROP_SIZE
+from utilities.config import CROP_SIZE, get_datetime_attrs
 from matplotlib.patches import Rectangle
 
 import time, threading
@@ -322,7 +322,8 @@ class SequenceDataLoader(tf.data.Dataset):
                 # if offsets+4 offset exists, we create pairs using those offsets+4 since T0-1 exists by definition
                 matching_offsets = np.intersect1d(offsets_1[station],offsets_0[station])
                 # pairs = zip(matching_offsets-4,matching_offsets)
-                GHI_pairs = zip(df[df.hdf5_8bit_offset.isin(matching_offsets-4)].GHI.values, df[df.hdf5_8bit_offset.isin(matching_offsets)].GHI.values)
+                GHI_pairs = zip(df[df.hdf5_8bit_offset.isin(matching_offsets-4)].GHI.values,
+                    df[df.hdf5_8bit_offset.isin(matching_offsets)].GHI.values)
                 offset_pairs = zip(matching_offsets-4,matching_offsets)
                 
                 example_pairs[station] = zip(offset_pairs,GHI_pairs)
@@ -364,9 +365,10 @@ class SequenceDataLoaderMemChunks(tf.data.Dataset):
 
         k_sequences = args.k_sequences # in the past, addition to T0 
         img_sequence_step = args.img_sequence_step
-        GHI_sequence_steps = [4,12,24] # in the future, in addition to T0
+        GHI_sequence_steps = [4,8,12] # in the future, in addition to T0
+        GHI_sequence_steps_reverse = [24,20,12,0][-(args.future_ghis+1):]
         GHI_sequence_steps = GHI_sequence_steps[:args.future_ghis]
-        GHI_sequence_steps.reverse()
+        # GHI_sequence_steps.reverse()
         while True:
             for path in unique_paths:
 
@@ -395,24 +397,25 @@ class SequenceDataLoaderMemChunks(tf.data.Dataset):
                     # pairs = zip(matching_offsets-4,matching_offsets)
 
                     # For GHIs
-                
                     matching_offsets_GHIs = matching_offsets_imgs
                     for GHI_sequence_step in GHI_sequence_steps:
                         matching_offsets_GHIs = np.intersect1d(matching_offsets_GHIs, matching_offsets_GHIs + GHI_sequence_step)
                     # matching_offsets_GHIs = np.intersect1d(matching_offsets_imgs, matching_offsets_imgs + GHI_sequence_step)
 
                     GHI_pairs_list = []
-                    # CS_GHI_pairs_list = []
-                    for GHI_sequence_step in GHI_sequence_steps:
+                    CS_GHI_pairs_list = []
+                    for i, GHI_sequence_step in enumerate(GHI_sequence_steps_reverse):
                         GHI_pairs_list.append(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs - GHI_sequence_step)].GHI.values)
                     GHI_pairs_list.append(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs)].GHI.values)
-                    #     CS_GHI_pairs_list.append(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs - GHI_sequence_step)].CLEARSKY_GHI.values)
+                        CS_GHI_pairs_list.append(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs - GHI_sequence_step)].CLEARSKY_GHI.values)
                     # GHI_pairs_list.append(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs)].CLEARSKY_GHI.values)
 
                     # GHI_pairs = zip(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs - GHI_sequence_step )].GHI.values, 
                     #     df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs)].GHI.values)
                     GHI_pairs = zip(*GHI_pairs_list)
-
+                    CS_GHI_pairs = zip(*CS_GHI_pairs_list)
+                    date_time_attrs = [get_datetime_attrs(string) for string in 
+                        df[df.hdf5_8bit_offset.isin(matching_offsets_imgs)]['iso-datetime'].values ]
                     # for images
                     # offset_pairs = zip(matching_offsets-4,matching_offsets)
                     offsets_pairs_list = []
@@ -424,22 +427,19 @@ class SequenceDataLoaderMemChunks(tf.data.Dataset):
 
                     # example_pairs[station] = zip(offset_pairs,GHI_pairs)
                     sample = samples[station]
-                    example_pair = zip(offset_pairs, GHI_pairs)
+                    example_pair = zip(offset_pairs, date_time_attrs, CS_GHI_pairs, GHI_pairs)
                     # for (offset_1,offset_0),(GHI_0,GHI_plus_1) in example_pair:
-                    for offsets,GHIs in example_pair:
-                        # for a in ex_pair:
-                        # print(list(offset))
+                    for offsets, date_time_pair, CS_GHIs, GHIs in example_pair:
                         imgs = []
                         for offset in offsets:
                             img = sample[offset].swapaxes(0,1).swapaxes(1,2)
                             imgs.append(img)
                         # img_1 = sample[offset_1].swapaxes(0,1).swapaxes(1,2)
                         # img_0 = sample[offset_0].swapaxes(0,1).swapaxes(1,2)
-                        # tic = time.time()
-                        # print(tic-toc)
-                        # print(counter)
-                        # counter += 1
-                        yield imgs,GHIs
+                        if args.use_metadata:
+                            yield (imgs, date_time_pairs, CS_GHIs), (GHIs)
+                        else:
+                            yield imgs, GHIs
                     # yield (img_1,img_0),(GHI_0)
                 # print(example_pairs)
 

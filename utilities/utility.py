@@ -6,6 +6,7 @@ from time import sleep
 import typing
 
 import cv2
+from datetime import datetime
 import h5py, h5netcdf
 from line_profiler import LineProfiler
 import matplotlib.pyplot as plt
@@ -45,6 +46,10 @@ def read_hdf5(hdf5_path):
 def read_ncdf(ncdf_path):
     ncdf_data = h5netcdf.File(ncdf_path, 'r')
     return ncdf_data
+
+def get_datetime_attrs(string):
+    dt = datetime.fromisoformat(string)
+    return dt.month, dt.day, dt.hour
 
 """
 Function creating dummy image. Used for as well for experiements as for generating noise/ replacing missing images
