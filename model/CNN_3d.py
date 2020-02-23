@@ -25,7 +25,7 @@ def get_3d_model():
     model.add(Dense(2,activation='linear'))
     return model
 
-def get_3d_model_new():
+def get_3d_model_new(args):
     model = Sequential()
     model.add(Conv3D(32, kernel_size=(2,5,5), activation='relu', input_shape=(2,70,70,5)))
     model.add(MaxPooling3D(pool_size=(1,3,3)))
@@ -36,7 +36,7 @@ def get_3d_model_new():
     model.add(Conv3D(128, kernel_size=(1,2,2), activation='relu'))
     model.add(Flatten())
     model.add(Dense(100,activation='linear'))
-    model.add(Dense(2,activation='linear'))
+    model.add(Dense(args.future_ghis+1,activation='linear'))
     return model
 
 # class MyModel(Model):
