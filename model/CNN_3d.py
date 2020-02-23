@@ -31,7 +31,7 @@ def get_3d_model_new():
     model.add(MaxPooling3D(pool_size=(1,3,3)))
     model.add(Conv3D(64, kernel_size=(1,3,3), activation='relu'))
     model.add(MaxPooling3D(pool_size=(1,3,3)))
-    model.add(Conv3D(20, kernel_size=(1,3,3), activation='relu'))
+    model.add(Conv3D(128, kernel_size=(1,3,3), activation='relu'))
     model.add(Flatten())
     model.add(Dense(10,activation='linear'))
     model.add(Dense(2,activation='linear'))
@@ -137,6 +137,7 @@ if __name__ == "__main__":
         history = model.fit_generator(generator=sdl_train,
                                 validation_data=sdl_val,
                                 workers=4)
-        with open('/home/guest159/project/history/epoch_dict_%d'%epoch, 'wb') as file_pi:
+        os.makedirs('history',exist_ok=True)
+        with open('history/epoch_dict_%d'%epoch, 'wb') as file_pi:
             pickle.dump(history.history, file_pi)
         # use_multiprocessing=True,

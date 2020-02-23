@@ -343,7 +343,8 @@ class SequenceDataLoaderMemChunks(tf.data.Dataset):
 
         return tf.data.Dataset.from_generator(
             lambda: cls._generator(args,catalog),
-            output_types=(tf.float32,tf.float32)
+            output_types=(tf.float32,tf.float32),
+            output_shapes=(tf.TensorShape((None, None, None, None)), tf.TensorShape((2, )))
             # args=(args,catalog)
         )
 
