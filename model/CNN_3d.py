@@ -27,15 +27,16 @@ def get_3d_model():
 
 def get_3d_model_new(args):
     model = Sequential()
-    model.add(Conv3D(32, kernel_size=(2,5,5), activation='relu', input_shape=(2,70,70,5)))
+    model.add(Conv3D(32, kernel_size=(args.k_sequences+1,5,5),
+        padding='same',activation='relu', input_shape=(args.k_sequences+1,70,70,5)))
     model.add(MaxPooling3D(pool_size=(1,3,3)))
-    model.add(Conv3D(64, kernel_size=(1,3,3), activation='relu'))
+    model.add(Conv3D(64, kernel_size=(1,3,3), padding='same', activation='relu'))
     model.add(MaxPooling3D(pool_size=(1,3,3)))
-    model.add(Conv3D(128, kernel_size=(1,3,3), activation='relu'))
+    model.add(Conv3D(128, kernel_size=(1,3,3), padding='same', activation='relu'))
     model.add(MaxPooling3D(pool_size=(1,2,2)))
-    model.add(Conv3D(128, kernel_size=(1,2,2), activation='relu'))
+    model.add(Conv3D(128, kernel_size=(1,2,2), padding='same', activation='relu'))
     model.add(Flatten())
-    model.add(Dense(100,activation='linear'))
+    model.add(Dense(10,activation='linear'))
     model.add(Dense(args.future_ghis+1,activation='linear'))
     return model
 
@@ -123,7 +124,7 @@ if __name__ == "__main__":
     catalog_val = load_catalog(args.val_catalog_path)
     catalog_test = load_catalog(args.test_catalog_path)
 
-    model = get_3d_model_new()
+    model = get_3d_model_new(args)
     optimizer = optimizers.Adam(learning_rate=args.lr, beta_1=0.9, beta_2=0.999, amsgrad=False)
     print(model.summary())
     # exit()
