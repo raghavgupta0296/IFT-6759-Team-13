@@ -97,7 +97,7 @@ def preprocess_data(clean_df,
                     db_path = './data/database.db',
                     from_db = False,
                     offset = 18000,
-                    seq_length=17,
+                    seq_length = 17,
                     batch_size = 50):
     db = None
     stations_names = np.unique(clean_df['station']).tolist()
@@ -115,4 +115,4 @@ def preprocess_data(clean_df,
     stations_mappings = read_db(db)
 
     print('Instantiating the sequencer...')
-    return Sequencer(stations_names, stations_mappings, offset, seq_length, batch_size)
+    return Sequencer(stations_names, stations_mappings, offset = offset, seq_length = seq_length, max_batch_size = batch_size)
