@@ -30,8 +30,8 @@ def generate_file_name(length = 10):
     return binascii.b2a_hex(os.urandom(length)).decode('ascii')
 
 # loads the pickle dataframe containing data paths and targets information
-def load_catalog(args):
-    f = open(args.data_catalog_path,"rb")
+def load_catalog(path):
+    f = open(path,"rb")
     dataset = pickle.load(f)
     f.close()
     return dataset
@@ -122,8 +122,8 @@ def fetch_all_samples_hdf5(args,h5_data_path,dataframe_path=None):
     raw_data = np.zeros((archive_lut_size, len(channels), 650, 1500), dtype=np.uint8)
     for channel_idx, channel_name in enumerate(channels):
         assert channel_name in h5_data, f"missing channel: {channels}"
-        norm_min = h5_data[channel_name].attrs.get("orig_min", None)
-        norm_max = h5_data[channel_name].attrs.get("orig_max", None)
+        # norm_min = h5_data[channel_name].attrs.get("orig_min", None)
+        # norm_max = h5_data[channel_name].attrs.get("orig_max", None)
         channel_data = [utils.fetch_hdf5_sample(channel_name, h5_data, idx) for idx in range(archive_lut_size)]
         assert all([array is None or array.shape == (650, 1500) for array in channel_data]), \
             "one of the saved channels had an expected dimension"
