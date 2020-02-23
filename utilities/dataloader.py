@@ -367,78 +367,79 @@ class SequenceDataLoaderMemChunks(tf.data.Dataset):
         GHI_sequence_steps = [4,12,24] # in the future, in addition to T0
         GHI_sequence_steps = GHI_sequence_steps[:args.future_ghis]
         GHI_sequence_steps.reverse()
-        for path in tqdm(unique_paths):
+        while True:
+            for path in tqdm(unique_paths):
 
-            # samples = fetch_all_samples_hdf5(args,path)
-            # store_numpy(samples,path)
-            samples = load_numpy(path)
-            # continue
-            # grouping by paths
-            grouped = catalog[path == catalog.hdf5_8bit_path]
-            offsets_1 = {} # T0 - 1
-            offsets_0 = {} # T0
-            example_pairs = {}
-            offsets_list = []
-            for station in args.station_data.keys():
-                df = grouped[grouped.station == station]
-                argsort = np.argsort(df['hdf5_8bit_offset'].values)
-                offsets_1[station] = df['hdf5_8bit_offset'].values[argsort]
-                offsets_0[station] = offsets_1[station] + img_sequence_step
-                matching_offsets_imgs = df['hdf5_8bit_offset'].values[argsort]
-                for i in range(k_sequences):
-                    matching_offsets_imgs = np.intersect1d(matching_offsets_imgs, matching_offsets_imgs + img_sequence_step )
-                # offsets_plus_1[station] = offsets_1[station] + 8
+                # samples = fetch_all_samples_hdf5(args,path)
+                # store_numpy(samples,path)
+                samples = load_numpy(path)
+                # continue
+                # grouping by paths
+                grouped = catalog[path == catalog.hdf5_8bit_path]
+                offsets_1 = {} # T0 - 1
+                offsets_0 = {} # T0
+                example_pairs = {}
+                offsets_list = []
+                for station in args.station_data.keys():
+                    df = grouped[grouped.station == station]
+                    argsort = np.argsort(df['hdf5_8bit_offset'].values)
+                    offsets_1[station] = df['hdf5_8bit_offset'].values[argsort]
+                    offsets_0[station] = offsets_1[station] + img_sequence_step
+                    matching_offsets_imgs = df['hdf5_8bit_offset'].values[argsort]
+                    for i in range(k_sequences):
+                        matching_offsets_imgs = np.intersect1d(matching_offsets_imgs, matching_offsets_imgs + img_sequence_step )
+                    # offsets_plus_1[station] = offsets_1[station] + 8
                 
-                # if offsets+4 offset exists, we create pairs using those offsets+4 since T0-1 exists by definition
-                # matching_offsets_imgs = np.intersect1d(offsets_1[station],offsets_0[station])
-                # pairs = zip(matching_offsets-4,matching_offsets)
+                    # if offsets+4 offset exists, we create pairs using those offsets+4 since T0-1 exists by definition
+                    # matching_offsets_imgs = np.intersect1d(offsets_1[station],offsets_0[station])
+                    # pairs = zip(matching_offsets-4,matching_offsets)
 
-                # For GHIs
+                    # For GHIs
                 
-                matching_offsets_GHIs = matching_offsets_imgs
-                for GHI_sequence_step in GHI_sequence_steps:
-                    matching_offsets_GHIs = np.intersect1d(matching_offsets_GHIs, matching_offsets_GHIs + GHI_sequence_step)
-                # matching_offsets_GHIs = np.intersect1d(matching_offsets_imgs, matching_offsets_imgs + GHI_sequence_step)
+                    matching_offsets_GHIs = matching_offsets_imgs
+                    for GHI_sequence_step in GHI_sequence_steps:
+                        matching_offsets_GHIs = np.intersect1d(matching_offsets_GHIs, matching_offsets_GHIs + GHI_sequence_step)
+                    # matching_offsets_GHIs = np.intersect1d(matching_offsets_imgs, matching_offsets_imgs + GHI_sequence_step)
 
-                GHI_pairs_list = []
-                # CS_GHI_pairs_list = []
-                for GHI_sequence_step in GHI_sequence_steps:
-                    GHI_pairs_list.append(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs - GHI_sequence_step)].GHI.values)
-                GHI_pairs_list.append(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs)].GHI.values)
-                #     CS_GHI_pairs_list.append(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs - GHI_sequence_step)].CLEARSKY_GHI.values)
-                # GHI_pairs_list.append(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs)].CLEARSKY_GHI.values)
+                    GHI_pairs_list = []
+                    # CS_GHI_pairs_list = []
+                    for GHI_sequence_step in GHI_sequence_steps:
+                        GHI_pairs_list.append(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs - GHI_sequence_step)].GHI.values)
+                    GHI_pairs_list.append(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs)].GHI.values)
+                    #     CS_GHI_pairs_list.append(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs - GHI_sequence_step)].CLEARSKY_GHI.values)
+                    # GHI_pairs_list.append(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs)].CLEARSKY_GHI.values)
 
-                # GHI_pairs = zip(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs - GHI_sequence_step )].GHI.values, 
-                #     df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs)].GHI.values)
-                GHI_pairs = zip(*GHI_pairs_list)
+                    # GHI_pairs = zip(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs - GHI_sequence_step )].GHI.values, 
+                    #     df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs)].GHI.values)
+                    GHI_pairs = zip(*GHI_pairs_list)
 
-                # for images
-                # offset_pairs = zip(matching_offsets-4,matching_offsets)
-                offsets_pairs_list = []
-                for i in range(k_sequences):
-                    offsets_pairs_list.append(matching_offsets_imgs - (k_sequences + i))
-                offsets_pairs_list.append(matching_offsets_imgs)
-                offset_pairs = zip(*offsets_pairs_list)
-                # offset_pairs = zip(matching_offsets_imgs - img_sequence_step, matching_offsets_imgs)
+                    # for images
+                    # offset_pairs = zip(matching_offsets-4,matching_offsets)
+                    offsets_pairs_list = []
+                    for i in range(k_sequences):
+                        offsets_pairs_list.append(matching_offsets_imgs - (k_sequences + i))
+                    offsets_pairs_list.append(matching_offsets_imgs)
+                    offset_pairs = zip(*offsets_pairs_list)
+                    # offset_pairs = zip(matching_offsets_imgs - img_sequence_step, matching_offsets_imgs)
 
-                # example_pairs[station] = zip(offset_pairs,GHI_pairs)
-                sample = samples[station]
-                example_pair = zip(offset_pairs, GHI_pairs)
-                # for (offset_1,offset_0),(GHI_0,GHI_plus_1) in example_pair:
-                for offsets,GHIs in example_pair:
-                    # for a in ex_pair:
-                    # print(list(offset))
-                    imgs = []
-                    for offset in offsets:
-                        img = sample[offset].swapaxes(0,1).swapaxes(1,2)
-                        imgs.append(img)
-                    # img_1 = sample[offset_1].swapaxes(0,1).swapaxes(1,2)
-                    # img_0 = sample[offset_0].swapaxes(0,1).swapaxes(1,2)
-                    # tic = time.time()
-                    # print(tic-toc)
-                    # print(counter)
-                    # counter += 1
-                    yield imgs,GHIs
+                    # example_pairs[station] = zip(offset_pairs,GHI_pairs)
+                    sample = samples[station]
+                    example_pair = zip(offset_pairs, GHI_pairs)
+                    # for (offset_1,offset_0),(GHI_0,GHI_plus_1) in example_pair:
+                    for offsets,GHIs in example_pair:
+                        # for a in ex_pair:
+                        # print(list(offset))
+                        imgs = []
+                        for offset in offsets:
+                            img = sample[offset].swapaxes(0,1).swapaxes(1,2)
+                            imgs.append(img)
+                        # img_1 = sample[offset_1].swapaxes(0,1).swapaxes(1,2)
+                        # img_0 = sample[offset_0].swapaxes(0,1).swapaxes(1,2)
+                        # tic = time.time()
+                        # print(tic-toc)
+                        # print(counter)
+                        # counter += 1
+                        yield imgs,GHIs
                     # yield (img_1,img_0),(GHI_0)
                 # print(example_pairs)
 

@@ -1,7 +1,7 @@
 import tensorflow as tf
 import numpy as np
 from matplotlib import pyplot as plt
-import wandb, pickle
+import wandb, pickle, os
 from tqdm import tqdm
 from tensorflow import keras
 from tensorflow.keras import layers, Model
@@ -32,8 +32,10 @@ def get_3d_model_new():
     model.add(Conv3D(64, kernel_size=(1,3,3), activation='relu'))
     model.add(MaxPooling3D(pool_size=(1,3,3)))
     model.add(Conv3D(128, kernel_size=(1,3,3), activation='relu'))
+    model.add(MaxPooling3D(pool_size=(1,2,2)))
+    model.add(Conv3D(128, kernel_size=(1,2,2), activation='relu'))
     model.add(Flatten())
-    model.add(Dense(10,activation='linear'))
+    model.add(Dense(100,activation='linear'))
     model.add(Dense(2,activation='linear'))
     return model
 
@@ -122,22 +124,28 @@ if __name__ == "__main__":
     catalog_test = load_catalog(args.test_catalog_path)
 
     model = get_3d_model_new()
-    optimizer = optimizers.Adam(learning_rate=0.005, beta_1=0.9, beta_2=0.999, amsgrad=False)
+    optimizer = optimizers.Adam(learning_rate=args.lr, beta_1=0.9, beta_2=0.999, amsgrad=False)
     print(model.summary())
     # exit()
     model.compile(loss='mean_squared_error', optimizer=optimizer)
 
-    for epoch in range(args.epochs):
-        print("EPOCH ", epoch)
+    # for epoch in range(args.epochs):
+    # print("EPOCH ", epoch)
         
-        sdl_train = SequenceDataLoaderMemChunks(args, catalog_train).batch(64)
-        sdl_val = SequenceDataLoaderMemChunks(args, catalog_val).batch(64)
-        # sdl_test = SequenceDataLoaderMemChunks(args, catalog_test)
+    sdl_train = SequenceDataLoaderMemChunks(args, catalog_train).batch(args.batch_size)
+    sdl_val = SequenceDataLoaderMemChunks(args, catalog_val).batch(args.batch_size)
+    # sdl_test = SequenceDataLoaderMemChunks(args, catalog_test)
 
-        history = model.fit_generator(generator=sdl_train,
-                                validation_data=sdl_val,
-                                workers=4)
-        os.makedirs('history',exist_ok=True)
-        with open('history/epoch_dict_%d'%epoch, 'wb') as file_pi:
-            pickle.dump(history.history, file_pi)
-        # use_multiprocessing=True,
+    # history = model.fit_generator(generator=sdl_train,
+    #                        validation_data=sdl_val,
+    #                        workers=4)
+    train_steps = args.train_steps//args.batch_size
+    val_steps = args.val_steps//args.batch_size
+    history = model.fit(x=sdl_train, validation_data=sdl_val, steps_per_epoch=train_steps, validation_steps=val_steps,
+              epochs=args.epochs, workers=4)
+    # val_result = model.evaluate(x=sdl_val)
+    os.makedirs('history',exist_ok=True)
+    print(history)
+    with open('history/epoch_dict', 'wb') as file_pi:
+        pickle.dump(history.history, file_pi)
+    # use_multiprocessing=True,

@@ -31,6 +31,9 @@ def init_args():
 	parser.add_argument('--station_data',default=STATION_INFO,help='catalog absolute file path (dataframe) which contains the image paths, ghi and other metadata')
 	parser.add_argument('--channels',default=CHANNELS,help='list of channels to extract')
 
+	parser.add_argument('--train_steps',default=100000,type=int,help='number of training examples.')
+	parser.add_argument('--val_steps',default=40000,type=int,help='number of validation examples.')
+	parser.add_argument('--lr',default=0.005,type=float,help='lr of the model.')
 	parser.add_argument('--crop_size',default=CROP_SIZE,help='window size for cropping station image from satellite image.')    
 	parser.add_argument('--batch_size',default=BATCH_SIZE,help='batch size for training data.')    
 	parser.add_argument('--k_sequences',default=1,help='how many image sequences in the past to take')
