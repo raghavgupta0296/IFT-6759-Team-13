@@ -356,7 +356,7 @@ class SequenceDataLoaderMemChunks(tf.data.Dataset):
         # STEP_SIZE = 
         START_IDX = 0
         END_IDX = STEP_SIZE*100 #len(catalog)
-        
+
         if args.debug:
             STEP_SIZE = 1
             END_IDX = STEP_SIZE*3
@@ -368,7 +368,7 @@ class SequenceDataLoaderMemChunks(tf.data.Dataset):
         GHI_sequence_steps = GHI_sequence_steps[:args.future_ghis]
         GHI_sequence_steps.reverse()
         while True:
-            for path in tqdm(unique_paths):
+            for path in unique_paths:
 
                 # samples = fetch_all_samples_hdf5(args,path)
                 # store_numpy(samples,path)

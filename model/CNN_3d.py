@@ -7,7 +7,7 @@ from tensorflow import keras
 from tensorflow.keras import layers, Model
 
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Flatten, Conv3D, MaxPooling3D
+from tensorflow.keras.layers import Dense, Flatten, Conv3D, MaxPooling3D, BatchNormalization
 from tensorflow.keras import optimizers
 
 from utilities.dataloader import SequenceDataLoader,SequenceDataLoaderMemChunks
@@ -16,6 +16,7 @@ from utilities import config
 def get_3d_model():
     model = Sequential()
     model.add(Conv3D(16, kernel_size=(2,3,3), activation='relu', input_shape=(2,70,70,5)))
+    # model.add(BatchNormalization())
     model.add(MaxPooling3D(pool_size=(1,3,3)))
     model.add(Conv3D(16, kernel_size=(1,5,5), activation='relu'))
     model.add(MaxPooling3D(pool_size=(1,3,3)))
@@ -27,14 +28,14 @@ def get_3d_model():
 
 def get_3d_model_new(args):
     model = Sequential()
-    model.add(Conv3D(32, kernel_size=(args.k_sequences+1,5,5),
+    model.add(Conv3D(64, kernel_size=(args.k_sequences+1,5,5),
         padding='same',activation='relu', input_shape=(args.k_sequences+1,70,70,5)))
     model.add(MaxPooling3D(pool_size=(1,3,3)))
-    model.add(Conv3D(64, kernel_size=(1,3,3), padding='same', activation='relu'))
-    model.add(MaxPooling3D(pool_size=(1,3,3)))
     model.add(Conv3D(128, kernel_size=(1,3,3), padding='same', activation='relu'))
+    model.add(MaxPooling3D(pool_size=(1,3,3)))
+    model.add(Conv3D(256, kernel_size=(1,3,3), padding='same', activation='relu'))
     model.add(MaxPooling3D(pool_size=(1,2,2)))
-    model.add(Conv3D(128, kernel_size=(1,2,2), padding='same', activation='relu'))
+    model.add(Conv3D(512, kernel_size=(1,2,2), padding='same', activation='relu'))
     model.add(Flatten())
     model.add(Dense(10,activation='linear'))
     model.add(Dense(args.future_ghis+1,activation='linear'))
@@ -132,9 +133,14 @@ if __name__ == "__main__":
 
     # for epoch in range(args.epochs):
     # print("EPOCH ", epoch)
-        
-    sdl_train = SequenceDataLoaderMemChunks(args, catalog_train).batch(args.batch_size)
-    sdl_val = SequenceDataLoaderMemChunks(args, catalog_val).batch(args.batch_size)
+    def preprocess(x,y):
+        if args.normalize_img:
+            x = tf.image.per_image_standardization(x)
+        if args.normalize_y:
+            y = tf.math.divide(y,10)
+        return x,y
+    sdl_train = SequenceDataLoaderMemChunks(args, catalog_train).map(preprocess).batch(args.batch_size)
+    sdl_val = SequenceDataLoaderMemChunks(args, catalog_val).map(preprocess).batch(args.batch_size)
     # sdl_test = SequenceDataLoaderMemChunks(args, catalog_test)
 
     # history = model.fit_generator(generator=sdl_train,
@@ -143,7 +149,7 @@ if __name__ == "__main__":
     train_steps = args.train_steps//args.batch_size
     val_steps = args.val_steps//args.batch_size
     history = model.fit(x=sdl_train, validation_data=sdl_val, steps_per_epoch=train_steps, validation_steps=val_steps,
-              epochs=args.epochs, workers=4)
+              epochs=args.epochs)
     # val_result = model.evaluate(x=sdl_val)
     os.makedirs('history',exist_ok=True)
     print(history)

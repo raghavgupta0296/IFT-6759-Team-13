@@ -42,7 +42,8 @@ def init_args():
 		Future GHIs predicted: [+1hr] if 1, [+1hr,+3hr] if 2, [+1hr,+3hr,+6hr] if 3,''')    
 	parser.add_argument('-d','--debug',action="store_true",help='debugs on a limited amount of data and model capacity')
 	parser.add_argument('-e','--epochs',default=EPOCHS,type=int,help='number of passes on the full dataset to train the model on')
-
+	parser.add_argument('-n','--normalize_img',action="store_true",help='normalize img or not')
+	parser.add_argument('-y','--normalize_y',action="store_true",help='normalize y or not')
 	args = parser.parse_args()
 
 	return args
