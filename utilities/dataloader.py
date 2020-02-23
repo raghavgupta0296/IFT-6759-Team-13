@@ -8,7 +8,10 @@ from utilities.config import init_args
 from utilities.config import CROP_SIZE
 from matplotlib.patches import Rectangle
 
+import time, threading
+
 import cv2 as cv
+import os
 import pickle as pkl
 import numpy as np
 import matplotlib.pyplot as plt
@@ -19,7 +22,7 @@ from utilities.utility import *
 
 # loads dataset and iterates over dataframe rows as well as hdf5 and nc files for processing
 def load_dataset(args):
-    catalog = load_catalog(args)
+    catalog = load_catalog(args.data_catalog_path)
     for index, row in catalog.iterrows():
         ncdf_path = row['ncdf_path']
         hdf5_8 = row['hdf5_8bit_path']
@@ -246,6 +249,34 @@ class SimpleDataLoader(tf.data.Dataset):
 
             yield (x,y)
 
+def store_numpy(ndarray_dict,filepath):
+    os.makedirs('npz_store',exist_ok=True)
+    path = os.path.splitext(os.path.basename(filepath))[0] + ".npz"
+    path = os.path.join('npz_store',path)
+    np.savez(path, **ndarray_dict)
+
+def store_pickle(ndarray_dict,filepath):
+    os.makedirs('pickle_store',exist_ok=True)
+    path = os.path.splitext(os.path.basename(filepath))[0] + ".dat"
+    path = os.path.join('pickle_store',path)
+    # np.savez(path, **ndarray_dict)
+    with open(path, 'wb') as outfile:
+        pickle.dump(ndarray_dict, outfile, protocol=pickle.HIGHEST_PROTOCOL)
+
+def load_pickle(filepath):
+    path = os.path.splitext(os.path.basename(filepath))[0] + ".dat"
+    path = os.path.join('pickle_store',path)
+    # np.savez(path, **ndarray_dict)
+    with open(path, 'rb') as infile:
+        ndarray_dict = pickle.load(infile)
+    return ndarray_dict
+
+def load_numpy(filepath):
+    path = os.path.splitext(os.path.basename(filepath))[0] + ".npz"
+    path = os.path.join('npz_store',path)
+    ndarray_dict = np.load(path)
+    return ndarray_dict
+
 # generates t0-1 and t0 data
 class SequenceDataLoader(tf.data.Dataset):
 
@@ -273,6 +304,9 @@ class SequenceDataLoader(tf.data.Dataset):
         for path in tqdm(unique_paths):
 
             samples = fetch_all_samples_hdf5(args,path)
+            # store_numpy(samples,path)
+
+            # continue
 
             # grouping by paths
             grouped = catalog[path == catalog.hdf5_8bit_path]
@@ -302,9 +336,200 @@ class SequenceDataLoader(tf.data.Dataset):
                     img_0 = samples[station][offset_0]
                     yield (img_1,img_0),(GHI_1,GHI_0) 
 
+# generates t0-1 and t0 data
+class SequenceDataLoaderMemChunks(tf.data.Dataset):
+
+    def __new__(cls, args, catalog):
+
+        return tf.data.Dataset.from_generator(
+            lambda: cls._generator(args,catalog),
+            output_types=(tf.float32,tf.float32),
+            output_shapes=(tf.TensorShape((None, None, None, None)), tf.TensorShape((args.future_ghis+1, )))
+            # args=(args,catalog)
+        )
+
+    def _generator(args, catalog):
+
+        unique_paths = pd.unique(catalog['hdf5_8bit_path'].values.ravel())
+        # print(unique_paths)
+        STEP_SIZE =1 # args.batch_size
+        # STEP_SIZE = 
+        START_IDX = 0
+        END_IDX = STEP_SIZE*100 #len(catalog)
+        
+        if args.debug:
+            STEP_SIZE = 1
+            END_IDX = STEP_SIZE*3
+        counter = 0
+
+        k_sequences = args.k_sequences # in the past, addition to T0 
+        img_sequence_step = args.img_sequence_step
+        GHI_sequence_steps = [4,12,24] # in the future, in addition to T0
+        GHI_sequence_steps = GHI_sequence_steps[:args.future_ghis]
+        GHI_sequence_steps.reverse()
+        while True:
+            for path in tqdm(unique_paths):
+
+                # samples = fetch_all_samples_hdf5(args,path)
+                # store_numpy(samples,path)
+                samples = load_numpy(path)
+                # continue
+                # grouping by paths
+                grouped = catalog[path == catalog.hdf5_8bit_path]
+                offsets_1 = {} # T0 - 1
+                offsets_0 = {} # T0
+                example_pairs = {}
+                offsets_list = []
+                for station in args.station_data.keys():
+                    df = grouped[grouped.station == station]
+                    argsort = np.argsort(df['hdf5_8bit_offset'].values)
+                    offsets_1[station] = df['hdf5_8bit_offset'].values[argsort]
+                    offsets_0[station] = offsets_1[station] + img_sequence_step
+                    matching_offsets_imgs = df['hdf5_8bit_offset'].values[argsort]
+                    for i in range(k_sequences):
+                        matching_offsets_imgs = np.intersect1d(matching_offsets_imgs, matching_offsets_imgs + img_sequence_step )
+                    # offsets_plus_1[station] = offsets_1[station] + 8
+                
+                    # if offsets+4 offset exists, we create pairs using those offsets+4 since T0-1 exists by definition
+                    # matching_offsets_imgs = np.intersect1d(offsets_1[station],offsets_0[station])
+                    # pairs = zip(matching_offsets-4,matching_offsets)
+
+                    # For GHIs
+                
+                    matching_offsets_GHIs = matching_offsets_imgs
+                    for GHI_sequence_step in GHI_sequence_steps:
+                        matching_offsets_GHIs = np.intersect1d(matching_offsets_GHIs, matching_offsets_GHIs + GHI_sequence_step)
+                    # matching_offsets_GHIs = np.intersect1d(matching_offsets_imgs, matching_offsets_imgs + GHI_sequence_step)
+
+                    GHI_pairs_list = []
+                    # CS_GHI_pairs_list = []
+                    for GHI_sequence_step in GHI_sequence_steps:
+                        GHI_pairs_list.append(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs - GHI_sequence_step)].GHI.values)
+                    GHI_pairs_list.append(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs)].GHI.values)
+                    #     CS_GHI_pairs_list.append(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs - GHI_sequence_step)].CLEARSKY_GHI.values)
+                    # GHI_pairs_list.append(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs)].CLEARSKY_GHI.values)
+
+                    # GHI_pairs = zip(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs - GHI_sequence_step )].GHI.values, 
+                    #     df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs)].GHI.values)
+                    GHI_pairs = zip(*GHI_pairs_list)
+
+                    # for images
+                    # offset_pairs = zip(matching_offsets-4,matching_offsets)
+                    offsets_pairs_list = []
+                    for i in range(k_sequences):
+                        offsets_pairs_list.append(matching_offsets_imgs - (k_sequences + i))
+                    offsets_pairs_list.append(matching_offsets_imgs)
+                    offset_pairs = zip(*offsets_pairs_list)
+                    # offset_pairs = zip(matching_offsets_imgs - img_sequence_step, matching_offsets_imgs)
+
+                    # example_pairs[station] = zip(offset_pairs,GHI_pairs)
+                    sample = samples[station]
+                    example_pair = zip(offset_pairs, GHI_pairs)
+                    # for (offset_1,offset_0),(GHI_0,GHI_plus_1) in example_pair:
+                    for offsets,GHIs in example_pair:
+                        # for a in ex_pair:
+                        # print(list(offset))
+                        imgs = []
+                        for offset in offsets:
+                            img = sample[offset].swapaxes(0,1).swapaxes(1,2)
+                            imgs.append(img)
+                        # img_1 = sample[offset_1].swapaxes(0,1).swapaxes(1,2)
+                        # img_0 = sample[offset_0].swapaxes(0,1).swapaxes(1,2)
+                        # tic = time.time()
+                        # print(tic-toc)
+                        # print(counter)
+                        # counter += 1
+                        yield imgs,GHIs
+                    # yield (img_1,img_0),(GHI_0)
+                # print(example_pairs)
+
+def iterate_and_fetch_all_samples_hdf5(args,paths):
+    for path in paths:
+        samples = fetch_all_samples_hdf5(args,path)
+        store_numpy(samples,path)
+        # store_pickle(samples,path)
+        # load_numpy(path)
+        # load_pickle(path)
+        print("stored %s"%path)
+
+# generates t0-1 and t0 data
+class SequenceDataLoaderThreaded(tf.data.Dataset):
+
+    def __new__(cls, args, catalog):
+
+        return tf.data.Dataset.from_generator(
+            lambda: cls._generator(args,catalog),
+            output_types=(tf.float32,tf.float32)
+            # args=(args,catalog)
+        )
+
+    def _generator(args, catalog):
+
+        unique_paths = pd.unique(catalog['hdf5_8bit_path'].values.ravel())
+        print(unique_paths)
+        STEP_SIZE =1 # args.batch_size
+        # STEP_SIZE = 
+        START_IDX = 0
+        END_IDX = STEP_SIZE*100 #len(catalog)
+        
+        if args.debug:
+            STEP_SIZE = 1
+            END_IDX = STEP_SIZE*3
+        
+        # Create a mechanism for monitoring when all threads are finished.
+        coord = tf.train.Coordinator()
+        num_threads = 5
+        threads = []      
+  
+        unique_paths = unique_paths.tolist()
+        size = len(unique_paths)
+
+        for thread_index in range(num_threads):
+            from_ = size // num_threads * (thread_index)
+            upto = size // num_threads * (thread_index + 1)
+            args1 = (args,unique_paths[from_:upto])
+            t = threading.Thread(target=iterate_and_fetch_all_samples_hdf5, args=args1)
+            t.start()
+            threads.append(t)
+
+        # Wait for all the threads to terminate.
+        coord.join(threads)
+        print("exiting")
+        return
+        # samples = fetch_all_samples_hdf5(args,path)
+        # store_numpy(samples,path)
+        #     continue
+        # grouping by paths
+        grouped = catalog[path == catalog.hdf5_8bit_path]
+        offsets_1 = {} # T0 - 1
+        offsets_0 = {} # T0
+        example_pairs = {}
+        for station in args.station_data.keys():
+            df = grouped[grouped.station == station]
+            argsort = np.argsort(df['hdf5_8bit_offset'].values)
+            offsets_1[station] = df['hdf5_8bit_offset'].values[argsort]
+            offsets_0[station] = offsets_1[station] + 4
+            
+            # if offsets+4 offset exists, we create pairs using those offsets+4 since T0-1 exists by definition
+            matching_offsets = np.intersect1d(offsets_1[station],offsets_0[station])
+            # pairs = zip(matching_offsets-4,matching_offsets)
+            GHI_pairs = zip(df[df.hdf5_8bit_offset.isin(matching_offsets-4)].GHI.values, df[df.hdf5_8bit_offset.isin(matching_offsets)].GHI.values)
+            offset_pairs = zip(matching_offsets-4,matching_offsets)
+            
+            example_pairs[station] = zip(offset_pairs,GHI_pairs)
+            # print(example_pairs)
+        for station,ex_pair in example_pairs.items():
+            # for offset,GHI in ex_pair:
+            for (offset_1,offset_0),(GHI_1,GHI_0) in ex_pair:
+            # for a in ex_pair:
+                # print(list(offset))
+                img_1 = samples[station][offset_1]
+                img_0 = samples[station][offset_0]
+                yield (img_1,img_0),(GHI_1,GHI_0) 
+
 # loads dataset and iterates over dataframe rows as well as hdf5 and nc files for processing
 def load_dataset(args):
-    catalog = load_catalog(args)
+    catalog = load_catalog(args.data_catalog_path)
     catalog = pre_process(catalog)
     
     # print(catalog)
@@ -328,7 +553,7 @@ def load_dataset(args):
 
 # loads dataset and iterates over dataframe rows as well as hdf5 and nc files for processing
 def load_dataset_seq(args):
-    catalog = load_catalog(args)
+    catalog = load_catalog(args.data_catalog_path)
     # catalog = pre_process(catalog)
     
     # print(catalog)
@@ -339,7 +564,10 @@ def load_dataset_seq(args):
     # tf_set = tf.data.Dataset.from_generator(iterate_dataset, (tf.float32,tf.float32), args=(args,catalog))
     # print(tf_set)
 
-    sdl = SequenceDataLoader(args, catalog).prefetch(tf.data.experimental.AUTOTUNE).cache()
+    sdl = SequenceDataLoaderThreaded(args, catalog)
+    # sdl = SequenceDataLoaderMemChunks(args, catalog)
+    # sdl = sdl.map(lambda x,y: (x,y), num_parallel_calls=4)
+    sdl = sdl.prefetch(tf.data.experimental.AUTOTUNE)
     
     for epoch in range(args.epochs):
         # iterate over epochs
@@ -357,7 +585,7 @@ def create_data_loader():
     pass
 
 def data_loader_main():
-    args = config.init_args()
+    args = init_args()
     load_dataset_seq(args)
 
 if __name__ == "__main__":
