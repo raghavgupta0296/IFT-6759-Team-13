@@ -15,6 +15,7 @@ import numpy as np
 import pandas as pd
 import tensorflow as tf
 from tqdm import tqdm
+import os,binascii
 
 import config
 from utilities import utils
@@ -26,7 +27,7 @@ Args:
 Returns:
     string of size 'length' containing random characters
 """
-def get_file_name(length = 15):
+def generate_file_name(length = 10):
     return binascii.b2a_hex(os.urandom(length)).decode('ascii')
 
 # loads the pickle dataframe containing data paths and targets information
@@ -68,12 +69,11 @@ def create_dummy_image():
 Dummy cropping function used for experiments. To be replaced by a valid one
 Args:
     hdf5_8bit_path:  path to file
-    stations_coordinates: dictionary containing stations coordinates
     offsets: list of valid offsets
 Returns:
     Dictionary containing stations, offsets and corresponding images
 """
-def dummy_crop_image(hdf5_8bit_path, stations_coordinates, offsets):
+def dummy_crop_image(path, offsets=range(40)):
     global_dictionary = {}
     # Simulating access to files
     sleep(1.14)
@@ -84,7 +84,6 @@ def dummy_crop_image(hdf5_8bit_path, stations_coordinates, offsets):
             dic[o] = create_dummy_image()
         global_dictionary[s] = dic
     return global_dictionary
-
 
 # maps a physical co-ordinate to image pixel
 def map_coord_to_pixel(coord,min_coord,res):
