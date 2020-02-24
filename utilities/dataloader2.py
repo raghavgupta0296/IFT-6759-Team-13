@@ -342,11 +342,14 @@ class SequenceDataLoader(tf.data.Dataset):
 class SequenceDataLoaderMemChunks(tf.data.Dataset):
 
     def __new__(cls, args, catalog):
-
+        if args.k_sequences == 0:
+            output_shapes=(tf.TensorShape((None, None, None)), tf.TensorShape((args.future_ghis+1, )))
+        else:
+            output_shapes=(tf.TensorShape((None,None, None, None)), tf.TensorShape((args.future_ghis+1, )))
         return tf.data.Dataset.from_generator(
             lambda: cls._generator(args,catalog),
             output_types=(tf.float32,tf.float32),
-            output_shapes=(tf.TensorShape((None, None, None, None)), tf.TensorShape((args.future_ghis+1, )))
+            output_shapes=output_shapes
             # args=(args,catalog)
         )
 
@@ -442,6 +445,8 @@ class SequenceDataLoaderMemChunks(tf.data.Dataset):
                             imgs.append(img)
                         # img_1 = sample[offset_1].swapaxes(0,1).swapaxes(1,2)
                         # img_0 = sample[offset_0].swapaxes(0,1).swapaxes(1,2)
+                        if args.k_sequences ==0:
+                            imgs = imgs[0]
                         if args.use_metadata:
                             yield (imgs, date_time_pairs, CS_GHIs), (GHIs)
                         else:

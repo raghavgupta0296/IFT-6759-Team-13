@@ -11,8 +11,9 @@ from utilities.dataloader2 import SequenceDataLoaderMemChunks
 from utilities.utility import load_catalog
 import numpy as np
 import wandb
+from model.models_meta import Resnet_Meta
 
-wandb.init(project="project1-seq")
+wandb.init(project="project1-meta")
 
 args = config.init_args()
 
@@ -68,7 +69,7 @@ class MyModel(Model):
 
 
 # Create an instance of the model
-model = MyModel()
+model = Resnet_Meta(args)
 
 loss_object = tf.keras.losses.MeanSquaredError()
 optimizer = tf.keras.optimizers.Adam(learning_rate=0.01)
