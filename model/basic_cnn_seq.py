@@ -18,6 +18,13 @@ args = config.init_args()
 
 print(tf.__version__)
 
+def preprocess(x,y):
+    if args.normalize_img:
+        x = tf.image.per_image_standardization(x)
+    if args.normalize_y:
+        y = tf.math.divide(y,10)
+    return x,y
+
 class MyModel(Model):
 	def __init__(self):
 		super(MyModel, self).__init__()
@@ -84,7 +91,6 @@ def train_step(images, labels):
 	print("\n Loss: ", loss.numpy())
 	for i in range(10):
 		print(predictions[i].numpy(), labels[i].numpy())
-		
 
 # @tf.function
 def test_step(images, labels):
@@ -106,8 +112,8 @@ for epoch in range(args.epochs):
 	catalog_val = load_catalog(args.val_catalog_path)
 	catalog_test = load_catalog(args.test_catalog_path)
 
-	sdl_train = SequenceDataLoaderMemChunks(args, catalog_train).prefetch(tf.data.experimental.AUTOTUNE).batch(64)
-	sdl_val = SequenceDataLoaderMemChunks(args, catalog_val).prefetch(tf.data.experimental.AUTOTUNE).batch(64)
+	sdl_train = SequenceDataLoaderMemChunks(args, catalog_train).map(preprocess).prefetch(tf.data.experimental.AUTOTUNE).batch(64)
+	sdl_val = SequenceDataLoaderMemChunks(args, catalog_val).map(preprocess).prefetch(tf.data.experimental.AUTOTUNE).batch(64)
 	
 	print(sdl_train)
 
