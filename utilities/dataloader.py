@@ -406,8 +406,10 @@ class SequenceDataLoaderMemChunks(tf.data.Dataset):
                     CS_GHI_pairs_list = []
                     for i, GHI_sequence_step in enumerate(GHI_sequence_steps_reverse):
                         GHI_pairs_list.append(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs - GHI_sequence_step)].GHI.values)
-                    GHI_pairs_list.append(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs)].GHI.values)
                         CS_GHI_pairs_list.append(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs - GHI_sequence_step)].CLEARSKY_GHI.values)
+                    GHI_pairs_list.append(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs)].GHI.values)
+                    CS_GHI_pairs_list.append(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs)].CLEARSKY_GHI.values)
+                    
                     # GHI_pairs_list.append(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs)].CLEARSKY_GHI.values)
 
                     # GHI_pairs = zip(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs - GHI_sequence_step )].GHI.values, 
