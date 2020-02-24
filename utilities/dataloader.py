@@ -408,8 +408,8 @@ class SequenceDataLoaderMemChunks(tf.data.Dataset):
                     for i, GHI_sequence_step in enumerate(GHI_sequence_steps_reverse):
                         GHI_pairs_list.append(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs - GHI_sequence_step)].GHI.values)
                         CS_GHI_pairs_list.append(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs - GHI_sequence_step)].CLEARSKY_GHI.values)
-                    GHI_pairs_list.append(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs)].GHI.values)
-                    CS_GHI_pairs_list.append(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs)].CLEARSKY_GHI.values)
+                    # GHI_pairs_list.append(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs)].GHI.values)
+                    # CS_GHI_pairs_list.append(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs)].CLEARSKY_GHI.values)
                     
                     # GHI_pairs_list.append(df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs)].CLEARSKY_GHI.values)
 
@@ -417,8 +417,11 @@ class SequenceDataLoaderMemChunks(tf.data.Dataset):
                     #     df[df.hdf5_8bit_offset.isin(matching_offsets_GHIs)].GHI.values)
                     GHI_pairs = zip(*GHI_pairs_list)
                     CS_GHI_pairs = zip(*CS_GHI_pairs_list)
-                    date_time_attrs = [get_datetime_attrs(string) for string in 
-                        df[df.hdf5_8bit_offset.isin(matching_offsets_imgs)]['iso-datetime'].values ]
+                    
+                    # import pdb
+                    # pdb.set_trace()
+                    iso_dt = df[df.hdf5_8bit_offset.isin(matching_offsets_imgs)]['iso-datetime'].tolist()
+                    date_time_attrs = [get_datetime_attrs(dt) for dt in iso_dt] 
                     # for images
                     # offset_pairs = zip(matching_offsets-4,matching_offsets)
                     offsets_pairs_list = []
