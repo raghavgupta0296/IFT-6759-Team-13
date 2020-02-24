@@ -34,15 +34,17 @@ def init_args():
 	parser.add_argument('--train_steps',default=100000,type=int,help='number of training examples.')
 	parser.add_argument('--val_steps',default=40000,type=int,help='number of validation examples.')
 	parser.add_argument('--lr',default=0.005,type=float,help='lr of the model.')
-	parser.add_argument('--crop_size',default=CROP_SIZE,help='window size for cropping station image from satellite image.')    
-	parser.add_argument('--batch_size',default=BATCH_SIZE,help='batch size for training data.')    
-	parser.add_argument('--k_sequences',default=1,help='how many image sequences in the past to take')
-	parser.add_argument('--img_sequence_step',default=4,help='step size for k_sequences. in offset unit terms')    
-	parser.add_argument('--future_ghis',default=1,help='''how many future GHIs to predict apart from T0.
+	parser.add_argument('--crop_size',default=CROP_SIZE,type=int,help='window size for cropping station image from satellite image.')    
+	parser.add_argument('--batch_size',default=BATCH_SIZE,type=int,help='batch size for training data.')    
+	parser.add_argument('--k_sequences',default=4,type=int,help='how many image sequences in the past to take')
+	parser.add_argument('--img_sequence_step',default=2,type=int,help='step size for k_sequences. in offset unit terms')    
+	parser.add_argument('--future_ghis',default=3,type=int,help='''how many future GHIs to predict apart from T0.
 		Future GHIs predicted: [+1hr] if 1, [+1hr,+3hr] if 2, [+1hr,+3hr,+6hr] if 3,''')    
 	parser.add_argument('-d','--debug',action="store_true",help='debugs on a limited amount of data and model capacity')
 	parser.add_argument('-e','--epochs',default=EPOCHS,type=int,help='number of passes on the full dataset to train the model on')
-
+	parser.add_argument('-n','--normalize_img',action="store_true",help='normalize img or not')
+	parser.add_argument('-y','--normalize_y',action="store_true",help='normalize y or not')
+	parser.add_argument('-m','--use_metadata',action="store_true",help='use metadata for training')
 	args = parser.parse_args()
 
 	return args
