@@ -114,9 +114,9 @@ for epoch in range(args.epochs):
     train_loss.reset_states()
     valid_loss.reset_states()
     
-    print(sdl_train)
-    sdl_train = SequenceDataLoaderMemChunks(args, catalog_train).map(preprocess).prefetch(tf.data.experimental.AUTOTUNE).batch(64)
-    sdl_val = SequenceDataLoaderMemChunks(args, catalog_val).map(preprocess).prefetch(tf.data.experimental.AUTOTUNE).batch(64)
+    # print(sdl_train)
+    sdl_train = SequenceDataLoaderMemChunks(args, catalog_train).map(preprocess).prefetch(tf.data.experimental.AUTOTUNE).batch(args.batch_size)
+    sdl_val = SequenceDataLoaderMemChunks(args, catalog_val).map(preprocess).prefetch(tf.data.experimental.AUTOTUNE).batch(args.batch_size)
     # tm = tqdm(total=580)  # R! from data loader's tqdm
     # ini = time.time()
     for images, labels in sdl_train:

@@ -4,7 +4,6 @@ import random
 import time
 from tensorflow.keras import Model
 from tensorflow.keras.layers import Conv2D, Flatten, Dense, MaxPool2D, BatchNormalization, ReLU, Embedding, Concatenate, GlobalMaxPooling2D
-from data_loader_meta import load_dataloader
 from tensorflow.keras.applications.resnet50 import ResNet50
 from tensorflow.keras.applications.resnet50 import preprocess_input
 from tqdm import tqdm
@@ -15,7 +14,7 @@ import wandb
 
 class Resnet_Meta(Model):
 	def __init__(self,args):
-		super(MyModel, self).__init__()
+		super(Resnet_Meta, self).__init__()
 		self.resnet_base = ResNet50(include_top=False, weights=None, input_shape=(70, 70, 5), pooling='avg')
 		self.d1 = Dense(64, activation='relu')
 
@@ -34,17 +33,17 @@ class Resnet_Meta(Model):
 	def call(self, x):
 		x2 = x
 		x = x[0]
-		
+		print(x.get_shape())
 		# x = preprocess_input(x)
 		x = self.resnet_base(x)
 		# x = self.global_pooling(x)
 		x = self.d1(x)
 
-		x2_1 = self.embedding1(x2[1])
-		x2_2 = self.embedding2(x2[2])
-		x2_3 = self.embedding3(x2[3])
+		x2_1 = self.embedding1(x2[1][0])
+		x2_2 = self.embedding2(x2[1][1])
+		x2_3 = self.embedding3(x2[1][2])
 
-		x2 = self.concatenation([x2_1, x2_2, x2_3, x2[4],x2[5],x2[6],x2[7]])
+		x2 = self.concatenation([x2_1, x2_2, x2_3, x2[2][0],x2[2][1],x2[2][2],x2[2][3]])
 		x2 = self.d2(x2)
 
 		x = self.concatenation2([x,x2])
