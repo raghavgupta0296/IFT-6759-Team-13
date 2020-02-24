@@ -32,18 +32,19 @@ class Resnet_Meta(Model):
 
 	def call(self, x):
 		x2 = x
+		#print()
 		x = x[0]
 		print(x.get_shape())
 		# x = preprocess_input(x)
 		x = self.resnet_base(x)
 		# x = self.global_pooling(x)
 		x = self.d1(x)
-
+		print(x2[1])
 		x2_1 = self.embedding1(x2[1][0])
 		x2_2 = self.embedding2(x2[1][1])
 		x2_3 = self.embedding3(x2[1][2])
 
-		x2 = self.concatenation([x2_1, x2_2, x2_3, x2[2][0],x2[2][1],x2[2][2],x2[2][3]])
+		x2 = self.concatenation([x2_1, x22_2, x2_3, x2[2][0],x2[2][1],x2[2][2],x2[2][3]])
 		x2 = self.d2(x2)
 
 		x = self.concatenation2([x,x2])
