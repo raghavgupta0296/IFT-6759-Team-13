@@ -5,7 +5,8 @@ from utilities.utility import map_coord_to_pixel
 from utilities.utility import fetch_channel_samples
 from utilities.utility import plot_and_save_image
 from utilities.config import init_args
-from utilities.config import CROP_SIZE, get_datetime_attrs
+from utilities.config import CROP_SIZE
+# from utilities.utility import get_datetime_attrs
 from matplotlib.patches import Rectangle
 
 import time, threading

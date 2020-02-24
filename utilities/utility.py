@@ -48,7 +48,9 @@ def read_ncdf(ncdf_path):
     return ncdf_data
 
 def get_datetime_attrs(string):
-    dt = datetime.fromisoformat(string)
+    print(type(string),string)
+    dt = string.tolist() # datetime.fromisoformat(string)
+    print(dt)
     return dt.month, dt.day, dt.hour
 
 """
