@@ -13,7 +13,7 @@ class MyModel(Model):
     def __init__(self, args):
         super(MyModel, self).__init__()
         self.input_0 = Input(shape=(70,70,5))
-        self.conv1 = Conv2D(32, 3, kernel_initializer='he_uniform')
+        self.conv1 = Conv2D(32, 3, input_shape=(70,70,5), kernel_initializer='he_uniform')
         self.batchnorm1 = BatchNormalization()
         self.relu = ReLU()
         self.maxpool = MaxPool2D((2,2))
@@ -30,7 +30,8 @@ class MyModel(Model):
 
     def call(self, x):
         # x = x[0]
-        x = self.input_0(x)
+        # print(x,x[0])
+        # x = self.input_0(x)
         x = self.conv1(x) # 68 x 68 x 32
         x = self.batchnorm1(x)
         x = self.relu(x)
@@ -51,7 +52,11 @@ class MyModel(Model):
         x = self.batchnorm5(x)
         x = self.flatten(x)
         x = self.d1(x)
-        return x# Create an instance of the model
+        return x # Create an instance of the model
+   
+    def model(self):
+        x = Input(shape=(70,70,5))
+        return Model(inputs=[x],outputs=self.call(x))
 
 if __name__ == "__main__":
     args = config.init_args()
@@ -62,7 +67,9 @@ if __name__ == "__main__":
     model.compile(optimizer=optimizer, 
                   loss='mean_squared_error',
                   metrics=[rmse])
-    # print(model.summary())
+    model.build((None,70,70,5))
+    # pdb.set_trace()
+    print(model.model().summary())
     catalog_train = load_catalog(args.data_catalog_path)
     catalog_val = load_catalog(args.val_catalog_path)
     catalog_test = load_catalog(args.test_catalog_path)
@@ -70,8 +77,8 @@ if __name__ == "__main__":
     sdl_val = SimpleDataLoader(args, catalog_val).prefetch(tf.data.experimental.AUTOTUNE).batch(args.batch_size)
     model.fit(
         sdl_train,
-        steps_per_epoch=10000,
+        steps_per_epoch=1350,
         epochs=5, 
         validation_data=sdl_val,
-        validation_steps=1000
+        validation_steps=100,
     )

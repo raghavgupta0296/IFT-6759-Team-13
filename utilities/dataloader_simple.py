@@ -12,7 +12,7 @@ from matplotlib.patches import Rectangle
 import time, threading
 import pdb
 import cv2 as cv
-import os
+import os, random
 import pickle as pkl
 import numpy as np
 import matplotlib.pyplot as plt
@@ -36,37 +36,43 @@ class SimpleDataLoader(tf.data.Dataset):
 
         return tf.data.Dataset.from_generator(
             lambda: cls._generator(args,catalog),
-            output_types=(tf.float32,tf.float32)
+            output_types=(tf.float32,tf.float32),
+            output_shapes=(tf.TensorShape((70, 70, 5)), tf.TensorShape((1, ))),
             # args=(args,catalog)
         )
     def _generator(args, catalog):
 
         def preprocess(x,y):
+            if not np.any(x):
+                print("zero img in training")
             img = (x - avg_x)/std_x
             return img,y
 
         unique_paths = pd.unique(catalog['hdf5_8bit_path'].values.ravel())
-
+        # print(unique_paths,type(unique_paths))
         epochs = args.epochs
-        for path in unique_paths:
-            # samples = fetch_all_samples_hdf5(args,path)
-            samples = load_numpy(path)
+        for i in range(1):
+            np.random.shuffle(unique_paths)
+            # print(shuffled)
+            for path in unique_paths:
+                # samples = fetch_all_samples_hdf5(args,path)
+                samples = load_numpy(path)
 
-            grouped = catalog[path == catalog.hdf5_8bit_path]
-            for station in args.station_data.keys():
-                df = grouped[grouped.station == station]
-                argsort = np.argsort(df['hdf5_8bit_offset'].values)
-                offsets_0 = df['hdf5_8bit_offset'].values[argsort]
+                grouped = catalog[path == catalog.hdf5_8bit_path]
+                for station in args.station_data.keys():
+                    df = grouped[grouped.station == station]
+                    argsort = np.argsort(df['hdf5_8bit_offset'].values)
+                    offsets_0 = df['hdf5_8bit_offset'].values[argsort]
 
-                GHIs_0 = df[df.hdf5_8bit_offset.isin(offsets_0)].GHI.values
-                CS_GHI_0 = df[df.hdf5_8bit_offset.isin(offsets_0)].CLEARSKY_GHI.values
-                y_0 = CS_GHI_0 - GHIs_0
+                    GHIs_0 = df[df.hdf5_8bit_offset.isin(offsets_0)].GHI.values
+                    CS_GHI_0 = df[df.hdf5_8bit_offset.isin(offsets_0)].CLEARSKY_GHI.values
+                    y_0 = CS_GHI_0 - GHIs_0
 
-                sample = samples[station]
-                for i in range(offsets_0.shape[0]):
-                    x = sample[i].swapaxes(0,1).swapaxes(1,2)
-                    y = y_0[i]
-                    print(type(y))
-                    x,y = preprocess(x,y)
-                    # pdb.set_trace()
-                    yield x,y
+                    sample = samples[station]
+                    for i in range(offsets_0.shape[0]):
+                        x = sample[i].swapaxes(0,1).swapaxes(1,2)
+                        y = y_0[i:i+1]
+                        # print(type(x),type(y))
+                        # x,y = preprocess(x,y)
+                        # pdb.set_trace()
+                        yield x,y

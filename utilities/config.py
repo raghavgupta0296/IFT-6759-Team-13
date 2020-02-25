@@ -33,6 +33,7 @@ def init_args():
 
 	parser.add_argument('--train_steps',default=100000,type=int,help='number of training examples.')
 	parser.add_argument('--val_steps',default=40000,type=int,help='number of validation examples.')
+
 	parser.add_argument('--lr',default=0.005,type=float,help='lr of the model.')
 	parser.add_argument('--crop_size',default=CROP_SIZE,type=int,help='window size for cropping station image from satellite image.')    
 	parser.add_argument('--batch_size',default=BATCH_SIZE,type=int,help='batch size for training data.')    
