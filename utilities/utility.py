@@ -165,6 +165,12 @@ def fetch_all_samples_hdf5(args,h5_data_path,dataframe_path=None):
             lon_mid-margin:lon_mid+margin, 
         ]
         station_crops[station_name] = crop
+    
+    # Closing the file
+    try:
+        h5_data.close()
+    except:
+        pass # Was already closed
     return station_crops
 
 # saves images of 5 channels with plotted mapped co-ordinates
