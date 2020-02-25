@@ -8,6 +8,7 @@ from utilities.dataloader2 import SequenceDataLoaderMemChunks
 from utilities.dataloader_simple import SimpleDataLoader
 from utilities.utility import load_catalog
 import pdb
+from tqdm import tqdm
 
 class MyModel(Model):
     def __init__(self, args):
@@ -84,30 +85,37 @@ class new_model:
 
         self.train_loss = tf.keras.metrics.Mean(name='train_loss')
         self.valid_loss = tf.keras.metrics.Mean(name='valid_loss')
-
+        catalog_train = load_catalog(args.data_catalog_path)
+        catalog_val = load_catalog(args.val_catalog_path)
+        catalog_test = load_catalog(args.test_catalog_path)
+        
         for epoch in range(args.epochs):
             print("EPOCH ", epoch)
-            train_loss.reset_states()
-            valid_loss.reset_states()
+            self.train_loss.reset_states()
+            self.valid_loss.reset_states()
 
             sdl_train = SimpleDataLoader(args, catalog_train).prefetch(tf.data.experimental.AUTOTUNE).batch(args.batch_size)
-            sdl_val = SimpleDataLoader(args, catalog_val).prefetch(tf.data.experimental.AUTOTUNE).batch(args.batch_size)
+            sdl_valid = SimpleDataLoader(args, catalog_val).prefetch(tf.data.experimental.AUTOTUNE).batch(args.batch_size)
 
-            tm = tqdm(total=580)  # R! from data loader's tqdm
-            ini = time.time()
+            tm = tqdm(total=1000)  # R! from data loader's tqdm
+            # ini = time.time()
 
+            counter = 0
             for images, labels in sdl_train:
-                self.train_step(images, labels, train_loss, loss_object)
+                self.train_step(images, labels,)
                 tm.update(1)
-                ini = time.time()
+                counter += 1
+                if counter > 1000:
+                    break
+                # ini = time.time()
 
-            tm = tqdm(total=746-580)  # R! from data loader's tqdm
+            tm = tqdm(total=100)  # R! from data loader's tqdm
             for valid_images, valid_labels in sdl_valid:
                 self.test_step(valid_images, valid_labels)
                 tm.update(1)
 
             # template = 'Epoch {}, Loss: {}, Accuracy: {}, Test Loss: {}, Test Accuracy: {}'
-            print("Epoch: ", epoch, "; Train Loss: ", train_loss.result(), "; Valid Loss: ", valid_loss.result())
+            print("Epoch: ", epoch, "; Train Loss: ", self.train_loss.result(), "; Valid Loss: ", self.valid_loss.result())
             # wandb.log({"Epoch":epoch,"Train_Loss":train_loss.result(),"Valid_Loss":valid_loss.result()})
             # print(template.format(epoch+1, train_loss.result(), 0))
 
@@ -116,7 +124,7 @@ if __name__ == "__main__":
 
     nm = new_model()
     nm.different_method()
-    return
+    exit()
 
     model = MyModel(args)
     optimizer = Adam(learning_rate=args.lr)
