@@ -11,7 +11,7 @@ from utilities.utility import dummy_crop_image
 from utilities.sequencer_utils import time_in_seconds
 from utilities.sequencer_utils import convert_to_epoch
 from utilities.utility import generate_file_name
-
+from utilities.utility import standardize_img
 # To set to 0 later
 DEBUG = 1
 
@@ -69,7 +69,7 @@ def generate_stations_dictionaries(df, list_stations):
             station_id = row['station']
             offset = row['hdf5_8bit_offset']
             try:
-                img = dic[station_id][offset]
+                img = standardize_img(dic[station_id][offset])
             except KeyError:
                 img = create_dummy_image()
 
@@ -79,7 +79,8 @@ def generate_stations_dictionaries(df, list_stations):
                        'station': row['station'],
                        'day': df_timestamp.day,
                        'month': df_timestamp.month,
-                       'local_time': time_in_seconds(df_timestamp),
+                       #'hour': df_timestamp.hour,
+                       #'local_time': time_in_seconds(df_timestamp),
                        'image': img,
                        'CLEARSKY_GHI': row['CLEARSKY_GHI'],
                        'GHI': row['GHI']}
