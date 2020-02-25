@@ -58,8 +58,65 @@ class MyModel(Model):
         x = Input(shape=(70,70,5))
         return Model(inputs=[x],outputs=self.call(x))
 
+class new_model:
+    def train_step(self, images, labels):
+        with tf.GradientTape() as tape:
+            predictions = self.model(images, training=True)
+            # for i in range(10):
+            #   print(predictions[i].numpy(), labels[i].numpy())
+            loss = self.loss_object(labels, predictions)
+        gradients = tape.gradient(loss, self.model.trainable_variables)
+        self.optimizer.apply_gradients(zip(gradients, self.model.trainable_variables))
+        self.train_loss(loss)
+        print("\n Loss: ", loss.numpy())
+
+    def test_step(self, images, labels):
+        predictions = self.model(images, training=False)
+        v_loss = self.loss_object(labels, predictions)
+
+        self.valid_loss(v_loss)
+        print("\n Valid Loss: ", v_loss)
+
+    def different_method(self):
+        self.model = MyModel(args)
+        self.loss_object = tf.keras.losses.MeanSquaredError()
+        self.optimizer = tf.keras.optimizers.Adam()
+
+        self.train_loss = tf.keras.metrics.Mean(name='train_loss')
+        self.valid_loss = tf.keras.metrics.Mean(name='valid_loss')
+
+        for epoch in range(args.epochs):
+            print("EPOCH ", epoch)
+            train_loss.reset_states()
+            valid_loss.reset_states()
+
+            sdl_train = SimpleDataLoader(args, catalog_train).prefetch(tf.data.experimental.AUTOTUNE).batch(args.batch_size)
+            sdl_val = SimpleDataLoader(args, catalog_val).prefetch(tf.data.experimental.AUTOTUNE).batch(args.batch_size)
+
+            tm = tqdm(total=580)  # R! from data loader's tqdm
+            ini = time.time()
+
+            for images, labels in sdl_train:
+                self.train_step(images, labels, train_loss, loss_object)
+                tm.update(1)
+                ini = time.time()
+
+            tm = tqdm(total=746-580)  # R! from data loader's tqdm
+            for valid_images, valid_labels in sdl_valid:
+                self.test_step(valid_images, valid_labels)
+                tm.update(1)
+
+            # template = 'Epoch {}, Loss: {}, Accuracy: {}, Test Loss: {}, Test Accuracy: {}'
+            print("Epoch: ", epoch, "; Train Loss: ", train_loss.result(), "; Valid Loss: ", valid_loss.result())
+            # wandb.log({"Epoch":epoch,"Train_Loss":train_loss.result(),"Valid_Loss":valid_loss.result()})
+            # print(template.format(epoch+1, train_loss.result(), 0))
+
 if __name__ == "__main__":
     args = config.init_args()
+
+    nm = new_model()
+    nm.different_method()
+    return
 
     model = MyModel(args)
     optimizer = Adam(learning_rate=args.lr)
