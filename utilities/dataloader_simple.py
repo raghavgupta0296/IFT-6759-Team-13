@@ -66,6 +66,7 @@ class SimpleDataLoader(tf.data.Dataset):
                 for i in range(offsets_0.shape[0]):
                     x = sample[i].swapaxes(0,1).swapaxes(1,2)
                     y = y_0[i]
+                    print(type(y))
                     x,y = preprocess(x,y)
                     # pdb.set_trace()
                     yield x,y
