@@ -69,14 +69,14 @@ class new_model:
         gradients = tape.gradient(loss, self.model.trainable_variables)
         self.optimizer.apply_gradients(zip(gradients, self.model.trainable_variables))
         self.train_loss(loss)
-        print("\n Loss: ", loss.numpy())
+        # print("\n Loss: ", loss.numpy())
 
     def test_step(self, images, labels):
         predictions = self.model(images, training=False)
         v_loss = self.loss_object(labels, predictions)
 
         self.valid_loss(v_loss)
-        print("\n Valid Loss: ", v_loss)
+        # print("\n Valid Loss: ", v_loss)
 
     def different_method(self):
         self.model = MyModel(args)
@@ -109,11 +109,14 @@ class new_model:
                     break
                 # ini = time.time()
 
+            counter = 0
             tm = tqdm(total=100)  # R! from data loader's tqdm
             for valid_images, valid_labels in sdl_valid:
                 self.test_step(valid_images, valid_labels)
                 tm.update(1)
-
+                counter +=1
+                if counter > 100:
+                    break
             # template = 'Epoch {}, Loss: {}, Accuracy: {}, Test Loss: {}, Test Accuracy: {}'
             print("Epoch: ", epoch, "; Train Loss: ", self.train_loss.result(), "; Valid Loss: ", self.valid_loss.result())
             # wandb.log({"Epoch":epoch,"Train_Loss":train_loss.result(),"Valid_Loss":valid_loss.result()})

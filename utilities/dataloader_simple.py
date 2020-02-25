@@ -37,7 +37,7 @@ class SimpleDataLoader(tf.data.Dataset):
         return tf.data.Dataset.from_generator(
             lambda: cls._generator(args,catalog),
             output_types=(tf.float32,tf.float32),
-            output_shapes=(tf.TensorShape((70, 70, 5)), tf.TensorShape((1, ))),
+            # output_shapes=(tf.TensorShape((70, 70, 5)), tf.TensorShape((1, ))),
             # args=(args,catalog)
         )
     def _generator(args, catalog):
