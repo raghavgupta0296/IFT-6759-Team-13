@@ -10,57 +10,36 @@ from utilities.sequencer import Sequencer
 from time import perf_counter
 from time import sleep
 
-def preprocess_3h_sequence(batch):
-    X = []
-    y = []
-    for sequence in batch:
-        X.append([sequence[0]['image'], sequence[1]['image']]) # Image(T0-1), Image(T0)
-        y.append([sequence[1]['GHI'], sequence[2]['GHI']])     # GHI(T0), GHI(T0 + 1)
-    return np.array(X), np.array(y)
 
 
-def preprocess_9h_sequence(batch):
-    x = []
-    y = []
-    for sequence in batch:
-        # Image(T0-2), Image(T0-1.5), Image(T0-1), Image(T0-0.5), Image(T0)
-        x.append([sequence[0]['image'], sequence[1]['image'], sequence[2]['image'], sequence[3]['image'], sequence[4]['image']])
-        # GHI(T0), GHI(T0 + 1), GHI(T0 + 3), GHI(T0 + 6)
-        y.append([sequence[4]['GHI'], sequence[6]['GHI'], sequence[10]['GHI'], sequence[16]['GHI']])
-    return np.array(x), np.array(y)
+
 
 # Class used for loading data
-class SequenceDataLoader_1h_int_3h_seq(tf.data.Dataset):
+class SequenceDataLoader_1h_int_6h_seq(tf.data.Dataset):
     def _generator(sequencer):
         while True: # infinite loop
             batch = sequencer.generate_batch()
             if not batch:
                 break
-            x, y = preprocess_3h_sequence(batch)
-            yield x, y
+            x , y = [], []
+            for sequence in batch:
+                # Image(T0), day, month, CLEARSKY_GHI(T0)
+                x.append(zip(sequence[0]['image'],         # Image(T0),
+                             sequence[0]['day'],           # Day(T0),
+                             sequence[0]['month'],         # Month(T0)
+                             sequence[0]['CLEARSKY_GHI'])) # CLEARSKY_GHI(T0)
+                y.append(zip(sequence[0]['GHI'] - sequence[0]['CLEARSKY_GHI'], # GHI(T0) - CLEARSKY_GHI(T0)
+                             sequence[1]['GHI'] - sequence[1]['CLEARSKY_GHI'], # GHI(T0+1) - CLEARSKY_GHI(T0+1)
+                             sequence[2]['GHI'] - sequence[2]['CLEARSKY_GHI'], # GHI(T0+3) - CLEARSKY_GHI(T0+3)
+                             sequence[3]['GHI'] - sequence[3]['CLEARSKY_GHI']))# GHI(T0+6) - CLEARSKY_GHI(T0+6)
+                yield x, y
 
     def __new__(cls, sequencer):
         return tf.data.Dataset.from_generator(
             lambda: cls._generator(sequencer),
-            output_types=(tf.dtypes.float16, tf.dtypes.float64)
-            #output_shapes=((None, 2), (None, 2)),
-        )
-
-
-# Class used for loading data
-class SequenceDataLoader_30min_int_9h_seq(tf.data.Dataset):
-    def _generator(sequencer):
-        while True: # infinite loop
-            batch = sequencer.generate_batch()
-            if not batch:
-                break
-            x, y = preprocess_9h_sequence(batch)
-            yield x, y
-
-    def __new__(cls, sequencer):
-        return tf.data.Dataset.from_generator(
-            lambda: cls._generator(sequencer),
-            output_types=(tf.dtypes.float64, tf.dtypes.float64)
+            output_types=(tf.dtypes.float32, tf.dtypes.int32, tf.dtypes.int32,
+                          tf.dtypes.float32, tf.dtypes.float32, tf.dtypes.float32,
+                          tf.dtypes.float32, tf.dtypes.float32)
             #output_shapes=((None, 5), (None, 4)),
             #args = None
         )

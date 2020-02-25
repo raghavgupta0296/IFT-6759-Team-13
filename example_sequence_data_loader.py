@@ -1,6 +1,5 @@
 from utilities.sequence_dataloader import preprocess_data
-from utilities.sequence_dataloader import SequenceDataLoader_1h_int_3h_seq
-from utilities.sequence_dataloader import SequenceDataLoader_30min_int_9h_seq
+from utilities.sequence_dataloader import SequenceDataLoader_1h_int_6h_seq
 from utilities.sequence_dataloader import benchmark
 
 from time import perf_counter
@@ -33,7 +32,7 @@ sequencer = preprocess_data(clean_df, root_dir='./data/preprocessed/', db_path =
 
 print('Step 2: Loading data...')
 tic = perf_counter()
-benchmark(SequenceDataLoader_1h_int_3h_seq(sequencer))
+benchmark(SequenceDataLoader_1h_int_6h_seq(sequencer))
 toc = perf_counter()
 
 print('Total time elapsed during loading of the data: %f' %(toc - tic))

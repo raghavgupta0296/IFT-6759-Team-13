@@ -214,3 +214,17 @@ def get_hdf5_fields(reader: h5py.File) -> typing.Any:
     for dataset_lut_name in reader:
         fields_names.append(dataset_lut_name)
     return fields_names
+
+
+"""
+Standardizes the image
+Args:
+    img: Input image 
+Returns:
+    Standardized image
+"""
+def standardize_img(img):
+    avg_x = np.array([0.31950477, 283.18481332, 239.19212155, 272.73521949, 254.09056291]).reshape(1,1,5)
+    std_x = np.array([0.27667209, 16.24902932,  8.79865931, 20.08307892, 13.8115307]).reshape(1,1,5)
+    img = (img - avg_x)/std_x
+    return img

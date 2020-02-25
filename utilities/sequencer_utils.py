@@ -2,6 +2,10 @@ import pandas as pd
 import datetime as dt
 
 
+ONE_HOUR = 3600
+ONE_DAY = 86400
+
+
 """
 Returns the same time at next day given a timestamp
 Args:
