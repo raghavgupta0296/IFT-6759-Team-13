@@ -61,6 +61,7 @@ def benchmark(dataset, num_epochs=2):
 """
 Function generating sequencer object starting from dataframe
 Args:
+    args: arguments parser
     clean_df: dataframe
     root_dir: directory for storing the data
     db_path: path for the joint table
@@ -71,7 +72,8 @@ Args:
 Returns:
     Sequencer object
 """
-def preprocess_data(clean_df,
+def preprocess_data(args,
+                    clean_df,
                     root_dir='./data/preprocessed/',
                     db_path = './data/database.db',
                     from_db = False,
@@ -82,7 +84,7 @@ def preprocess_data(clean_df,
     stations_names = np.unique(clean_df['station']).tolist()
     if from_db == False:
         print('Generating records...')
-        records = generate_stations_dictionaries(clean_df, stations_names)
+        records = generate_stations_dictionaries(args, clean_df, stations_names)
 
         print('Generating the joint table...')
         db = write_blocks_on_disk(records, stations_names, root_dir, db_path)

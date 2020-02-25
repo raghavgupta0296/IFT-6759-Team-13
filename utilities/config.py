@@ -10,7 +10,8 @@ TEST_DATA_CATALOG = 'dummy_test_catalog.pkl'
 # Format: { Station Code : [Latitude,Longitude,Elevation] }
 
 CHANNELS = ["ch1","ch2","ch3","ch4","ch6"]
-STATION_INFO = json.loads(open('config/SURFRAD.json').read())
+print('Current dir is: ', os.getcwd())
+STATION_INFO = json.loads(open('./config/SURFRAD.json').read())
 STATION_NAMES = list(STATION_INFO.keys())
 
 # HYPERPARAMS
