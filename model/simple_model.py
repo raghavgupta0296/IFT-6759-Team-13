@@ -68,10 +68,10 @@ if __name__ == "__main__":
     catalog_test = load_catalog(args.test_catalog_path)
     sdl_train = SimpleDataLoader(args, catalog_train).prefetch(tf.data.experimental.AUTOTUNE).batch(args.batch_size)
     sdl_val = SimpleDataLoader(args, catalog_val).prefetch(tf.data.experimental.AUTOTUNE).batch(args.batch_size)
-    model.fit_generator(
+    model.fit(
         sdl_train,
-        steps_per_epoch=None,
+        steps_per_epoch=10000,
         epochs=5, 
         validation_data=sdl_val,
-        validation_steps=None
+        validation_steps=1000
     )
