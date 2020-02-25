@@ -7,6 +7,7 @@ from tqdm import tqdm
 
 from utilities.utility import create_dummy_image
 from utilities.utility import dummy_crop_image
+from utilities.utility import fetch_all_samples_hdf5
 
 from utilities.sequencer_utils import time_in_seconds
 from utilities.sequencer_utils import convert_to_epoch
@@ -42,7 +43,7 @@ Args:
 Returns:
     list containing training data
 """
-def generate_stations_dictionaries(df, list_stations):
+def generate_stations_dictionaries(args, df, list_stations):
     # First step: organize the dataframe with respect to file paths
     grouped = group_by(df, 'hdf5_8bit_path')
     unique_paths = np.unique(df['hdf5_8bit_path'])
@@ -61,7 +62,8 @@ def generate_stations_dictionaries(df, list_stations):
         cropped_df = grouped[grouped.hdf5_8bit_path == path].sort_index(axis=0)
         offsets = cropped_df['hdf5_8bit_offset'].values
         # Collecting cropped images from the compressed data
-        dic = dummy_crop_image(path)
+        #dic = dummy_crop_image(path)
+        dic = fetch_all_samples_hdf5(args, path)
 
         # Iterating throw stations
         for index, row in cropped_df.iterrows():

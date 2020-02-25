@@ -1,4 +1,3 @@
-import datetime
 from functools import lru_cache
 import pickle
 import pdb
@@ -7,8 +6,9 @@ import typing
 
 import cv2
 from datetime import datetime
+from datetime import timedelta
 import h5py, h5netcdf
-from line_profiler import LineProfiler
+#from line_profiler import LineProfiler
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 import numpy as np
@@ -106,8 +106,8 @@ def fetch_all_samples_hdf5(args,h5_data_path,dataframe_path=None):
     global_start_idx = h5_data.attrs["global_dataframe_start_idx"]
     global_end_idx = h5_data.attrs["global_dataframe_end_idx"]
     archive_lut_size = global_end_idx - global_start_idx
-    global_start_time = datetime.datetime.strptime(h5_data.attrs["global_dataframe_start_time"], "%Y.%m.%d.%H%M")
-    lut_timestamps = [global_start_time + idx * datetime.timedelta(minutes=15) for idx in range(archive_lut_size)]
+    global_start_time = datetime.strptime(h5_data.attrs["global_dataframe_start_time"], "%Y.%m.%d.%H%M")
+    lut_timestamps = [global_start_time + idx * timedelta(minutes=15) for idx in range(archive_lut_size)]
     stations = args.station_data
     stations_data = {}
     # df = pd.read_pickle(dataframe_path)
@@ -148,7 +148,7 @@ def fetch_all_samples_hdf5(args,h5_data_path,dataframe_path=None):
             # raw_data[array_idx, channel_idx, :, :] = cv.flip(array, 0)
             raw_data[array_idx, channel_idx, :, :] = array
             last_valid_array_idx = array_idx
-    print("raw_data:",raw_data.shape)
+    #print("raw_data:",raw_data.shape)
     
 
     crop_size = args.crop_size
@@ -226,5 +226,6 @@ Returns:
 def standardize_img(img):
     avg_x = np.array([0.31950477, 283.18481332, 239.19212155, 272.73521949, 254.09056291]).reshape(1,1,5)
     std_x = np.array([0.27667209, 16.24902932,  8.79865931, 20.08307892, 13.8115307]).reshape(1,1,5)
+    img = img.swapaxes(0,1).swapaxes(1,2)
     img = (img - avg_x)/std_x
     return img
