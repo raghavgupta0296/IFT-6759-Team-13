@@ -10,7 +10,7 @@ from utilities.utility import load_catalog
 import pdb
 
 class MyModel(Model):
-    def __init__(self):
+    def __init__(self, args):
         super(MyModel, self).__init__()
         self.input_0 = Input(shape=(70,70,5))
         self.conv1 = Conv2D(32, 3, kernel_initializer='he_uniform')
@@ -56,7 +56,7 @@ class MyModel(Model):
 if __name__ == "__main__":
     args = config.init_args()
 
-    model = MyModel()
+    model = MyModel(args)
     optimizer = Adam(learning_rate=args.lr)
     rmse = RootMeanSquaredError()
     model.compile(optimizer=optimizer, 
@@ -69,7 +69,7 @@ if __name__ == "__main__":
     sdl_train = SimpleDataLoader(args, catalog_train).prefetch(tf.data.experimental.AUTOTUNE).batch(args.batch_size)
     sdl_val = SimpleDataLoader(args, catalog_val).prefetch(tf.data.experimental.AUTOTUNE).batch(args.batch_size)
     model.fit_generator(
-        sdl_train, 
+        sdl_train,
         steps_per_epoch=None,
         epochs=5, 
         validation_data=sdl_val,
