@@ -19,6 +19,8 @@ DEBUG = 1
 # Root directory
 ROOT_DIR = '.'
 
+# Max size to write on memory
+BLOCK_MAX_SIZE = 20000
 
 """
 Groups the dataframe per column and sorts it with respect to timestamps
@@ -93,6 +95,102 @@ def generate_stations_dictionaries(args, df, list_stations):
     print('Generated %d rows in total' % nb_rows)
     return records
 
+
+
+
+def dump_station_data(station_name, records, root_dir, seq_dic, db):
+    print('Dumping data for station %s...' % station_name)
+    seq_dic[station_name] += 1
+    filename = generate_file_name()
+    filepath = root_dir + '/' + filename + '.dat'
+    new_row = {'station': station_name,'seq': seq_dic[station_name], 'df_path':filepath}
+    db.append(new_row)
+    # Dumping data on disk
+    pkl.dump(records, open(filepath, "wb" ))
+
+
+"""
+Generates the intermediate data chunks for the model
+Args:
+    args: Object containing arguments
+    df:  original dataframe 
+    list_stations:  list of stations
+Returns:
+    Joint table to retrieve the blocks
+"""
+def generate_memory_blocks(args, df, list_stations, root_dir = ROOT_DIR + '/output/', db_path = 'database.db'):
+    # Dataframe containing blocks info to access them
+    db_list = []
+    seq_dic = {}
+
+    # First step: organize the dataframe with respect to file paths
+    grouped = group_by(df, 'hdf5_8bit_path')
+    unique_paths = np.unique(df['hdf5_8bit_path'])
+
+    # timer
+    t1 = tqdm(total=len(unique_paths))
+    nb_rows = 0
+    records = {}
+    
+    # Creating dictionaries
+    for s in list_stations:
+        records[s] = []
+        seq_dic[s] = 0
+
+    # Main loop
+    for path in unique_paths:
+        # Grouping by paths
+        cropped_df = grouped[grouped.hdf5_8bit_path == path].sort_index(axis=0)
+        # Collecting cropped images from the compressed data
+        dic = dummy_crop_image(path)
+        #dic = fetch_all_samples_hdf5(args, path)
+
+        # Iterating through stations
+        for index, row in cropped_df.iterrows():
+            img = None
+            station_id = row['station']
+            offset = row['hdf5_8bit_offset']
+            try:
+                #img = standardize_img(dic[station_id][offset])
+                img = dic[station_id][offset]
+            except KeyError:
+                img = create_dummy_image()
+
+            # Generating row and adding it to the list
+            df_timestamp = row['iso-datetime']
+            new_row = {'iso-datetime': convert_to_epoch(df_timestamp),
+                       'station': row['station'],
+                       'day': df_timestamp.day,
+                       'month': df_timestamp.month,
+                       'hour': df_timestamp.hour,
+                       'local_time': time_in_seconds(df_timestamp),
+                       'image': img,
+                       'CLEARSKY_GHI': row['CLEARSKY_GHI'],
+                       'GHI': row['GHI']}
+            records[station_id].append(new_row)
+            nb_rows += 1
+        
+        # Check if we reached max size
+        for s in list_stations:
+            if  len(records[s]) >= BLOCK_MAX_SIZE:
+                # Writing data on memory
+                dump_station_data(s, records[s], root_dir, seq_dic, db_list)
+                # Flushing out memory
+                records[s] = []
+        # Tqdm counter
+        t1.update(1)
+    
+    # Last pass to write whatever is left
+    for s in list_stations:
+        if len(records[s]) > 0:
+            # Writing data on memory
+            dump_station_data(s, records[s], root_dir, seq_dic, db_list)
+            records[s] = []
+    print('Generated %d rows in total' % nb_rows)
+    print('Saving the joint table...')
+    db_df = pd.DataFrame(db_list)
+    db_df.to_pickle(db_path)
+    return db_df
 
 
 """
