@@ -69,7 +69,7 @@ class new_model:
         gradients = tape.gradient(loss, self.model.trainable_variables)
         self.optimizer.apply_gradients(zip(gradients, self.model.trainable_variables))
         self.train_loss(loss)
-        # print("\n Loss: ", loss.numpy())
+        print("\n Loss: ", loss.numpy())
 
     def test_step(self, images, labels):
         predictions = self.model(images, training=False)
@@ -83,7 +83,7 @@ class new_model:
         self.model.build((None,70,70,5))
         # pdb.set_trace()
         print(self.model.model().summary())
-        exit()
+        # exit()
         self.loss_object = tf.keras.losses.MeanSquaredError()
         self.optimizer = tf.keras.optimizers.Adam(args.lr)
 
