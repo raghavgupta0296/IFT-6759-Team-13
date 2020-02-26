@@ -32,7 +32,7 @@ for i, elem in enumerate(LIST_DFS):
     print('Reading dataframe...')
     df = pd.read_pickle(elem)
     print('Generating records and the joint table...')
-    db = generate_memory_blocks(args, df, list_stations, root_dir = './data/preprocessed/', db_path = LIST_DBS[i])
+    db = generate_memory_blocks(args, df, STATION_IDS, root_dir = './data/preprocessed/', db_path = LIST_DBS[i])
     toc = perf_counter()
     print('Time elapsed during this step: %f' %(toc - tic))
 
