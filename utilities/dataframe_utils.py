@@ -142,8 +142,8 @@ def generate_memory_blocks(args, df, list_stations, root_dir = ROOT_DIR + '/outp
         # Grouping by paths
         cropped_df = grouped[grouped.hdf5_8bit_path == path].sort_index(axis=0)
         # Collecting cropped images from the compressed data
-        dic = dummy_crop_image(path)
-        #dic = fetch_all_samples_hdf5(args, path)
+        #dic = dummy_crop_image(path)
+        dic = fetch_all_samples_hdf5(args, path)
 
         # Iterating through stations
         for index, row in cropped_df.iterrows():
