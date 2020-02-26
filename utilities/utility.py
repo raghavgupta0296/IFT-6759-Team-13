@@ -38,11 +38,20 @@ def load_catalog(path):
     return dataset
 
 # loads an hdf5 file
-@lru_cache(maxsize=10)
+#@lru_cache(maxsize=10)
 def read_hdf5(hdf5_path):
     h5_data = h5py.File(hdf5_path, "r")
     return h5_data
 
+
+# Closes an open hdf5 file
+def close_hdf5(hdf5_file):
+    # Closing the file
+    try:
+        hdf5_file.close()
+    except:
+        pass # Was already closed
+    
 # loads a netcdf file
 def read_ncdf(ncdf_path):
     ncdf_data = h5netcdf.File(ncdf_path, 'r')
@@ -167,10 +176,7 @@ def fetch_all_samples_hdf5(args,h5_data_path,dataframe_path=None):
         station_crops[station_name] = crop
     
     # Closing the file
-    try:
-        h5_data.close()
-    except:
-        pass # Was already closed
+    close_hdf5(h5_data)
     return station_crops
 
 # saves images of 5 channels with plotted mapped co-ordinates

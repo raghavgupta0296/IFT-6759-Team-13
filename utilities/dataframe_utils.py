@@ -88,6 +88,7 @@ def generate_stations_dictionaries(args, df, list_stations):
                        'GHI': row['GHI']}
             records[station_id].append(new_row)
             nb_rows += 1
+            
         t1.update(1)
     print('Generated %d rows in total' % nb_rows)
     return records
@@ -162,6 +163,7 @@ def write_blocks_on_disk(records, list_stations, root_dir = ROOT_DIR + '/data/pr
     db = pd.DataFrame(db_list)
     db.to_pickle(df_path)
     return db
+
 
 
 
