@@ -80,38 +80,48 @@ class new_model:
 
     def different_method(self):
         self.model = MyModel(args)
+        self.model.build((None,70,70,5))
+        # pdb.set_trace()
+        print(self.model.model().summary())
+        exit()
         self.loss_object = tf.keras.losses.MeanSquaredError()
-        self.optimizer = tf.keras.optimizers.Adam()
+        self.optimizer = tf.keras.optimizers.Adam(args.lr)
 
         self.train_loss = tf.keras.metrics.Mean(name='train_loss')
         self.valid_loss = tf.keras.metrics.Mean(name='valid_loss')
-        catalog_train = load_catalog(args.data_catalog_path)
-        catalog_val = load_catalog(args.val_catalog_path)
-        catalog_test = load_catalog(args.test_catalog_path)
+        # catalog_train = load_catalog(args.data_catalog_path)
+        # catalog_val = load_catalog(args.val_catalog_path)
+        # catalog_test = load_catalog(args.test_catalog_path)
         
         for epoch in range(args.epochs):
             print("EPOCH ", epoch)
             self.train_loss.reset_states()
             self.valid_loss.reset_states()
 
-            sdl_train = SimpleDataLoader(args, catalog_train).prefetch(tf.data.experimental.AUTOTUNE).batch(args.batch_size)
-            sdl_valid = SimpleDataLoader(args, catalog_val).prefetch(tf.data.experimental.AUTOTUNE).batch(args.batch_size)
+            sdl_train = SimpleDataLoader(args, args.data_catalog_path)#.batch(args.batch_size).prefetch(tf.data.experimental.AUTOTUNE)
+            sdl_valid = SimpleDataLoader(args, args.val_catalog_path)#.batch(args.batch_size).prefetch(tf.data.experimental.AUTOTUNE)
 
-            tm = tqdm(total=1000)  # R! from data loader's tqdm
+            train_total = 1000
+            val_total = 100
+            tm = tqdm(total=train_total)  # R! from data loader's tqdm
             # ini = time.time()
 
             counter = 0
-            for images, labels in sdl_train:
+            for batch in sdl_train:
+                images = batch['images']
+                labels = batch['y']
                 self.train_step(images, labels,)
                 tm.update(1)
                 counter += 1
-                if counter > 1000:
+                if counter > train_total:
                     break
                 # ini = time.time()
 
             counter = 0
             tm = tqdm(total=100)  # R! from data loader's tqdm
-            for valid_images, valid_labels in sdl_valid:
+            for batch in sdl_valid:
+                valid_images = batch['images']
+                valid_labels = batch['y']
                 self.test_step(valid_images, valid_labels)
                 tm.update(1)
                 counter +=1
@@ -138,11 +148,11 @@ if __name__ == "__main__":
     model.build((None,70,70,5))
     # pdb.set_trace()
     print(model.model().summary())
-    catalog_train = load_catalog(args.data_catalog_path)
-    catalog_val = load_catalog(args.val_catalog_path)
-    catalog_test = load_catalog(args.test_catalog_path)
-    sdl_train = SimpleDataLoader(args, catalog_train).prefetch(tf.data.experimental.AUTOTUNE).batch(args.batch_size)
-    sdl_val = SimpleDataLoader(args, catalog_val).prefetch(tf.data.experimental.AUTOTUNE).batch(args.batch_size)
+    # catalog_train = load_catalog(args.data_catalog_path)
+    # catalog_val = load_catalog(args.val_catalog_path)
+    # catalog_test = load_catalog(args.test_catalog_path)
+    sdl_train = SimpleDataLoader(args, args.data_catalog_path)#.prefetch(tf.data.experimental.AUTOTUNE).batch(args.batch_size)
+    sdl_val = SimpleDataLoader(args, args.val_catalog_path)#.prefetch(tf.data.experimental.AUTOTUNE).batch(args.batch_size)
     model.fit(
         sdl_train,
         steps_per_epoch=1350,
