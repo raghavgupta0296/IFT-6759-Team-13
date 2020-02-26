@@ -6,8 +6,7 @@ Created on Tue Feb 25 14:13:30 2020
 """
 
 from utilities.config import init_args
-from utilities.dataframe_utils import generate_stations_dictionaries
-from utilities.dataframe_utils import write_blocks_on_disk
+from utilities.dataframe_utils import generate_memory_blocks
 from time import perf_counter
 
 import pandas as pd
@@ -31,11 +30,9 @@ args = init_args()
 for i, elem in enumerate(LIST_DFS):
     tic = perf_counter()
     print('Reading dataframe...')
-    df = pd.read_pickle(TRAIN_DF)
-    print('Generating records...')
-    records = generate_stations_dictionaries(args, df, STATION_IDS)
-    print('Generating the joint table...')
-    db = write_blocks_on_disk(records, STATION_IDS, root_dir = '.', db_path = LIST_DBS[i])
+    df = pd.read_pickle(elem)
+    print('Generating records and the joint table...')
+    db = generate_memory_blocks(args, df, list_stations, root_dir = './data/preprocessed/', db_path = LIST_DBS[i])
     toc = perf_counter()
     print('Time elapsed during this step: %f' %(toc - tic))
 
