@@ -72,7 +72,7 @@ def prepare_dataloader(
         else:
             ndarray_dict = np.load(path)
         return ndarray_dict
-    
+
     def read_hdf5(hdf5_path):
         import h5py
         h5_data = h5py.File(hdf5_path, "r")
@@ -301,7 +301,7 @@ def prepare_model(
             return x+c
 
     model = MyModel()
-    model.load_weights('checkpoints/keras_model_1582840350.1643887')
+    model.load_weights('../model/keras_model_1582840350.1643887')
 
     ################################### MODIFY ABOVE ##################################
 
