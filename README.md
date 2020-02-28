@@ -1,15 +1,15 @@
 # IFT-6759-Team-13
 Project 1: Advanced Projects in Machine Learning
+## Regenerate Results:
 
-Preprocessing:
+### Preprocessing:
 ```
 cd prepro
 python data_cleaning.py
 cd ..
 python -m utilities.dataloader2 --data_catalog_path='prepro/clean_df'
 ```
-## Training:
-
+### Training
 1. Run command:
 
 ```
