@@ -2,11 +2,11 @@
 Project 1: Advanced Projects in Machine Learning
 
 Preprocessing:
-
+```
 cd prepro
 python data_cleaning.py
 python -m utilities.dataloader2 --data_catalog_path='prepro/clean_df'
-
+```
 ## Training:
 
 1. Run command:
