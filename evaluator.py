@@ -153,9 +153,9 @@ def prepare_dataloader(
         std_x = np.array([0.27667209, 16.24902932,  8.79865931, 20.08307892, 13.8115307]).reshape(1,1,5)
 
         catalog = dataframe.copy()
-        catalog.loc[(catalog[station_i+'_DAYTIME']==0) & (catalog[station_i+'_CLEARSKY_GHI'].isna()), station_i+'_CLEARSKY_GHI'] = 0
-        catalog[station_i+'_CLEARSKY_GHI'] = catalog[station_i+'_CLEARSKY_GHI'].interpolate(method='linear')
-        catalog.loc[catalog[station_i+'_CLEARSKY_GHI'] < 0, station_i+'_CLEARSKY_GHI'] = 0 
+        # catalog.loc[(catalog[station_i+'_DAYTIME']==0) & (catalog[station_i+'_CLEARSKY_GHI'].isna()), station_i+'_CLEARSKY_GHI'] = 0
+        # catalog[station_i+'_CLEARSKY_GHI'] = catalog[station_i+'_CLEARSKY_GHI'].interpolate(method='linear')
+        # catalog.loc[catalog[station_i+'_CLEARSKY_GHI'] < 0, station_i+'_CLEARSKY_GHI'] = 0 
 
         # for idx, row in tqdm(catalog.iterrows(),total=len(catalog)):
         for idx in tqdm.tqdm(target_datetimes):
