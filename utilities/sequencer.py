@@ -1,20 +1,22 @@
 from utilities.sequencer_utils import intersect_sorted_lists
+from utilities.sequencer_utils import ONE_HOUR
+from utilities.sequencer_utils import ONE_DAY
 from random import shuffle
 import pickle as pkl
 
 
 # A Class used for reading sequences of data
+# A Class used for reading sequences of data
 class Sequencer:
 
     # Init method
-    def __init__(self, stations_names, stations_mappings, offset=1800, seq_length=16, max_batch_size=50, shuffle=False):
+    def __init__(self, stations_names, stations_mappings, offset=1800, seq_length=0, max_batch_size=50):
         self._MAX_MEM_SIZE = 1000
         self._stations_names = stations_names
         self._stations_mappings = stations_mappings
         self._offset = offset
         self._seq_length = seq_length
         self._max_batch_size = max_batch_size
-        self._shuffle = shuffle
         self._current_indexes = {name: 0 for name in stations_names}
         self._current_seq_num = {name: 0 for name in stations_names}
         self._memory_segments = {name: [] for name in stations_names}
@@ -128,12 +130,12 @@ class Sequencer:
         size = len(mem_list)
         now = self._read_epoch_time(mem_list[curr_index])
         then = self._read_epoch_time(mem_list[size - 1])
-        DAY = 86400
-        if (then - now) < DAY:
+        if (then - now) < ONE_DAY:
             print('INFO: Loading segment for station \'%s\'' % station_name)
             attempt = self._load_segment(station_name)
             if attempt != 1:
                 print('WARNING: Failed to get valid segment for station \'%s\'' % station_name)
+                # Might be the last memory chunk? 
                 return size - 1
             print('INFO: sequence number for station %s is now %d' % (station_name, seq))
 
@@ -152,7 +154,7 @@ class Sequencer:
     def _detect_sequences_in_segment(self, start_index, segment):
         seq_list = []
         seen = {}
-        print('View length is ', len(segment))
+        minimum_length = 4
 
         # First: collect the values
         for i, elem in enumerate(segment):
@@ -161,10 +163,10 @@ class Sequencer:
         seen_keys = sorted(list(seen.keys()))
         end_times = seen_keys.copy()
         # Second: Add offset k times and eliminate values
-        for k in range(self._seq_length):
+        for k in range(1,4):
             # Adding the offset length
             for i in range(len(end_times)):
-                end_times[i] += self._offset
+                end_times[i] += ONE_HOUR * k
 
             # Computing intersection
             end_times = intersect_sorted_lists(end_times, seen_keys)
@@ -172,8 +174,8 @@ class Sequencer:
         # Last: pickup indexes
         for e in end_times:
             sequence = []
-            for k in range(self._seq_length):
-                val = e - self._offset * (k + 1)
+            for k in [0, 3, 5, 6]:
+                val = e - ONE_HOUR * k
                 sequence.insert(0, seen[val])
             seq_list.append(sequence)
         return seq_list
@@ -195,14 +197,12 @@ class Sequencer:
         # Main loop
         oos_stations = 0
         while len(batch) < batch_size and oos_stations < len(station_Ids):
-            if self._shuffle:
-                shuffle(station_Ids)
             for station_id in station_Ids:
                 station_name = self._stations_names[station_id]
                 print('INFO: preparing data for station %s...' %station_name)
                 memory_segment = self._memory_segments[station_name]
                 start_index = self._current_indexes[station_name]
-                print('INFO: station %s. Initial index is %d...' % (station_name, start_index))
+                #print('INFO: station %s. Initial index is %d...' % (station_name, start_index))
                 end_index = self._get_valid_data_segment(station_name)
                 if end_index == -1:
                     self._update_index(station_name, len(memory_segment) - 1)
@@ -212,7 +212,7 @@ class Sequencer:
                     oos_stations += 1
                     continue
 
-                print('INFO: station %s, reading segment[%d, %d]...' % (station_name, start_index, end_index))
+                print('INFO: station %s, reading segment[%d, %d]...' % (station_name, start_index, end_index-1))
                 view = memory_segment[start_index:end_index]
 
                 print('INFO: station %s: sequence detection...' % (station_name))

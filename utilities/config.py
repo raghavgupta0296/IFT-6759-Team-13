@@ -11,7 +11,7 @@ data_catalog = os.path.join(ROOT_DATA_PATH,RAW_DATA_CATALOG)
 # Format: { Station Code : [Latitude,Longitude,Elevation] }
 
 CHANNELS = ["ch1","ch2","ch3","ch4","ch6"]
-STATION_INFO = json.loads(open('config/SURFRAD.json').read())
+STATION_INFO = json.loads(open('./config/SURFRAD.json').read())
 STATION_NAMES = list(STATION_INFO.keys())
 
 # HYPERPARAMS

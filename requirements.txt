@@ -8,7 +8,4 @@ numpy
 pandas
 h5netcdf
 netcdf4
-<<<<<<< HEAD
-=======
 ipykernel
->>>>>>> 8c64ae904973e1de9f22e0542a989c97abc86aaa

@@ -1,4 +1,3 @@
-import datetime
 from functools import lru_cache
 import pickle
 import pdb
@@ -6,9 +5,11 @@ from time import sleep
 import typing
 
 import cv2
-# from datetime import datetime
+
+from datetime import datetime
+from datetime import timedelta
 import h5py, h5netcdf
-from line_profiler import LineProfiler
+#from line_profiler import LineProfiler
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 import numpy as np
@@ -38,11 +39,20 @@ def load_catalog(path):
     return dataset
 
 # loads an hdf5 file
-@lru_cache(maxsize=10)
+#@lru_cache(maxsize=10)
 def read_hdf5(hdf5_path):
     h5_data = h5py.File(hdf5_path, "r")
     return h5_data
 
+
+# Closes an open hdf5 file
+def close_hdf5(hdf5_file):
+    # Closing the file
+    try:
+        hdf5_file.close()
+    except:
+        pass # Was already closed
+    
 # loads a netcdf file
 def read_ncdf(ncdf_path):
     ncdf_data = h5netcdf.File(ncdf_path, 'r')
@@ -106,8 +116,8 @@ def fetch_all_samples_hdf5(args,h5_data_path,dataframe_path=None):
     global_start_idx = h5_data.attrs["global_dataframe_start_idx"]
     global_end_idx = h5_data.attrs["global_dataframe_end_idx"]
     archive_lut_size = global_end_idx - global_start_idx
-    global_start_time = datetime.datetime.strptime(h5_data.attrs["global_dataframe_start_time"], "%Y.%m.%d.%H%M")
-    lut_timestamps = [global_start_time + idx * datetime.timedelta(minutes=15) for idx in range(archive_lut_size)]
+    global_start_time = datetime.strptime(h5_data.attrs["global_dataframe_start_time"], "%Y.%m.%d.%H%M")
+    lut_timestamps = [global_start_time + idx * timedelta(minutes=15) for idx in range(archive_lut_size)]
     stations = args.station_data
     stations_data = {}
     if dataframe_path is not None:
@@ -150,7 +160,7 @@ def fetch_all_samples_hdf5(args,h5_data_path,dataframe_path=None):
             # raw_data[array_idx, channel_idx, :, :] = cv.flip(array, 0)
             raw_data[array_idx, channel_idx, :, :] = array
             last_valid_array_idx = array_idx
-    print("raw_data:",raw_data.shape)
+    #print("raw_data:",raw_data.shape)
     
 
     crop_size = args.crop_size
@@ -167,6 +177,9 @@ def fetch_all_samples_hdf5(args,h5_data_path,dataframe_path=None):
             lon_mid-margin:lon_mid+margin, 
         ]
         station_crops[station_name] = crop
+    
+    # Closing the file
+    close_hdf5(h5_data)
     return station_crops
 
 # saves images of 5 channels with plotted mapped co-ordinates
@@ -216,3 +229,18 @@ def get_hdf5_fields(reader: h5py.File) -> typing.Any:
     for dataset_lut_name in reader:
         fields_names.append(dataset_lut_name)
     return fields_names
+
+
+"""
+Standardizes the image
+Args:
+    img: Input image 
+Returns:
+    Standardized image
+"""
+def standardize_img(img):
+    avg_x = np.array([0.31950477, 283.18481332, 239.19212155, 272.73521949, 254.09056291]).reshape(1,1,5)
+    std_x = np.array([0.27667209, 16.24902932,  8.79865931, 20.08307892, 13.8115307]).reshape(1,1,5)
+    img = img.swapaxes(0,1).swapaxes(1,2)
+    img = (img - avg_x)/std_x
+    return img
