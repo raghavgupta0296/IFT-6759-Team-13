@@ -56,8 +56,8 @@ clean_data.loc[clean_data.GHI<0,'GHI'] = 0
 
 clean_data = clean_data.reset_index(drop=True)
 
-# with open("clean_df","wb") as f:
-#     pickle.dump(clean_data,f)
+with open("clean_df","wb") as f:
+    pickle.dump(clean_data,f)
 
 print(clean_data)
 
