@@ -110,7 +110,8 @@ def fetch_all_samples_hdf5(args,h5_data_path,dataframe_path=None):
     lut_timestamps = [global_start_time + idx * datetime.timedelta(minutes=15) for idx in range(archive_lut_size)]
     stations = args.station_data
     stations_data = {}
-    # df = pd.read_pickle(dataframe_path)
+    if dataframe_path is not None:
+        df = pd.read_pickle(dataframe_path)
     # assume lats/lons stay identical throughout all frames; just pick the first available arrays
     idx, lats, lons = 0, None, None
     while (lats is None or lons is None) and idx < archive_lut_size:
@@ -121,9 +122,10 @@ def fetch_all_samples_hdf5(args,h5_data_path,dataframe_path=None):
         station_coords = (np.argmin(np.abs(lats - coords[0])), np.argmin(np.abs(lons - coords[1])))
         station_data = {"coords": station_coords}
         # if dataframe_path:
-        # station_data["ghi"] = [df.at[pd.Timestamp(t), reg + "_GHI"] for t in lut_timestamps]
-        # station_data["csky"] = [df.at[pd.Timestamp(t), reg + "_CLEARSKY_GHI"] for t in lut_timestamps]
-        # station_data["daytime"] = [df.at[pd.Timestamp(t), reg + "_DAYTIME"] for t in lut_timestamps]
+        if dataframe_path is not None:
+            station_data["ghi"] = [df.at[pd.Timestamp(t), reg + "_GHI"] for t in lut_timestamps]
+            station_data["csky"] = [df.at[pd.Timestamp(t), reg + "_CLEARSKY_GHI"] for t in lut_timestamps]
+            station_data["daytime"] = [df.at[pd.Timestamp(t), reg + "_DAYTIME"] for t in lut_timestamps]
         stations_data[reg] = station_data
 
     raw_data = np.zeros((archive_lut_size, len(channels), 650, 1500), dtype=np.uint8)

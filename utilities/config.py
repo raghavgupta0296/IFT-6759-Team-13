@@ -5,6 +5,7 @@ import os
 ROOT_DATA_PATH = '/project/cq-training-1/project1/data'
 RAW_DATA_CATALOG = 'catalog.helios.public.20100101-20160101.pkl'
 TEST_DATA_CATALOG = 'dummy_test_catalog.pkl'
+data_catalog = os.path.join(ROOT_DATA_PATH,RAW_DATA_CATALOG)
 
 # SURFRAD Station Info
 # Format: { Station Code : [Latitude,Longitude,Elevation] }
@@ -15,7 +16,7 @@ STATION_NAMES = list(STATION_INFO.keys())
 
 # HYPERPARAMS
 CROP_SIZE = 70 # even number
-EPOCHS = 1
+EPOCHS = 3
 BATCH_SIZE = 64
 
 def init_args():
@@ -24,7 +25,6 @@ def init_args():
 	parser.add_argument('--image_data', choices=['hdf5v7_8bit','hdf5v5_16bit','netcdf'], default='hdf5v7_8bit',
 		help='choose either hdf5 8bit or 16bit')
 
-	data_catalog = os.path.join(ROOT_DATA_PATH,RAW_DATA_CATALOG)
 	parser.add_argument('--data_catalog_path',default=data_catalog,help='train catalog absolute file path (dataframe) which contains the image paths, ghi and other metadata')
 	parser.add_argument('--val_catalog_path',default='valid_df',help='validation catalog absolute file path (dataframe) which contains the image paths, ghi and other metadata')
 	parser.add_argument('--test_catalog_path',default='test_df',help='test catalog absolute file path (dataframe) which contains the image paths, ghi and other metadata')
@@ -34,7 +34,7 @@ def init_args():
 	parser.add_argument('--train_steps',default=100000,type=int,help='number of training examples.')
 	parser.add_argument('--val_steps',default=40000,type=int,help='number of validation examples.')
 
-	parser.add_argument('--lr',default=0.005,type=float,help='lr of the model.')
+	parser.add_argument('--lr',default=0.001,type=float,help='lr of the model.')
 	parser.add_argument('--crop_size',default=CROP_SIZE,type=int,help='window size for cropping station image from satellite image.')    
 	parser.add_argument('--batch_size',default=BATCH_SIZE,type=int,help='batch size for training data.')    
 	parser.add_argument('--k_sequences',default=4,type=int,help='how many image sequences in the past to take')
