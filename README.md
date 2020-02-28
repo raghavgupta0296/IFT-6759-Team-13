@@ -26,4 +26,4 @@ It takes ~4 hours to create x,y cache. This enables very fast training and valid
 
 3. Run command:
 
-`python simple_keras_cnn.py`
+`python -m model.simple_keras_cnn`
