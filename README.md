@@ -1,5 +1,8 @@
 # IFT-6759-Team-13
 Project 1: Advanced Projects in Machine Learning
+
+`evaluator.py` run with args.
+
 ## Regenerate Results:
 
 ### Preprocessing:
@@ -20,7 +23,7 @@ This will create train_df, valid_df, and test_df
 
 2. Run command: 
 
-`python utilities/dataloader_simple2.py`
+`python -m utilities.dataloader_simple2`
 
 It takes ~4 hours to create x,y cache. This enables very fast training and validation.
 
