@@ -13,7 +13,7 @@ python -m utilities.dataloader2 --data_catalog_path='prepro/clean_df'
 1. Run command:
 
 ```
-python utilities/data_cleaning_no_melt.py
+python prepro/data_cleaning_no_melt.py
 ```
 
 This will create train_df, valid_df, and test_df
