@@ -55,67 +55,14 @@ def prepare_dataloader(
     # WE ARE PROVIDING YOU WITH A DUMMY DATA GENERATOR FOR DEMONSTRATION PURPOSES.
     # MODIFY EVERYTHINGIN IN THIS BLOCK AS YOU SEE FIT
 
-    def clean_dataset(df):
-        clean_data = df.reset_index()
-        for station_i in stations:
-            clean_data[station_i] = clean_data[station_i+"_DAYTIME"].astype('str') + "~=~" + clean_data[station_i+"_CLEARSKY_GHI"].astype('str')
-        for station_i in stations:
-            clean_data = clean_data.drop(columns=[station_i+'_DAYTIME',station_i+'_CLEARSKY_GHI'])
-        clean_data = clean_data.melt(
-            id_vars=['iso-datetime', 'ncdf_path', 'hdf5_8bit_path', 'hdf5_8bit_offset', 'hdf5_16bit_path', 'hdf5_16bit_offset'], 
-            value_vars=stations, 
-            var_name='station', 
-            value_name='station_info'
-        )
-        split_cols = clean_data.station_info.str.split("~=~",expand=True)
-        clean_data['DAYTIME'] = split_cols[0]
-        clean_data['CLEARSKY_GHI'] = split_cols[1]
-        clean_data = clean_data.drop(columns=['station_info'])
-        clean_data.DAYTIME = clean_data.DAYTIME.astype('float')
-        clean_data.CLEARSKY_GHI = clean_data.CLEARSKY_GHI.astype('float')
-        clean_data = clean_data.reset_index(drop=True)
-        return clean_data
-
-    def save_crops(catalog):
-        unique_paths = pd.unique(catalog['hdf5_8bit_path'].values.ravel())
-        print(unique_paths)
-        
-        # Create a mechanism for monitoring when all threads are finished.
-        coord = tf.train.Coordinator()
-        num_threads = 5
-        threads = []      
-  
-        unique_paths = unique_paths.tolist()
-        size = len(unique_paths)
-
-        for thread_index in range(num_threads):
-            from_ = size // num_threads * (thread_index)
-            upto = size // num_threads * (thread_index + 1)
-            args1 = (unique_paths[from_:upto])
-            t = threading.Thread(target=iterate_and_fetch_all_samples_hdf5, args=args1)
-            t.start()
-            threads.append(t)
-
-        # Wait for all the threads to terminate.
-        coord.join(threads)
-    
-    def iterate_and_fetch_all_samples_hdf5(paths):
-        for path in paths:
-            store_path = os.path.splitext(os.path.basename(path))[0] + ".npz"
-            store_path = os.path.join('npz_store',store_path)
-            if os.path.isfile(store_path):
-                continue
-            else:
-                samples = fetch_all_samples_hdf5(path)
-                store_numpy(samples, path)
-                print("stored %s"%path)
-
+    # stores numpy crops in a npz file
     def store_numpy(ndarray_dict,filepath):
         os.makedirs('npz_store',exist_ok=True)
         path = os.path.splitext(os.path.basename(filepath))[0] + ".npz"
         path = os.path.join('npz_store',path)
         np.savez(path, **ndarray_dict)
 
+    # optimized loading of crops. stores all crops per file. 
     def load_numpy(filepath):
         path = os.path.splitext(os.path.basename(filepath))[0] + ".npz"
         path = os.path.join('npz_store',path)
@@ -125,18 +72,18 @@ def prepare_dataloader(
         else:
             ndarray_dict = np.load(path)
         return ndarray_dict
-
+    
     def read_hdf5(hdf5_path):
         import h5py
         h5_data = h5py.File(hdf5_path, "r")
 
         return h5_data
 
+    # modified template code from utils.py to extract all crops per station per file
     def fetch_all_samples_hdf5(h5_data_path):
         from utilities import utils
         channels = ["ch1","ch2","ch3","ch4","ch6"]
 
-        # sample = [utils.fetch_hdf5_sample(ch, h5_data_handle, hdf5_offset) for ch in channels]
         # # return sample
         copy_last_if_missing = True
         h5_data = read_hdf5(h5_data_path)
@@ -199,6 +146,7 @@ def prepare_dataloader(
             station_crops[station_name] = crop
         return station_crops
 
+    # Image generator for feeding inputs to the model
     def _generator3():
         import traceback
         avg_x = np.array([0.31950477, 283.18481332, 239.19212155, 272.73521949, 254.09056291]).reshape(1,1,5)
@@ -230,7 +178,7 @@ def prepare_dataloader(
                 # ss = ["BND","TBL","DRA","FPK","GWN","PSU","SXF"]
 
                 for station_i, value in stations.items():
-                    # GHIs = [i[station_i + "_GHI"].values[0] for i in timedelta_rows]
+
                     CS_GHIs = [i[station_i + "_CLEARSKY_GHI"].values[0] for i in timedelta_rows]
                     # y = np.array(CS_GHIs)
 
@@ -263,48 +211,6 @@ def prepare_dataloader(
                    tf.TensorShape([4])
                    )
                 ).batch(128).prefetch(tf.data.experimental.AUTOTUNE)
-
-    def dummy_data_generator():
-        """
-        Generate dummy data for the model, only for example purposes.
-        """
-        batch_size = 32
-        image_dim = (70, 70)
-        n_channels = 5
-        output_seq_len = 4
-
-        for i in range(0, len(target_datetimes), batch_size):
-            batch_of_datetimes = target_datetimes[i:i+batch_size]
-            samples = tf.random.uniform(shape=(
-                len(batch_of_datetimes), image_dim[0], image_dim[1], n_channels
-            ))
-            targets = tf.zeros(shape=(
-                len(batch_of_datetimes), output_seq_len
-            ))
-            # Remember that you do not have access to the targets.
-            # Your dataloader should handle this accordingly.
-            yield samples, targets
-
-    def not_a_dummy_data_generator():
-        """
-        Generate REAL data for the model, not for example purposes, but it's the real thing!
-        """
-        batch_size = 32
-        image_dim = (70, 70)
-        n_channels = 5
-        output_seq_len = 4
-        
-        for i in range(0, len(target_datetimes), batch_size):
-            batch_of_datetimes = target_datetimes[i:i+batch_size]
-            samples = tf.random.uniform(shape=(
-                len(batch_of_datetimes), image_dim[0], image_dim[1], n_channels
-            ))
-            targets = tf.zeros(shape=(
-                len(batch_of_datetimes), output_seq_len
-            ))
-            # Remember that you do not have access to the targets.
-            # Your dataloader should handle this accordingly.
-            yield samples, targets
     
     data_loader = tf.data.Dataset.from_generator(
         _generator3, (tf.float32, tf.float32, tf.float32)

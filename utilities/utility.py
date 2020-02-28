@@ -3,12 +3,14 @@ import pickle
 import pdb
 from time import sleep
 import typing
-
-import cv2
-
 from datetime import datetime
 from datetime import timedelta
-import h5py, h5netcdf
+import os
+import binascii
+
+import cv2
+import h5py
+import h5netcdf
 #from line_profiler import LineProfiler
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
@@ -16,7 +18,6 @@ import numpy as np
 import pandas as pd
 import tensorflow as tf
 from tqdm import tqdm
-import os,binascii
 
 import config
 from utilities import utils
@@ -24,22 +25,25 @@ from utilities import utils
 """
 Generates a file name
 Args:
-    length:  length of the string 
+    length:  length of the string
 Returns:
     string of size 'length' containing random characters
 """
-def generate_file_name(length = 10):
+
+def generate_file_name(length=10):
     return binascii.b2a_hex(os.urandom(length)).decode('ascii')
 
 # loads the pickle dataframe containing data paths and targets information
+
 def load_catalog(path):
-    f = open(path,"rb")
+    f = open(path, "rb")
     dataset = pickle.load(f)
     f.close()
     return dataset
 
 # loads an hdf5 file
-#@lru_cache(maxsize=10)
+# @lru_cache(maxsize=10)
+
 def read_hdf5(hdf5_path):
     h5_data = h5py.File(hdf5_path, "r")
     return h5_data
@@ -47,22 +51,26 @@ def read_hdf5(hdf5_path):
 
 # Closes an open hdf5 file
 def close_hdf5(hdf5_file):
+
     # Closing the file
     try:
         hdf5_file.close()
-    except:
-        pass # Was already closed
-    
+    except BaseException:
+        pass  # Was already closed
+
 # loads a netcdf file
+
 def read_ncdf(ncdf_path):
     ncdf_data = h5netcdf.File(ncdf_path, 'r')
     return ncdf_data
 
+
 def get_datetime_attrs(string):
     # print(type(string),string)
-    dt = string # datetime.fromisoformat(string)
+    dt = string  # datetime.fromisoformat(string)
     # print(dt)
     return dt.month, dt.day, dt.hour
+
 
 """
 Function creating dummy image. Used for as well for experiements as for generating noise/ replacing missing images
@@ -70,10 +78,13 @@ Args:
 Returns:
     Blank image
 """
+
+
 def create_dummy_image():
-    img = np.zeros([70,70,5],dtype=np.uint8)
+    img = np.zeros([70, 70, 5], dtype=np.uint8)
     #plt.imshow(img[:,:,0], cmap='gray')
     return img
+
 
 """
 Dummy cropping function used for experiments. To be replaced by a valid one
@@ -83,6 +94,8 @@ Args:
 Returns:
     Dictionary containing stations, offsets and corresponding images
 """
+
+
 def dummy_crop_image(path, offsets=range(40)):
     global_dictionary = {}
     # Simulating access to files
@@ -96,17 +109,28 @@ def dummy_crop_image(path, offsets=range(40)):
     return global_dictionary
 
 # maps a physical co-ordinate to image pixel
-def map_coord_to_pixel(coord,min_coord,res):
-    x = int(abs(min_coord - coord)/res)
+
+
+def map_coord_to_pixel(coord, min_coord, res):
+    x = int(abs(min_coord - coord) / res)
     return x
 
 # extract images of all the 5 channels given offset and data handle
-def fetch_channel_samples(args,h5_data_handle,hdf5_offset):
+
+def fetch_channel_samples(args, h5_data_handle, hdf5_offset):
     channels = args.channels
-    sample = [utils.fetch_hdf5_sample(ch, h5_data_handle, hdf5_offset) for ch in channels]
+    sample = [
+        utils.fetch_hdf5_sample(
+            ch,
+            h5_data_handle,
+            hdf5_offset) for ch in channels]
     return sample
 
-def fetch_all_samples_hdf5(args,h5_data_path,dataframe_path=None):
+"""
+Template code from utils.py modified to extract akk crops from a file
+"""
+
+def fetch_all_samples_hdf5(args, h5_data_path, dataframe_path=None):
     channels = args.channels
 
     # sample = [utils.fetch_hdf5_sample(ch, h5_data_handle, hdf5_offset) for ch in channels]
@@ -116,95 +140,138 @@ def fetch_all_samples_hdf5(args,h5_data_path,dataframe_path=None):
     global_start_idx = h5_data.attrs["global_dataframe_start_idx"]
     global_end_idx = h5_data.attrs["global_dataframe_end_idx"]
     archive_lut_size = global_end_idx - global_start_idx
-    global_start_time = datetime.strptime(h5_data.attrs["global_dataframe_start_time"], "%Y.%m.%d.%H%M")
-    lut_timestamps = [global_start_time + idx * timedelta(minutes=15) for idx in range(archive_lut_size)]
+    global_start_time = datetime.strptime(
+        h5_data.attrs["global_dataframe_start_time"], "%Y.%m.%d.%H%M")
+    lut_timestamps = [
+        global_start_time +
+        idx *
+        timedelta(
+            minutes=15) for idx in range(archive_lut_size)]
     stations = args.station_data
     stations_data = {}
     if dataframe_path is not None:
         df = pd.read_pickle(dataframe_path)
-    # assume lats/lons stay identical throughout all frames; just pick the first available arrays
+    # assume lats/lons stay identical throughout all frames; just pick the
+    # first available arrays
     idx, lats, lons = 0, None, None
     while (lats is None or lons is None) and idx < archive_lut_size:
-        lats, lons = utils.fetch_hdf5_sample("lat", h5_data, idx), utils.fetch_hdf5_sample("lon", h5_data, idx)
-        idx += 1    
+        lats, lons = utils.fetch_hdf5_sample(
+            "lat", h5_data, idx), utils.fetch_hdf5_sample(
+            "lon", h5_data, idx)
+        idx += 1
     assert lats is not None and lons is not None, "could not fetch lats/lons arrays (hdf5 might be empty)"
     for reg, coords in stations.items():
-        station_coords = (np.argmin(np.abs(lats - coords[0])), np.argmin(np.abs(lons - coords[1])))
+        station_coords = (
+            np.argmin(
+                np.abs(
+                    lats -
+                    coords[0])),
+            np.argmin(
+                np.abs(
+                    lons -
+                    coords[1])))
         station_data = {"coords": station_coords}
         # if dataframe_path:
         if dataframe_path is not None:
-            station_data["ghi"] = [df.at[pd.Timestamp(t), reg + "_GHI"] for t in lut_timestamps]
-            station_data["csky"] = [df.at[pd.Timestamp(t), reg + "_CLEARSKY_GHI"] for t in lut_timestamps]
-            station_data["daytime"] = [df.at[pd.Timestamp(t), reg + "_DAYTIME"] for t in lut_timestamps]
+            station_data["ghi"] = [
+                df.at[pd.Timestamp(t), reg + "_GHI"] for t in lut_timestamps]
+            station_data["csky"] = [
+                df.at[pd.Timestamp(t), reg + "_CLEARSKY_GHI"] for t in lut_timestamps]
+            station_data["daytime"] = [
+                df.at[pd.Timestamp(t), reg + "_DAYTIME"] for t in lut_timestamps]
         stations_data[reg] = station_data
 
-    raw_data = np.zeros((archive_lut_size, len(channels), 650, 1500), dtype=np.uint8)
+    raw_data = np.zeros(
+        (archive_lut_size,
+         len(channels),
+         650,
+         1500),
+        dtype=np.uint8)
     for channel_idx, channel_name in enumerate(channels):
         assert channel_name in h5_data, f"missing channel: {channels}"
         # norm_min = h5_data[channel_name].attrs.get("orig_min", None)
         # norm_max = h5_data[channel_name].attrs.get("orig_max", None)
-        channel_data = [utils.fetch_hdf5_sample(channel_name, h5_data, idx) for idx in range(archive_lut_size)]
+        channel_data = [
+            utils.fetch_hdf5_sample(
+                channel_name,
+                h5_data,
+                idx) for idx in range(archive_lut_size)]
         assert all([array is None or array.shape == (650, 1500) for array in channel_data]), \
             "one of the saved channels had an expected dimension"
         last_valid_array_idx = None
         for array_idx, array in enumerate(channel_data):
             if array is None:
                 if copy_last_if_missing and last_valid_array_idx is not None:
-                    raw_data[array_idx, channel_idx, :, :] = raw_data[last_valid_array_idx, channel_idx, :, :]
+                    raw_data[array_idx,
+                             channel_idx,
+                             :,
+                             :] = raw_data[last_valid_array_idx,
+                                           channel_idx,
+                                           :,
+                                           :]
                 continue
-            # array = (((array.astype(np.float32) - norm_min) / (norm_max - norm_min)) * 255).astype(np.uint8)
-            # array = cv.applyColorMap(array, cv.COLORMAP_BONE)
-            # for station_idx, (station_name, station) in enumerate(stations_data.items()):
-            #     station_color = get_label_color_mapping(station_idx + 1).tolist()[::-1]
-            #     array = cv.circle(array, station["coords"][::-1], radius=9, color=station_color, thickness=-1)
-            # raw_data[array_idx, channel_idx, :, :] = cv.flip(array, 0)
             raw_data[array_idx, channel_idx, :, :] = array
             last_valid_array_idx = array_idx
-    #print("raw_data:",raw_data.shape)
-    
+    # print("raw_data:",raw_data.shape)
 
     crop_size = args.crop_size
     station_crops = {}
     for station_name, station in stations_data.items():
         # array = cv.circle(array, station["coords"][::-1], radius=9, color=station_color, thickness=-1)
         station_coords = station["coords"]
-        margin = crop_size//2
+        margin = crop_size // 2
         lat_mid = station_coords[0]
         lon_mid = station_coords[1]
         crop = raw_data[
             :, :,
-            lat_mid-margin:lat_mid+margin, 
-            lon_mid-margin:lon_mid+margin, 
+            lat_mid - margin:lat_mid + margin,
+            lon_mid - margin:lon_mid + margin,
         ]
         station_crops[station_name] = crop
-    
+
     # Closing the file
     close_hdf5(h5_data)
     return station_crops
 
 # saves images of 5 channels with plotted mapped co-ordinates
+
+
 def plot_and_save_image(args, station_coords, samples, prefix="0"):
-    cmap='gray'
-    for sample,ch in zip(samples, args.channels):
-        plt.imshow(sample,origin='lower',cmap=cmap)
-        plt.scatter(station_coords[:,0], station_coords[:,1])
-        plt.savefig("sample_outputs/%s_%s.png"%(prefix, ch))
+    """
+    Args: 
+    args: argparse
+    station_coords: station coordinates dict
+    samples: list of np arrays
+    """
+    cmap = 'gray'
+    for sample, ch in zip(samples, args.channels):
+        plt.imshow(sample, origin='lower', cmap=cmap)
+        plt.scatter(station_coords[:, 0], station_coords[:, 1])
+        plt.savefig("sample_outputs/%s_%s.png" % (prefix, ch))
 
 # Extracts the Latitude and Longitude  from the hdf5 data
+
 def get_lon_lat_from_hdf5(h5_data):
+    """
+    Args:
+    h5_data: h5py handle
+    """
     global_start_idx = h5_data.attrs["global_dataframe_start_idx"]
     global_end_idx = h5_data.attrs["global_dataframe_end_idx"]
     archive_lut_size = global_end_idx - global_start_idx
     idx, lat, lon = 0, None, None
     if idx < archive_lut_size:
-        lat, lon = utils.fetch_hdf5_sample("lat", h5_data, idx), utils.fetch_hdf5_sample("lon", h5_data, idx)
+        lat, lon = utils.fetch_hdf5_sample(
+            "lat", h5_data, idx), utils.fetch_hdf5_sample(
+            "lon", h5_data, idx)
     return lat, lon
 
+
 def get_hdf5_attributes(
-        dataset_name: str,
-        reader: h5py.File,
-        sample_idx: int,
-    ) -> typing.Any:
+    dataset_name: str,
+    reader: h5py.File,
+    sample_idx: int,
+) -> typing.Any:
     """
     Displays list of attributes
     Args:
@@ -224,6 +291,7 @@ def get_hdf5_attributes(
     dataset = reader[dataset_name]
     return dataset
 
+
 def get_hdf5_fields(reader: h5py.File) -> typing.Any:
     fields_names = []
     for dataset_lut_name in reader:
@@ -234,13 +302,21 @@ def get_hdf5_fields(reader: h5py.File) -> typing.Any:
 """
 Standardizes the image
 Args:
-    img: Input image 
+    img: Input image
 Returns:
     Standardized image
 """
+
+
 def standardize_img(img):
-    avg_x = np.array([0.31950477, 283.18481332, 239.19212155, 272.73521949, 254.09056291]).reshape(1,1,5)
-    std_x = np.array([0.27667209, 16.24902932,  8.79865931, 20.08307892, 13.8115307]).reshape(1,1,5)
-    img = img.swapaxes(0,1).swapaxes(1,2)
-    img = (img - avg_x)/std_x
+    avg_x = np.array([0.31950477, 283.18481332, 239.19212155,
+                      272.73521949, 254.09056291]).reshape(1, 1, 5)
+    std_x = np.array([0.27667209, 16.24902932, 8.79865931,
+                      20.08307892, 13.8115307]).reshape(1, 1, 5)
+    img = img.swapaxes(0, 1).swapaxes(1, 2)
+    img = (img - avg_x) / std_x
     return img
+
+
+if __name__ == "__main__":
+    print("Hi, you have reached the utility module which contains utility snippets used throughout the project. The module will now exit.")

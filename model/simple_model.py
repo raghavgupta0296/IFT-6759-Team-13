@@ -5,19 +5,28 @@ from tensorflow.keras.metrics import RootMeanSquaredError
 from tensorflow.keras.optimizers import Adam
 from utilities import config
 from utilities.dataloader2 import SequenceDataLoaderMemChunks
-from utilities.dataloader_simple import SimpleDataLoader,SimpleDataLoader2, SequenceDataLoader3, SimpleDataLoader4, SequenceDataLoader5, _generator
+from utilities.dataloader_simple import SimpleDataLoader, SimpleDataLoader2, SequenceDataLoader3, SimpleDataLoader4, SequenceDataLoader5, _generator
 from utilities.utility import load_catalog
 import pdb
 from tqdm import tqdm
 
+
+# Convolution 2D model for img(T0) -> GHI(T0) predictions
 class MyModel(Model):
+    """
+    Args:
+        args: argparse obj
+    Returns:
+        Built model
+    """
     def __init__(self, args):
         super(MyModel, self).__init__()
-        self.input_0 = Input(shape=(70,70,5))
-        self.conv1 = Conv2D(32, 3, input_shape=(70,70,5), kernel_initializer='he_uniform')
+        self.input_0 = Input(shape=(70, 70, 5))
+        self.conv1 = Conv2D(32, 3, input_shape=(70, 70, 5),
+                            kernel_initializer='he_uniform')
         self.batchnorm1 = BatchNormalization()
         self.relu = ReLU()
-        self.maxpool = MaxPool2D((2,2))
+        self.maxpool = MaxPool2D((2, 2))
         self.conv2 = Conv2D(64, 3, kernel_initializer='he_uniform')
         self.batchnorm2 = BatchNormalization()
         self.conv3 = Conv2D(128, 3, kernel_initializer='he_uniform')
@@ -33,48 +42,55 @@ class MyModel(Model):
         # x = x[0]
         # print(x,x[0])
         # x = self.input_0(x)
-        x = self.conv1(x) # 68 x 68 x 32
+        x = self.conv1(x)  # 68 x 68 x 32
         x = self.batchnorm1(x)
         x = self.relu(x)
-        x = self.maxpool(x) # 34 x 34 x 32
-        x = self.conv2(x) # 32 x 32 x 64
+        x = self.maxpool(x)  # 34 x 34 x 32
+        x = self.conv2(x)  # 32 x 32 x 64
         x = self.batchnorm2(x)
         x = self.relu(x)
-        x = self.maxpool(x) # 16 x 16 x 64
-        x = self.conv3(x) # 14 x 14 x 128
+        x = self.maxpool(x)  # 16 x 16 x 64
+        x = self.conv3(x)  # 14 x 14 x 128
         x = self.batchnorm3(x)
         x = self.relu(x)
-        x = self.maxpool(x) # 7 x 7 x 128
-        x = self.conv4(x) # 5 x 5 x 256
+        x = self.maxpool(x)  # 7 x 7 x 128
+        x = self.conv4(x)  # 5 x 5 x 256
         x = self.batchnorm4(x)
         x = self.relu(x)
-        x = self.conv5(x) # 1 x 1 x 512
+        x = self.conv5(x)  # 1 x 1 x 512
         x = self.relu(x)
         x = self.batchnorm5(x)
         x = self.flatten(x)
         x = self.d1(x)
-        return x # Create an instance of the model
-   
-    def model(self):
-        x = Input(shape=(70,70,5))
-        return Model(inputs=[x],outputs=self.call(x))
+        return x  # Create an instance of the model
 
+    def model(self):
+        x = Input(shape=(70, 70, 5))
+        return Model(inputs=[x], outputs=self.call(x))
+
+# Convolution 2D model for img(T0) -> GHI(T0,...T0+6) predictions
 class MyModel2(Model):
+    """
+    Args:
+        args: argparse obj
+    Returns:
+        Built model
+    """
     def __init__(self, args):
         super(MyModel2, self).__init__()
-        self.input_0 = Input(shape=(70,70,5))
-        self.conv1 = Conv2D(32, 3, input_shape=(70,70,5))
+        self.input_0 = Input(shape=(70, 70, 5))
+        self.conv1 = Conv2D(32, 3, input_shape=(70, 70, 5))
         self.batchnorm1 = BatchNormalization()
         self.relu = ReLU()
-        self.maxpool2 = MaxPool2D((2,2))
-        self.maxpool3 = MaxPool2D((3,3))
-        self.conv2 = Conv2D(64, 3,activation='relu')
+        self.maxpool2 = MaxPool2D((2, 2))
+        self.maxpool3 = MaxPool2D((3, 3))
+        self.conv2 = Conv2D(64, 3, activation='relu')
         self.batchnorm2 = BatchNormalization()
-        self.conv3 = Conv2D(128, 3,activation='relu')
+        self.conv3 = Conv2D(128, 3, activation='relu')
         self.batchnorm3 = BatchNormalization()
-        self.conv4 = Conv2D(256, 3,activation='relu')
+        self.conv4 = Conv2D(256, 3, activation='relu')
         self.batchnorm4 = BatchNormalization()
-        self.conv5 = Conv2D(512, 5,activation='relu')
+        self.conv5 = Conv2D(512, 5, activation='relu')
         self.batchnorm5 = BatchNormalization()
         self.flatten = Flatten()
         self.d1 = Dense(10, activation='linear')
@@ -84,74 +100,86 @@ class MyModel2(Model):
         # x = x[0]
         # print(x,x[0])
         # x = self.input_0(x)
-        x = self.conv1(x) # 68 x 68 x 32
+        x = self.conv1(x)  # 68 x 68 x 32
         x = self.batchnorm1(x)
         # x = self.relu(x)
-        x = self.maxpool3(x) # 34 x 34 x 32
-        x = self.conv2(x) # 32 x 32 x 64
+        x = self.maxpool3(x)  # 34 x 34 x 32
+        x = self.conv2(x)  # 32 x 32 x 64
         x = self.batchnorm2(x)
         # x = self.relu(x)
-        x = self.maxpool2(x) # 16 x 16 x 64
-        x = self.conv3(x) # 14 x 14 x 128
+        x = self.maxpool2(x)  # 16 x 16 x 64
+        x = self.conv3(x)  # 14 x 14 x 128
         x = self.batchnorm3(x)
         # x = self.relu(x)
         # x = self.maxpool2(x) # 7 x 7 x 128
-        x = self.conv4(x) # 5 x 5 x 256
+        x = self.conv4(x)  # 5 x 5 x 256
         x = self.batchnorm4(x)
         # x = self.maxpool2(x) # 16 x 16 x 64
         # x = self.relu(x)
-        x = self.conv5(x) # 1 x 1 x 512
+        x = self.conv5(x)  # 1 x 1 x 512
         # x = self.relu(x)
         x = self.batchnorm5(x)
         x = self.flatten(x)
         x = self.d1(x)
         x = self.d2(x)
-        return x # Create an instance of the model
-   
+        return x  # Create an instance of the model
+
     def model(self):
-        x = Input(shape=(70,70,5))
-        return Model(inputs=[x],outputs=self.call(x))
+        x = Input(shape=(70, 70, 5))
+        return Model(inputs=[x], outputs=self.call(x))
 
 # CONV-3D
+
+# Convolution 2D model for img(T0-n...T0) -> GHI(T0,...T0+6) predictions
+
 class MyModel3(Model):
+     """
+    Args:
+        args: argparse obj
+    Returns:
+        Built model
+    """
     def __init__(self, args):
         super(MyModel3, self).__init__()
-        self.conv1 = Conv3D(16, kernel_size=(1,3,3), input_shape=(5,70,70,5))
+        self.conv1 = Conv3D(
+            16, kernel_size=(
+                1, 3, 3), input_shape=(
+                5, 70, 70, 5))
         self.batchnorm1 = BatchNormalization()
         self.relu = ReLU()
-        self.maxpool = MaxPool3D((1,2,2))
-        self.conv2 = Conv3D(32, kernel_size=(1,3,3))
+        self.maxpool = MaxPool3D((1, 2, 2))
+        self.conv2 = Conv3D(32, kernel_size=(1, 3, 3))
         self.batchnorm2 = BatchNormalization()
-        self.conv3 = Conv3D(64, kernel_size=(1,3,3))
+        self.conv3 = Conv3D(64, kernel_size=(1, 3, 3))
         self.batchnorm3 = BatchNormalization()
-        self.conv4 = Conv3D(128, kernel_size=(1,3,3))
+        self.conv4 = Conv3D(128, kernel_size=(1, 3, 3))
         self.batchnorm4 = BatchNormalization()
-        self.conv5 = Conv3D(256, kernel_size=(1,5,5))
+        self.conv5 = Conv3D(256, kernel_size=(1, 5, 5))
         self.batchnorm5 = BatchNormalization()
         self.flatten = Flatten()
         self.d1 = Dense(4, activation='linear')
 
     def call(self, x):
-        x = self.conv1(x) # 68 x 68 x 32
+        x = self.conv1(x)  # 68 x 68 x 32
         x = self.batchnorm1(x)
         x = self.relu(x)
-        x = self.maxpool(x) # 34 x 34 x 32
+        x = self.maxpool(x)  # 34 x 34 x 32
 
-        x = self.conv2(x) # 32 x 32 x 64
+        x = self.conv2(x)  # 32 x 32 x 64
         x = self.batchnorm2(x)
         x = self.relu(x)
-        x = self.maxpool(x) # 16 x 16 x 64
+        x = self.maxpool(x)  # 16 x 16 x 64
 
-        x = self.conv3(x) # 14 x 14 x 128
+        x = self.conv3(x)  # 14 x 14 x 128
         x = self.batchnorm3(x)
         x = self.relu(x)
-        x = self.maxpool(x) # 7 x 7 x 128
+        x = self.maxpool(x)  # 7 x 7 x 128
 
-        x = self.conv4(x) # 5 x 5 x 256
+        x = self.conv4(x)  # 5 x 5 x 256
         x = self.batchnorm4(x)
         x = self.relu(x)
 
-        x = self.conv5(x) # 1 x 1 x 512
+        x = self.conv5(x)  # 1 x 1 x 512
         x = self.batchnorm5(x)
         x = self.relu(x)
 
@@ -161,10 +189,12 @@ class MyModel3(Model):
 
     def model(self):
         # (seq, crop_h, crop_w, 5)
-        x = Input(shape=(5,70,70,5))
-        return Model(inputs=[x],outputs=self.call(x))
+        x = Input(shape=(5, 70, 70, 5))
+        return Model(inputs=[x], outputs=self.call(x))
 
+# class for manual training of model using GradientTape instead of keras.fit
 class new_model:
+
     def train_step(self, images, labels):
         with tf.GradientTape() as tape:
             predictions = self.model(images, training=True)
@@ -172,7 +202,8 @@ class new_model:
             #   print(predictions[i].numpy(), labels[i].numpy())
             loss = self.loss_object(labels, predictions)
         gradients = tape.gradient(loss, self.model.trainable_variables)
-        self.optimizer.apply_gradients(zip(gradients, self.model.trainable_variables))
+        self.optimizer.apply_gradients(
+            zip(gradients, self.model.trainable_variables))
         self.train_loss(loss)
         print("\n Loss: ", loss.numpy())
 
@@ -185,7 +216,7 @@ class new_model:
 
     def different_method(self):
         self.model = MyModel(args)
-        self.model.build((None,70,70,5))
+        self.model.build((None, 70, 70, 5))
         # pdb.set_trace()
         print(self.model.model().summary())
         # exit()
@@ -197,14 +228,16 @@ class new_model:
         # catalog_train = load_catalog(args.data_catalog_path)
         # catalog_val = load_catalog(args.val_catalog_path)
         # catalog_test = load_catalog(args.test_catalog_path)
-        
+
         for epoch in range(args.epochs):
             print("EPOCH ", epoch)
             self.train_loss.reset_states()
             self.valid_loss.reset_states()
 
-            sdl_train = SimpleDataLoader(args, args.data_catalog_path)#.batch(args.batch_size).prefetch(tf.data.experimental.AUTOTUNE)
-            sdl_valid = SimpleDataLoader(args, args.val_catalog_path)#.batch(args.batch_size).prefetch(tf.data.experimental.AUTOTUNE)
+            # .batch(args.batch_size).prefetch(tf.data.experimental.AUTOTUNE)
+            sdl_train = SimpleDataLoader(args, args.data_catalog_path)
+            # .batch(args.batch_size).prefetch(tf.data.experimental.AUTOTUNE)
+            sdl_valid = SimpleDataLoader(args, args.val_catalog_path)
 
             train_total = 1000
             val_total = 100
@@ -229,18 +262,28 @@ class new_model:
                 valid_labels = batch['y']
                 self.test_step(valid_images, valid_labels)
                 tm.update(1)
-                counter +=1
+                counter += 1
                 if counter > 100:
                     break
             # template = 'Epoch {}, Loss: {}, Accuracy: {}, Test Loss: {}, Test Accuracy: {}'
-            print("Epoch: ", epoch, "; Train Loss: ", self.train_loss.result(), "; Valid Loss: ", self.valid_loss.result())
+            print(
+                "Epoch: ",
+                epoch,
+                "; Train Loss: ",
+                self.train_loss.result(),
+                "; Valid Loss: ",
+                self.valid_loss.result())
             # wandb.log({"Epoch":epoch,"Train_Loss":train_loss.result(),"Valid_Loss":valid_loss.result()})
             # print(template.format(epoch+1, train_loss.result(), 0))
 
-def get_dataloaders(datal,args):
-    sdl_train = datal(args, args.data_catalog_path)#.prefetch(tf.data.experimental.AUTOTUNE).batch(args.batch_size)
-    sdl_val = datal(args, args.val_catalog_path)#.prefetch(tf.data.experimental.AUTOTUNE).batch(args.batch_size)
+
+def get_dataloaders(datal, args):
+    # .prefetch(tf.data.experimental.AUTOTUNE).batch(args.batch_size)
+    sdl_train = datal(args, args.data_catalog_path)
+    # .prefetch(tf.data.experimental.AUTOTUNE).batch(args.batch_size)
+    sdl_val = datal(args, args.val_catalog_path)
     return sdl_train, sdl_val
+
 
 def train_simple_model(args):
 
@@ -248,14 +291,15 @@ def train_simple_model(args):
 
     optimizer = Adam(learning_rate=args.lr)
     rmse = RootMeanSquaredError()
-    model.compile(optimizer=optimizer, 
+    model.compile(optimizer=optimizer,
                   loss='mean_squared_error',
                   metrics=[rmse])
-    model.build((None,70,70,5))
+    model.build((None, 70, 70, 5))
     # pdb.set_trace()
     print(model.model().summary())
     # return model, SimpleDataLoader4
     return model, SequenceDataLoader5
+
 
 def train_seq_model(args):
 
@@ -263,13 +307,14 @@ def train_seq_model(args):
 
     optimizer = Adam(learning_rate=args.lr)
     rmse = RootMeanSquaredError()
-    model.compile(optimizer=optimizer, 
+    model.compile(optimizer=optimizer,
                   loss='mean_squared_error',
                   metrics=[rmse])
-    model.build((None,1,70,70,5))
+    model.build((None, 1, 70, 70, 5))
     # pdb.set_trace()
     print(model.model().summary())
     return model, SequenceDataLoader3
+
 
 if __name__ == "__main__":
     args = config.init_args()
@@ -281,14 +326,13 @@ if __name__ == "__main__":
     model, dataloader = train_simple_model(args)
     # model, dataloader = train_seq_model(args)
 
-    sdl_train, sdl_val = get_dataloaders(dataloader,args)
+    sdl_train, sdl_val = get_dataloaders(dataloader, args)
 
     model.fit(
         sdl_train,
         # steps_per_epoch=100,
-        epochs=args.epochs, 
+        epochs=args.epochs,
         validation_data=sdl_val,
         # validation_steps=100,
     )
     # model.save('very_very_confidential_model',save_format='tf')
-
